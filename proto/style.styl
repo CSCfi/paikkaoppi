@@ -344,6 +344,28 @@ ul
   right 0
   bottom 0
 
+.map__zoom
+  position absolute
+  z-index 2
+  right 20px
+  top 20px
+.map__zoom-in,
+.map__zoom-out
+  width 40px
+  height @width
+  background #fff
+  border-radius 100%
+  padding 10px
+  box-shadow 2px 2px 10px alpha(#000,.3)
+  margin 0 0 5px 0
+.map__zoom-in
+  &:before
+    content url(../assets/icon_plus.svg)
+.map__zoom-out
+  &:before
+    content url(../assets/icon_minus.svg)
+
+
 
 //- LIST
 
