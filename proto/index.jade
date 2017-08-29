@@ -56,8 +56,8 @@ html
                   ul.list.type--basic
                     li.list__item
                       a(href='#task-lempipaikkani') Lempipaikkani
-                    li.list__item 
-                      a(href='#task-luokkaretki') Luokkaretki
+                    //- li.list__item 
+                    //-   a(href='#task-luokkaretki') Luokkaretki
 
                 .view__column
                   .profile
@@ -76,7 +76,7 @@ html
 
           .view#map-lempipaikkani
             .proto__documentation
-              p Tehtävän ohjeet. Näytetään alkuun staattisena sisältönä. Ensimmäisessä versiossa toteutetaan vain tämän tehtävän toiminnot.
+              p Lempipaikkani-kartta. Aluksi toteutetaan kartan zoomaaminen ja liikuttaminen sekä pistemäisen merkinnän lisääminen.
 
             .view__header
               a.view__header-link(href='#dashboard') Takaisin
@@ -85,13 +85,13 @@ html
             .map__wrapper
               .placeholder__map
             
-          .view#map-luokkaretki
-            .view__header
-              a.view__header-link(href='#dashboard') Takaisin
-              a.view__header-link(href='#task-luokkaretki') Ohjeet
+          //- .view#map-luokkaretki
+          //-   .view__header
+          //-     a.view__header-link(href='#dashboard') Takaisin
+          //-     a.view__header-link(href='#task-luokkaretki') Ohjeet
             
-            .map__wrapper
-              .placeholder__map
+          //-   .map__wrapper
+          //-     .placeholder__map
             
 
 
@@ -136,23 +136,23 @@ html
                 .accordion__footer
                   a.button(href='#map-lempipaikkani') Aloita tehtävä
 
-          .view#task-luokkaretki
-            .proto__documentation
-              p Tehtävän ohjeet. Luokkaretki-tehtävä toteutetaan vaiheessa kaksi.
-            .view__content
-              .accordion
-                .accordion__item
-                  h2.accordion__title Tutustukaa projektiin ja suunnitelkaa omaa työtä
-                  .accordion__text
-                    ul.list.type--text
-                      li.list__item Tutustukaa yhdessä projektiin sekä sen tavoitteisiin ja arviointiin.
-                      li.list__item Jakautukaa ryhmiin.
-                      li.list__item Aloittakaa ryhmien maskottien suunnittelu ja valmistaminen. Maskotit esiintyvät myöhemmin ottamissanne kuvissa valituista retkikohteista.  Maskotit voidaan lopuksi sijoittaa myös luokan yhteiseen projektikoosteeseen (katso kuva vaiheessa 7).
-                .accordion__item
-                  h2.accordion__title Harjoitelkaa kartta-alustan käyttöä
-                  .accordion__text
-                    ul.list.type--text
-                      li.list__item Tutustukaa PaikkaOpin kartta-alustaan ja oman kunnan karttaan esimerkiksi Paikkatiedon ABC -tehtävien avulla.
-                      li.list__item Harjoitelkaa myös pistekohteen tallentamista kartta-alustalle.
-                .accordion__footer
-                  a.button(href='#map-luokkaretki') Aloita tehtävä
+          //- .view#task-luokkaretki
+          //-   .proto__documentation
+          //-     p Tehtävän ohjeet. Luokkaretki-tehtävä toteutetaan vaiheessa kaksi.
+          //-   .view__content
+          //-     .accordion
+          //-       .accordion__item
+          //-         h2.accordion__title Tutustukaa projektiin ja suunnitelkaa omaa työtä
+          //-         .accordion__text
+          //-           ul.list.type--text
+          //-             li.list__item Tutustukaa yhdessä projektiin sekä sen tavoitteisiin ja arviointiin.
+          //-             li.list__item Jakautukaa ryhmiin.
+          //-             li.list__item Aloittakaa ryhmien maskottien suunnittelu ja valmistaminen. Maskotit esiintyvät myöhemmin ottamissanne kuvissa valituista retkikohteista.  Maskotit voidaan lopuksi sijoittaa myös luokan yhteiseen projektikoosteeseen (katso kuva vaiheessa 7).
+          //-       .accordion__item
+          //-         h2.accordion__title Harjoitelkaa kartta-alustan käyttöä
+          //-         .accordion__text
+          //-           ul.list.type--text
+          //-             li.list__item Tutustukaa PaikkaOpin kartta-alustaan ja oman kunnan karttaan esimerkiksi Paikkatiedon ABC -tehtävien avulla.
+          //-             li.list__item Harjoitelkaa myös pistekohteen tallentamista kartta-alustalle.
+          //-       .accordion__footer
+          //-         a.button(href='#map-luokkaretki') Aloita tehtävä
