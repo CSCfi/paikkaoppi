@@ -1,0 +1,2 @@
+# paikkaoppi
+Responsiivinen paikkaoppitiedon opettamissovellus
