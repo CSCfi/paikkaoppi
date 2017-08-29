@@ -7,3 +7,16 @@
   right: 0;
   bottom: 0;
 }
+@media print {
+  .app,
+  .app__wrapper,
+  .app__content {
+    position: static !important;
+  }
+  .view {
+    position: relative;
+    width: 100%;
+    display: block !important;
+    page-break-after: always;
+  }
+}

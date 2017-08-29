@@ -12,5 +12,16 @@
   
 
 
+//- PRINT
+//- Print on landscape for documentation
 
-
+@media print
+	.app,
+	.app__wrapper,
+	.app__content
+		position static !important
+	.view
+		position relative
+		width 100%
+		display block !important
+		page-break-after always
