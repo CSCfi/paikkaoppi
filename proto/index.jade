@@ -19,6 +19,8 @@ html
 
       .app__wrapper
         .app__content
+          .app__header
+            //-
 
           .view#login
 
@@ -38,14 +40,42 @@ html
                 a.button(href='#dashboard') Kirjaudu sisään
             
           .view#dashboard
-            a(href='#map') Kartta
+            .view__content
+              h1 Omat tehtävät
+
+              ul.list.type--basic
+                li.list__item 
+                  a(href='#task') Luokkaretki
+                li.list__item
+                  a(href='#task') Tehtävä 1
+                li.list__item
+                  a(href='#task') Tehtävä 2
+
+              a(href='#settings') Asetukset
 
           .view#map
-            a(href='#settings') Asetukset
+            p Tähän tulee kartta
+            a(href='#task') Ohjeet
+            a(href='#dashboard') Takaisin
 
           .view#settings
-            a(href='#task') Tehtävä
+            a(href='#dashboard') Takaisin
 
           .view#task
-            a(href='#map') Kartta
+            .view__content
+              .accordion
+                .accordion__item
+                  h2.accordion__title Tutustukaa projektiin ja suunnitelkaa omaa työtä
+                  .accordion__text
+                    ul.list.type--text
+                      li.list__item Tutustukaa yhdessä projektiin sekä sen tavoitteisiin ja arviointiin.
+                      li.list__item Jakautukaa ryhmiin.
+                      li.list__item Aloittakaa ryhmien maskottien suunnittelu ja valmistaminen. Maskotit esiintyvät myöhemmin ottamissanne kuvissa valituista retkikohteista.  Maskotit voidaan lopuksi sijoittaa myös luokan yhteiseen projektikoosteeseen (katso kuva vaiheessa 7).
+                .accordion__item
+                  h2.accordion__title Harjoitelkaa kartta-alustan käyttöä
+                  .accordion__text
+                    ul.list.type--text
+                      li.list__item Tutustukaa PaikkaOpin kartta-alustaan ja oman kunnan karttaan esimerkiksi Paikkatiedon ABC -tehtävien avulla.
+                      li.list__item Harjoitelkaa myös pistekohteen tallentamista kartta-alustalle.
+              a.button(href='#map') Aloita tehtävä
 

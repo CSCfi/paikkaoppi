@@ -21,6 +21,34 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+h1,
+h2,
+h3,
+h4,
+h5 {
+  line-height: 1.32;
+  margin: 0 0 0.5em 0;
+  font-weight: 600;
+}
+h1 {
+  font-size: 1.464100000000001rem;
+}
+h2 {
+  font-size: 1.331rem;
+}
+h3 {
+  font-size: 1.21rem;
+}
+h4 {
+  font-size: 1.1rem;
+}
+h5 {
+  font-size: 1rem;
+}
+p {
+  margin: 0 0 1em 0;
+  padding: 0;
+}
 a {
   text-decoration: none;
   color: inherit;
@@ -170,6 +198,11 @@ input {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
 .app {
   position: absolute;
   top: 0;
@@ -192,7 +225,8 @@ input {
   left: 20px;
   right: 20px;
   bottom: 20px;
-  overflow: hidden;
+  overflow-x: hidden;
+  overflow-y: auto;
 }
 .view {
   text-align: center;
@@ -201,6 +235,10 @@ input {
   max-width: 1100px;
   margin: 0 auto;
   text-align: left;
+  padding: 0 30px;
+}
+.list.type--text .list__item {
+  margin: 0 0 0.5rem 0;
 }
 .form.type--login {
   max-width: 300px;
@@ -208,4 +246,16 @@ input {
 }
 .form__item {
   padding: 5px 0;
+}
+.accordion {
+  counter-reset: accordion__item;
+}
+.accordion__title {
+  color: #e1854b;
+  margin: 20px 0 10px 0;
+}
+.accordion__title:before {
+  counter-increment: accordion__item;
+  content: counter(accordion__item) '.';
+  margin: 0 5px 0 0;
 }

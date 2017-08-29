@@ -20,6 +20,8 @@ bold_font_weight = 600
 
 border_radius = 20px
 
+base_padding = 30px
+
 input_border_color = #333
 input_border_radius = 1px
 input_padding = 5px 5px
@@ -91,6 +93,26 @@ body
   if base_smooth_font
     -webkit-font-smoothing antialiased
     -moz-osx-font-smoothing grayscale
+
+h1, h2, h3, h4, h5
+  line-height .8 * base_line_height
+  margin 0 0 .5em 0
+  font-weight title_font_weight
+
+h1
+  font-size size_h1
+h2
+  font-size size_h2
+h3
+  font-size size_h3
+h4
+  font-size size_h4
+h5
+  font-size size_h5
+
+p
+  margin 0 0 1em 0
+  padding 0
 
 a
   text-decoration none
@@ -217,6 +239,14 @@ placeholder()
    placeholder()
 }
 
+ul
+  list-style none
+  padding 0
+  margin 0
+
+
+//- APP
+//- Base container and layout
 
 .app
   position absolute
@@ -240,7 +270,12 @@ placeholder()
   left @top
   right @top
   bottom @top
-  overflow hidden
+  overflow-x hidden
+  overflow-y auto
+
+
+//- VIEW
+//- Holds a single view of the application
 
 .view
   // General wrapper
@@ -251,7 +286,19 @@ placeholder()
   max-width page_max_width
   margin 0 auto
   text-align left
+  padding 0 base_padding
   
+
+//- LIST
+
+.list
+  &.type--basic
+    //-
+  &.type--text
+    .list__item
+      margin 0 0 .5rem 0
+
+//- FORM
 
 .form
 
@@ -264,4 +311,20 @@ placeholder()
     
 .form__item
   padding 5px 0
+  
 
+//- ACCORDION
+
+.accordion
+  counter-reset accordion__item
+
+.accordion__item
+  //
+
+.accordion__title
+  color brand_color[0]
+  margin 20px 0 10px 0
+  &:before
+    counter-increment accordion__item
+    content counter(accordion__item)'.'
+    margin 0 5px 0 0
