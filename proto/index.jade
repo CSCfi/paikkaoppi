@@ -54,17 +54,19 @@ html
                       a(href='#task-luokkaretki') Luokkaretki
 
                 .view__column
-                  .form.type--settings
-
-                    .form__item
+                  .profile
+                    .profile__item
+                      .profile__image
+                        img(src='assets/monster.png')
+                    .profile__item
                       label Kalle Kirjautunut
-                    .form__item
+                    .profile__item
                       label kalle.kirjautunut@koulu.fi
-
-                    div
-                      a(href='#settings') Muokkaa asetuksia
-                    div
-                      a(href='#login') Kirjaudu ulos    
+                    .profile__footer
+                      .profile__footer-item
+                        a(href='#settings') Muokkaa asetuksia
+                      .profile__footer-item
+                        a(href='#login') Kirjaudu ulos    
               
               
 
