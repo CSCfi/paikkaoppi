@@ -24,11 +24,10 @@ html
             //-
 
           .view#login
+            .proto__documentation
+              p Kirjautumisnäkymä. Näytetään staattisena.
 
             .view__content
-
-
-
               .form.type--login
                 .app__logo
 
@@ -42,8 +41,11 @@ html
                   label Salasana
                   input(type='password')
                 a.button(href='#dashboard') Kirjaudu sisään
-            
+
           .view#dashboard
+            .proto__documentation
+              p Oppilaan työpöytä. Tehtävälistaus näytetään staattisena. Linkistä pääsee katsomaan tehtävien ohjeet.
+
             .view__content
 
               .view__columns
@@ -70,34 +72,42 @@ html
                       .profile__footer-item
                         a(href='#settings') Muokkaa asetuksia
                       .profile__footer-item
-                        a(href='#login') Kirjaudu ulos    
-              
-              
+                        a(href='#login') Kirjaudu ulos
 
           .view#map-lempipaikkani
+            .proto__documentation
+              p Tehtävän ohjeet. Näytetään alkuun staattisena sisältönä. Ensimmäisessä versiossa toteutetaan vain tämän tehtävän toiminnot.
+
             .view__header
-              a(href='#dashboard') Takaisin
-              a(href='#task-lempipaikkani') Ohjeet
-            .placeholder__map
+              a.view__header-link(href='#dashboard') Takaisin
+              a.view__header-link(href='#task-lempipaikkani') Ohjeet
+            
+            .map__wrapper
+              .placeholder__map
             
           .view#map-luokkaretki
             .view__header
-              a(href='#dashboard') Takaisin
-              a(href='#task-luokkaretki') Ohjeet
-            .placeholder__map
+              a.view__header-link(href='#dashboard') Takaisin
+              a.view__header-link(href='#task-luokkaretki') Ohjeet
+            
+            .map__wrapper
+              .placeholder__map
             
 
 
           .view#settings
+            .proto__documentation
+              p Omien tietojen ylläpito. Toteutetaan alkuun staattisena näkymänä.            
+            
             .view__content
-              
-
+            
               .form.type--settings
 
                 a(href='#dashboard') Takaisin
 
-                .form__ingress
-                  p Tässä näkymässä voit muokata omia tietojasi.
+                .profile__item
+                  .profile__image
+                    img(src='assets/monster.png')
 
                 .form__item
                   label Nimi
@@ -110,6 +120,9 @@ html
                 a.button(href='#dashboard') Tallenna asetukset
 
           .view#task-lempipaikkani
+            .proto__documentation
+              p Tehtävän ohjeet. Ensimmäisessä vaiheessa toteutetaan yhden pistemäisen merkinnän lisääminen kartalle, kartan zoomaus ja liikuttaminen.
+
             .view__content
               .accordion
                 .accordion__item
@@ -124,6 +137,8 @@ html
                   a.button(href='#map-lempipaikkani') Aloita tehtävä
 
           .view#task-luokkaretki
+            .proto__documentation
+              p Tehtävän ohjeet. Luokkaretki-tehtävä toteutetaan vaiheessa kaksi.
             .view__content
               .accordion
                 .accordion__item
