@@ -34,6 +34,7 @@ button_padding = 15px 15px
 button_background = brand_color[0]
 button_color = #fff
 
+max_text_width = 600px
 page_max_width = 1100px
 page_header_height = 3rem
 main_navigation_width = 300px
@@ -305,6 +306,9 @@ ul
   &.type--login
     max-width 300px
     margin 0 auto
+  &.type--settings
+    max-width 300px
+    margin 0 auto
 
 .form__ingress
   //-
@@ -317,6 +321,8 @@ ul
 
 .accordion
   counter-reset accordion__item
+  max-width max_text_width
+  margin 0 auto
 
 .accordion__item
   //
@@ -328,3 +334,6 @@ ul
     counter-increment accordion__item
     content counter(accordion__item)'.'
     margin 0 5px 0 0
+    
+.accordion__footer
+  margin 20px 0 0 0

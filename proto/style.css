@@ -244,11 +244,17 @@ ul {
   max-width: 300px;
   margin: 0 auto;
 }
+.form.type--settings {
+  max-width: 300px;
+  margin: 0 auto;
+}
 .form__item {
   padding: 5px 0;
 }
 .accordion {
   counter-reset: accordion__item;
+  max-width: 600px;
+  margin: 0 auto;
 }
 .accordion__title {
   color: #e1854b;
@@ -258,4 +264,7 @@ ul {
   counter-increment: accordion__item;
   content: counter(accordion__item) '.';
   margin: 0 5px 0 0;
+}
+.accordion__footer {
+  margin: 20px 0 0 0;
 }
