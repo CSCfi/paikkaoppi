@@ -228,6 +228,13 @@ ul {
   overflow-x: hidden;
   overflow-y: auto;
 }
+.app__logo {
+  background: url("../assets/Paikkaoppi_logo.png");
+  background-size: cover;
+  width: 180px;
+  height: 50px;
+  margin: 30px auto;
+}
 .view {
   text-align: center;
   height: 100%;
@@ -278,6 +285,9 @@ ul {
 .form.type--settings {
   max-width: 300px;
   margin: 0 auto;
+}
+.form__ingress {
+  text-align: center;
 }
 .form__item {
   padding: 5px 0;
