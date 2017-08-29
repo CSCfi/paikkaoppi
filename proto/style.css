@@ -319,12 +319,3 @@ ul {
 .profile__footer-item {
   font-weight: bold;
 }
-.placeholder__map {
-  position: absolute;
-  background: url("../assets/map.png") no-repeat top left;
-  background-size: cover;
-  top: 60px;
-  left: 0;
-  right: 0;
-  bottom: 0;
-}
