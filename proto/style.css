@@ -237,6 +237,14 @@ ul {
   text-align: left;
   padding: 0 30px;
 }
+.view__header {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 60px;
+  text-align: left;
+}
 .list.type--text .list__item {
   margin: 0 0 0.5rem 0;
 }
@@ -267,4 +275,13 @@ ul {
 }
 .accordion__footer {
   margin: 20px 0 0 0;
+}
+.placeholder__map {
+  position: absolute;
+  background: url("../assets/map.png") no-repeat top left;
+  background-size: cover;
+  top: 60px;
+  left: 0;
+  right: 0;
+  bottom: 0;
 }

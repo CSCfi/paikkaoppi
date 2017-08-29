@@ -56,14 +56,17 @@ html
                 a(href='#login') Kirjaudu ulos
 
           .view#map-lempipaikkani
-            p Tähän tulee kartta
-            a(href='#task-lempipaikkani') Ohjeet
-            a(href='#dashboard') Takaisin
-
+            .view__header
+              a(href='#dashboard') Takaisin
+              a(href='#task-lempipaikkani') Ohjeet
+            .placeholder__map
+            
           .view#map-luokkaretki
-            p Tähän tulee kartta
-            a(href='#task-luokkaretki') Ohjeet
-            a(href='#dashboard') Takaisin
+            .view__header
+              a(href='#dashboard') Takaisin
+              a(href='#task-luokkaretki') Ohjeet
+            .placeholder__map
+            
 
 
           .view#settings
