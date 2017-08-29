@@ -41,19 +41,32 @@ html
             
           .view#dashboard
             .view__content
-              h1 Omat tehtävät
 
-              ul.list.type--basic
-                li.list__item
-                  a(href='#task-lempipaikkani') Lempipaikkani
-                li.list__item 
-                  a(href='#task-luokkaretki') Luokkaretki
+              .view__columns
+                
+                .view__column
+                  h1 Omat tehtävät
 
-              div
-                a(href='#settings') Asetukset
+                  ul.list.type--basic
+                    li.list__item
+                      a(href='#task-lempipaikkani') Lempipaikkani
+                    li.list__item 
+                      a(href='#task-luokkaretki') Luokkaretki
+
+                .view__column
+                  .form.type--settings
+
+                    .form__item
+                      label Kalle Kirjautunut
+                    .form__item
+                      label kalle.kirjautunut@koulu.fi
+
+                    div
+                      a(href='#settings') Muokkaa asetuksia
+                    div
+                      a(href='#login') Kirjaudu ulos    
               
-              div
-                a(href='#login') Kirjaudu ulos
+              
 
           .view#map-lempipaikkani
             .view__header
@@ -88,7 +101,7 @@ html
                   input(type='email')
 
                 
-                a.button Tallenna asetukset
+                a.button(href='#dashboard') Tallenna asetukset
 
           .view#task-lempipaikkani
             .view__content

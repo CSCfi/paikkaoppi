@@ -35,13 +35,27 @@
           </div>
           <div id="dashboard" class="view">
             <div class="view__content">
-              <h1>Omat tehtävät</h1>
-              <ul class="list type--basic">
-                <li class="list__item"><a href="#task-lempipaikkani">Lempipaikkani</a></li>
-                <li class="list__item"> <a href="#task-luokkaretki">Luokkaretki</a></li>
-              </ul>
-              <div><a href="#settings">Asetukset</a></div>
-              <div><a href="#login">Kirjaudu ulos</a></div>
+              <div class="view__columns">
+                <div class="view__column">
+                  <h1>Omat tehtävät</h1>
+                  <ul class="list type--basic">
+                    <li class="list__item"><a href="#task-lempipaikkani">Lempipaikkani</a></li>
+                    <li class="list__item"> <a href="#task-luokkaretki">Luokkaretki</a></li>
+                  </ul>
+                </div>
+                <div class="view__column">
+                  <div class="form type--settings">
+                    <div class="form__item">
+                      <label>Kalle Kirjautunut</label>
+                    </div>
+                    <div class="form__item">
+                      <label>kalle.kirjautunut@koulu.fi</label>
+                    </div>
+                    <div><a href="#settings">Muokkaa asetuksia</a></div>
+                    <div><a href="#login">Kirjaudu ulos    </a></div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
           <div id="map-lempipaikkani" class="view">
@@ -65,7 +79,7 @@
                 <div class="form__item">
                   <label>Sähköpostiosoite</label>
                   <input type="email">
-                </div><a class="button">Tallenna asetukset</a>
+                </div><a href="#dashboard" class="button">Tallenna asetukset</a>
               </div>
             </div>
           </div>

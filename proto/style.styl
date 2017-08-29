@@ -22,6 +22,9 @@ border_radius = 20px
 
 base_padding = 30px
 
+media_medium = 720px
+media_large = 1080px
+
 input_border_color = #333
 input_border_radius = 1px
 input_padding = 5px 5px
@@ -267,7 +270,7 @@ ul
   
 .app__content
   position absolute
-  top 20px
+  top 0
   left @top
   right @top
   bottom @top
@@ -281,13 +284,15 @@ ul
 .view
   // General wrapper
   text-align center
+  height 100%
 
 .view__content
   //- Restricted width wrapper
   max-width page_max_width
   margin 0 auto
   text-align left
-  padding 0 base_padding
+  padding base_padding
+  height 100%
   
 .view__header
   position absolute
@@ -296,6 +301,27 @@ ul
   right 0
   height 60px
   text-align left
+
+.view__columns
+  
+  @media (min-width: media_medium)
+    display flex
+    align-items stretch
+    height 100%
+  
+.view__column
+  
+  &:nth-child(1)
+    flex 1 0 auto
+  &:nth-child(2)
+    margin base_padding 0 0 0
+    background #efefef
+    padding base_padding
+    @media (min-width: media_medium)
+      min-width 300px
+      margin-top 0
+    
+
 
 //- LIST
 
