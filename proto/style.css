@@ -1,0 +1,211 @@
+@import url("//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600");
+* {
+  box-sizing: border-box;
+}
+*:focus {
+  outline: none;
+}
+html {
+  font-size: 100%;
+}
+html,
+body {
+  margin: 0;
+  padding: 0;
+}
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+  line-height: 1.65;
+  font-weight: 400;
+  color: #333;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+a {
+  text-decoration: none;
+  color: inherit;
+}
+input,
+select,
+button,
+textarea {
+  -webkit-appearance: none;
+  appearance: none;
+  font-family: inherit;
+  font-size: 100%;
+  font-weight: 400;
+  line-height: 1.65;
+  transition: box-shadow 80ms linear;
+  max-width: 100%;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+input:disabled,
+select:disabled,
+button:disabled,
+textarea:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+.button {
+  -webkit-appearance: none;
+  appearance: none;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1;
+  border: none;
+  padding: 15px 15px;
+  white-space: nowrap;
+  border-radius: 0;
+  transition: all 160ms linear;
+  background: #e1854b;
+  color: #fff;
+  width: 100%;
+  text-align: center;
+  margin: 10px 0;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+}
+.input,
+input {
+  border: 1px solid #333;
+  border-radius: 1px;
+  padding: 5px 5px;
+  min-height: 2.8rem;
+  display: block;
+  margin: 0;
+}
+.input.has-error,
+input.has-error {
+  border-color: #e1854b;
+}
+.input.has-error:focus,
+input.has-error:focus {
+  border-color: #e1854b;
+}
+.input,
+input[type=text],
+input[type=tel],
+input[type=email],
+input[type=password] {
+  width: 100%;
+}
+textarea {
+  border: 1px solid #333;
+  min-height: 80px;
+  margin-bottom: -4px;
+  padding: 5px 5px;
+  border-radius: 1px;
+  resize: vertical;
+}
+input[type=checkbox],
+input[type=radio] {
+  width: 22px;
+  height: 22px;
+  min-width: 24px;
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 10px 0 0;
+  position: relative;
+  min-height: 0;
+}
+input[type=checkbox]:checked,
+input[type=radio]:checked {
+  background: #fff;
+}
+input[type=checkbox]:checked:before,
+input[type=radio]:checked:before {
+  content: '';
+  background: no-repeat center center;
+  background-image: url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNTQgMTE0Ljg2Ij48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6bm9uZTtzdHJva2U6IzAwMDtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbGluZWpvaW46YmV2ZWw7c3Ryb2tlLXdpZHRoOjI0cHg7fTwvc3R5bGU+PC9kZWZzPjx0aXRsZT5Bc3NldCAxPC90aXRsZT48ZyBpZD0iTGF5ZXJfMiIgZGF0YS1uYW1lPSJMYXllciAyIj48ZyBpZD0iTGF5ZXJfMS0yIiBkYXRhLW5hbWU9IkxheWVyIDEiPjxwb2x5bGluZSBjbGFzcz0iY2xzLTEiIHBvaW50cz0iMTAgNjIuNSA1MS41IDEwOCAxNDQgMTAiLz48L2c+PC9nPjwvc3ZnPg==");
+  width: 100%;
+  height: 100%;
+  background-size: 15px;
+  display: inline-block;
+  vertical-align: top;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+input {
+  border: 1px solid #333;
+  border-radius: 1px;
+  padding: 5px 5px;
+  min-height: 2.8rem;
+  display: block;
+  margin: 0;
+}
+::-webkit-input-placeholder {
+  color: #6f6f6f;
+  font-style: italic;
+  font-family: inherit;
+  line-height: line_height;
+  font-size: 100%;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+::-moz-placeholder {
+/* Firefox 19+ */
+  color: #6f6f6f;
+  font-style: italic;
+  font-family: inherit;
+  line-height: line_height;
+  font-size: 100%;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+:-ms-input-placeholder {
+  color: #6f6f6f;
+  font-style: italic;
+  font-family: inherit;
+  line-height: line_height;
+  font-size: 100%;
+  font-weight: 400;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+.app {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+.app__wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  overflow: hidden;
+}
+.app__content {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  overflow: hidden;
+}
+.view {
+  text-align: center;
+}
+.view__content {
+  max-width: 1100px;
+  margin: 0 auto;
+  text-align: left;
+}
+.form.type--login {
+  max-width: 300px;
+  margin: 0 auto;
+}
+.form__item {
+  padding: 5px 0;
+}

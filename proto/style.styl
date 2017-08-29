@@ -1,0 +1,267 @@
+font_family = 'Source Sans Pro'
+font_weights = '300,400,600'
+
+brand_color = ( #E1854B #F05348 #ee6f66 #cc360d #000 )
+ui_color = ( #35b577 #ffb448 #FF312E #587792 )
+neutral = ( #FAF7F5 #F5F5F5 darken(#F5F5F5,5) )
+text_color = ( #333 #888 )
+
+base_font_size = 100%
+base_line_height = 1.65
+base_smooth_font = true
+
+placeholder_color = darken(text_color[1],10)
+placeholder_weight = 400
+
+base_font_weight = 400
+title_font_weight = 600
+thin_font_weight = 300
+bold_font_weight = 600
+
+border_radius = 20px
+
+input_border_color = #333
+input_border_radius = 1px
+input_padding = 5px 5px
+
+button_weight = bold_font_weight
+button_font_size = 1rem
+button_border = none
+button_border_radius = 0
+button_padding = 15px 15px
+button_background = brand_color[0]
+button_color = #fff
+
+page_max_width = 1100px
+page_header_height = 3rem
+main_navigation_width = 300px
+
+size_h5 = 1rem
+size_h4 = 1.1 * size_h5 rem
+size_h3 = 1.1 * size_h4 rem
+size_h2 = 1.1 * size_h3 rem
+size_h1 = 1.1 * size_h2 rem
+
+
+noselect()
+  -webkit-user-select none
+  -moz-user-select none
+  user-select none
+
+
+color_primary = brand_color[1]
+
+color_link = color_primary
+color_link_visited = color_primary
+color_link_hover = lighten(color_primary,5)
+color_link_active = color_primary
+
+link()
+  color color_link
+  cursor pointer
+  transition color 120ms linear
+  &:visited
+    color color_link_visited
+  &:hover
+    color color_link_hover
+  &:active
+    color color_link_active
+
+
+@import url('//fonts.googleapis.com/css?family='+ replace(' ', '+', font_family) +':'+ font_weights);
+
+*
+  box-sizing border-box
+  &:focus
+    outline none
+
+html
+  font-size base_font_size
+
+html, body
+  margin 0
+  padding 0
+  
+
+body
+  font-family font_family, sans-serif
+  line-height base_line_height
+  font-weight base_font_weight
+  color text_color[0]
+  if base_smooth_font
+    -webkit-font-smoothing antialiased
+    -moz-osx-font-smoothing grayscale
+
+a
+  text-decoration none
+  color inherit
+  
+input, select, button, textarea
+  -webkit-appearance none
+  appearance none
+  font-family inherit
+  font-size 100%
+  font-weight base_font_weight
+  line-height base_line_height
+  transition box-shadow 80ms linear
+  max-width 100%
+  if base_smooth_font
+    -webkit-font-smoothing antialiased
+    -moz-osx-font-smoothing grayscale
+  &:disabled
+    opacity .5
+    cursor default
+
+
+button()
+  -webkit-appearance none
+  appearance none
+  display inline-block
+  vertical-align middle
+  cursor pointer
+  font-weight button_weight
+  font-size button_font_size
+  line-height 1
+  border button_border
+  padding button_padding
+  white-space nowrap
+  border-radius button_border_radius
+  transition all 160ms linear
+  background button_background
+  color button_color
+  width 100%
+  text-align center
+  margin 10px 0
+  noselect()
+ 
+.button
+  button()
+
+input()
+  border 1px solid input_border_color
+  border-radius input_border_radius
+  padding input_padding
+  min-height 2.8rem
+  display block
+  margin 0
+  
+.input, input
+  input()
+  &.has-error
+    border-color brand_color[0]
+    &:focus
+      border-color brand_color[0]
+
+.input, 
+input[type=text], 
+input[type=tel], 
+input[type=email], 
+input[type=password]
+  width 100%
+
+textarea
+  border 1px solid input_border_color
+  min-height 80px
+  margin-bottom -4px
+  padding input_padding
+  border-radius input_border_radius
+  resize vertical
+
+input[type=checkbox],
+input[type=radio]
+  width 22px
+  height @width
+  min-width 24px
+  display inline-block
+  vertical-align middle
+  margin 0 10px 0 0
+  position relative
+  min-height 0
+  &:checked
+    background #fff
+    &:before
+      content ''
+      background no-repeat center center
+      background-image url('data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAxNTQgMTE0Ljg2Ij48ZGVmcz48c3R5bGU+LmNscy0xe2ZpbGw6bm9uZTtzdHJva2U6IzAwMDtzdHJva2UtbGluZWNhcDpyb3VuZDtzdHJva2UtbGluZWpvaW46YmV2ZWw7c3Ryb2tlLXdpZHRoOjI0cHg7fTwvc3R5bGU+PC9kZWZzPjx0aXRsZT5Bc3NldCAxPC90aXRsZT48ZyBpZD0iTGF5ZXJfMiIgZGF0YS1uYW1lPSJMYXllciAyIj48ZyBpZD0iTGF5ZXJfMS0yIiBkYXRhLW5hbWU9IkxheWVyIDEiPjxwb2x5bGluZSBjbGFzcz0iY2xzLTEiIHBvaW50cz0iMTAgNjIuNSA1MS41IDEwOCAxNDQgMTAiLz48L2c+PC9nPjwvc3ZnPg==')
+      width 100%
+      height @width
+      background-size 15px
+      display inline-block
+      vertical-align top
+      position absolute
+      top 0
+      left 0
+input
+  input()
+
+placeholder()
+  color placeholder_color
+  font-style italic
+  font-family inherit
+  line-height line_height
+  font-size 100%
+  font-weight placeholder_weight
+  if base_smooth_font
+    -webkit-font-smoothing antialiased
+    -moz-osx-font-smoothing grayscale
+
+::-webkit-input-placeholder {
+   placeholder()
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   placeholder()
+}
+
+:-ms-input-placeholder {
+   placeholder()
+}
+
+
+.app
+  position absolute
+  top 0
+  left 0
+  right 0
+  bottom 0
+  overflow hidden
+
+.app__wrapper
+  position absolute
+  top 0
+  left 0
+  right 0
+  bottom 0
+  overflow hidden
+  
+.app__content
+  position absolute
+  top 20px
+  left @top
+  right @top
+  bottom @top
+  overflow hidden
+
+.view
+  // General wrapper
+  text-align center
+
+.view__content
+  //- Restricted width wrapper
+  max-width page_max_width
+  margin 0 auto
+  text-align left
+  
+
+.form
+
+  &.type--login
+    max-width 300px
+    margin 0 auto
+
+.form__ingress
+  //-
+    
+.form__item
+  padding 5px 0
+

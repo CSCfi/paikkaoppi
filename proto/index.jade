@@ -1,0 +1,51 @@
+doctype html
+html
+  head
+    meta(charset='UTF-8')
+    meta(name='viewport', content='width=device-width, height=device-height, initial-scale=1')
+    meta(name="apple-mobile-web-app-capable", content="yes")
+    link(rel="shortcut icon" href="favicon.ico")
+
+    title Paikkaoppi-proto
+
+    link(rel='stylesheet', type='text/css', href="style.css")
+    script(type='text/javascript', src='https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-rc1/jquery.slim.min.js')
+    script(type='text/javascript', src='script.js')
+
+  body
+
+
+    .app
+
+      .app__wrapper
+        .app__content
+
+          .view#login
+
+            .view__content
+
+              .form.type--login
+
+                .form__ingress
+                  p PaikkaOppi on kouluille maksuton verkkopohjainen oppimisympäristö.
+
+                .form__item
+                  label Käyttäjänimi
+                  input(type='text')
+                .form__item
+                  label Salasana
+                  input(type='password')
+                a.button(href='#dashboard') Kirjaudu sisään
+            
+          .view#dashboard
+            a(href='#map') Kartta
+
+          .view#map
+            a(href='#settings') Asetukset
+
+          .view#settings
+            a(href='#task') Tehtävä
+
+          .view#task
+            a(href='#map') Kartta
+

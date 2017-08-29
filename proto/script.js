@@ -1,0 +1,1 @@
+(function(){$(function(){var n;return n=$(window),n.on("hashchange",function(o){return n.trigger("loadView")}),n.on("loadView",function(n){return $(".view").hide(),""===window.location.hash||"#"===window.location.hash?$("#login").show():$(window.location.hash).show()}),n.trigger("loadView")})}).call(this);

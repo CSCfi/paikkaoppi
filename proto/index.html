@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <link rel="shortcut icon" href="favicon.ico">
+    <title>Paikkaoppi-proto</title>
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-rc1/jquery.slim.min.js"></script>
+    <script type="text/javascript" src="script.js"></script>
+  </head>
+  <body>
+    <div class="app">
+      <div class="app__wrapper">
+        <div class="app__content">
+          <div id="login" class="view">
+            <div class="view__content">
+              <div class="form type--login">
+                <div class="form__ingress">
+                  <p>PaikkaOppi on kouluille maksuton verkkopohjainen oppimisympäristö.</p>
+                </div>
+                <div class="form__item">
+                  <label>Käyttäjänimi</label>
+                  <input type="text">
+                </div>
+                <div class="form__item">
+                  <label>Salasana</label>
+                  <input type="password">
+                </div><a href="#dashboard" class="button">Kirjaudu sisään</a>
+              </div>
+            </div>
+          </div>
+          <div id="dashboard" class="view"><a href="#map">Kartta</a></div>
+          <div id="map" class="view"><a href="#settings">Asetukset</a></div>
+          <div id="settings" class="view"><a href="#task">Tehtävä</a></div>
+          <div id="task" class="view"><a href="#map">Kartta</a></div>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
