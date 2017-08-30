@@ -228,11 +228,15 @@ ul {
   overflow-y: auto;
 }
 .app__logo {
-  background: url("../assets/Paikkaoppi_logo.png");
+  background: url("assets/Paikkaoppi_logo.png");
   background-size: cover;
   width: 180px;
   height: 50px;
   margin: 30px auto;
+}
+.title__list {
+  margin: 0 0 25px 0;
+  font-size: 1.331rem;
 }
 .popup {
   position: fixed;
@@ -326,23 +330,44 @@ ul {
   top: 20px;
 }
 .map__zoom-in,
-.map__zoom-out {
+.map__zoom-out,
+.map__center {
   width: 40px;
   height: 40px;
   background: #fff;
   border-radius: 100%;
   padding: 10px;
   box-shadow: 2px 2px 10px rgba(0,0,0,0.3);
-  margin: 0 0 5px 0;
+  margin: 0 0 8px 0;
+  cursor: pointer;
 }
 .map__zoom-in:before {
-  content: url("../assets/icon_plus.svg");
+  content: url("assets/icon_plus.svg");
 }
 .map__zoom-out:before {
-  content: url("../assets/icon_minus.svg");
+  content: url("assets/icon_minus.svg");
+}
+.map__center {
+  margin-top: 20px;
+}
+.map__center:before {
+  content: url("assets/icon_center.svg");
 }
 .list.type--text .list__item {
   margin: 0 0 0.5rem 0;
+}
+.list__item-link {
+  display: inline-block;
+  padding: 0 0 2px 0;
+  color: #f05348;
+  font-weight: 600;
+  border-bottom: 1px solid transparent;
+  transition: color 120ms linear, border 120ms linear 0ms;
+}
+.list__item-link:hover {
+  color: #c21c10;
+  border-bottom-color: rgba(194,28,16,0.4);
+  transition: color 120ms linear, border 120ms linear 80ms;
 }
 .form.type--login {
   max-width: 300px;
@@ -371,8 +396,8 @@ ul {
   margin: 0 auto;
 }
 .accordion__title {
-  color: linear-gradient(65deg, #f05348, #e1854b);
-  margin: 20px 0 10px 0;
+  color: #e1854b;
+  margin: 20px 0 15px 0;
 }
 .accordion__title:before {
   counter-increment: accordion__item;
@@ -380,7 +405,7 @@ ul {
   margin: 0 5px 0 0;
 }
 .accordion__footer {
-  margin: 20px 0 0 0;
+  margin: 35px 0 0 0;
   text-align: center;
   -webkit-position: sticky;
   position: sticky;
@@ -405,4 +430,5 @@ ul {
 }
 .profile__footer-item {
   font-weight: bold;
+  margin: 0 0 10px 0;
 }

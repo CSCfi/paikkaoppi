@@ -1,7 +1,7 @@
 font_family = 'Source Sans Pro'
 font_weights = '300,400,600'
 
-brand_color = ( linear-gradient(65deg, #F05348, #E1854B) #ee6f66 #cc360d #000 )
+brand_color = ( linear-gradient(65deg, #F05348, #E1854B) #F05348 darken(#F05348, 20) #E1854B )
 ui_color = ( #35b577 #ffb448 #FF312E #587792 )
 neutral = ( #FAF7F5 #F5F5F5 darken(#F5F5F5,5) )
 text_color = ( #333 #888 )
@@ -277,11 +277,18 @@ ul
   overflow-y auto
 
 .app__logo
-  background url(../assets/Paikkaoppi_logo.png)
+  background url(assets/Paikkaoppi_logo.png)
   background-size cover
   width 180px
   height 50px 
   margin base_padding auto
+
+
+//- TITLES
+
+.title__list
+  margin 0 0 25px 0
+  font-size size_h2
 
 
 //- POPUP
@@ -379,20 +386,26 @@ ul
   right 20px
   top 20px
 .map__zoom-in,
-.map__zoom-out
+.map__zoom-out,
+.map__center
   width 40px
   height @width
   background #fff
   border-radius 100%
   padding 10px
   box-shadow 2px 2px 10px alpha(#000,.3)
-  margin 0 0 5px 0
+  margin 0 0 8px 0
+  cursor pointer
 .map__zoom-in
   &:before
-    content url(../assets/icon_plus.svg)
+    content url(assets/icon_plus.svg)
 .map__zoom-out
   &:before
-    content url(../assets/icon_minus.svg)
+    content url(assets/icon_minus.svg)
+.map__center
+  margin-top 20px
+  &:before
+    content url(assets/icon_center.svg)
 
 
 
@@ -404,6 +417,19 @@ ul
   &.type--text
     .list__item
       margin 0 0 .5rem 0
+
+.list__item-link
+  display inline-block
+  padding 0 0 2px 0
+  color brand_color[1]
+  font-weight bold_font_weight
+  border-bottom 1px solid transparent
+  transition color 120ms linear, border 120ms linear 0ms
+  &:hover
+    color brand_color[2]
+    border-bottom-color alpha(brand_color[2],.4)
+    transition color 120ms linear, border 120ms linear 80ms
+
 
 //- FORM
 
@@ -441,15 +467,15 @@ ul
   //
 
 .accordion__title
-  color brand_color[0]
-  margin 20px 0 10px 0
+  color brand_color[3]
+  margin 20px 0 15px 0
   &:before
     counter-increment accordion__item
     content counter(accordion__item)'.'
     margin 0 5px 0 0
     
 .accordion__footer
-  margin 20px 0 0 0
+  margin 35px 0 0 0
   text-align center
   -webkit-position sticky
   position sticky
@@ -475,5 +501,6 @@ ul
   margin base_padding 0 0 0
 .profile__footer-item
   font-weight bold
+  margin 0 0 10px 0
 
 
