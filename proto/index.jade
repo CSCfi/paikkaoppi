@@ -1,3 +1,5 @@
+- var compileWithDocumentation = true
+
 doctype html
 html
   head
@@ -24,8 +26,9 @@ html
             //-
 
           .view#login
-            .proto__documentation
-              p Kirjautumisnäkymä. Näytetään staattisena.
+            if compileWithDocumentation
+              .proto__documentation
+                p Kirjautumisnäkymä. Näytetään staattisena.
 
             .view__content
               .form.type--login
@@ -43,8 +46,9 @@ html
                 a.button(href='#dashboard') Kirjaudu sisään
 
           .view#dashboard
-            .proto__documentation
-              p Oppilaan työpöytä. Tehtävälistaus näytetään staattisena. Linkistä pääsee katsomaan tehtävien ohjeet.
+            if compileWithDocumentation
+              .proto__documentation
+                p Oppilaan työpöytä. Tehtävälistaus näytetään staattisena. Linkistä pääsee katsomaan tehtävien ohjeet.
 
             .view__content
 
@@ -75,8 +79,9 @@ html
                         a(href='#login') Kirjaudu ulos
 
           .view#map-lempipaikkani
-            .proto__documentation
-              p Lempipaikkani-kartta. Aluksi toteutetaan kartan zoomaaminen ja liikuttaminen sekä pistemäisen merkinnän lisääminen.
+            if compileWithDocumentation
+              .proto__documentation
+                p Lempipaikkani-kartta. Aluksi toteutetaan kartan zoomaaminen ja liikuttaminen sekä pistemäisen merkinnän lisääminen.
 
             .view__header
               a.view__header-link(href='#dashboard') Takaisin
@@ -100,8 +105,9 @@ html
 
 
           .view#settings
-            .proto__documentation
-              p Omien tietojen ylläpito. Toteutetaan alkuun staattisena näkymänä.            
+            if compileWithDocumentation
+              .proto__documentation
+                p Omien tietojen ylläpito. Toteutetaan alkuun staattisena näkymänä.            
             
             .view__content
             
@@ -124,8 +130,9 @@ html
                 a.button(href='#dashboard') Tallenna asetukset
 
           .view#task-lempipaikkani
-            .proto__documentation
-              p Tehtävän ohjeet. Ensimmäisessä vaiheessa toteutetaan yhden pistemäisen merkinnän lisääminen kartalle, kartan zoomaus ja liikuttaminen.
+            if compileWithDocumentation
+              .proto__documentation
+                p Tehtävän ohjeet. Ensimmäisessä vaiheessa toteutetaan yhden pistemäisen merkinnän lisääminen kartalle, kartan zoomaus ja liikuttaminen.
 
             .view__content
               .accordion
