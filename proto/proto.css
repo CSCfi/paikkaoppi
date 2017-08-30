@@ -1,6 +1,6 @@
 .placeholder__map {
   position: absolute;
-  background: url("../assets/map.png") no-repeat top left;
+  background: url("assets/map.png") no-repeat top left;
   background-size: cover;
   top: 0;
   left: 0;

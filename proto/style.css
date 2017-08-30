@@ -361,13 +361,10 @@ ul {
   padding: 0 0 2px 0;
   color: #f05348;
   font-weight: 600;
-  border-bottom: 1px solid transparent;
-  transition: color 120ms linear, border 120ms linear 0ms;
+  transition: color 120ms linear;
 }
 .list__item-link:hover {
   color: #c21c10;
-  border-bottom-color: rgba(194,28,16,0.4);
-  transition: color 120ms linear, border 120ms linear 80ms;
 }
 .form.type--login {
   max-width: 300px;
