@@ -1,7 +1,7 @@
 font_family = 'Source Sans Pro'
 font_weights = '300,400,600'
 
-brand_color = ( #E1854B #F05348 #ee6f66 #cc360d #000 )
+brand_color = ( linear-gradient(65deg, #F05348, #E1854B) #ee6f66 #cc360d #000 )
 ui_color = ( #35b577 #ffb448 #FF312E #587792 )
 neutral = ( #FAF7F5 #F5F5F5 darken(#F5F5F5,5) )
 text_color = ( #333 #888 )
@@ -32,8 +32,8 @@ input_padding = 5px 5px
 button_weight = bold_font_weight
 button_font_size = 1rem
 button_border = none
-button_border_radius = 0
-button_padding = 15px 15px
+button_border_radius = 30px
+button_padding = 15px 35px
 button_background = brand_color[0]
 button_color = #fff
 
@@ -155,9 +155,8 @@ button()
   transition all 160ms linear
   background button_background
   color button_color
-  width 100%
   text-align center
-  margin 10px 0
+  margin 10px auto
   noselect()
  
 .button
@@ -284,6 +283,36 @@ ul
   height 50px 
   margin base_padding auto
 
+
+//- POPUP
+
+.popup
+  position fixed
+  top 0
+  left 0
+  right 0
+  bottom 0
+  z-index 10
+  background #fff
+  @media (min-width: media_medium)
+    left 20vw
+    right @left
+    
+    &:before,
+    &:after
+      content ''
+      display block
+      position fixed
+      top 0
+      bottom 0
+      width 20vw
+      background alpha(#000,.4)
+    &:before
+      left 0
+    &:after
+      right 0
+
+
 //- VIEW
 //- Holds a single view of the application
 
@@ -392,7 +421,14 @@ ul
     
 .form__item
   padding 5px 0
-  
+
+.form__footer
+  text-align center
+  margin 20px 0 0 0
+  -webkit-position sticky
+  position sticky
+  bottom 0
+
 
 //- ACCORDION
 
@@ -414,6 +450,10 @@ ul
     
 .accordion__footer
   margin 20px 0 0 0
+  text-align center
+  -webkit-position sticky
+  position sticky
+  bottom 0
 
 
 //- PROFILE
