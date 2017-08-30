@@ -301,6 +301,7 @@ ul
   bottom 0
   z-index 10
   background #fff
+  padding 0 20px
   overflow-x hidden
   overflow-y auto
   @media (min-width: media_medium)
@@ -353,6 +354,24 @@ ul
   font-weight bold_font_weight
   margin 0 20px 0 0
 
+.view__add
+  position absolute
+  top 0
+  right 30px
+  background brand_color[1]
+  border-radius 100%
+  width 30px
+  height @width
+  padding 3px 5px
+  text-align center
+  box-shadow 2px 2px 8px alpha(#000,.2)
+  cursor pointer
+  &:before
+    content url(assets/icon_plus-w.svg)
+    display inline-block
+    width 14px
+
+
 .view__columns
   
   @media (min-width: media_medium)
@@ -361,6 +380,7 @@ ul
     height 100%
   
 .view__column
+  position relative
   
   &:nth-child(1)
     flex 1 0 auto

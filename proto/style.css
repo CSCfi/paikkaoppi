@@ -246,6 +246,7 @@ ul {
   bottom: 0;
   z-index: 10;
   background: #fff;
+  padding: 0 20px;
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -297,12 +298,33 @@ ul {
   font-weight: 600;
   margin: 0 20px 0 0;
 }
+.view__add {
+  position: absolute;
+  top: 0;
+  right: 30px;
+  background: #f05348;
+  border-radius: 100%;
+  width: 30px;
+  height: 30px;
+  padding: 3px 5px;
+  text-align: center;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+  cursor: pointer;
+}
+.view__add:before {
+  content: url("assets/icon_plus-w.svg");
+  display: inline-block;
+  width: 14px;
+}
 @media (min-width: 720px) {
   .view__columns {
     display: flex;
     align-items: stretch;
     height: 100%;
   }
+}
+.view__column {
+  position: relative;
 }
 .view__column:nth-child(1) {
   flex: 1 0 auto;
