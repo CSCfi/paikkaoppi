@@ -355,6 +355,24 @@ ul {
 .map__center:before {
   content: url("assets/icon_center.svg");
 }
+.list.type--tasks .list__item {
+  margin: 0 0 8px 0;
+}
+.list.type--tasks .list__item:before {
+  display: inline-block;
+  vertical-align: bottom;
+  width: 18px;
+  margin: 0 8px -2px 0;
+}
+.list.type--tasks .list__item.type--new:before {
+  content: url("assets/icon_task.svg");
+}
+.list.type--tasks .list__item.type--progressing:before {
+  content: url("assets/icon_task_progressing.svg");
+}
+.list.type--tasks .list__item.type--done:before {
+  content: url("assets/icon_task_done.svg");
+}
 .list.type--text .list__item {
   margin: 0 0 0.5rem 0;
 }

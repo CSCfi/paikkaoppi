@@ -416,6 +416,21 @@ ul
 .list
   &.type--basic
     //-
+  &.type--tasks
+    .list__item
+      margin 0 0 8px 0
+      &:before
+        display inline-block
+        vertical-align bottom
+        width 18px
+        margin 0 8px -2px 0
+      &.type--new:before
+        content url(assets/icon_task.svg)
+      &.type--progressing:before
+        content url(assets/icon_task_progressing.svg)
+      &.type--done:before
+        content url(assets/icon_task_done.svg)
+      
   &.type--text
     .list__item
       margin 0 0 .5rem 0

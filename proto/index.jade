@@ -58,11 +58,15 @@ html
                 .view__column
                   h1.title__list Omat tehtävät
 
-                  ul.list.type--basic
-                    li.list__item
+                  ul.list.type--tasks
+                    
+                    li.list__item.type--progressing
                       a.list__item-link(href='#task-lempipaikkani') Lempipaikkani
-                    //- li.list__item 
-                    //-   a(href='#task-luokkaretki') Luokkaretki
+                    li.list__item.type--progressing
+                      a.list__item-link Luokkaretki
+                    li.list__item.type--new
+                      a.list__item-link(href='#task-lempipaikkani') Lempipaikkani
+                    
 
                 .view__column
                   .profile
