@@ -238,7 +238,7 @@ ul {
   margin: 35px 0 25px 0;
   font-size: 1.331rem;
 }
-.title__list:first-child {
+.title__list:first-of-type {
   margin-top: 0;
 }
 .popup {
