@@ -56,8 +56,8 @@ html
               .view__columns
                 
                 .view__column
-                  .view__add
-                    
+                  a.view__add(href='#library')
+
                   h1.title__list Omat tehtävät
 
                   ul.list.type--tasks
@@ -154,6 +154,31 @@ html
                   input(type='email')
                 .form__footer
                   a.button(href='#dashboard') Tallenna asetukset
+
+          .view#library
+            if compileWithDocumentation
+              .proto__documentation
+                p Tehtäväkirjasto. Toteutetaan aluksi staattisena. Opettajat ja oppilaat voivat selata täällä julkisia tehtäviä, sekä aloittaa haluamansa tehtävän.           
+            
+            .view__content
+            
+              h1.title__list Sinulle jaetut tehtävät
+
+              ul.list.type--tasks
+                
+                li.list__item.type--progressing
+                  a.list__item-link(href='#task-lempipaikkani') Lempipaikkani
+                li.list__item.type--progressing
+                  a.list__item-link Luokkaretki
+
+              h1.title__list Kaikki tehtävät
+
+              ul.list.type--tasks
+                
+                li.list__item.type--progressing
+                  a.list__item-link(href='#task-lempipaikkani') Lempipaikkani
+                li.list__item.type--progressing
+                  a.list__item-link Luokkaretki
 
           
 

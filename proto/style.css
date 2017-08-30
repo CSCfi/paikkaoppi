@@ -235,8 +235,11 @@ ul {
   margin: 30px auto;
 }
 .title__list {
-  margin: 0 0 25px 0;
+  margin: 35px 0 25px 0;
   font-size: 1.331rem;
+}
+.title__list:first-child {
+  margin-top: 0;
 }
 .popup {
   position: fixed;
