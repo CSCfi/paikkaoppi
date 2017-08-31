@@ -20,7 +20,7 @@ bold_font_weight = 600
 
 border_radius = 30px
 
-base_padding = 30px
+base_padding = 25px
 
 media_medium = 720px
 media_large = 1080px
@@ -308,7 +308,7 @@ ul
   bottom 0
   z-index 10
   background #fff
-  padding 0 base_padding
+  padding base_padding
   overflow-x hidden
   overflow-y auto
   @media (min-width: media_medium)
@@ -535,7 +535,7 @@ ul
     .list__item
       flex 1 0 calc(100% \- 15px)
       margin 0 15px 15px 0
-      background neutral[1]
+      border 1px solid neutral[3]
       padding 10px
       cursor pointer
       @media (min-width: media_medium)
@@ -552,7 +552,6 @@ ul
       margin 0 0 10px 0
     .list__item-link
       display block
-      
       &:before
         display inline-block
         vertical-align bottom
@@ -611,19 +610,24 @@ ul
   max-width max_text_width
   margin 0 auto
 
+.accordion__header
+  color lighten(brand_color[3], 5)
+  margin 0 0 35px 0
+
 .accordion__item
   //
 
 .accordion__title
-  color brand_color[3]
-  margin 20px 0 15px 0
+  font-weight bold_font_weight
+  font-size size_h4
+  margin 20px 0 10px 0
   &:before
     counter-increment accordion__item
     content counter(accordion__item)'.'
     margin 0 5px 0 0
     
 .accordion__footer
-  margin 35px 0 0 0
+  margin 40px 0 0 0
   text-align center
   -webkit-position sticky
   position sticky
