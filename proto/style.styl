@@ -409,8 +409,6 @@ ul
   text-align center
   box-shadow 2px 2px 8px alpha(#000,.2)
   cursor pointer
-  @media (min-width: media_medium)
-    right 30px
   &:before
     content url(assets/icon_plus-w.svg)
     display inline-block
@@ -429,13 +427,14 @@ ul
   
   &:nth-child(1)
     flex 1 0 auto
+    
   &:nth-child(2)
     margin base_padding 0 0 0
     background #efefef
     padding base_padding
     @media (min-width: media_medium)
       min-width 300px
-      margin-top 0
+      margin 0 0 0 20px
     
 
 //- MAP
@@ -520,20 +519,36 @@ ul
   &.type--basic
     //-
   &.type--tasks
+    display flex
+    flex-wrap wrap
+    margin 0 -15px 0 0
     .list__item
-      margin 0 0 8px 0
+      flex 1 0 33.332%
+      margin 0 15px 15px 0
+      background neutral[1]
+      padding 10px
+      cursor pointer
+      &.type--progressing .list__item-link:before
+        content url(assets/icon_task_progressing.svg)
+      &.type--done .list__item-link:before
+        content url(assets/icon_task.svg)      
+    .list__item-image
+      width 100%
+      height 80px
+      background-size cover
+      margin 0 0 10px 0
+    .list__item-link
+      display block
+      
       &:before
         display inline-block
         vertical-align bottom
         width 18px
-        margin 0 8px -2px 0
-      &.type--new:before
-        content url(assets/icon_task.svg)
-      &.type--progressing:before
-        content url(assets/icon_task_progressing.svg)
-      &.type--done:before
-        content url(assets/icon_task_done.svg)
-      
+        margin 0 8px -4px 0
+
+  &.type--tasks-list
+    .list__item
+      margin 0 0 8px 0      
   &.type--text
     .list__item
       margin 0 0 .5rem 0

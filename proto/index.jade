@@ -60,14 +60,15 @@ html
 
                   h1.title__list Omat tehtävät
 
-                  ul.list.type--tasks
+                  .list.type--tasks
                     
-                    li.list__item.type--progressing
-                      a.list__item-link(href='#task-lempipaikkani') Lempipaikkani
-                    li.list__item.type--progressing
-                      a.list__item-link Luokkaretki
-                    li.list__item.type--new
-                      a.list__item-link(href='#task-lempipaikkani') Lempipaikkani
+                    a.list__item.type--progressing(href='#task-lempipaikkani')
+                      .list__item-image(style='background:url(assets/map.png)')
+                      .list__item-link Lempipaikkani
+                    a.list__item.type--done
+                      .list__item-image(style='background:url(assets/map.png)')
+                      .list__item-link Luokkaretki
+
                     
 
                 .view__column
@@ -220,21 +221,21 @@ html
             
               h1.title__list Sinulle jaetut tehtävät
 
-              ul.list.type--tasks
+              .list.type--tasks
                 
-                li.list__item
-                  a.list__item-link(href='#task-lempipaikkani-aloita') Lempipaikkani
-                li.list__item
-                  a.list__item-link Luokkaretki
+                a.list__item(href='#task-lempipaikkani-aloita')
+                  .list__item-link Lempipaikkani
+                a.list__item
+                  .list__item-link Luokkaretki
 
               h1.title__list Kaikki tehtävät
 
-              ul.list.type--tasks
+              .list.type--tasks
                 
-                li.list__item
-                  a.list__item-link(href='#task-lempipaikkani-aloita') Lempipaikkani
-                li.list__item
-                  a.list__item-link Luokkaretki
+                a.list__item(href='#task-lempipaikkani-aloita')
+                  .list__item-link Lempipaikkani
+                a.list__item
+                  .list__item-link Luokkaretki
 
           
 
