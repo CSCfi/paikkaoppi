@@ -469,6 +469,13 @@ ul {
     display: none;
   }
 }
+.map__pointer {
+  content: url("assets/icon_task.svg");
+  width: 45px;
+  position: absolute;
+  z-index: 1;
+  cursor: pointer;
+}
 .list.type--tasks {
   display: flex;
   flex-wrap: wrap;
@@ -480,12 +487,6 @@ ul {
   background: #f5f5f5;
   padding: 10px;
   cursor: pointer;
-}
-.list.type--tasks .list__item.type--progressing .list__item-link:before {
-  content: url("assets/icon_task_progressing.svg");
-}
-.list.type--tasks .list__item.type--done .list__item-link:before {
-  content: url("assets/icon_task.svg");
 }
 .list.type--tasks .list__item-image {
   width: 100%;

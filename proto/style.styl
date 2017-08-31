@@ -511,7 +511,13 @@ ul
   text-align right
   @media (max-width: media_medium)
     display none
-    
+  
+.map__pointer
+  content url(assets/icon_task.svg)
+  width 45px
+  position absolute
+  z-index 1
+  cursor pointer
 
 //- LIST
 
@@ -529,9 +535,9 @@ ul
       padding 10px
       cursor pointer
       &.type--progressing .list__item-link:before
-        content url(assets/icon_task_progressing.svg)
+        // content url(assets/icon_task_progressing.svg)
       &.type--done .list__item-link:before
-        content url(assets/icon_task.svg)      
+        // 
     .list__item-image
       width 100%
       height 80px
