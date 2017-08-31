@@ -97,13 +97,30 @@
                 </div>
               </div>
             </div>
-            <div class="view__header"><a href="#dashboard" class="view__header-link">Takaisin</a><a href="#task-lempipaikkani" class="view__header-link">Ohjeet</a></div>
+            <div id="mark" class="popup">
+              <div class="form type--basic">
+                <div class="popup__header"><a href="#map-lempipaikkani" class="popup__header-link type--back">Takaisin</a></div>
+                <div class="form__item">
+                  <label>Nimi</label>
+                  <input type="text">
+                </div>
+                <div class="form__item">
+                  <label>Kuvaus</label>
+                  <textarea></textarea>
+                </div>
+                <div class="form__footer"><a href="#map-lempipaikkani" class="button">Tallenna merkintä</a></div>
+              </div>
+            </div>
+            <div class="view__header"><a href="#dashboard" class="view__header-link type--back">Takaisin</a>
+              <h1 class="view__header-title">Lempipaikkani</h1><a href="#task-lempipaikkani" class="view__header-link type--info">Ohjeet</a>
+            </div>
             <div class="map__wrapper">
               <div class="map__zoom">
                 <div class="map__zoom-in"></div>
                 <div class="map__zoom-out"></div>
                 <div class="map__center"></div>
               </div>
+              <div class="map__tools"><a href="#mark" class="map__tools-dot"></a></div>
               <div class="placeholder__map"></div>
             </div>
           </div>
@@ -114,7 +131,7 @@
               <p>Omien tietojen ylläpito. Toteutetaan alkuun staattisena näkymänä.            </p>
             </div>
             <div class="view__content">
-              <div class="form type--settings"><a href="#dashboard">Takaisin</a>
+              <div class="form type--basic"><a href="#dashboard">Takaisin</a>
                 <div class="profile__item">
                   <div class="profile__image"><img src="assets/monster.png"></div>
                 </div>
@@ -137,13 +154,13 @@
             <div class="view__content">
               <h1 class="title__list">Sinulle jaetut tehtävät</h1>
               <ul class="list type--tasks">
-                <li class="list__item type--progressing"><a href="#task-lempipaikkani" class="list__item-link">Lempipaikkani</a></li>
-                <li class="list__item type--progressing"><a class="list__item-link">Luokkaretki</a></li>
+                <li class="list__item type--new"><a href="#task-lempipaikkani" class="list__item-link">Lempipaikkani</a></li>
+                <li class="list__item type--new"><a class="list__item-link">Luokkaretki</a></li>
               </ul>
               <h1 class="title__list">Kaikki tehtävät</h1>
               <ul class="list type--tasks">
-                <li class="list__item type--progressing"><a href="#task-lempipaikkani" class="list__item-link">Lempipaikkani</a></li>
-                <li class="list__item type--progressing"><a class="list__item-link">Luokkaretki</a></li>
+                <li class="list__item type--new"><a href="#task-lempipaikkani" class="list__item-link">Lempipaikkani</a></li>
+                <li class="list__item type--new"><a class="list__item-link">Luokkaretki</a></li>
               </ul>
             </div>
           </div>

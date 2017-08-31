@@ -18,7 +18,7 @@ title_font_weight = 600
 thin_font_weight = 300
 bold_font_weight = 600
 
-border_radius = 20px
+border_radius = 30px
 
 base_padding = 30px
 
@@ -137,6 +137,11 @@ input, select, button, textarea
   &:disabled
     opacity .5
     cursor default
+
+textarea
+  width 100%
+  height 140px
+  resize vertical
 
 
 button()
@@ -309,7 +314,6 @@ ul
   @media (min-width: media_medium)
     left 20vw
     right @left
-    
     &:before,
     &:after
       content ''
@@ -323,6 +327,13 @@ ul
       left 0
     &:after
       right 0
+
+.popup__header
+  padding 20px 0
+.popup__header-link
+  font-weight bold_font_weight
+  &.type--back
+    //
 
 
 //- VIEW
@@ -348,18 +359,26 @@ ul
   right 0
   height page_header_height
   text-align left
-  padding 0 base_padding
+  padding 0 15px
   display flex
   align-items center
+  box-shadow 0 2px 12px alpha(#000,.5)
+  position relative
+  z-index 3
   
+.view__header-title
+  margin 0
+  font-size size_h4
+  flex 1
+  text-align center
+
 .view__header-link
   font-weight bold_font_weight
-  margin 0 20px 0 0
 
 .view__add
   position absolute
   top 0
-  right 30px
+  right 0
   background brand_color[1]
   border-radius 100%
   width 30px
@@ -368,6 +387,8 @@ ul
   text-align center
   box-shadow 2px 2px 8px alpha(#000,.2)
   cursor pointer
+  @media (min-width: media_medium)
+    right 30px
   &:before
     content url(assets/icon_plus-w.svg)
     display inline-block
@@ -407,7 +428,7 @@ ul
 .map__zoom
   position absolute
   z-index 2
-  right 20px
+  right 10px
   top 20px
 .map__zoom-in,
 .map__zoom-out,
@@ -417,7 +438,7 @@ ul
   background #fff
   border-radius 100%
   padding 10px
-  box-shadow 2px 2px 10px alpha(#000,.3)
+  box-shadow 2px 2px 12px alpha(#000,.5)
   margin 0 0 8px 0
   cursor pointer
 .map__zoom-in
@@ -431,7 +452,32 @@ ul
   &:before
     content url(assets/icon_center.svg)
 
-
+.map__tools
+  background #fff
+  box-shadow 2px 2px 12px alpha(#000,.5)
+  position absolute
+  left 10px
+  bottom 10px
+  right 10px
+  display inline-block
+  z-index 2
+  padding 5px 15px
+  border-radius border_radius
+  @media (min-width: media_medium)
+    right auto
+    
+.map__tools-dot
+  width 40px
+  height @width
+  padding 10px
+  cursor pointer
+  background brand_color[1]
+  display inline-block
+  border-radius 100%
+  box-shadow 2px 2px 10px alpha(#000,.3)
+  &:before
+    content url(assets/icon_dot.svg)
+    
 
 //- LIST
 
@@ -474,9 +520,10 @@ ul
   &.type--login
     max-width 300px
     margin 0 auto
-  &.type--settings
+  &.type--basic
     max-width 300px
     margin 0 auto
+    text-align left
 
 .form__ingress
   text-align center

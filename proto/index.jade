@@ -108,16 +108,37 @@ html
                   .accordion__footer
                     a.button(href='#map-lempipaikkani') Aloita tehtävä
 
+            .popup#mark
+
+              .form.type--basic
+
+                .popup__header
+                  a.popup__header-link.type--back(href='#map-lempipaikkani') Takaisin
+
+                .form__item
+                  label Nimi
+                  input(type='text')
+                .form__item
+                  label Kuvaus
+                  textarea
+                .form__footer
+                  a.button(href='#map-lempipaikkani') Tallenna merkintä
+
 
             .view__header
-              a.view__header-link(href='#dashboard') Takaisin
-              a.view__header-link(href='#task-lempipaikkani') Ohjeet
+              a.view__header-link.type--back(href='#dashboard') Takaisin
+              h1.view__header-title Lempipaikkani
+              a.view__header-link.type--info(href='#task-lempipaikkani') Ohjeet
             
             .map__wrapper
               .map__zoom
                 .map__zoom-in
                 .map__zoom-out
                 .map__center
+
+              .map__tools
+                a.map__tools-dot(href='#mark')
+
 
               .placeholder__map
             
@@ -138,7 +159,7 @@ html
             
             .view__content
             
-              .form.type--settings
+              .form.type--basic
 
                 a(href='#dashboard') Takaisin
 
@@ -166,18 +187,18 @@ html
 
               ul.list.type--tasks
                 
-                li.list__item.type--progressing
+                li.list__item.type--new
                   a.list__item-link(href='#task-lempipaikkani') Lempipaikkani
-                li.list__item.type--progressing
+                li.list__item.type--new
                   a.list__item-link Luokkaretki
 
               h1.title__list Kaikki tehtävät
 
               ul.list.type--tasks
                 
-                li.list__item.type--progressing
+                li.list__item.type--new
                   a.list__item-link(href='#task-lempipaikkani') Lempipaikkani
-                li.list__item.type--progressing
+                li.list__item.type--new
                   a.list__item-link Luokkaretki
 
           
