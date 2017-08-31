@@ -533,6 +533,10 @@ ul {
   max-width: 340px;
   margin: 0 auto;
 }
+.form.type--settings {
+  max-width: 340px;
+  margin: 0 auto;
+}
 .form.type--basic {
   margin: 0 auto;
   text-align: left;
