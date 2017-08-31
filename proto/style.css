@@ -522,12 +522,11 @@ ul {
 .list__item-link {
   display: inline-block;
   padding: 0 0 2px 0;
-  color: #f05348;
   font-weight: 600;
   transition: color 120ms linear;
 }
 .list__item-link:hover {
-  color: #c21c10;
+  color: #e1854b;
 }
 .form.type--login {
   max-width: 340px;
@@ -560,7 +559,6 @@ ul {
   margin: 0 auto;
 }
 .accordion__header {
-  color: #e59461;
   margin: 0 0 35px 0;
 }
 .accordion__title {
