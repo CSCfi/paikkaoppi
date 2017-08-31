@@ -15,7 +15,7 @@ body {
 }
 body {
   font-family: 'Source Sans Pro', sans-serif;
-  line-height: 1.65;
+  line-height: 1.55;
   font-weight: 400;
   color: #333;
   -webkit-font-smoothing: antialiased;
@@ -26,7 +26,7 @@ h2,
 h3,
 h4,
 h5 {
-  line-height: 1.32;
+  line-height: 1.24;
   margin: 0 0 0.5em 0;
   font-weight: 600;
 }
@@ -62,7 +62,7 @@ textarea {
   font-family: inherit;
   font-size: 100%;
   font-weight: 400;
-  line-height: 1.65;
+  line-height: 1.55;
   transition: box-shadow 80ms linear;
   max-width: 100%;
   -webkit-font-smoothing: antialiased;
@@ -319,14 +319,18 @@ ul {
   right: 0;
   height: 3.6rem;
   text-align: left;
-  padding: 0 15px;
+  padding: 0 30px;
   display: flex;
   align-items: center;
   position: relative;
   z-index: 3;
+  max-width: 1100px;
+  margin: 0 auto;
 }
 .view__header.type--map {
   box-shadow: 0 2px 12px rgba(0,0,0,0.5);
+  max-width: none;
+  padding: 0 15px;
 }
 .view__header-title {
   margin: 0;
@@ -482,11 +486,17 @@ ul {
   margin: 0 -15px 0 0;
 }
 .list.type--tasks .list__item {
-  flex: 1 0 33.332%;
+  flex: 1 0 calc(100% - 15px);
   margin: 0 15px 15px 0;
   background: #f5f5f5;
   padding: 10px;
   cursor: pointer;
+}
+@media (min-width: 720px) {
+  .list.type--tasks .list__item {
+    flex: 1 0 33.332%;
+    max-width: 33.332%;
+  }
 }
 .list.type--tasks .list__item-image {
   width: 100%;

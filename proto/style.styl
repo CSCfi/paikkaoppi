@@ -7,7 +7,7 @@ neutral = ( #FAF7F5 #F5F5F5 darken(#F5F5F5,5) )
 text_color = ( #333 #888 )
 
 base_font_size = 100%
-base_line_height = 1.65
+base_line_height = 1.55
 base_smooth_font = true
 
 placeholder_color = darken(text_color[1],10)
@@ -373,13 +373,17 @@ ul
   right 0
   height page_header_height
   text-align left
-  padding 0 15px
+  padding 0 base_padding
   display flex
   align-items center
   position relative
   z-index 3
+  max-width page_max_width
+  margin 0 auto
   &.type--map
     box-shadow 0 2px 12px alpha(#000,.5)
+    max-width none
+    padding 0 15px
   
 .view__header-title
   margin 0
@@ -529,11 +533,14 @@ ul
     flex-wrap wrap
     margin 0 -15px 0 0
     .list__item
-      flex 1 0 33.332%
+      flex 1 0 calc(100% \- 15px)
       margin 0 15px 15px 0
       background neutral[1]
       padding 10px
       cursor pointer
+      @media (min-width: media_medium)
+        flex 1 0 33.332%
+        max-width 33.332%
       &.type--progressing .list__item-link:before
         // content url(assets/icon_task_progressing.svg)
       &.type--done .list__item-link:before
