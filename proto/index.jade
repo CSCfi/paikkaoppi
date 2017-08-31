@@ -81,7 +81,7 @@ html
                       label kalle.kirjautunut@koulu.fi
                     .profile__footer
                       .profile__footer-item
-                        a(href='#settings') Muokkaa asetuksia
+                        a(href='#settings') Muokkaa omia tietoja
                       .profile__footer-item
                         a(href='#login') Kirjaudu ulos
 
@@ -132,6 +132,11 @@ html
 
                 .popup__header
                   a.popup__header-link.type--back(href='#map-lempipaikkani')
+                  h1.popup__header-title Uusi merkintä
+
+                .form__text
+                  .form__text-title Koordinaatit
+                  .form__text-value 60°10′15″N, 024°56′15″E
 
                 .form__item
                   label Nimi
@@ -143,7 +148,7 @@ html
                   a.button(href='#map-lempipaikkani') Tallenna merkintä
 
 
-            .view__header
+            .view__header.type--map
               a.view__header-link.type--back(href='#dashboard')
               h1.view__header-title Lempipaikkani
               a.view__header-link.type--info(href='#task-lempipaikkani') Ohjeet
@@ -189,12 +194,12 @@ html
 
                 .form__item
                   label Nimi
-                  input(type='text')
+                  input(type='text', value='Kalle Kirjautunut')
                 .form__item
                   label Sähköpostiosoite
-                  input(type='email')
+                  input(type='email', value='kalle.kirjautunut@koulu.fi')
                 .form__footer
-                  a.button(href='#dashboard') Tallenna asetukset
+                  a.button(href='#dashboard') Tallenna omat tiedot
 
           .view#library
             if compileWithDocumentation

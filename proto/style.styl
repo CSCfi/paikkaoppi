@@ -27,7 +27,7 @@ media_large = 1080px
 
 input_border_color = #333
 input_border_radius = 1px
-input_padding = 5px 5px
+input_padding = 5px 10px
 
 button_weight = bold_font_weight
 button_font_size = 1rem
@@ -330,6 +330,9 @@ ul
 
 .popup__header
   padding 20px 0
+  display flex
+  align-items center
+  
 .popup__header-link
   font-weight bold_font_weight
   cursor pointer
@@ -341,6 +344,10 @@ ul
       width 20px
       margin 0 20px -3px 0
 
+.popup__header-title
+  margin 0
+  font-size size_h4
+  flex 1
 
 
 //- VIEW
@@ -369,9 +376,10 @@ ul
   padding 0 15px
   display flex
   align-items center
-  box-shadow 0 2px 12px alpha(#000,.5)
   position relative
   z-index 3
+  &.type--map
+    box-shadow 0 2px 12px alpha(#000,.5)
   
 .view__header-title
   margin 0
