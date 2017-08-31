@@ -439,10 +439,14 @@ ul {
   z-index: 2;
   padding: 5px 15px;
   border-radius: 30px;
+  display: flex;
+  align-items: center;
+  text-align: left;
 }
 @media (min-width: 720px) {
   .map__tools {
     right: auto;
+    min-width: 40%;
   }
 }
 .map__tools-dot {
@@ -457,6 +461,18 @@ ul {
 }
 .map__tools-dot:before {
   content: url("assets/icon_dot.svg");
+}
+.map__tools-coords {
+  display: inline-block;
+  font-weight: 600;
+  margin: 0 5px 0 40px;
+  flex: 1 0 auto;
+  text-align: right;
+}
+@media (max-width: 720px) {
+  .map__tools-coords {
+    display: none;
+  }
 }
 .list.type--tasks .list__item {
   margin: 0 0 8px 0;
