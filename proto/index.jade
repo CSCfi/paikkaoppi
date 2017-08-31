@@ -90,7 +90,7 @@ html
               .proto__documentation
                 p Lempipaikkani-kartta. Aluksi toteutetaan kartan zoomaaminen ja liikuttaminen sekä pistemäisen merkinnän lisääminen.
 
-            .popup#task-lempipaikkani
+            .popup#task-lempipaikkani-aloita
               if compileWithDocumentation
                 .proto__documentation
                   p Tehtävän ohjeet. Ensimmäisessä vaiheessa toteutetaan yhden pistemäisen merkinnän lisääminen kartalle, kartan zoomaus ja liikuttaminen.
@@ -108,12 +108,30 @@ html
                   .accordion__footer
                     a.button(href='#map-lempipaikkani') Aloita tehtävä
 
+            .popup#task-lempipaikkani
+              if compileWithDocumentation
+                .proto__documentation
+                  p Tehtävän ohjeet. Ensimmäisessä vaiheessa toteutetaan yhden pistemäisen merkinnän lisääminen kartalle, kartan zoomaus ja liikuttaminen.
+
+              .view__content
+                .accordion
+                  .accordion__item
+                    h2.accordion__title Merkitse kartalle oma lempipaikkasi
+                    .accordion__text
+                      ul.list.type--text
+                        li.list__item Opettele kartan käyttöä.
+                        li.list__item Etsi kartalta oma lempipaikkasi.
+                        li.list__item Merkitse kartalle valitsemasi paikka ja kerro miksi se on sinulle tärkeä.
+                  
+                  .accordion__footer
+                    a.button(href='#map-lempipaikkani') Jatka tehtävää
+
             .popup#mark
 
               .form.type--basic
 
                 .popup__header
-                  a.popup__header-link.type--back(href='#map-lempipaikkani') Takaisin
+                  a.popup__header-link.type--back(href='#map-lempipaikkani')
 
                 .form__item
                   label Nimi
@@ -126,7 +144,7 @@ html
 
 
             .view__header
-              a.view__header-link.type--back(href='#dashboard') Takaisin
+              a.view__header-link.type--back(href='#dashboard')
               h1.view__header-title Lempipaikkani
               a.view__header-link.type--info(href='#task-lempipaikkani') Ohjeet
             
@@ -157,11 +175,13 @@ html
               .proto__documentation
                 p Omien tietojen ylläpito. Toteutetaan alkuun staattisena näkymänä.            
             
+            .view__header
+              a.view__header-link.type--back(href='#dashboard')
+              h1.view__header-title Omat tiedot
+            
             .view__content
             
               .form.type--basic
-
-                a(href='#dashboard') Takaisin
 
                 .profile__item
                   .profile__image
@@ -180,25 +200,32 @@ html
             if compileWithDocumentation
               .proto__documentation
                 p Tehtäväkirjasto. Toteutetaan aluksi staattisena. Opettajat ja oppilaat voivat selata täällä julkisia tehtäviä, sekä aloittaa haluamansa tehtävän.           
-            
+              
+            .view__header
+              a.view__header-link.type--back(href='#dashboard')
+              h1.view__header-title Tehtäväkirjasto            
+
+
             .view__content
+
+
             
               h1.title__list Sinulle jaetut tehtävät
 
               ul.list.type--tasks
                 
-                li.list__item.type--new
-                  a.list__item-link(href='#task-lempipaikkani') Lempipaikkani
-                li.list__item.type--new
+                li.list__item
+                  a.list__item-link(href='#task-lempipaikkani-aloita') Lempipaikkani
+                li.list__item
                   a.list__item-link Luokkaretki
 
               h1.title__list Kaikki tehtävät
 
               ul.list.type--tasks
                 
-                li.list__item.type--new
-                  a.list__item-link(href='#task-lempipaikkani') Lempipaikkani
-                li.list__item.type--new
+                li.list__item
+                  a.list__item-link(href='#task-lempipaikkani-aloita') Lempipaikkani
+                li.list__item
                   a.list__item-link Luokkaretki
 
           

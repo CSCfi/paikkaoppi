@@ -254,7 +254,7 @@ ul {
   bottom: 0;
   z-index: 10;
   background: #fff;
-  padding: 0 20px;
+  padding: 0 10px;
   overflow-x: hidden;
   overflow-y: auto;
 }
@@ -285,6 +285,14 @@ ul {
 }
 .popup__header-link {
   font-weight: 600;
+  cursor: pointer;
+}
+.popup__header-link.type--back:before {
+  content: url("assets/icon_arrow-l.svg");
+  display: inline-block;
+  vertical-align: bottom;
+  width: 20px;
+  margin: 0 20px -3px 0;
 }
 .view {
   text-align: center;
@@ -302,7 +310,7 @@ ul {
   top: 0;
   left: 0;
   right: 0;
-  height: 3rem;
+  height: 3.6rem;
   text-align: left;
   padding: 0 15px;
   display: flex;
@@ -315,10 +323,17 @@ ul {
   margin: 0;
   font-size: 1.1rem;
   flex: 1;
-  text-align: center;
 }
 .view__header-link {
   font-weight: 600;
+  cursor: pointer;
+}
+.view__header-link.type--back:before {
+  content: url("assets/icon_arrow-l.svg");
+  display: inline-block;
+  vertical-align: bottom;
+  width: 20px;
+  margin: 0 20px -3px 0;
 }
 .view__add {
   position: absolute;
@@ -369,7 +384,7 @@ ul {
 }
 .map__wrapper {
   position: absolute;
-  top: 3rem;
+  top: 3.6rem;
   left: 0;
   right: 0;
   bottom: 0;
@@ -466,11 +481,11 @@ ul {
   color: #c21c10;
 }
 .form.type--login {
-  max-width: 300px;
+  max-width: 340px;
   margin: 0 auto;
 }
 .form.type--basic {
-  max-width: 300px;
+  max-width: 340px;
   margin: 0 auto;
   text-align: left;
 }

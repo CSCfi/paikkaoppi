@@ -77,7 +77,7 @@
             <div class="proto__documentation">
               <p>Lempipaikkani-kartta. Aluksi toteutetaan kartan zoomaaminen ja liikuttaminen sekä pistemäisen merkinnän lisääminen.</p>
             </div>
-            <div id="task-lempipaikkani" class="popup">
+            <div id="task-lempipaikkani-aloita" class="popup">
               <div class="proto__documentation">
                 <p>Tehtävän ohjeet. Ensimmäisessä vaiheessa toteutetaan yhden pistemäisen merkinnän lisääminen kartalle, kartan zoomaus ja liikuttaminen.</p>
               </div>
@@ -97,9 +97,29 @@
                 </div>
               </div>
             </div>
+            <div id="task-lempipaikkani" class="popup">
+              <div class="proto__documentation">
+                <p>Tehtävän ohjeet. Ensimmäisessä vaiheessa toteutetaan yhden pistemäisen merkinnän lisääminen kartalle, kartan zoomaus ja liikuttaminen.</p>
+              </div>
+              <div class="view__content">
+                <div class="accordion">
+                  <div class="accordion__item">
+                    <h2 class="accordion__title">Merkitse kartalle oma lempipaikkasi</h2>
+                    <div class="accordion__text">
+                      <ul class="list type--text">
+                        <li class="list__item">Opettele kartan käyttöä.</li>
+                        <li class="list__item">Etsi kartalta oma lempipaikkasi.</li>
+                        <li class="list__item">Merkitse kartalle valitsemasi paikka ja kerro miksi se on sinulle tärkeä.</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="accordion__footer"><a href="#map-lempipaikkani" class="button">Jatka tehtävää</a></div>
+                </div>
+              </div>
+            </div>
             <div id="mark" class="popup">
               <div class="form type--basic">
-                <div class="popup__header"><a href="#map-lempipaikkani" class="popup__header-link type--back">Takaisin</a></div>
+                <div class="popup__header"><a href="#map-lempipaikkani" class="popup__header-link type--back"></a></div>
                 <div class="form__item">
                   <label>Nimi</label>
                   <input type="text">
@@ -111,7 +131,7 @@
                 <div class="form__footer"><a href="#map-lempipaikkani" class="button">Tallenna merkintä</a></div>
               </div>
             </div>
-            <div class="view__header"><a href="#dashboard" class="view__header-link type--back">Takaisin</a>
+            <div class="view__header"><a href="#dashboard" class="view__header-link type--back"></a>
               <h1 class="view__header-title">Lempipaikkani</h1><a href="#task-lempipaikkani" class="view__header-link type--info">Ohjeet</a>
             </div>
             <div class="map__wrapper">
@@ -130,8 +150,11 @@
             <div class="proto__documentation">
               <p>Omien tietojen ylläpito. Toteutetaan alkuun staattisena näkymänä.            </p>
             </div>
+            <div class="view__header"><a href="#dashboard" class="view__header-link type--back"></a>
+              <h1 class="view__header-title">Omat tiedot</h1>
+            </div>
             <div class="view__content">
-              <div class="form type--basic"><a href="#dashboard">Takaisin</a>
+              <div class="form type--basic">
                 <div class="profile__item">
                   <div class="profile__image"><img src="assets/monster.png"></div>
                 </div>
@@ -151,16 +174,19 @@
             <div class="proto__documentation">
               <p>Tehtäväkirjasto. Toteutetaan aluksi staattisena. Opettajat ja oppilaat voivat selata täällä julkisia tehtäviä, sekä aloittaa haluamansa tehtävän.           </p>
             </div>
+            <div class="view__header"><a href="#dashboard" class="view__header-link type--back"></a>
+              <h1 class="view__header-title">Tehtäväkirjasto            </h1>
+            </div>
             <div class="view__content">
               <h1 class="title__list">Sinulle jaetut tehtävät</h1>
               <ul class="list type--tasks">
-                <li class="list__item type--new"><a href="#task-lempipaikkani" class="list__item-link">Lempipaikkani</a></li>
-                <li class="list__item type--new"><a class="list__item-link">Luokkaretki</a></li>
+                <li class="list__item"><a href="#task-lempipaikkani-aloita" class="list__item-link">Lempipaikkani</a></li>
+                <li class="list__item"><a class="list__item-link">Luokkaretki</a></li>
               </ul>
               <h1 class="title__list">Kaikki tehtävät</h1>
               <ul class="list type--tasks">
-                <li class="list__item type--new"><a href="#task-lempipaikkani" class="list__item-link">Lempipaikkani</a></li>
-                <li class="list__item type--new"><a class="list__item-link">Luokkaretki</a></li>
+                <li class="list__item"><a href="#task-lempipaikkani-aloita" class="list__item-link">Lempipaikkani</a></li>
+                <li class="list__item"><a class="list__item-link">Luokkaretki</a></li>
               </ul>
             </div>
           </div>

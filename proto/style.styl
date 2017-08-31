@@ -39,7 +39,7 @@ button_color = #fff
 
 max_text_width = 600px
 page_max_width = 1100px
-page_header_height = 3rem
+page_header_height = 3.6rem
 main_navigation_width = 300px
 
 size_h5 = 1rem
@@ -308,7 +308,7 @@ ul
   bottom 0
   z-index 10
   background #fff
-  padding 0 20px
+  padding 0 10px
   overflow-x hidden
   overflow-y auto
   @media (min-width: media_medium)
@@ -332,8 +332,15 @@ ul
   padding 20px 0
 .popup__header-link
   font-weight bold_font_weight
+  cursor pointer
   &.type--back
-    //
+    &:before
+      content url(assets/icon_arrow-l.svg)
+      display inline-block
+      vertical-align bottom
+      width 20px
+      margin 0 20px -3px 0
+
 
 
 //- VIEW
@@ -370,10 +377,17 @@ ul
   margin 0
   font-size size_h4
   flex 1
-  text-align center
 
 .view__header-link
   font-weight bold_font_weight
+  cursor pointer
+  &.type--back
+    &:before
+      content url(assets/icon_arrow-l.svg)
+      display inline-block
+      vertical-align bottom
+      width 20px
+      margin 0 20px -3px 0
 
 .view__add
   position absolute
@@ -518,10 +532,10 @@ ul
 .form
 
   &.type--login
-    max-width 300px
+    max-width 340px
     margin 0 auto
   &.type--basic
-    max-width 300px
+    max-width 340px
     margin 0 auto
     text-align left
 
