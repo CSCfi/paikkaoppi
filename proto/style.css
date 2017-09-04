@@ -501,8 +501,10 @@ ul {
 .list.type--tasks .list__item-image {
   width: 100%;
   height: 80px;
-  background-size: cover;
   margin: 0 0 10px 0;
+  background: url("assets/map.svg");
+  background-size: cover;
+  border: 1px solid;
 }
 .list.type--tasks .list__item-title {
   font-size: 1.1rem;
