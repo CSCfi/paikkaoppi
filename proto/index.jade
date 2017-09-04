@@ -78,11 +78,7 @@ html
                         img(src='assets/monster.png')
                     .profile__item
                       label Kalle Kirjautunut
-                    .profile__item
-                      label kalle.kirjautunut@koulu.fi
                     .profile__footer
-                      .profile__footer-item
-                        a(href='#settings') Muokkaa omia tietoja
                       .profile__footer-item
                         a(href='#login') Kirjaudu ulos
 
@@ -204,31 +200,31 @@ html
             
 
 
-          .view#settings
-            if compileWithDocumentation
-              .proto__documentation
-                p Omien tietojen ylläpito. Toteutetaan alkuun staattisena näkymänä.            
+          //- .view#settings
+          //-   if compileWithDocumentation
+          //-     .proto__documentation
+          //-       p Omien tietojen ylläpito. Toteutetaan alkuun staattisena näkymänä.            
             
-            .view__header
-              a.view__header-link.type--back(href='#dashboard')
-              h1.view__header-title Omat tiedot
+          //-   .view__header
+          //-     a.view__header-link.type--back(href='#dashboard')
+          //-     h1.view__header-title Omat tiedot
             
-            .view__content
+          //-   .view__content
             
-              .form.type--settings
+          //-     .form.type--settings
 
-                .profile__item
-                  .profile__image
-                    img(src='assets/monster.png')
+          //-       .profile__item
+          //-         .profile__image
+          //-           img(src='assets/monster.png')
 
-                .form__item
-                  label Nimi
-                  input(type='text', value='Kalle Kirjautunut')
-                .form__item
-                  label Sähköpostiosoite
-                  input(type='email', value='kalle.kirjautunut@koulu.fi')
-                .form__footer
-                  a.button(href='#dashboard') Tallenna omat tiedot
+          //-       .form__item
+          //-         label Nimi
+          //-         input(type='text', value='Kalle Kirjautunut')
+          //-       .form__item
+          //-         label Sähköpostiosoite
+          //-         input(type='email', value='kalle.kirjautunut@koulu.fi')
+          //-       .form__footer
+          //-         a.button(href='#dashboard') Tallenna omat tiedot
 
           .view#library
             if compileWithDocumentation
