@@ -39,12 +39,70 @@ html
 
                 .form__item
                   label Käyttäjänimi
-                  input(type='text')
+                  input(type='text', value='oppilas')
                 .form__item
                   label Salasana
                   input(type='password')
                 .form__footer
                   a.button(href='#dashboard') Kirjaudu sisään
+
+          .view#login-teacher
+            if compileWithDocumentation
+              .proto__documentation
+                p Kirjaudu opettajana. Näytetään staattisena.
+
+            .view__content
+              .form.type--login
+                .app__logo
+
+                .form__ingress
+                  p PaikkaOppi on kouluille maksuton verkkopohjainen oppimisympäristö.
+
+                .form__item
+                  label Käyttäjänimi
+                  input(type='text', value='opettaja')
+                .form__item
+                  label Salasana
+                  input(type='password')
+                .form__footer
+                  a.button(href='#dashboard-teacher') Kirjaudu sisään
+
+          .view#dashboard-teacher
+            if compileWithDocumentation
+              .proto__documentation
+                p Opettajan työpöytä. Tehtävälistaus näytetään alkuun staattisena. Linkistä pääsee katsomaan tehtävien ohjeet.
+
+            .view__content
+
+              .view__columns
+                
+                .view__column
+                  a.view__add(href='#library')
+
+                  h1.title__list Omat tehtävät
+
+                  .list.type--tasks
+                    
+                    a.list__item(href='#task-lempipaikkani')
+                      .list__item-image(style='background:url(assets/map.png)')
+                      .list__item-title Lempipaikkani
+                    a.list__item
+                      .list__item-image(style='background:url(assets/map.png)')
+                      .list__item-title Luokkaretki
+
+                    
+
+                .view__column
+                  .profile
+                    .profile__item
+                      .profile__image
+                        img(src='assets/monster.png')
+                    .profile__item
+                      label Kalle Kirjautunut
+                    .profile__footer
+                      .profile__footer-item
+                        a(href='#login') Kirjaudu ulos
+
 
           .view#dashboard
             if compileWithDocumentation

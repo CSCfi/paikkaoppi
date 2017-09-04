@@ -29,13 +29,65 @@
                 </div>
                 <div class="form__item">
                   <label>Käyttäjänimi</label>
-                  <input type="text">
+                  <input type="text" value="oppilas">
                 </div>
                 <div class="form__item">
                   <label>Salasana</label>
                   <input type="password">
                 </div>
                 <div class="form__footer"><a href="#dashboard" class="button">Kirjaudu sisään</a></div>
+              </div>
+            </div>
+          </div>
+          <div id="login-teacher" class="view">
+            <div class="proto__documentation">
+              <p>Kirjaudu opettajana. Näytetään staattisena.</p>
+            </div>
+            <div class="view__content">
+              <div class="form type--login">
+                <div class="app__logo"></div>
+                <div class="form__ingress">
+                  <p>PaikkaOppi on kouluille maksuton verkkopohjainen oppimisympäristö.</p>
+                </div>
+                <div class="form__item">
+                  <label>Käyttäjänimi</label>
+                  <input type="text" value="opettaja">
+                </div>
+                <div class="form__item">
+                  <label>Salasana</label>
+                  <input type="password">
+                </div>
+                <div class="form__footer"><a href="#dashboard-teacher" class="button">Kirjaudu sisään</a></div>
+              </div>
+            </div>
+          </div>
+          <div id="dashboard-teacher" class="view">
+            <div class="proto__documentation">
+              <p>Opettajan työpöytä. Tehtävälistaus näytetään alkuun staattisena. Linkistä pääsee katsomaan tehtävien ohjeet.</p>
+            </div>
+            <div class="view__content">
+              <div class="view__columns">
+                <div class="view__column"><a href="#library" class="view__add"></a>
+                  <h1 class="title__list">Omat tehtävät</h1>
+                  <div class="list type--tasks"><a href="#task-lempipaikkani" class="list__item">
+                      <div style="background:url(assets/map.png)" class="list__item-image"></div>
+                      <div class="list__item-title">Lempipaikkani</div></a><a class="list__item">
+                      <div style="background:url(assets/map.png)" class="list__item-image"></div>
+                      <div class="list__item-title">Luokkaretki</div></a></div>
+                </div>
+                <div class="view__column">
+                  <div class="profile">
+                    <div class="profile__item">
+                      <div class="profile__image"><img src="assets/monster.png"></div>
+                    </div>
+                    <div class="profile__item">
+                      <label>Kalle Kirjautunut</label>
+                    </div>
+                    <div class="profile__footer">
+                      <div class="profile__footer-item"><a href="#login">Kirjaudu ulos</a></div>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
