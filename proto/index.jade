@@ -82,6 +82,31 @@ html
                       .profile__footer-item
                         a(href='#login') Kirjaudu ulos
 
+
+          .view#map-karttaesitys
+            if compileWithDocumentation
+              .proto__documentation
+                //-
+
+            .view__header.type--map
+              a.view__header-link.type--back(href='#dashboard')
+              h1.view__header-title Karttaesitys
+            
+            .map__wrapper
+              .map__zoom
+                .map__zoom-in
+                .map__zoom-out
+                .map__center
+
+              .map__tools
+                a.map__tools-dot(href='#mark')
+                .map__tools-coords 60°10′15″N, 024°56′15″E
+
+              .map__pointers
+
+              .placeholder__map
+            
+
           .view#map-lempipaikkani
             if compileWithDocumentation
               .proto__documentation
@@ -242,11 +267,16 @@ html
               h1.title__list Valitse tehtävä
 
               .list.type--tasks
-                
+                .list__item
+                  .list__item-title Karttaesitys
+                  .list__item-description Kartta ja työkalut oman esityksen luomiseen.
+                  a.list__item-link(href='#map-karttaesitys') Aloita tehtävä
+
                 .list__item
                   .list__item-title Lempipaikkani
                   .list__item-description Etsi lempipaikkasi ja merkitse se kartalle.
                   a.list__item-link(href='#task-lempipaikkani-aloita') Aloita tehtävä
+
                 .list__item
                   .list__item-title Luokkaretki
                   .list__item-description Tämä tehtävä ei ole vielä käytössä.
