@@ -550,13 +550,17 @@ ul
       height 80px
       background-size cover
       margin 0 0 10px 0
+    .list__item-title
+      font-size size_h4
+      font-weight bold_font_weight
+      margin 0 0 5px 0
     .list__item-link
-      display block
-      &:before
-        display inline-block
-        vertical-align bottom
-        width 18px
-        margin 0 8px -4px 0
+      button()
+      padding 10px 15px
+      margin 15px 0 5px 0
+      &.is-inactive
+        opacity .3
+        cursor default
 
   &.type--tasks-list
     .list__item

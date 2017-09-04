@@ -64,10 +64,10 @@ html
                     
                     a.list__item(href='#task-lempipaikkani')
                       .list__item-image(style='background:url(assets/map.png)')
-                      .list__item-link Lempipaikkani
+                      .list__item-title Lempipaikkani
                     a.list__item
                       .list__item-image(style='background:url(assets/map.png)')
-                      .list__item-link Luokkaretki
+                      .list__item-title Luokkaretki
 
                     
 
@@ -239,28 +239,19 @@ html
             .view__content
 
 
-            
-              h1.title__list Sinulle jaetut tehtävät
+              h1.title__list Valitse tehtävä
 
               .list.type--tasks
                 
-                a.list__item(href='#task-lempipaikkani-aloita')
-                  .list__item-link Lempipaikkani
+                .list__item
+                  .list__item-title Lempipaikkani
                   .list__item-description Etsi lempipaikkasi ja merkitse se kartalle.
-                a.list__item
-                  .list__item-link Luokkaretki
+                  a.list__item-link(href='#task-lempipaikkani-aloita') Aloita tehtävä
+                .list__item
+                  .list__item-title Luokkaretki
                   .list__item-description Tämä tehtävä ei ole vielä käytössä.
+                  a.list__item-link.is-inactive Aloita tehtävä
 
-              h1.title__list Kaikki tehtävät
-
-              .list.type--tasks
-                
-                a.list__item(href='#task-lempipaikkani-aloita')
-                  .list__item-link Lempipaikkani
-                  .list__item-description Etsi lempipaikkasi ja merkitse se kartalle.
-                a.list__item
-                  .list__item-link Luokkaretki
-                  .list__item-description Tämä tehtävä ei ole vielä käytössä.
 
           
 

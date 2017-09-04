@@ -504,14 +504,38 @@ ul {
   background-size: cover;
   margin: 0 0 10px 0;
 }
-.list.type--tasks .list__item-link {
-  display: block;
+.list.type--tasks .list__item-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 5px 0;
 }
-.list.type--tasks .list__item-link:before {
+.list.type--tasks .list__item-link {
+  -webkit-appearance: none;
+  appearance: none;
   display: inline-block;
-  vertical-align: bottom;
-  width: 18px;
-  margin: 0 8px -4px 0;
+  vertical-align: middle;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1;
+  border: none;
+  padding: 15px 35px;
+  white-space: nowrap;
+  border-radius: 30px;
+  transition: all 160ms linear;
+  background: linear-gradient(65deg, #f05348, #e1854b);
+  color: #fff;
+  text-align: center;
+  margin: 10px auto;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  padding: 10px 15px;
+  margin: 15px 0 5px 0;
+}
+.list.type--tasks .list__item-link.is-inactive {
+  opacity: 0.3;
+  cursor: default;
 }
 .list.type--tasks-list .list__item {
   margin: 0 0 8px 0;
