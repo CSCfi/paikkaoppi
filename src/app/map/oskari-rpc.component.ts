@@ -1,6 +1,7 @@
 import { Component, NgZone, AfterViewInit } from '@angular/core';
 import OskariRPC from 'oskari-rpc';
 import { environment } from '../../environments/environment';
+import { Config } from './config';
 
 
 @Component({
@@ -21,52 +22,77 @@ export class OskariRpcComponent implements AfterViewInit {
     const iframe = document.getElementById('oskari-map')
     console.info("Connect IFrame to ", this.domain)
     this.channel = OskariRPC.connect(iframe, this.domain)
-    console.info("channel: ", this.channel)
-    this.channel.onReady(function() {
-      console.info("copy/paste")
-    });
+    this.channel.onReady(() => {
+      this.zone.runGuarded(() => this.checkRpcVersion())
+    })
 
-    this.channel.onReady( () => {
-      console.info("onReady TUKO")
-    });
-    /*
-    this.channel.onReady( () => {
-      console.info("onReady1")
-    });
-    this.channel.onReady( () => {
-      this.zone.runGuarded( () => console.info("onReady2"))
-    });
-    this.channel.onReady( function() {
-      console.info("onReady3")
-    });
-    */
-    console.log(this.channel.isReady())
+    this.channel.onReady(() => {
+      this.zone.runGuarded(() => this.addEventListeners())
+    })
+  }
+
+  onReady(cb: () => any): void {
+    this.channel.onReady(() => {
+      this.zone.runGuarded(() => cb())
+    })
+  }
+
+  private addEventListeners() {
+    console.info("addEventListeners", this.channel)
+    this.channel.handleEvent('MapClickedEvent', data => {
+      console.info("MapClickedEvent:", data)
+      this.setMarkerToMap(data.lon, data.lat)
+    })
+    this.channel.handleEvent('MarkerClickEvent', data => {
+      console.info("MarkerClickEvent:", data)
+      this.removeMarker(data.id)
+    })
+  }
+
+  setMarkerToMap(lon, lat) {
+    console.info("setMarkerToMap:", lon, lat)
+    this.addMarker(lon, lat)
+  }
+
+  removeMarker(id: String) {
+    console.info("removeMarker:", id)
+    this.channel.postRequest('MapModulePlugin.RemoveMarkersRequest', [id]);
+  }
+
+  addMarker(lon, lat) {
+    const markerOptions = {
+      x: lon,
+      y: lat,
+      color: 'ff0000',
+      msg: '',
+      shape: 2,
+      size: 6
+    };
+    this.channel.postRequest('MapModulePlugin.AddMarkerRequest', [markerOptions]);
   }
 
   checkRpcVersion() {
-    console.info("checkRpcVersion")
-    console.info("IsReady: ", this.channel.isReady())
+    console.info("checkRpcVersion: isReady:", this.channel.isReady())
     //channel is now ready and listening.
-    this.channel.log('Map is now listening');
-    var expectedOskariVersion = '2.0.4';
-    this.channel.isSupported(expectedOskariVersion, function (blnSupported) {
+    var expectedOskariVersion = '1.42.1';
+    this.channel.isSupported(expectedOskariVersion, (blnSupported) => this.zone.runGuarded(() => {
       if (blnSupported) {
-        this.channel.log('Client is supported and Oskari version is ' + expectedOskariVersion)
+        console.info('Client is supported and Oskari version is ' + expectedOskariVersion)
       } else {
-        this.channel.log('Oskari-instance is not the one we expect (' + expectedOskariVersion + ') or client not supported')
+        console.info('Oskari-instance is not the one we expect (' + expectedOskariVersion + ') or client not supported')
         // getInfo can be used to get the current Oskari version
         this.channel.getInfo(function (oskariInfo) {
-          this.channel.log('Current Oskari-instance reports version as: ', oskariInfo)
+          console.info('Current Oskari-instance reports version as: ', oskariInfo)
         });
       }
-    });
-    this.channel.isSupported(function (blnSupported) {
+    }))
+
+    this.channel.isSupported((blnSupported) => this.zone.runGuarded(() => {
       if (!blnSupported) {
-        this.channel.log('Oskari reported client version (' + OskariRPC.VERSION + ') is not supported.' +
-          'The client might work, but some features are not compatible.')
+        console.info('Oskari reported client version (' + OskariRPC.VERSION + ') is not supported. The client might work, but some features are not compatible.')
       } else {
-        this.channel.log('Client is supported by Oskari.')
+        console.info('Client is supported by Oskari.')
       }
-    })
+    }))
   }
 }

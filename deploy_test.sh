@@ -7,7 +7,7 @@ function build {
 
 function deploy {
     echo "Deploy app to S3."
-    eval "aws s3 cp --recursive --profile perttvil-personal ./dist s3://demo-paikkaoppi/app/test"
+    eval "aws s3 cp --recursive --profile paikkaoppi-deploy ./dist s3://demo-paikkaoppi/app/test"
 }
 
 build && deploy
