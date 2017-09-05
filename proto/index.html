@@ -383,6 +383,19 @@
             <div class="proto__documentation">
               <p>Opettajan tehtäväkirjasto. Toteutetaan aluksi staattisena. Opettaja voi luoda uuden tehtävän, nimetä sen ja se tulee näkyviin opettajan työpöydälle. Muut käyttäjät voivat liittyä siihen syöttämällä tehtävän koodin.         </p>
             </div>
+            <div id="create-task" class="popup">
+              <div class="form type--basic">
+                <div class="popup__header"><a href="#library-opettaja" class="popup__header-link type--back"></a>
+                  <h1 class="popup__header-title">Uusi tehtävä</h1>
+                </div>
+                <h1 class="accordion__header">Suomi-visa</h1>
+                <div class="form__item">
+                  <label>Nimi</label>
+                  <input type="text" value="Suomi-visa">
+                </div>
+                <div class="form__footer"><a href="#dashboard-opettaja" class="button">Tallenna tehtävä</a></div>
+              </div>
+            </div>
             <div class="view__header"><a href="#dashboard-opettaja" class="view__header-link type--back"></a>
               <h1 class="view__header-title">Tehtäväkirjasto            </h1>
             </div>
@@ -394,7 +407,7 @@
                   <div class="list__item-description">Hae tehtävä koodilla.</div>
                   <div class="list__item-footer">
                     <div class="list__item-input">
-                      <input type="text" placeholder="Kirjoita koodi tähän..." class="input--code"><a href="#map-karttaesitys" class="button--continue"> </a>
+                      <input type="text" placeholder="Kirjoita koodi tähän..." class="input--code"><a class="button--continue"></a>
                     </div>
                   </div>
                 </div>
@@ -405,7 +418,7 @@
                   <div class="list__item-title">Karttaesitys</div>
                   <div class="list__item-description">Kartta ja työkalut oman esityksen luomiseen.</div>
                   <div class="list__item-info">Tehtävä sopii omien esitysten tekemiseen ja karttatyökaluihin tutustumiseen.</div>
-                  <div class="list__item-footer"><a href="#map-karttaesitys" class="list__item-link">Luo tehtävä</a></div>
+                  <div class="list__item-footer"><a class="list__item-link is-inactive">Luo tehtävä</a></div>
                 </div>
                 <div class="list__item">
                   <div class="list__item-tag">
@@ -414,7 +427,7 @@
                   <div class="list__item-title">Suomi-visa</div>
                   <div class="list__item-description">Tässä visassa harjoitellaan kartan käyttöä hyödyntäen kartta-alustan työkaluja.</div>
                   <div class="list__item-info">Tehtävä sopii ala- ja yläkouluun sekä lukioon maantieteen ja ympäristöopin tunneille.</div>
-                  <div class="list__item-footer"> <a href="#task-suomivisa-aloita" class="list__item-link">Luo tehtävä</a></div>
+                  <div class="list__item-footer"> <a href="#create-task" class="list__item-link">Luo tehtävä</a></div>
                 </div>
                 <div class="list__item">
                   <div class="list__item-tag">
@@ -422,7 +435,7 @@
                   </div>
                   <div class="list__item-title">Lempipaikkani</div>
                   <div class="list__item-description">Tämä tehtävä ei ole vielä käytössä.</div>
-                  <div class="list__item-footer"><a href="#task-lempipaikkani-aloita" class="list__item-link is-inactive">Luo tehtävä</a></div>
+                  <div class="list__item-footer"><a class="list__item-link is-inactive">Luo tehtävä</a></div>
                 </div>
                 <div class="list__item">
                   <div class="list__item-tag">
