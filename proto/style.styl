@@ -330,7 +330,7 @@ ul
       right 0
 
 .popup__header
-  padding 20px 0
+  padding 0 0 20px 0
   display flex
   align-items center
   
@@ -586,6 +586,27 @@ ul
         border-radius border_radius
         font-size .82rem
         font-weight 900
+    .list__item-input
+      display flex
+      align-items center
+      .input--code
+        border-radius border_radius
+        padding 5px 15px
+      .button--continue
+        background brand_color[0]
+        display inline-flex
+        align-items center
+        padding 10px
+        border-radius border_radius
+        margin 0 0 0 10px
+        &:before
+          content url(assets/icon_arrow-r-w.svg)
+          display inline-block
+          vertical-align bottom
+          width 20px
+          height @width
+            
+          
 
   &.type--tasks-list
     .list__item

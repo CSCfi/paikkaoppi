@@ -282,7 +282,7 @@ ul {
   }
 }
 .popup__header {
-  padding: 20px 0;
+  padding: 0 0 20px 0;
   display: flex;
   align-items: center;
 }
@@ -565,6 +565,29 @@ ul {
   border-radius: 30px;
   font-size: 0.82rem;
   font-weight: 900;
+}
+.list.type--tasks .list__item-input {
+  display: flex;
+  align-items: center;
+}
+.list.type--tasks .list__item-input .input--code {
+  border-radius: 30px;
+  padding: 5px 15px;
+}
+.list.type--tasks .list__item-input .button--continue {
+  background: linear-gradient(65deg, #f05348, #e1854b);
+  display: inline-flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 30px;
+  margin: 0 0 0 10px;
+}
+.list.type--tasks .list__item-input .button--continue:before {
+  content: url("assets/icon_arrow-r-w.svg");
+  display: inline-block;
+  vertical-align: bottom;
+  width: 20px;
+  height: 20px;
 }
 .list.type--tasks-list .list__item {
   margin: 0 0 8px 0;
