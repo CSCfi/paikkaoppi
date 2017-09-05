@@ -1,5 +1,5 @@
 font_family = 'Source Sans Pro'
-font_weights = '300,400,600'
+font_weights = '300,400,600,900'
 
 brand_color = ( linear-gradient(65deg, #F05348, #E1854B) #F05348 darken(#F05348, 20) #E1854B )
 ui_color = ( #35b577 #ffb448 #FF312E #587792 )
@@ -121,6 +121,7 @@ p
 a
   text-decoration none
   color inherit
+  cursor pointer
   
 input, select, button, textarea
   -webkit-appearance none
@@ -329,7 +330,7 @@ ul
       right 0
 
 .popup__header
-  padding 20px 0
+  padding 0 0 20px 0
   display flex
   align-items center
   
@@ -536,19 +537,21 @@ ul
       flex 1 0 calc(100% \- 15px)
       margin 0 15px 15px 0
       border 1px solid neutral[3]
-      padding 10px
-      cursor pointer
+      padding 15px 20px
+      display flex
+      flex-direction column
+      justify-content flex-end
       @media (min-width: media_medium)
-        flex 1 0 33.332%
-        max-width 33.332%
+        flex 1 0 calc(33.332% \- 15px)
+        max-width calc(33.332% \- 15px)
       &.type--progressing .list__item-link:before
         // content url(assets/icon_task_progressing.svg)
       &.type--done .list__item-link:before
         // 
     .list__item-image
-      width 100%
+      width calc(100% \+ 20px)
       height 80px
-      margin 0 0 10px 0
+      margin -5px -10px 10px
       background url(assets/map.svg)
       background-size cover
       border 1px solid neutral[3]
@@ -556,13 +559,54 @@ ul
       font-size size_h4
       font-weight bold_font_weight
       margin 0 0 5px 0
+    .list__item-footer
+      flex 1 0 auto
+      display flex
+      flex-direction column
+      justify-content flex-end
+      margin 25px 0 0 0
+    .list__item-detail
+      font-size .86rem
+      margin -5px 0 0 0
     .list__item-link
       button()
+      display block
       padding 10px 15px
       margin 15px 0 5px 0
       &.is-inactive
         opacity .3
         cursor default
+    .list__item-code
+      margin 5px 0 0 0
+      .code
+        background neutral[2]
+        display inline-block
+        line-height 1.1
+        padding 2px 5px
+        border-radius border_radius
+        font-size .82rem
+        font-weight 900
+    .list__item-input
+      display flex
+      align-items center
+      .input--code
+        border-radius border_radius
+        padding 5px 15px
+      .button--continue
+        background brand_color[0]
+        display inline-flex
+        align-items center
+        padding 10px
+        border-radius border_radius
+        margin 0 0 0 10px
+        &:before
+          content url(assets/icon_arrow-r-w.svg)
+          display inline-block
+          vertical-align bottom
+          width 20px
+          height @width
+            
+          
 
   &.type--tasks-list
     .list__item
@@ -655,8 +699,9 @@ ul
 
 .profile__footer
   margin base_padding 0 0 0
+  
 .profile__footer-item
-  font-weight bold
+  font-weight bold_font_weight
   margin 0 0 10px 0
 
 
