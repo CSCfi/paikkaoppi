@@ -534,6 +534,7 @@ ul
     flex-wrap wrap
     margin 0 -15px 0 0
     .list__item
+      position relative
       flex 1 0 calc(100% \- 15px)
       margin 0 15px 15px 0
       border 1px solid neutral[3]
@@ -585,6 +586,19 @@ ul
       margin 0 0 10px 0
       .tag
         background neutral[2]
+        display inline-block
+        line-height 1.1
+        padding 2px 5px
+        border-radius border_radius
+        font-size .82rem
+        font-weight bold_font_weight
+    .list__item-status
+      position absolute
+      top 0
+      left 2px
+      .status
+        background brand_color[0]
+        color #fff
         display inline-block
         line-height 1.1
         padding 2px 5px

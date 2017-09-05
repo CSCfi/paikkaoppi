@@ -487,6 +487,7 @@ ul {
   margin: 0 -15px 0 0;
 }
 .list.type--tasks .list__item {
+  position: relative;
   flex: 1 0 calc(100% - 15px);
   margin: 0 15px 15px 0;
   border: 1px solid;
@@ -565,6 +566,21 @@ ul {
 }
 .list.type--tasks .list__item-tag .tag {
   background: #e8e8e8;
+  display: inline-block;
+  line-height: 1.1;
+  padding: 2px 5px;
+  border-radius: 30px;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+.list.type--tasks .list__item-status {
+  position: absolute;
+  top: 0;
+  left: 2px;
+}
+.list.type--tasks .list__item-status .status {
+  background: linear-gradient(65deg, #f05348, #e1854b);
+  color: #fff;
   display: inline-block;
   line-height: 1.1;
   padding: 2px 5px;
