@@ -39,7 +39,7 @@
               </div>
             </div>
           </div>
-          <div id="login-teacher" class="view">
+          <div id="login-opettaja" class="view">
             <div class="proto__documentation">
               <p>Kirjaudu opettajana. Näytetään staattisena.</p>
             </div>
@@ -57,11 +57,11 @@
                   <label>Salasana</label>
                   <input type="password">
                 </div>
-                <div class="form__footer"><a href="#dashboard-teacher" class="button">Kirjaudu sisään</a></div>
+                <div class="form__footer"><a href="#dashboard-opettaja" class="button">Kirjaudu sisään</a></div>
               </div>
             </div>
           </div>
-          <div id="dashboard-teacher" class="view">
+          <div id="dashboard-opettaja" class="view">
             <div class="proto__documentation">
               <p>Opettajan työpöytä. Tehtävälistaus näytetään alkuun staattisena. Linkistä pääsee katsomaan tehtävien ohjeet.</p>
             </div>
@@ -101,9 +101,11 @@
                   <h1 class="title__list">Omat tehtävät</h1>
                   <div class="list type--tasks"><a href="#task-lempipaikkani" class="list__item">
                       <div class="list__item-image"></div>
-                      <div class="list__item-title">Lempipaikkani</div></a><a href="#task-suomivisa" class="list__item">
+                      <div class="list__item-title">Lempipaikkani</div>
+                      <div class="list__item-detail">4 merkintää</div></a><a href="#task-suomivisa" class="list__item">
                       <div class="list__item-image"></div>
-                      <div class="list__item-title">Suomi-visa</div></a></div>
+                      <div class="list__item-title">Suomi-visa</div>
+                      <div class="list__item-detail">2 merkintää</div></a></div>
                 </div>
                 <div class="view__column">
                   <div class="profile">
@@ -111,7 +113,7 @@
                       <div class="profile__image"><img src="assets/monster.png"></div>
                     </div>
                     <div class="profile__item">
-                      <label>Kalle Kirjautunut</label>
+                      <label>Olli Oppilas</label>
                     </div>
                     <div class="profile__footer">
                       <div class="profile__footer-item"><a href="#login">Kirjaudu ulos</a></div>
@@ -119,25 +121,6 @@
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-          <div id="map-karttaesitys" class="view">
-            <div class="proto__documentation">
-            </div>
-            <div class="view__header type--map"><a href="#dashboard" class="view__header-link type--back"></a>
-              <h1 class="view__header-title">Karttaesitys</h1>
-            </div>
-            <div class="map__wrapper">
-              <div class="map__zoom">
-                <div class="map__zoom-in"></div>
-                <div class="map__zoom-out"></div>
-                <div class="map__center"></div>
-              </div>
-              <div class="map__tools"><a href="#mark" class="map__tools-dot"></a>
-                <div class="map__tools-coords">60°10′15″N, 024°56′15″E</div>
-              </div>
-              <div class="map__pointers"></div>
-              <div class="placeholder__map"></div>
             </div>
           </div>
           <div id="map-lempipaikkani" class="view">
@@ -315,6 +298,25 @@
               <div class="placeholder__map"></div>
             </div>
           </div>
+          <div id="map-karttaesitys" class="view">
+            <div class="proto__documentation">
+            </div>
+            <div class="view__header type--map"><a href="#dashboard" class="view__header-link type--back"></a>
+              <h1 class="view__header-title">Karttaesitys</h1>
+            </div>
+            <div class="map__wrapper">
+              <div class="map__zoom">
+                <div class="map__zoom-in"></div>
+                <div class="map__zoom-out"></div>
+                <div class="map__center"></div>
+              </div>
+              <div class="map__tools"><a href="#mark" class="map__tools-dot"></a>
+                <div class="map__tools-coords">60°10′15″N, 024°56′15″E</div>
+              </div>
+              <div class="map__pointers"></div>
+              <div class="placeholder__map"></div>
+            </div>
+          </div>
           <div id="library" class="view">
             <div class="proto__documentation">
               <p>Tehtäväkirjasto. Toteutetaan aluksi staattisena. Opettajat ja oppilaat voivat selata täällä julkisia tehtäviä, sekä aloittaa haluamansa tehtävän.           </p>
@@ -327,19 +329,23 @@
               <div class="list type--tasks">
                 <div class="list__item">
                   <div class="list__item-title">Karttaesitys</div>
-                  <div class="list__item-description">Kartta ja työkalut oman esityksen luomiseen.</div><a href="#map-karttaesitys" class="list__item-link">Aloita tehtävä</a>
+                  <div class="list__item-description">Kartta ja työkalut oman esityksen luomiseen.</div>
+                  <div class="list__item-footer"><a href="#map-karttaesitys" class="list__item-link">Aloita tehtävä</a></div>
                 </div>
                 <div class="list__item">
                   <div class="list__item-title">Lempipaikkani</div>
-                  <div class="list__item-description">Etsi lempipaikkasi ja merkitse se kartalle.</div><a href="#task-lempipaikkani-aloita" class="list__item-link">Aloita tehtävä</a>
+                  <div class="list__item-description">Etsi lempipaikkasi ja merkitse se kartalle.</div>
+                  <div class="list__item-footer"> <a href="#task-lempipaikkani-aloita" class="list__item-link">Aloita tehtävä</a></div>
                 </div>
                 <div class="list__item">
                   <div class="list__item-title">Suomi-visa</div>
-                  <div class="list__item-description">Tässä visassa harjoitellaan kartan käyttöä hyödyntäen kartta-alustan erilaisia työkaluja ja kartta-aineistoja.</div><a href="#task-suomivisa-aloita" class="list__item-link">Aloita tehtävä</a>
+                  <div class="list__item-description">Tässä visassa harjoitellaan kartan käyttöä hyödyntäen kartta-alustan erilaisia työkaluja ja kartta-aineistoja.</div>
+                  <div class="list__item-footer"> <a href="#task-suomivisa-aloita" class="list__item-link">Aloita tehtävä</a></div>
                 </div>
                 <div class="list__item">
                   <div class="list__item-title">Luokkaretki</div>
-                  <div class="list__item-description">Tämä tehtävä ei ole vielä käytössä.</div><a class="list__item-link is-inactive">Aloita tehtävä</a>
+                  <div class="list__item-description">Tämä tehtävä ei ole vielä käytössä.</div>
+                  <div class="list__item-footer"><a class="list__item-link is-inactive">Aloita tehtävä</a></div>
                 </div>
               </div>
             </div>

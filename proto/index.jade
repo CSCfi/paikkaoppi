@@ -46,7 +46,7 @@ html
                 .form__footer
                   a.button(href='#dashboard') Kirjaudu sisään
 
-          .view#login-teacher
+          .view#login-opettaja
             if compileWithDocumentation
               .proto__documentation
                 p Kirjaudu opettajana. Näytetään staattisena.
@@ -65,111 +65,29 @@ html
                   label Salasana
                   input(type='password')
                 .form__footer
-                  a.button(href='#dashboard-teacher') Kirjaudu sisään
+                  a.button(href='#dashboard-opettaja') Kirjaudu sisään
 
-          .view#dashboard-teacher
+          .view#dashboard-opettaja
             if compileWithDocumentation
               .proto__documentation
                 p Opettajan työpöytä. Tehtävälistaus näytetään alkuun staattisena. Linkistä pääsee katsomaan tehtävien ohjeet.
 
-            .view__content
-
-              .view__columns
-                
-                .view__column
-                  a.view__add(href='#library')
-
-                  h1.title__list Omat tehtävät
-
-                  .list.type--tasks
-                    
-                    a.list__item(href='#task-lempipaikkani')
-                      .list__item-image(style='background:url(assets/map.png)')
-                      .list__item-title Lempipaikkani
-                    a.list__item(href='#task-suomivisa')
-                      .list__item-image(style='background:url(assets/map.png)')
-                      .list__item-title Suomi-visa
-
-                    
-
-                .view__column
-                  .profile
-                    .profile__item
-                      .profile__image
-                        img(src='assets/monster.png')
-                    .profile__item
-                      label Kalle Kirjautunut
-                    .profile__footer
-                      .profile__footer-item
-                        a(href='#login') Kirjaudu ulos
-
+            include partials/_dashboard_opettaja
 
           .view#dashboard
             if compileWithDocumentation
               .proto__documentation
                 p Oppilaan työpöytä. Tehtävälistaus näytetään staattisena. Linkistä pääsee katsomaan tehtävien ohjeet.
 
-            .view__content
-
-              .view__columns
-                
-                .view__column
-                  a.view__add(href='#library')
-
-                  h1.title__list Omat tehtävät
-
-                  .list.type--tasks
-                    
-                    a.list__item(href='#task-lempipaikkani')
-                      .list__item-image
-                      .list__item-title Lempipaikkani
-                    a.list__item(href='#task-suomivisa')
-                      .list__item-image
-                      .list__item-title Suomi-visa
-
-                    
-
-                .view__column
-                  .profile
-                    .profile__item
-                      .profile__image
-                        img(src='assets/monster.png')
-                    .profile__item
-                      label Kalle Kirjautunut
-                    .profile__footer
-                      .profile__footer-item
-                        a(href='#login') Kirjaudu ulos
-
-
-          .view#map-karttaesitys
-            if compileWithDocumentation
-              .proto__documentation
-                //-
-
-            .view__header.type--map
-              a.view__header-link.type--back(href='#dashboard')
-              h1.view__header-title Karttaesitys
+            include partials/_dashboard_oppilas
             
-            .map__wrapper
-              .map__zoom
-                .map__zoom-in
-                .map__zoom-out
-                .map__center
-
-              .map__tools
-                a.map__tools-dot(href='#mark')
-                .map__tools-coords 60°10′15″N, 024°56′15″E
-
-              .map__pointers
-
-              .placeholder__map
             
           .view#map-lempipaikkani
             if compileWithDocumentation
               .proto__documentation
                 p Lempipaikkani-kartta. Aluksi toteutetaan kartan zoomaaminen ja liikuttaminen sekä pistemäisen merkinnän lisääminen.
             
-            include partials/_tehtava_lempipaikka.jade
+            include partials/_tehtava_lempipaikka
 
 
           .view#map-suomivisa
@@ -178,63 +96,18 @@ html
                 p Suomivisa-kartta. Suomivisassa tarvitaan kartan liikuttamista ja zoomaamista. Itse tehtävä tehdään muualla kuin PaikkaOpissa.
             
             include partials/_tehtava_suomivisa.jade
+
+          .view#map-karttaesitys
+            if compileWithDocumentation
+              .proto__documentation
+                //-
+
+            include partials/_tehtava_karttaesitys
             
           .view#library
             if compileWithDocumentation
               .proto__documentation
                 p Tehtäväkirjasto. Toteutetaan aluksi staattisena. Opettajat ja oppilaat voivat selata täällä julkisia tehtäviä, sekä aloittaa haluamansa tehtävän.           
               
-            .view__header
-              a.view__header-link.type--back(href='#dashboard')
-              h1.view__header-title Tehtäväkirjasto            
+            include partials/_kirjasto
 
-
-            .view__content
-
-
-              h1.title__list Valitse tehtävä
-
-              .list.type--tasks
-                .list__item
-                  .list__item-title Karttaesitys
-                  .list__item-description Kartta ja työkalut oman esityksen luomiseen.
-                  a.list__item-link(href='#map-karttaesitys') Aloita tehtävä
-
-                .list__item
-                  .list__item-title Lempipaikkani
-                  .list__item-description Etsi lempipaikkasi ja merkitse se kartalle.
-                  a.list__item-link(href='#task-lempipaikkani-aloita') Aloita tehtävä
-
-                .list__item
-                  .list__item-title Suomi-visa
-                  .list__item-description Tässä visassa harjoitellaan kartan käyttöä hyödyntäen kartta-alustan erilaisia työkaluja ja kartta-aineistoja.
-                  a.list__item-link(href='#task-suomivisa-aloita') Aloita tehtävä
-
-                .list__item
-                  .list__item-title Luokkaretki
-                  .list__item-description Tämä tehtävä ei ole vielä käytössä.
-                  a.list__item-link.is-inactive Aloita tehtävä
-
-
-          
-
-          //- .view#task-luokkaretki
-          //-   .proto__documentation
-          //-     p Tehtävän ohjeet. Luokkaretki-tehtävä toteutetaan vaiheessa kaksi.
-          //-   .view__content
-          //-     .accordion
-          //-       .accordion__item
-          //-         h2.accordion__title Tutustukaa projektiin ja suunnitelkaa omaa työtä
-          //-         .accordion__text
-          //-           ul.list.type--text
-          //-             li.list__item Tutustukaa yhdessä projektiin sekä sen tavoitteisiin ja arviointiin.
-          //-             li.list__item Jakautukaa ryhmiin.
-          //-             li.list__item Aloittakaa ryhmien maskottien suunnittelu ja valmistaminen. Maskotit esiintyvät myöhemmin ottamissanne kuvissa valituista retkikohteista.  Maskotit voidaan lopuksi sijoittaa myös luokan yhteiseen projektikoosteeseen (katso kuva vaiheessa 7).
-          //-       .accordion__item
-          //-         h2.accordion__title Harjoitelkaa kartta-alustan käyttöä
-          //-         .accordion__text
-          //-           ul.list.type--text
-          //-             li.list__item Tutustukaa PaikkaOpin kartta-alustaan ja oman kunnan karttaan esimerkiksi Paikkatiedon ABC -tehtävien avulla.
-          //-             li.list__item Harjoitelkaa myös pistekohteen tallentamista kartta-alustalle.
-          //-       .accordion__footer
-          //-         a.button(href='#map-luokkaretki') Aloita tehtävä

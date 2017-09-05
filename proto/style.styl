@@ -121,6 +121,7 @@ p
 a
   text-decoration none
   color inherit
+  cursor pointer
   
 input, select, button, textarea
   -webkit-appearance none
@@ -536,19 +537,21 @@ ul
       flex 1 0 calc(100% \- 15px)
       margin 0 15px 15px 0
       border 1px solid neutral[3]
-      padding 10px
-      cursor pointer
+      padding 15px 20px
+      display flex
+      flex-direction column
+      justify-content flex-end
       @media (min-width: media_medium)
-        flex 1 0 33.332%
-        max-width 33.332%
+        flex 1 0 calc(33.332% \- 15px)
+        max-width calc(33.332% \- 15px)
       &.type--progressing .list__item-link:before
         // content url(assets/icon_task_progressing.svg)
       &.type--done .list__item-link:before
         // 
     .list__item-image
-      width 100%
+      width calc(100% \+ 20px)
       height 80px
-      margin 0 0 10px 0
+      margin -5px -10px 10px
       background url(assets/map.svg)
       background-size cover
       border 1px solid neutral[3]
@@ -556,8 +559,18 @@ ul
       font-size size_h4
       font-weight bold_font_weight
       margin 0 0 5px 0
+    .list__item-footer
+      flex 1 0 auto
+      display flex
+      flex-direction column
+      justify-content flex-end
+      margin 25px 0 0 0
+    .list__item-detail
+      font-size .86rem
+      margin -5px 0 0 0
     .list__item-link
       button()
+      display block
       padding 10px 15px
       margin 15px 0 5px 0
       &.is-inactive

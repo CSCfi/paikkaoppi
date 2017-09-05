@@ -1,0 +1,29 @@
+.view__content
+  .view__columns
+    
+    .view__column
+      a.view__add(href='#library')
+
+      h1.title__list Omat tehtävät
+
+      .list.type--tasks
+        
+        a.list__item(href='#task-lempipaikkani')
+          .list__item-image(style='background:url(assets/map.png)')
+          .list__item-title Lempipaikkani
+        a.list__item(href='#task-suomivisa')
+          .list__item-image(style='background:url(assets/map.png)')
+          .list__item-title Suomi-visa
+
+        
+
+    .view__column
+      .profile
+        .profile__item
+          .profile__image
+            img(src='assets/monster.png')
+        .profile__item
+          label Kalle Kirjautunut
+        .profile__footer
+          .profile__footer-item
+            a(href='#login') Kirjaudu ulos
