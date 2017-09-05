@@ -1,4 +1,4 @@
-@import url("//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600");
+@import url("//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,900");
 * {
   box-sizing: border-box;
 }
@@ -553,6 +553,18 @@ ul {
 .list.type--tasks .list__item-link.is-inactive {
   opacity: 0.3;
   cursor: default;
+}
+.list.type--tasks .list__item-code {
+  margin: 5px 0 0 0;
+}
+.list.type--tasks .list__item-code .code {
+  background: #e8e8e8;
+  display: inline-block;
+  line-height: 1.1;
+  padding: 2px 5px;
+  border-radius: 30px;
+  font-size: 0.82rem;
+  font-weight: 900;
 }
 .list.type--tasks-list .list__item {
   margin: 0 0 8px 0;

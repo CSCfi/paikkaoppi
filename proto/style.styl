@@ -1,5 +1,5 @@
 font_family = 'Source Sans Pro'
-font_weights = '300,400,600'
+font_weights = '300,400,600,900'
 
 brand_color = ( linear-gradient(65deg, #F05348, #E1854B) #F05348 darken(#F05348, 20) #E1854B )
 ui_color = ( #35b577 #ffb448 #FF312E #587792 )
@@ -576,6 +576,16 @@ ul
       &.is-inactive
         opacity .3
         cursor default
+    .list__item-code
+      margin 5px 0 0 0
+      .code
+        background neutral[2]
+        display inline-block
+        line-height 1.1
+        padding 2px 5px
+        border-radius border_radius
+        font-size .82rem
+        font-weight 900
 
   &.type--tasks-list
     .list__item
