@@ -589,7 +589,10 @@ ul {
   font-weight: 600;
 }
 .list.type--tasks .list__item-code {
-  margin: 5px 0 0 0;
+  margin: 15px 0 0 0;
+  flex: 1 0 auto;
+  display: flex;
+  align-items: flex-end;
 }
 .list.type--tasks .list__item-code .code {
   background: #e8e8e8;
