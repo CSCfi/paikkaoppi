@@ -109,5 +109,11 @@ html
               .proto__documentation
                 p Tehtäväkirjasto. Toteutetaan aluksi staattisena. Opettajat ja oppilaat voivat selata täällä julkisia tehtäviä, sekä aloittaa haluamansa tehtävän.           
               
-            include partials/_kirjasto
+            include partials/_kirjasto_oppilas
 
+          .view#library-opettaja
+            if compileWithDocumentation
+              .proto__documentation
+                p Opettajan tehtäväkirjasto. Toteutetaan aluksi staattisena. Opettaja voi luoda uuden tehtävän, nimetä sen ja se tulee näkyviin opettajan työpöydälle. Muut käyttäjät voivat liittyä siihen syöttämällä tehtävän koodin.         
+              
+            include partials/_kirjasto_opettaja

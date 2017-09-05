@@ -1,5 +1,5 @@
 font_family = 'Source Sans Pro'
-font_weights = '300,400,600,900'
+font_weights = '300,400,700,900'
 
 brand_color = ( linear-gradient(65deg, #F05348, #E1854B) #F05348 darken(#F05348, 20) #E1854B )
 ui_color = ( #35b577 #ffb448 #FF312E #587792 )
@@ -14,7 +14,7 @@ placeholder_color = darken(text_color[1],10)
 placeholder_weight = 400
 
 base_font_weight = 400
-title_font_weight = 600
+title_font_weight = 700
 thin_font_weight = 300
 bold_font_weight = 600
 
@@ -576,6 +576,21 @@ ul
       &.is-inactive
         opacity .3
         cursor default
+    .list__item-info
+      margin 15px 0 0 0
+      padding 15px 0 0 0
+      border-top 1px solid alpha(brand_color[2], .3)
+      font-size .88rem
+    .list__item-tag
+      margin 0 0 10px 0
+      .tag
+        background neutral[2]
+        display inline-block
+        line-height 1.1
+        padding 2px 5px
+        border-radius border_radius
+        font-size .82rem
+        font-weight bold_font_weight
     .list__item-code
       margin 5px 0 0 0
       .code

@@ -1,0 +1,58 @@
+.view__header
+  a.view__header-link.type--back(href='#dashboard-opettaja')
+  h1.view__header-title Tehtäväkirjasto            
+
+
+.view__content
+
+
+  h1.title__list Valitse tehtävä
+
+  .list.type--tasks
+    .list__item
+      .list__item-title Lataa tehtävä
+      .list__item-description Hae tehtävä koodilla.
+      .list__item-footer
+        .list__item-input
+          input.input--code(type='text', placeholder='Kirjoita koodi tähän...')
+          a.button--continue(href='#map-karttaesitys') 
+
+    .list__item
+      .list__item-tag
+        .tag Monialainen
+      .list__item-title Karttaesitys
+      .list__item-description Kartta ja työkalut oman esityksen luomiseen.
+      .list__item-info Tehtävä sopii omien esitysten tekemiseen ja karttatyökaluihin tutustumiseen.
+      .list__item-footer
+        a.list__item-link(href='#map-karttaesitys') Luo tehtävä
+
+    .list__item
+      .list__item-tag
+        .tag Maantieto
+      .list__item-title Suomi-visa
+      .list__item-description Tässä visassa harjoitellaan kartan käyttöä hyödyntäen kartta-alustan työkaluja.
+      .list__item-info Tehtävä sopii ala- ja yläkouluun sekä lukioon maantieteen ja ympäristöopin tunneille.
+      .list__item-footer  
+        a.list__item-link(href='#task-suomivisa-aloita') Luo tehtävä
+
+    .list__item
+      .list__item-tag
+        .tag Maantieto
+      .list__item-title Lempipaikkani
+      .list__item-description Tämä tehtävä ei ole vielä käytössä.
+      .list__item-footer
+        a.list__item-link.is-inactive(href='#task-lempipaikkani-aloita') Luo tehtävä
+
+    .list__item
+      .list__item-tag
+        .tag Monialainen
+      .list__item-title Luokkaretki
+      .list__item-description Tämä tehtävä ei ole vielä käytössä.
+      .list__item-footer
+        a.list__item-link.is-inactive Luo tehtävä
+
+
+
+
+
+

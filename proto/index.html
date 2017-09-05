@@ -67,7 +67,7 @@
             </div>
             <div class="view__content">
               <div class="view__columns">
-                <div class="view__column"><a href="#library" class="view__add"></a>
+                <div class="view__column"><a href="#library-opettaja" class="view__add"></a>
                   <h1 class="title__list">Omat tehtävät</h1>
                   <div class="list type--tasks"><a href="#task-lempipaikkani" class="list__item">
                       <div class="list__item-image"></div>
@@ -348,8 +348,8 @@
               <h1 class="title__list">Valitse tehtävä</h1>
               <div class="list type--tasks">
                 <div class="list__item">
-                  <div class="list__item-title">Uusi tehtävä</div>
-                  <div class="list__item-description">Hae uusi tehtävä koodilla.</div>
+                  <div class="list__item-title">Lataa tehtävä</div>
+                  <div class="list__item-description">Hae tehtävä koodilla.</div>
                   <div class="list__item-footer">
                     <div class="list__item-input">
                       <input type="text" placeholder="Kirjoita koodi tähän..." class="input--code"><a href="#map-karttaesitys" class="button--continue"> </a>
@@ -375,6 +375,62 @@
                   <div class="list__item-title">Luokkaretki</div>
                   <div class="list__item-description">Tämä tehtävä ei ole vielä käytössä.</div>
                   <div class="list__item-footer"><a class="list__item-link is-inactive">Aloita tehtävä</a></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div id="library-opettaja" class="view">
+            <div class="proto__documentation">
+              <p>Opettajan tehtäväkirjasto. Toteutetaan aluksi staattisena. Opettaja voi luoda uuden tehtävän, nimetä sen ja se tulee näkyviin opettajan työpöydälle. Muut käyttäjät voivat liittyä siihen syöttämällä tehtävän koodin.         </p>
+            </div>
+            <div class="view__header"><a href="#dashboard-opettaja" class="view__header-link type--back"></a>
+              <h1 class="view__header-title">Tehtäväkirjasto            </h1>
+            </div>
+            <div class="view__content">
+              <h1 class="title__list">Valitse tehtävä</h1>
+              <div class="list type--tasks">
+                <div class="list__item">
+                  <div class="list__item-title">Lataa tehtävä</div>
+                  <div class="list__item-description">Hae tehtävä koodilla.</div>
+                  <div class="list__item-footer">
+                    <div class="list__item-input">
+                      <input type="text" placeholder="Kirjoita koodi tähän..." class="input--code"><a href="#map-karttaesitys" class="button--continue"> </a>
+                    </div>
+                  </div>
+                </div>
+                <div class="list__item">
+                  <div class="list__item-tag">
+                    <div class="tag">Monialainen</div>
+                  </div>
+                  <div class="list__item-title">Karttaesitys</div>
+                  <div class="list__item-description">Kartta ja työkalut oman esityksen luomiseen.</div>
+                  <div class="list__item-info">Tehtävä sopii omien esitysten tekemiseen ja karttatyökaluihin tutustumiseen.</div>
+                  <div class="list__item-footer"><a href="#map-karttaesitys" class="list__item-link">Luo tehtävä</a></div>
+                </div>
+                <div class="list__item">
+                  <div class="list__item-tag">
+                    <div class="tag">Maantieto</div>
+                  </div>
+                  <div class="list__item-title">Suomi-visa</div>
+                  <div class="list__item-description">Tässä visassa harjoitellaan kartan käyttöä hyödyntäen kartta-alustan työkaluja.</div>
+                  <div class="list__item-info">Tehtävä sopii ala- ja yläkouluun sekä lukioon maantieteen ja ympäristöopin tunneille.</div>
+                  <div class="list__item-footer"> <a href="#task-suomivisa-aloita" class="list__item-link">Luo tehtävä</a></div>
+                </div>
+                <div class="list__item">
+                  <div class="list__item-tag">
+                    <div class="tag">Maantieto</div>
+                  </div>
+                  <div class="list__item-title">Lempipaikkani</div>
+                  <div class="list__item-description">Tämä tehtävä ei ole vielä käytössä.</div>
+                  <div class="list__item-footer"><a href="#task-lempipaikkani-aloita" class="list__item-link is-inactive">Luo tehtävä</a></div>
+                </div>
+                <div class="list__item">
+                  <div class="list__item-tag">
+                    <div class="tag">Monialainen</div>
+                  </div>
+                  <div class="list__item-title">Luokkaretki</div>
+                  <div class="list__item-description">Tämä tehtävä ei ole vielä käytössä.</div>
+                  <div class="list__item-footer"><a class="list__item-link is-inactive">Luo tehtävä</a></div>
                 </div>
               </div>
             </div>

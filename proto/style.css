@@ -1,4 +1,4 @@
-@import url("//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,900");
+@import url("//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,900");
 * {
   box-sizing: border-box;
 }
@@ -28,7 +28,7 @@ h4,
 h5 {
   line-height: 1.24;
   margin: 0 0 0.5em 0;
-  font-weight: 600;
+  font-weight: 700;
 }
 h1 {
   font-size: 1.464100000000001rem;
@@ -553,6 +553,24 @@ ul {
 .list.type--tasks .list__item-link.is-inactive {
   opacity: 0.3;
   cursor: default;
+}
+.list.type--tasks .list__item-info {
+  margin: 15px 0 0 0;
+  padding: 15px 0 0 0;
+  border-top: 1px solid rgba(194,28,16,0.3);
+  font-size: 0.88rem;
+}
+.list.type--tasks .list__item-tag {
+  margin: 0 0 10px 0;
+}
+.list.type--tasks .list__item-tag .tag {
+  background: #e8e8e8;
+  display: inline-block;
+  line-height: 1.1;
+  padding: 2px 5px;
+  border-radius: 30px;
+  font-size: 0.82rem;
+  font-weight: 600;
 }
 .list.type--tasks .list__item-code {
   margin: 5px 0 0 0;
