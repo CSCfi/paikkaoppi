@@ -1,0 +1,2 @@
+/** Something from Kristas proto. No idea :=) */
+(function(){$(function(){var o;return o=$(window),o.on("hashchange",function(n){return o.trigger("loadView")}),o.on("loadView",function(o){return $(".popup").hide(),""===window.location.hash||"#"===window.location.hash?$("#login").show():($(window.location.hash).hasClass("popup")&&$(window.location.hash).parents(".view").show(),$(window.location.hash).show())}),o.trigger("loadView")})}).call(this);

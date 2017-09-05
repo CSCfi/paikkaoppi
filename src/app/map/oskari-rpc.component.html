@@ -1,0 +1,6 @@
+<div id="oskari-map-wrapper">
+  <iframe *ngIf="env == 'dev2'" id="oskari-map" src="https://kartta.paikkatietoikkuna.fi/published/fi/87e9ad3a-a91f-4888-8262-4fc625102ee1"></iframe>
+  <iframe *ngIf="env == 'dev'" id="oskari-map" src="https://hkp.maanmittauslaitos.fi/hkp/published/fi/e4b64125-f3ad-49e2-b54e-bcb71f657472"></iframe>
+  <iframe *ngIf="env == 'test'" id="oskari-map" src="https://kartta.paikkatietoikkuna.fi/published/fi/3ccb28fc-2df8-4ad8-b5b2-85d415297882"></iframe>
+  <iframe *ngIf="env == 'prod'" id="oskari-map" src="https://kartta.paikkatietoikkuna.fi/published/fi/b1de7e10-256d-4ded-acf6-4621d0e67394"></iframe>
+</div>
