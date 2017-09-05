@@ -71,9 +71,9 @@
                   <h1 class="title__list">Omat tehtävät</h1>
                   <div class="list type--tasks"><a href="#task-lempipaikkani" class="list__item">
                       <div style="background:url(assets/map.png)" class="list__item-image"></div>
-                      <div class="list__item-title">Lempipaikkani</div></a><a class="list__item">
+                      <div class="list__item-title">Lempipaikkani</div></a><a href="#task-suomivisa" class="list__item">
                       <div style="background:url(assets/map.png)" class="list__item-image"></div>
-                      <div class="list__item-title">Luokkaretki</div></a></div>
+                      <div class="list__item-title">Suomi-visa</div></a></div>
                 </div>
                 <div class="view__column">
                   <div class="profile">
@@ -101,9 +101,9 @@
                   <h1 class="title__list">Omat tehtävät</h1>
                   <div class="list type--tasks"><a href="#task-lempipaikkani" class="list__item">
                       <div class="list__item-image"></div>
-                      <div class="list__item-title">Lempipaikkani</div></a><a class="list__item">
+                      <div class="list__item-title">Lempipaikkani</div></a><a href="#task-suomivisa" class="list__item">
                       <div class="list__item-image"></div>
-                      <div class="list__item-title">Luokkaretki</div></a></div>
+                      <div class="list__item-title">Suomi-visa</div></a></div>
                 </div>
                 <div class="view__column">
                   <div class="profile">
@@ -242,8 +242,79 @@
               <div class="placeholder__map"></div>
             </div>
           </div>
-          
-          
+          <div id="map-suomivisa" class="view">
+            <div class="proto__documentation">
+              <p>Suomivisa-kartta. Suomivisassa tarvitaan kartan liikuttamista ja zoomaamista. Itse tehtävä tehdään muualla kuin PaikkaOpissa.</p>
+            </div>
+            <div id="task-suomivisa-aloita" class="popup">
+              <div class="proto__documentation">
+              </div>
+              <div class="view__content">
+                <div class="accordion">
+                  <h1 class="accordion__header">Suomi-visa</h1>
+                  <div class="accordion__item">
+                    <h2 class="accordion__title">Mikä pohjoisen kunta ja kylä?</h2>
+                    <div class="accordion__text">
+                      <ul class="list type--text">
+                        <li class="list__item">Mikä on Suomen pohjoisin kylä?</li>
+                        <li class="list__item">Entä mikä on Suomen pohjoisin kunta?</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="accordion__item">
+                    <h2 class="accordion__title">Mitä kaupunkeja on Salpausselkien päällä?</h2>
+                    <div class="accordion__text">
+                      <ul class="list type--text">
+                        <li class="list__item">Etsi kartalta Salpausselät ja tutki, mitkä kaupungit on rakennettu kartassa näkyvien reunamuodostumien päälle.</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="accordion__footer"><a href="#map-suomivisa" class="button">Aloita tehtävä</a></div>
+                </div>
+              </div>
+            </div>
+            <div id="task-suomivisa" class="popup">
+              <div class="proto__documentation">
+              </div>
+              <div class="view__content">
+                <div class="accordion">
+                  <h1 class="accordion__header">Suomi-visa</h1>
+                  <div class="accordion__item">
+                    <h2 class="accordion__title">Mikä pohjoisen kunta ja kylä?</h2>
+                    <div class="accordion__text">
+                      <ul class="list type--text">
+                        <li class="list__item">Mikä on Suomen pohjoisin kylä?</li>
+                        <li class="list__item">Entä mikä on Suomen pohjoisin kunta?</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="accordion__item">
+                    <h2 class="accordion__title">Mitä kaupunkeja on Salpausselkien päällä?</h2>
+                    <div class="accordion__text">
+                      <ul class="list type--text">
+                        <li class="list__item">Etsi kartalta Salpausselät ja tutki, mitkä kaupungit on rakennettu kartassa näkyvien reunamuodostumien päälle.</li>
+                      </ul>
+                    </div>
+                  </div>
+                  <div class="accordion__footer"><a href="#map-suomivisa" class="button">Jatka tehtävää</a></div>
+                </div>
+              </div>
+            </div>
+            <div class="view__header type--map"><a href="#dashboard" class="view__header-link type--back"></a>
+              <h1 class="view__header-title">Suomi-visa</h1><a href="#task-suomivisa" class="view__header-link type--info">Ohjeet</a>
+            </div>
+            <div class="map__wrapper">
+              <div class="map__zoom">
+                <div class="map__zoom-in"></div>
+                <div class="map__zoom-out"></div>
+                <div class="map__center"></div>
+              </div>
+              <div class="map__tools"><a class="map__tools-dot"></a>
+                <div class="map__tools-coords">60°10′15″N, 024°56′15″E</div>
+              </div>
+              <div class="placeholder__map"></div>
+            </div>
+          </div>
           <div id="library" class="view">
             <div class="proto__documentation">
               <p>Tehtäväkirjasto. Toteutetaan aluksi staattisena. Opettajat ja oppilaat voivat selata täällä julkisia tehtäviä, sekä aloittaa haluamansa tehtävän.           </p>
@@ -261,6 +332,10 @@
                 <div class="list__item">
                   <div class="list__item-title">Lempipaikkani</div>
                   <div class="list__item-description">Etsi lempipaikkasi ja merkitse se kartalle.</div><a href="#task-lempipaikkani-aloita" class="list__item-link">Aloita tehtävä</a>
+                </div>
+                <div class="list__item">
+                  <div class="list__item-title">Suomi-visa</div>
+                  <div class="list__item-description">Tässä visassa harjoitellaan kartan käyttöä hyödyntäen kartta-alustan erilaisia työkaluja ja kartta-aineistoja.</div><a href="#task-suomivisa-aloita" class="list__item-link">Aloita tehtävä</a>
                 </div>
                 <div class="list__item">
                   <div class="list__item-title">Luokkaretki</div>

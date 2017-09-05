@@ -86,9 +86,9 @@ html
                     a.list__item(href='#task-lempipaikkani')
                       .list__item-image(style='background:url(assets/map.png)')
                       .list__item-title Lempipaikkani
-                    a.list__item
+                    a.list__item(href='#task-suomivisa')
                       .list__item-image(style='background:url(assets/map.png)')
-                      .list__item-title Luokkaretki
+                      .list__item-title Suomi-visa
 
                     
 
@@ -123,9 +123,9 @@ html
                     a.list__item(href='#task-lempipaikkani')
                       .list__item-image
                       .list__item-title Lempipaikkani
-                    a.list__item
+                    a.list__item(href='#task-suomivisa')
                       .list__item-image
-                      .list__item-title Luokkaretki
+                      .list__item-title Suomi-visa
 
                     
 
@@ -164,151 +164,21 @@ html
 
               .placeholder__map
             
-
           .view#map-lempipaikkani
             if compileWithDocumentation
               .proto__documentation
                 p Lempipaikkani-kartta. Aluksi toteutetaan kartan zoomaaminen ja liikuttaminen sekä pistemäisen merkinnän lisääminen.
-
-            .popup#task-lempipaikkani-aloita
-              if compileWithDocumentation
-                .proto__documentation
-                  p Tehtävän ohjeet. Ensimmäisessä vaiheessa toteutetaan yhden pistemäisen merkinnän lisääminen kartalle, kartan zoomaus ja liikuttaminen.
-
-              .view__content
-                .accordion
-                  h1.accordion__header Lempipaikkani
-                  .accordion__item
-                    h2.accordion__title Merkitse kartalle oma lempipaikkasi
-                    .accordion__text
-                      ul.list.type--text
-                        li.list__item Opettele kartan käyttöä.
-                        li.list__item Etsi kartalta oma lempipaikkasi.
-                        li.list__item Merkitse kartalle valitsemasi paikka ja kerro miksi se on sinulle tärkeä.
-                  
-                  .accordion__footer
-                    a.button(href='#map-lempipaikkani') Aloita tehtävä
-
-            .popup#task-lempipaikkani
-              if compileWithDocumentation
-                .proto__documentation
-                  p Tehtävän ohjeet. Ensimmäisessä vaiheessa toteutetaan yhden pistemäisen merkinnän lisääminen kartalle, kartan zoomaus ja liikuttaminen.
-
-              .view__content
-                .accordion
-                  h1.accordion__header Lempipaikkani
-                  .accordion__item
-                    h2.accordion__title Merkitse kartalle oma lempipaikkasi
-                    .accordion__text
-                      ul.list.type--text
-                        li.list__item Opettele kartan käyttöä.
-                        li.list__item Etsi kartalta oma lempipaikkasi.
-                        li.list__item Merkitse kartalle valitsemasi paikka ja kerro miksi se on sinulle tärkeä.
-                  
-                  .accordion__footer
-                    a.button(href='#map-lempipaikkani') Jatka tehtävää
-
-            .popup#mark
-
-              .form.type--basic
-
-                .popup__header
-                  a.popup__header-link.type--back(href='#map-lempipaikkani')
-                  h1.popup__header-title Uusi merkintä
-
-                .form__text
-                  .form__text-title Koordinaatit
-                  .form__text-value 60°10′15″N, 024°56′15″E
-
-                .form__item
-                  label Nimi
-                  input(type='text')
-                .form__item
-                  label Kuvaus
-                  textarea
-                .form__footer
-                  a.button(href='#map-lempipaikkani') Tallenna merkintä
-
-
-            .popup#mark-view
-
-              .form.type--basic
-
-                .popup__header
-                  a.popup__header-link.type--back(href='#map-lempipaikkani')
-                  h1.popup__header-title Kallen lempipaikka
-
-                .form__text
-                  .form__text-title Koordinaatit
-                  .form__text-value 60°10′15″N, 024°56′15″E
-
-                .form__item
-                  label Nimi
-                  .form__value Kallen lempipaikka
-                .form__item
-                  label Kuvaus
-                  .form__value Pieni kivi puron vieressä.
-                //- .form__footer
-                //-   a.button(href='#map-lempipaikkani') Muokkaa merkintää
-
-
-            .view__header.type--map
-              a.view__header-link.type--back(href='#dashboard')
-              h1.view__header-title Lempipaikkani
-              a.view__header-link.type--info(href='#task-lempipaikkani') Ohjeet
             
-            .map__wrapper
-              .map__zoom
-                .map__zoom-in
-                .map__zoom-out
-                .map__center
-
-              .map__tools
-                a.map__tools-dot(href='#mark')
-                .map__tools-coords 60°10′15″N, 024°56′15″E
-
-              .map__pointers
-                a.map__pointer(style='top:300px;left:190px;', href='#mark-view')
+            include partials/_tehtava_lempipaikka.jade
 
 
-              .placeholder__map
+          .view#map-suomivisa
+            if compileWithDocumentation
+              .proto__documentation
+                p Suomivisa-kartta. Suomivisassa tarvitaan kartan liikuttamista ja zoomaamista. Itse tehtävä tehdään muualla kuin PaikkaOpissa.
             
-          //- .view#map-luokkaretki
-          //-   .view__header
-          //-     a.view__header-link(href='#dashboard') Takaisin
-          //-     a.view__header-link(href='#task-luokkaretki') Ohjeet
+            include partials/_tehtava_suomivisa.jade
             
-          //-   .map__wrapper
-          //-     .placeholder__map
-            
-
-
-          //- .view#settings
-          //-   if compileWithDocumentation
-          //-     .proto__documentation
-          //-       p Omien tietojen ylläpito. Toteutetaan alkuun staattisena näkymänä.            
-            
-          //-   .view__header
-          //-     a.view__header-link.type--back(href='#dashboard')
-          //-     h1.view__header-title Omat tiedot
-            
-          //-   .view__content
-            
-          //-     .form.type--settings
-
-          //-       .profile__item
-          //-         .profile__image
-          //-           img(src='assets/monster.png')
-
-          //-       .form__item
-          //-         label Nimi
-          //-         input(type='text', value='Kalle Kirjautunut')
-          //-       .form__item
-          //-         label Sähköpostiosoite
-          //-         input(type='email', value='kalle.kirjautunut@koulu.fi')
-          //-       .form__footer
-          //-         a.button(href='#dashboard') Tallenna omat tiedot
-
           .view#library
             if compileWithDocumentation
               .proto__documentation
@@ -334,6 +204,11 @@ html
                   .list__item-title Lempipaikkani
                   .list__item-description Etsi lempipaikkasi ja merkitse se kartalle.
                   a.list__item-link(href='#task-lempipaikkani-aloita') Aloita tehtävä
+
+                .list__item
+                  .list__item-title Suomi-visa
+                  .list__item-description Tässä visassa harjoitellaan kartan käyttöä hyödyntäen kartta-alustan erilaisia työkaluja ja kartta-aineistoja.
+                  a.list__item-link(href='#task-suomivisa-aloita') Aloita tehtävä
 
                 .list__item
                   .list__item-title Luokkaretki

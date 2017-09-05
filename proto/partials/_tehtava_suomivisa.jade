@@ -1,0 +1,64 @@
+.popup#task-suomivisa-aloita
+  if compileWithDocumentation
+    .proto__documentation
+      //-
+
+  .view__content
+    .accordion
+      h1.accordion__header Suomi-visa
+      .accordion__item
+        h2.accordion__title Mikä pohjoisen kunta ja kylä?
+        .accordion__text
+          ul.list.type--text
+            li.list__item Mikä on Suomen pohjoisin kylä?
+            li.list__item Entä mikä on Suomen pohjoisin kunta?
+
+      .accordion__item
+        h2.accordion__title Mitä kaupunkeja on Salpausselkien päällä?
+        .accordion__text
+          ul.list.type--text
+            li.list__item Etsi kartalta Salpausselät ja tutki, mitkä kaupungit on rakennettu kartassa näkyvien reunamuodostumien päälle.
+      
+      .accordion__footer
+        a.button(href='#map-suomivisa') Aloita tehtävä
+
+.popup#task-suomivisa
+  if compileWithDocumentation
+    .proto__documentation
+      //-
+
+  .view__content
+    .accordion
+      h1.accordion__header Suomi-visa
+      .accordion__item
+        h2.accordion__title Mikä pohjoisen kunta ja kylä?
+        .accordion__text
+          ul.list.type--text
+            li.list__item Mikä on Suomen pohjoisin kylä?
+            li.list__item Entä mikä on Suomen pohjoisin kunta?
+
+      .accordion__item
+        h2.accordion__title Mitä kaupunkeja on Salpausselkien päällä?
+        .accordion__text
+          ul.list.type--text
+            li.list__item Etsi kartalta Salpausselät ja tutki, mitkä kaupungit on rakennettu kartassa näkyvien reunamuodostumien päälle.
+      
+      .accordion__footer
+        a.button(href='#map-suomivisa') Jatka tehtävää
+
+.view__header.type--map
+  a.view__header-link.type--back(href='#dashboard')
+  h1.view__header-title Suomi-visa
+  a.view__header-link.type--info(href='#task-suomivisa') Ohjeet
+
+.map__wrapper
+  .map__zoom
+    .map__zoom-in
+    .map__zoom-out
+    .map__center
+
+  .map__tools
+    a.map__tools-dot
+    .map__tools-coords 60°10′15″N, 024°56′15″E
+
+  .placeholder__map
