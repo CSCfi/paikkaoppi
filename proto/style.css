@@ -695,11 +695,14 @@ ul {
   text-align: center;
 }
 .profile__image {
-  width: 120px;
-  height: 120px;
+  margin: 20px 0 0 0;
+  width: 180px;
+  height: 180px;
   margin: 0 auto 25px auto;
   overflow: hidden;
   border-radius: 100%;
+  background: #fff;
+  padding: 10px;
 }
 .profile__image img {
   width: 100%;
