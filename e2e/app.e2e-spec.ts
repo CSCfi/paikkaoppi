@@ -1,6 +1,6 @@
 import { AppPage } from './app.po';
 
-describe('oppipaikka-ui App', () => {
+describe('paikkaoppi-ui App', () => {
   let page: AppPage;
 
   beforeEach(() => {
