@@ -1,41 +1,34 @@
 <div id="dashboard" class="view">
-  <div class="proto__documentation">
+    <div class="proto__documentation">
       <p>Oppilaan työpöytä. Tehtävälistaus näytetään staattisena. Linkistä pääsee katsomaan tehtävien ohjeet.</p>
-  </div>
-  <div class="view__content">
+    </div>
+    <div class="view__content">
       <div class="view__columns">
-          <div class="view__column"><a href="#library" class="view__add"></a>
-              <h1 class="title__list">Omat tehtävät</h1>
-              <div class="list type--tasks">
-                <a class="list__item" routerLink="/map">
-                      <div style="background:url(assets/map.png)" class="list__item-image"></div>
-                      <div class="list__item-link">Lempipaikkani</div>
-                  </a>
-                  <a class="list__item" routerLink="/map">
-                      <div style="background:url(assets/map.png)" class="list__item-image"></div>
-                      <div class="list__item-link">Luokkaretki</div>
-                  </a>
-              </div>
+        <div class="view__column"><a routerLink="/library" class="view__add"></a>
+          <h1 class="title__list">Omat tehtävät</h1>
+          <div class="list type--tasks"><a routerLink="/map" class="list__item">
+              <div class="list__item-image"></div>
+              <div class="list__item-title">Lempipaikkani</div>
+              <div class="list__item-detail">4 merkintää</div></a><a routerLink="/map" class="list__item">
+              <div class="list__item-image"></div>
+              <div class="list__item-title">Suomi-visa</div>
+              <div class="list__item-detail">2 merkintää</div></a></div>
+        </div>
+        <div class="view__column">
+          <div class="profile">
+            <div class="profile__item">
+              <div class="profile__image"><img src="assets/monster.svg"></div>
+            </div>
+            <div class="profile__item">
+              <label>Olli Oppilas</label>
+            </div>
+            <!--
+            <div class="profile__footer">
+              <div class="profile__footer-item"><a href="#login">Kirjaudu ulos</a></div>
+            </div>
+            -->
           </div>
-          <div class="view__column">
-              <div class="profile">
-                  <div class="profile__item">
-                      <div class="profile__image"><img src="assets/monster.png"></div>
-                  </div>
-                  <!--
-                  <div class="profile__item">
-                      <label>Kalle Kirjautunut</label>
-                  </div>
-                  <div class="profile__item">
-                      <label>kalle.kirjautunut@koulu.fi</label>
-                  </div>
-                  <div class="profile__footer">
-                      <div class="profile__footer-item"><a href="#settings">Muokkaa omia tietoja</a></div>
-                      <div class="profile__footer-item"><a href="#login">Kirjaudu ulos</a></div>
-                  </div>
-                  -->
-              </div>
-          </div>
+        </div>
       </div>
+    </div>
   </div>
-</div>

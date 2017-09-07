@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { OskariRpcComponent } from './oskari-rpc.component'
+import { PopupComponent } from './popup.component'
 
 
 @Component({

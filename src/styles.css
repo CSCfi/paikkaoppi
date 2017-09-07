@@ -1,4 +1,4 @@
-@import url("//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600");
+@import url("//fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,900");
 * {
   box-sizing: border-box;
 }
@@ -28,7 +28,7 @@ h4,
 h5 {
   line-height: 1.24;
   margin: 0 0 0.5em 0;
-  font-weight: 600;
+  font-weight: 700;
 }
 h1 {
   font-size: 1.464100000000001rem;
@@ -52,6 +52,7 @@ p {
 a {
   text-decoration: none;
   color: inherit;
+  cursor: pointer;
 }
 input,
 select,
@@ -281,7 +282,7 @@ ul {
   }
 }
 .popup__header {
-  padding: 20px 0;
+  padding: 0 0 35px 0;
   display: flex;
   align-items: center;
 }
@@ -486,32 +487,144 @@ ul {
   margin: 0 -15px 0 0;
 }
 .list.type--tasks .list__item {
+  position: relative;
   flex: 1 0 calc(100% - 15px);
   margin: 0 15px 15px 0;
   border: 1px solid;
-  padding: 10px;
-  cursor: pointer;
+  padding: 15px 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
 }
 @media (min-width: 720px) {
   .list.type--tasks .list__item {
-    flex: 1 0 33.332%;
-    max-width: 33.332%;
+    flex: 1 0 calc(33.332% - 15px);
+    max-width: calc(33.332% - 15px);
   }
 }
 .list.type--tasks .list__item-image {
-  width: 100%;
+  width: calc(100% + 20px);
   height: 80px;
+  margin: -5px -10px 10px;
+  background: url("assets/map.svg");
   background-size: cover;
-  margin: 0 0 10px 0;
+  border: 1px solid;
+}
+.list.type--tasks .list__item-title {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin: 0 0 5px 0;
+}
+.list.type--tasks .list__item-footer {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  margin: 25px 0 0 0;
+}
+.list.type--tasks .list__item-detail {
+  font-size: 0.86rem;
+  margin: -5px 0 0 0;
 }
 .list.type--tasks .list__item-link {
+  -webkit-appearance: none;
+  appearance: none;
+  display: inline-block;
+  vertical-align: middle;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1;
+  border: none;
+  padding: 15px 35px;
+  white-space: nowrap;
+  border-radius: 30px;
+  transition: all 160ms linear;
+  background: linear-gradient(65deg, #f05348, #e1854b);
+  color: #fff;
+  text-align: center;
+  margin: 10px auto;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
   display: block;
+  padding: 10px 15px;
+  margin: 15px 0 5px 0;
 }
-.list.type--tasks .list__item-link:before {
+.list.type--tasks .list__item-link.is-inactive {
+  opacity: 0.3;
+  cursor: default;
+}
+.list.type--tasks .list__item-info {
+  margin: 15px 0 0 0;
+  padding: 15px 0 0 0;
+  border-top: 1px solid rgba(194,28,16,0.3);
+  font-size: 0.88rem;
+}
+.list.type--tasks .list__item-tag {
+  margin: 0 0 10px 0;
+}
+.list.type--tasks .list__item-tag .tag {
+  background: #e8e8e8;
+  display: inline-block;
+  line-height: 1.1;
+  padding: 2px 5px;
+  border-radius: 30px;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+.list.type--tasks .list__item-status {
+  position: absolute;
+  top: 0;
+  left: 2px;
+}
+.list.type--tasks .list__item-status .status {
+  background: linear-gradient(65deg, #f05348, #e1854b);
+  color: #fff;
+  display: inline-block;
+  line-height: 1.1;
+  padding: 2px 5px;
+  border-radius: 30px;
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+.list.type--tasks .list__item-code {
+  margin: 15px 0 0 0;
+  flex: 1 0 auto;
+  display: flex;
+  align-items: flex-end;
+}
+.list.type--tasks .list__item-code .code {
+  background: #e8e8e8;
+  display: inline-block;
+  line-height: 1.1;
+  padding: 2px 5px;
+  border-radius: 30px;
+  font-size: 0.82rem;
+  font-weight: 900;
+}
+.list.type--tasks .list__item-input {
+  display: flex;
+  align-items: center;
+}
+.list.type--tasks .list__item-input .input--code {
+  border-radius: 30px;
+  padding: 5px 15px;
+}
+.list.type--tasks .list__item-input .button--continue {
+  background: linear-gradient(65deg, #f05348, #e1854b);
+  display: inline-flex;
+  align-items: center;
+  padding: 10px;
+  border-radius: 30px;
+  margin: 0 0 0 10px;
+}
+.list.type--tasks .list__item-input .button--continue:before {
+  content: url("assets/icon_arrow-r-w.svg");
   display: inline-block;
   vertical-align: bottom;
-  width: 18px;
-  margin: 0 8px -4px 0;
+  width: 20px;
+  height: 20px;
 }
 .list.type--tasks-list .list__item {
   margin: 0 0 8px 0;
@@ -582,11 +695,14 @@ ul {
   text-align: center;
 }
 .profile__image {
-  width: 120px;
-  height: 120px;
+  margin: 20px 0 0 0;
+  width: 180px;
+  height: 180px;
   margin: 0 auto 25px auto;
   overflow: hidden;
   border-radius: 100%;
+  background: #fff;
+  padding: 10px;
 }
 .profile__image img {
   width: 100%;
@@ -596,6 +712,6 @@ ul {
   margin: 25px 0 0 0;
 }
 .profile__footer-item {
-  font-weight: bold;
+  font-weight: 600;
   margin: 0 0 10px 0;
 }
