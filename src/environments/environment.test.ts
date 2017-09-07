@@ -6,6 +6,6 @@
 export const environment = {
   production: false,
   mapEnv : "test",
-  mapDomain : "https://d9ecs9v95rpj5.cloudfront.net",
+  mapDomain : "https://kartta.paikkatietoikkuna.fi",
   mapId : "3ccb28fc-2df8-4ad8-b5b2-85d415297882",
 };

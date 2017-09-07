@@ -21,7 +21,6 @@
       "styles": [
         "styles.css",
         "proto.css",
-        "styles.scss",
         "../node_modules/font-awesome/css/font-awesome.min.css"
       ],
       "scripts": [
