@@ -27,14 +27,6 @@ export class OskariRpcComponent implements AfterViewInit {
     this.channel.onReady(() => {
       this.zone.runGuarded(() => this.checkRpcVersion())
     })
-
-    this.channel.onReady(() => {
-      this.zone.runGuarded(() => this.addEventListeners())
-    })
-  }
-
-  private addEventListeners() {
-    
   }
 
   setMarkerToMap(lon, lat) {
@@ -54,7 +46,7 @@ export class OskariRpcComponent implements AfterViewInit {
       color: 'ff0000',
       msg: '',
       shape: 2,
-      size: 6
+      size: 10
     }
     this.channel.postRequest('MapModulePlugin.AddMarkerRequest', [markerOptions]);
   }
