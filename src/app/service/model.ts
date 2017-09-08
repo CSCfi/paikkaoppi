@@ -1,14 +1,16 @@
-export class Task {
+export interface Task {
     name: string
     title: string
     description: string
     info: string
+    tags: string[]
     code: string
 }
 
-export class TaskTemplate {
+export interface TaskTemplate {
     name: string
     title: string
     description: string
     info: string
+    tags: string[]
 }
