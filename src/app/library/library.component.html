@@ -1,41 +1,23 @@
 <div id="library" class="view">
   <div class="proto__documentation">
-    <p>Tehtäväkirjasto. Toteutetaan aluksi staattisena. Opettajat ja oppilaat voivat selata täällä julkisia tehtäviä, sekä aloittaa haluamansa tehtävän.           </p>
+    <p>Tehtäväkirjasto. Toteutetaan aluksi staattisena. Opettajat ja oppilaat voivat selata täällä julkisia tehtäviä, sekä aloittaa
+      haluamansa tehtävän.</p>
   </div>
   <div class="view__header"><a routerLink="/dashboard" class="view__header-link type--back"></a>
-    <h1 class="view__header-title">Tehtäväkirjasto            </h1>
+    <h1 class="view__header-title">Tehtäväkirjasto</h1>
   </div>
   <div class="view__content">
     <h1 class="title__list">Valitse tehtävä</h1>
     <div class="list type--tasks">
-      <div class="list__item">
-        <div class="list__item-title">Lataa tehtävä</div>
-        <div class="list__item-description">Hae tehtävä koodilla.</div>
-        <div class="list__item-footer">
-          <div class="list__item-input">
-            <input type="text" placeholder="Kirjoita koodi tähän..." class="input--code"><a routerLink="/map" class="button--continue"> </a>
-          </div>
+      <div class="list__item" *ngFor="let t of taskTemplates">
+        <div class="list__item-tag">
+          <div class="tag">Maantieto</div>
         </div>
-      </div>
-      <div class="list__item">
-        <div class="list__item-title">Karttaesitys</div>
-        <div class="list__item-description">Kartta ja työkalut oman esityksen luomiseen.</div>
-        <div class="list__item-footer"><a routerLink="/map" class="list__item-link">Aloita tehtävä</a></div>
-      </div>
-      <div class="list__item">
-        <div class="list__item-title">Suomi-visa</div>
-        <div class="list__item-description">Tässä visassa harjoitellaan kartan käyttöä hyödyntäen kartta-alustan työkaluja.</div>
-        <div class="list__item-footer"> <a routerLink="/map" class="list__item-link">Aloita tehtävä</a></div>
-      </div>
-      <div class="list__item">
-        <div class="list__item-title">Lempipaikkani</div>
-        <div class="list__item-description">Tämä tehtävä ei ole vielä käytössä.</div>
-        <div class="list__item-footer"> <a class="list__item-link is-inactive">Aloita tehtävä</a></div>
-      </div>
-      <div class="list__item">
-        <div class="list__item-title">Luokkaretki</div>
-        <div class="list__item-description">Tämä tehtävä ei ole vielä käytössä.</div>
-        <div class="list__item-footer"><a class="list__item-link is-inactive">Aloita tehtävä</a></div>
+        <div class="list__item-title">{{t.name}}</div>
+        <div class="list__item-detail">{{t.title}} </div>
+        <div class="list__item-description">{{t.description}}</div>
+        <div class="list__item-info">{{t.info}}.</div>
+        <div class="list__item-footer"> <a routerLink="/dashboard" class="list__item-link">Luo tehtävä</a></div>
       </div>
     </div>
   </div>

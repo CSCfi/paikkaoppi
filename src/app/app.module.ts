@@ -10,7 +10,9 @@ import { MapModule } from './map/map.module'
 import { AppRoutingModule } from './app-routing.module';
 import { HomeComponent } from './home/home.component';
 
-import {AuthService} from './auth.service'
+import { AuthService } from './service/auth.service'
+import { TaskService } from './service/task.service'
+import { TaskTemplateService } from './service/task-template.service'
 
 @NgModule({
   declarations: [
@@ -22,7 +24,7 @@ import {AuthService} from './auth.service'
   imports: [
     AppRoutingModule, BrowserModule, MapModule
   ],
-  providers: [AuthService],
+  providers: [AuthService, TaskService, TaskTemplateService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

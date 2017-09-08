@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { OskariRpcComponent } from './oskari-rpc.component'
 import { PopupComponent } from './popup.component'
 
@@ -10,7 +11,7 @@ import { PopupComponent } from './popup.component'
 })
 export class MapComponent implements OnInit {
 
-  constructor() { }
+  constructor(private router: Router) { }
 
   ngOnInit() {
   }

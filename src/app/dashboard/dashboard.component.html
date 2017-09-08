@@ -1,32 +1,40 @@
-<div id="dashboard" class="view">
-    <div class="proto__documentation">
-      <p>Oppilaan työpöytä. Tehtävälistaus näytetään staattisena. Linkistä pääsee katsomaan tehtävien ohjeet.</p>
-    </div>
-    <div class="view__content">
-      <div class="view__columns">
-        <div class="view__column"><a routerLink="/library" class="view__add"></a>
-          <h1 class="title__list">Omat tehtävät</h1>
-          <div class="list type--tasks"><a routerLink="/map" class="list__item">
-              <div class="list__item-image"></div>
-              <div class="list__item-title">Lempipaikkani</div>
-              <div class="list__item-detail">4 merkintää</div></a><a routerLink="/map" class="list__item">
-              <div class="list__item-image"></div>
-              <div class="list__item-title">Suomi-visa</div>
-              <div class="list__item-detail">2 merkintää</div></a></div>
+<div class="view">
+  <div class="proto__documentation" *ngIf="role == 'student'">
+    <p>Oppilaan työpöytä. Tehtävälistaus näytetään staattisena. Linkistä pääsee katsomaan tehtävien ohjeet.</p>
+  </div>
+  <div class="proto__documentation" *ngIf="role == 'teacher'">
+    <p>Opettajan työpöytä. Tehtävälistaus näytetään alkuun staattisena. Linkistä pääsee katsomaan tehtävien ohjeet.</p>
+  </div>
+  <div class="view__content">
+    <div class="view__columns">
+      <div class="view__column"><a routerLink="/library" class="view__add"></a>
+        <h1 class="title__list">Omat tehtävät</h1>
+        <div class="list type--tasks">
+          <a routerLink="/map" class="list__item" *ngFor="let t of tasks">
+            <div class="list__item-status">
+              <div class="status">Uusi</div>
+            </div>
+            <div class="list__item-image"></div>
+            <div class="list__item-title">{{t.name}}</div>
+            <div class="list__item-detail">{{t.title}} </div>
+            <div class="list__item-code"><div class="code">{{t.code}}</div></div>
+          </a>
         </div>
-        <div class="view__column">
-          <div class="profile">
-            <div class="profile__item">
-              <div class="profile__image"><img src="assets/monster.svg"></div>
+      </div>
+      <div class="view__column">
+        <div class="profile">
+          <div class="profile__item">
+            <div class="profile__image">
             </div>
-            <div class="profile__item">
-              <label>{{currentUser.name}}</label>
-            </div>
-            <div class="profile__footer">
-              <div class="profile__footer-item"><a (click)="logout()">Kirjaudu ulos</a></div>
-            </div>
+          </div>
+          <div class="profile__item">
+            <label>{{user.name}}</label>
+          </div>
+          <div class="profile__footer">
+            <div class="profile__footer-item"><a (click)="logout()">Kirjaudu ulos</a></div>
           </div>
         </div>
       </div>
     </div>
   </div>
+</div>

@@ -1,30 +1,23 @@
-<h1>
-  </h1>
-
-
-<div id="dashboard" class="view">
-    <div class="proto__documentation">
-      <p>Väliaikainen aloitussivu, jolta voi valita missä roolissa testaa sovellusta.</p>
-    </div>
-    <div class="view__content">
-      <div class="view__columns">
-        <div class="view__column"><a routerLink="/library" class="view__add"></a>
-        </div>
-        <div class="view__column">
-          <div class="profile">
-            <div class="profile__item">
-              <div class="profile__image"><img src="assets/monster.svg"></div>
-            </div>
-            <div class="profile__footer">
-              <div class="profile__footer-item">
-                  <a (click)="loginStudent()">Testaa opiskelijana</a>
-              </div>
-              <div class="profile__footer-item">
-                  <a (click)="loginTeacher()">Testaa opettajana</a>
-              </div>
-            </div>
-          </div>
-        </div>
+<div id="login" class="view">
+  <div class="proto__documentation">
+    <p>Kirjautumisnäkymä. Näytetään staattisena.</p>
+  </div>
+  <div class="view__content">
+    <div class="form type--login">
+      <div class="app__logo"></div>
+      <div class="form__ingress">
+        <p>PaikkaOppi on kouluille maksuton verkkopohjainen oppimisympäristö.</p>
       </div>
+      <div class="form__item">
+        <label>Käyttäjänimi</label>
+        <input type="text" value="oppilas">
+      </div>
+      <div class="form__item">
+        <label>Salasana</label>
+        <input type="password">
+      </div>
+      <div class="form__footer"><a (click)="loginStudent()" class="button">Kirjaudu sisään opiskelijana</a></div>
+      <div class="form__footer"><a (click)="loginTeacher()" class="button">Kirjaudu sisään opettajana</a></div>
     </div>
   </div>
+</div>
