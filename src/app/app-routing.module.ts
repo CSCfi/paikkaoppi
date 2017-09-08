@@ -1,12 +1,14 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { NgModule } from '@angular/core'
+import { RouterModule, Routes } from '@angular/router'
 
-import { DashboardComponent } from './dashboard/dashboard.component';
-import { LibraryComponent } from './library/library.component';
-import { MapComponent } from './map/map.component';
+import { HomeComponent } from './home/home.component'
+import { DashboardComponent } from './dashboard/dashboard.component'
+import { LibraryComponent } from './library/library.component'
+import { MapComponent } from './map/map.component'
 
 const routes: Routes = [
-  { path: 'home', component: DashboardComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'dashboard', component: DashboardComponent },
   { path: 'map', component: MapComponent },
   { path: 'library', component: LibraryComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },

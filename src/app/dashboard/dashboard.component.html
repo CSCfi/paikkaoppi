@@ -20,13 +20,11 @@
               <div class="profile__image"><img src="assets/monster.svg"></div>
             </div>
             <div class="profile__item">
-              <label>Olli Oppilas</label>
+              <label>{{currentUser.name}}</label>
             </div>
-            <!--
             <div class="profile__footer">
-              <div class="profile__footer-item"><a href="#login">Kirjaudu ulos</a></div>
+              <div class="profile__footer-item"><a (click)="logout()">Kirjaudu ulos</a></div>
             </div>
-            -->
           </div>
         </div>
       </div>
