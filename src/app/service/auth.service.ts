@@ -44,8 +44,8 @@ export class AuthService {
     localStorage.removeItem(AuthService.KEY_USER)
   }
 
-  getRole(): string {
-    return localStorage.getItem(AuthService.KEY_ROLE)
+  getRole(): Role {
+    return localStorage.getItem(AuthService.KEY_ROLE) as Role
   }
 
   getUser() : User | null {

@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService, User } from '../auth.service'
+import { AuthService, User, Role } from '../service/auth.service'
+import { TaskService } from '../service/task.service'
+import { Task } from '../service/model'
 
 @Component({
   selector: 'app-dashboard',
@@ -8,12 +10,16 @@ import { AuthService, User } from '../auth.service'
   styleUrls: ['./dashboard.component.css']
 })
 export class DashboardComponent implements OnInit {
-  currentUser: User
-  
-  constructor(private authService: AuthService, private router: Router) { }
+  user: User
+  role: Role
+  tasks: Task[]
+
+  constructor(private authService: AuthService, private router: Router, private taskService: TaskService) { }
 
   ngOnInit() {
-    this.currentUser = this.authService.getUser()
+    this.user = this.authService.getUser()
+    this.role = this.authService.getRole()
+    this.tasks = this.taskService.getTasks()
   }
 
   logout() {
