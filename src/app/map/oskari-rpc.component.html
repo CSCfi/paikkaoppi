@@ -4,7 +4,9 @@
     <div (click)="zoomOut()" class="map__zoom-out"></div>
     <div (click)="reset()" class="map__center"></div>
   </div>
-  <div class="map__tools"><a (click)="toggleMarkerAction()" class="map__tools-dot" [ngClass]="markerAction == true ? 'is-selected' : ''"></a>
+  <div class="map__tools">
+    <a (click)="toggleMarkerAction()" class="map__tools-dot" [ngClass]="markerAction == true ? 'is-selected' : ''"></a>
+    <a (click)="toggleDrawAreaAction()" class="map__tools-dot" [ngClass]="drawAreaAction == true ? 'is-selected' : ''"></a>
     <div class="map__tools-coords"></div>
   </div>
   <iframe *ngIf="env == 'dev'" id="oskari-map" src="https://kartta.paikkatietoikkuna.fi/published/fi/87e9ad3a-a91f-4888-8262-4fc625102ee1"></iframe>
