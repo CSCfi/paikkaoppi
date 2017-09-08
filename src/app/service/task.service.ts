@@ -26,6 +26,7 @@ export class TaskService {
       name: template.name,
       title: template.title,
       description: template.description,
+      info: template.info,
       code: code
     }
   }
