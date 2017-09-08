@@ -1,8 +1,16 @@
-<div id="oskari-map-wrapper">
-  <iframe *ngIf="env == 'dev'" id="oskari-map" src="https://kartta.paikkatietoikkuna.fi/published/fi/87e9ad3a-a91f-4888-8262-4fc625102ee1"></iframe>
-  <iframe *ngIf="env == 'test'" id="oskari-map" src="https://kartta.paikkatietoikkuna.fi/published/fi/3ccb28fc-2df8-4ad8-b5b2-85d415297882"></iframe>
-  <iframe *ngIf="env == 'prod'" id="oskari-map" src="https://kartta.paikkatietoikkuna.fi/published/fi/b1de7e10-256d-4ded-acf6-4621d0e67394"></iframe>
+<div class="view__header type--map"><a href="#dashboard" class="view__header-link type--back"></a>
+  <h1 class="view__header-title">Suomi-visa</h1><a href="#task-suomivisa" class="view__header-link type--info">Ohjeet</a>
+</div>
+<div class="map__wrapper">
+  <div class="map__zoom">
+    <div (click)="zoomIn()" class="map__zoom-in"></div>
+    <div (click)="zoomOut()" class="map__zoom-out"></div>
+    <div (click)="reset()" class="map__center"></div>
+  </div>
   <div class="map__tools"><a (click)="toggleMarkerAction()" class="map__tools-dot" [ngClass]="markerAction == true ? 'selected' : ''"></a>
     <div class="map__tools-coords"></div>
   </div>
+  <iframe *ngIf="env == 'dev'" id="oskari-map" src="https://kartta.paikkatietoikkuna.fi/published/fi/87e9ad3a-a91f-4888-8262-4fc625102ee1"></iframe>
+  <iframe *ngIf="env == 'test'" id="oskari-map" src="https://kartta.paikkatietoikkuna.fi/published/fi/3ccb28fc-2df8-4ad8-b5b2-85d415297882"></iframe>
+  <iframe *ngIf="env == 'prod'" id="oskari-map" src="https://kartta.paikkatietoikkuna.fi/published/fi/b1de7e10-256d-4ded-acf6-4621d0e67394"></iframe>
 </div>

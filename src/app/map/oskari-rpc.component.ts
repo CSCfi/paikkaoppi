@@ -29,12 +29,30 @@ export class OskariRpcComponent implements AfterViewInit {
     })
   }
 
+  zoomIn() {
+    this.channel.zoomIn((data) => this.zone.runGuarded(() => {
+      console.log('Zoom level after: ', data)
+    }))
+  }
+
+  zoomOut() {
+    this.channel.zoomOut((data) => this.zone.runGuarded(() => {
+      console.log('Zoom level after: ', data)
+    }))
+  }
+
+  reset() {
+    this.channel.resetState(() => this.zone.runGuarded(() => {
+      console.log('State reset.')
+    }))
+  }
+
   setMarkerToMap(lon, lat) {
     console.info('setMarkerToMap:', lon, lat)
     this.addMarker(lon, lat)
   }
 
-  removeMarker(id: String) {
+  removeMarker(id: string) {
     console.info('removeMarker:', id)
     this.channel.postRequest('MapModulePlugin.RemoveMarkersRequest', [id]);
   }
@@ -56,7 +74,7 @@ export class OskariRpcComponent implements AfterViewInit {
     this.markerAction = !this.markerAction
 
     if (this.markerAction) {
-      console.log('MapClickedEvent')
+      console.log('Set marker on')
       const eventName = 'MapClickedEvent'
       const markerHandler = function(data) {
         console.info(eventName + ':', data)
@@ -64,19 +82,17 @@ export class OskariRpcComponent implements AfterViewInit {
         this.toggleMarkerAction()
       }.bind(this)
       this.actionHandlers.set(eventName, markerHandler)
-      console.log(this.channel)
       this.channel.handleEvent(eventName, markerHandler)
       this.channel.setCursorStyle(['pointer'], (data) => this.zone.runGuarded(() => {}))
 
     } else {
-      console.log('MarkerClickEvent')
+      console.log('Set marker off')
       const eventName = 'MarkerClickEvent'
       const markerHandler = function(data) {
         console.info(eventName + ':', data)
         this.removeMarker(data.id)
       }.bind(this)
       this.actionHandlers.set(eventName, markerHandler)
-      console.log(this.channel)
       this.channel.handleEvent(eventName, markerHandler)
       this.channel.setCursorStyle(['default'], (data) => this.zone.runGuarded(() => {}))
     }
