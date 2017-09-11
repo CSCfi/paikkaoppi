@@ -1,4 +1,4 @@
-<div class="view__container--is-loaded">
+<div [ngClass]="{ 'view__container': isHelpVisible, 'view__container--is-loaded': !isHelpVisible }">
     <div class="view__header type--map">
         <a routerLink="/dashboard" class="view__header-link type--back"></a>
         <h1 class="view__header-title">{{task?.name}}</h1>
