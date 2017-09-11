@@ -19,7 +19,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.user = this.authService.getUser()
     this.role = this.authService.getRole()
-    this.tasks = this.taskService.getTasks()
+    this.taskService.getTasks().then(tasks => this.tasks = tasks)
   }
 
   logout() {

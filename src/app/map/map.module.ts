@@ -3,14 +3,14 @@ import { CommonModule } from '@angular/common'
 import { RouterModule } from '@angular/router'
 import { MapComponent } from './map.component'
 import { OskariRpcComponent } from './oskari-rpc.component'
-import { PopupComponent } from './popup.component'
+import { HelpComponent } from './help.component';
 import { MarkComponent } from './mark.component'
 
 @NgModule({
   imports: [
     CommonModule, RouterModule
   ],
-  declarations: [MapComponent, OskariRpcComponent, PopupComponent, MarkComponent],
+  declarations: [MapComponent, OskariRpcComponent, HelpComponent, MarkComponent],
   exports: [MapComponent]
 })
 export class MapModule { }
