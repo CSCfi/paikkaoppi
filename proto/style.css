@@ -541,8 +541,8 @@ ul {
 }
 @media (min-width: 720px) {
   .list.type--tasks .list__item {
-    flex: 1 0 calc(33.332% - 15px);
-    max-width: calc(33.332% - 15px);
+    flex: 1 0 calc(50% - 15px);
+    max-width: calc(50% - 15px);
   }
 }
 .list.type--tasks .list__item-image {
