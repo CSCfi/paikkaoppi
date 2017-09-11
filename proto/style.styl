@@ -451,6 +451,33 @@ ul
   right 0
   bottom 0
 
+.map__info
+  position absolute
+  border-radius border_radius
+  top 15px
+  left 50%
+  padding 2px 15px
+  font-size .92rem
+  font-weight bold_font_weight
+  transform translateX(-50%)
+  background #fff
+  z-index 200
+  box-shadow 2px 2px 12px alpha(#000,.5)
+  display flex
+  align-items center
+.map__info-text
+  display inline-block
+  vertical-align center
+.map__info-close
+  cursor pointer
+  &:before
+    content url(assets/icon_cross.svg)
+    display inline-block
+    vertical-align center
+    width 13px
+    margin 3px -2px -3px 7px
+    
+
 .map__zoom
   position absolute
   z-index 2

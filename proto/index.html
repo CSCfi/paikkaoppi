@@ -18,9 +18,6 @@
           <div class="app__header">
           </div>
           <div id="login" class="view">
-            <div class="proto__documentation">
-              <p>Kirjautumisnäkymä. Näytetään staattisena.</p>
-            </div>
             <div class="view__content">
               <div class="form type--login">
                 <div class="app__logo"></div>
@@ -40,9 +37,6 @@
             </div>
           </div>
           <div id="login-opettaja" class="view">
-            <div class="proto__documentation">
-              <p>Kirjaudu opettajana. Näytetään staattisena.</p>
-            </div>
             <div class="view__content">
               <div class="form type--login">
                 <div class="app__logo"></div>
@@ -62,9 +56,6 @@
             </div>
           </div>
           <div id="dashboard-opettaja" class="view">
-            <div class="proto__documentation">
-              <p>Opettajan työpöytä. Tehtävälistaus näytetään alkuun staattisena. Linkistä pääsee katsomaan tehtävien ohjeet.</p>
-            </div>
             <div class="view__content">
               <div class="view__columns">
                 <div class="view__column"><a href="#library-opettaja" class="view__add"></a>
@@ -121,9 +112,6 @@
             </div>
           </div>
           <div id="dashboard" class="view">
-            <div class="proto__documentation">
-              <p>Oppilaan työpöytä. Tehtävälistaus näytetään staattisena. Linkistä pääsee katsomaan tehtävien ohjeet.</p>
-            </div>
             <div class="view__content">
               <div class="view__columns">
                 <div class="view__column"><a href="#library" class="view__add"></a>
@@ -153,13 +141,7 @@
             </div>
           </div>
           <div id="map-lempipaikkani" class="view">
-            <div class="proto__documentation">
-              <p>Lempipaikkani-kartta. Aluksi toteutetaan kartan zoomaaminen ja liikuttaminen sekä pistemäisen merkinnän lisääminen.</p>
-            </div>
             <div id="task-lempipaikkani-aloita" class="popup">
-              <div class="proto__documentation">
-                <p>Tehtävän ohjeet. Ensimmäisessä vaiheessa toteutetaan yhden pistemäisen merkinnän lisääminen kartalle, kartan zoomaus ja liikuttaminen.</p>
-              </div>
               <div class="view__content">
                 <div class="accordion">
                   <h1 class="accordion__header">Lempipaikkani</h1>
@@ -178,9 +160,6 @@
               </div>
             </div>
             <div id="task-lempipaikkani" class="popup">
-              <div class="proto__documentation">
-                <p>Tehtävän ohjeet. Ensimmäisessä vaiheessa toteutetaan yhden pistemäisen merkinnän lisääminen kartalle, kartan zoomaus ja liikuttaminen.</p>
-              </div>
               <div class="view__content">
                 <div class="accordion">
                   <h1 class="accordion__header">Lempipaikkani</h1>
@@ -255,12 +234,7 @@
             </div>
           </div>
           <div id="map-suomivisa" class="view">
-            <div class="proto__documentation">
-              <p>Suomivisa-kartta. Suomivisassa tarvitaan kartan liikuttamista ja zoomaamista. Itse tehtävä tehdään muualla kuin PaikkaOpissa.</p>
-            </div>
             <div id="task-suomivisa-aloita" class="popup">
-              <div class="proto__documentation">
-              </div>
               <div class="view__content">
                 <div class="accordion">
                   <h1 class="accordion__header">Suomi-visa</h1>
@@ -286,8 +260,6 @@
               </div>
             </div>
             <div id="task-suomivisa" class="popup">
-              <div class="proto__documentation">
-              </div>
               <div class="view__content">
                 <div class="accordion">
                   <h1 class="accordion__header">Suomi-visa</h1>
@@ -328,12 +300,14 @@
             </div>
           </div>
           <div id="map-karttaesitys" class="view">
-            <div class="proto__documentation">
-            </div>
             <div class="view__header type--map"><a href="#dashboard" class="view__header-link type--back"></a>
               <h1 class="view__header-title">Karttaesitys</h1>
             </div>
             <div class="map__wrapper">
+              <div class="map__info">
+                <div class="map__info-text">Valitse sijainti kartalta</div>
+                <div class="map__info-close"></div>
+              </div>
               <div class="map__zoom">
                 <div class="map__zoom-in"></div>
                 <div class="map__zoom-out"></div>
@@ -347,9 +321,6 @@
             </div>
           </div>
           <div id="library" class="view">
-            <div class="proto__documentation">
-              <p>Tehtäväkirjasto. Toteutetaan aluksi staattisena. Opettajat ja oppilaat voivat selata täällä julkisia tehtäviä, sekä aloittaa haluamansa tehtävän.           </p>
-            </div>
             <div class="view__header"><a href="#dashboard" class="view__header-link type--back"></a>
               <h1 class="view__header-title">Tehtäväkirjasto            </h1>
             </div>
@@ -389,9 +360,6 @@
             </div>
           </div>
           <div id="library-opettaja" class="view">
-            <div class="proto__documentation">
-              <p>Opettajan tehtäväkirjasto. Toteutetaan aluksi staattisena. Opettaja voi luoda uuden tehtävän, nimetä sen ja se tulee näkyviin opettajan työpöydälle. Muut käyttäjät voivat liittyä siihen syöttämällä tehtävän koodin.         </p>
-            </div>
             <div id="create-task" class="popup">
               <div class="form type--basic">
                 <div class="popup__header"><a href="#library-opettaja" class="popup__header-link type--back"></a>
