@@ -367,6 +367,9 @@ ul {
   display: inline-block;
   width: 14px;
 }
+.view__columns {
+  margin: 0 0 20px 0;
+}
 @media (min-width: 720px) {
   .view__columns {
     display: flex;
@@ -379,6 +382,11 @@ ul {
 }
 .view__column:nth-child(1) {
   flex: 1 0 auto;
+}
+@media (min-width: 720px) {
+  .view__column:nth-child(1) {
+    max-width: calc(100vw - 370px);
+  }
 }
 .view__column:nth-child(2) {
   margin: 25px 0 0 0;
