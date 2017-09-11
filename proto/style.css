@@ -223,6 +223,7 @@ ul {
   right: 0;
   bottom: 0;
   overflow: hidden;
+  height: calc(100vh - 3.6rem);
 }
 .app__content {
   position: absolute;
@@ -398,9 +399,6 @@ ul {
     min-width: 300px;
     margin: 0 0 0 20px;
   }
-}
-.view__container {
-  perspective: 800;
 }
 .map__wrapper {
   position: absolute;

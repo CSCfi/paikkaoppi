@@ -283,6 +283,7 @@ ul
   right @top
   bottom @top
   overflow hidden
+  height 'calc(100vh - %s)' % page_header_height
   
 .app__content
   position absolute
@@ -458,7 +459,7 @@ ul
 //- Wrapper for view animation, gets is-loaded when the view appears
 
 .view__container
-  perspective 800    
+  //-
 
 //- MAP
 
