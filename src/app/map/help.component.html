@@ -3,12 +3,14 @@
     <div class="accordion">
       <h1 class="accordion__header">{{task.name}}</h1>
       <div class="accordion__item">
-        <h2 class="accordion__title">{{task.title}}</h2>
-        <div class="accordion__text">
-          <ul class="list type--text">
-            <li class="list__item">{{task.description}}</li>
-          </ul>
-        </div>
+        <ng-container *ngFor="let i of task.instructions">
+          <h2 class="accordion__title">{{i.name}}</h2>
+          <div class="accordion__text">
+            <ul class="list type--text">
+              <li class="list__item">{{i.description}}</li>
+            </ul>
+          </div>
+        </ng-container>
       </div>
       <div class="accordion__footer"><a class="button" (click)="close()">Aloita tehtävä</a></div>
     </div>
