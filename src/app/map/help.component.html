@@ -3,7 +3,7 @@
     <div class="accordion">
       <h1 class="accordion__header">{{task?.name}}</h1>
       <div class="accordion__item">
-        <ng-container *ngFor="let i of task.instructions">
+        <ng-container *ngFor="let i of task?.instructions">
           <h2 class="accordion__title">{{i.name}}</h2>
           <div class="accordion__text">
             <ul class="list type--text">

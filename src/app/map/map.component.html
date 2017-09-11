@@ -1,7 +1,9 @@
-<div class="view__header type--map">
-    <a routerLink="/dashboard" class="view__header-link type--back"></a>
-    <h1 class="view__header-title">{{task?.name}}</h1>
-    <a (click)="showHelp()" class="view__header-link type--info">Ohjeet</a>
+<div class="view__container--is-loaded">
+    <div class="view__header type--map">
+        <a routerLink="/dashboard" class="view__header-link type--back"></a>
+        <h1 class="view__header-title">{{task?.name}}</h1>
+        <a (click)="showHelp()" class="view__header-link type--info">Ohjeet</a>
+    </div>
+    <app-oskari-rpc></app-oskari-rpc>
+    <app-help (helpClosed)="hideHelp()" [task]="task" [visible]="isHelpVisible"></app-help>
 </div>
-<app-oskari-rpc></app-oskari-rpc>
-<app-help (helpClosed)="hideHelp()" [task]="task" [visible]="isHelpVisible"></app-help>
