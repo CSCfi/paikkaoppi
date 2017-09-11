@@ -416,6 +416,7 @@ ul {
 .map__info-text {
   display: inline-block;
   vertical-align: center;
+  color: #e1854b;
 }
 .map__info-close {
   cursor: pointer;
