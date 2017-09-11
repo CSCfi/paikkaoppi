@@ -73,6 +73,17 @@ link()
   &:active
     color color_link_active
 
+ 
+@keyframes appear
+  0%
+    transform rotateX(-90deg)
+  40%
+    transform rotateX(0deg)
+  70%
+    transform rotateX(60deg)
+  100%
+    transform rotateX(0deg)
+
 
 @import url('//fonts.googleapis.com/css?family='+ replace(' ', '+', font_family) +':'+ font_weights);
 
@@ -442,7 +453,12 @@ ul
     @media (min-width: media_medium)
       min-width 300px
       margin 0 0 0 20px
-    
+ 
+
+//- Wrapper for view animation, gets is-loaded when the view appears
+
+.view__container
+  perspective 800    
 
 //- MAP
 
@@ -506,7 +522,23 @@ ul
 .map__center
   margin-top 20px
   &:before
-    content url(assets/icon_center.svg)
+    content url(assets/icon_center.svg)  
+
+.view__container .map__zoom > *
+  visibility hidden
+  transform-style preserve-3d
+  transform rotateX(-90deg)
+.view__container.is-loaded .map__zoom > *
+  visibility visible
+  animation appear 1s ease-in-out
+  animation-fill-mode forwards
+
+.map__zoom-in
+  animation-delay 900ms
+.map__zoom-out
+  animation-delay 1200ms
+.map__center
+  animation-delay 1500ms
 
 .map__tools
   background #fff
@@ -525,6 +557,15 @@ ul
   @media (min-width: media_medium)
     right auto
     min-width 40%
+
+.view__container .map__tools
+  visibility hidden
+  transform-style preserve-3d
+  transform rotateX(-90deg)
+.view__container.is-loaded .map__tools
+  visibility visible
+  animation appear 1s ease-in-out 300ms
+  animation-fill-mode forwards
 
 .map__tools-dot,
 .map__tools-area

@@ -174,7 +174,7 @@
                       </ul>
                     </div>
                   </div>
-                  <div class="accordion__footer"><a href="#map-lempipaikkani" class="button">Aloita tehtävä</a></div>
+                  <div class="accordion__footer"><a href="#map-lempipaikkani" onclick="$(&quot;.view__container&quot;).addClass(&quot;is-loaded&quot;)" class="button">Aloita tehtävä</a></div>
                 </div>
               </div>
             </div>
@@ -192,7 +192,7 @@
                       </ul>
                     </div>
                   </div>
-                  <div class="accordion__footer"><a href="#map-lempipaikkani" class="button">Jatka tehtävää</a></div>
+                  <div class="accordion__footer"><a href="#map-lempipaikkani" onclick="$(&quot;.view__container&quot;).addClass(&quot;is-loaded&quot;)" class="button">Jatka tehtävää</a></div>
                 </div>
               </div>
             </div>
@@ -233,23 +233,24 @@
                   <label>Kuvaus</label>
                   <div class="form__value">Pieni kivi puron vieressä.</div>
                 </div>
-                
               </div>
             </div>
-            <div class="view__header type--map"><a href="#dashboard" class="view__header-link type--back"></a>
-              <h1 class="view__header-title">Lempipaikkani</h1><a href="#task-lempipaikkani" class="view__header-link type--info">Ohjeet</a>
-            </div>
-            <div class="map__wrapper">
-              <div class="map__zoom">
-                <div class="map__zoom-in"></div>
-                <div class="map__zoom-out"></div>
-                <div class="map__center"></div>
+            <div class="view__container">
+              <div class="view__header type--map"><a href="#dashboard" class="view__header-link type--back"></a>
+                <h1 class="view__header-title">Lempipaikkani</h1><a href="#task-lempipaikkani" class="view__header-link type--info">Ohjeet</a>
               </div>
-              <div class="map__tools"><a href="#mark" class="map__tools-dot"></a>
-                <div class="map__tools-coords">60°10′15″N, 024°56′15″E</div>
+              <div class="map__wrapper">
+                <div class="map__zoom">
+                  <div class="map__zoom-in"></div>
+                  <div class="map__zoom-out"></div>
+                  <div class="map__center"></div>
+                </div>
+                <div class="map__tools"><a href="#mark" class="map__tools-dot"></a>
+                  <div class="map__tools-coords">60°10′15″N, 024°56′15″E</div>
+                </div>
+                <div class="map__pointers"><a style="top:300px;left:190px;" href="#mark-view" class="map__pointer"></a></div>
+                <div class="placeholder__map"></div>
               </div>
-              <div class="map__pointers"><a style="top:300px;left:190px;" href="#mark-view" class="map__pointer"></a></div>
-              <div class="placeholder__map"></div>
             </div>
           </div>
           <div id="map-suomivisa" class="view">
@@ -319,24 +320,26 @@
             </div>
           </div>
           <div id="map-karttaesitys" class="view">
-            <div class="view__header type--map"><a href="#dashboard" class="view__header-link type--back"></a>
-              <h1 class="view__header-title">Karttaesitys</h1>
-            </div>
-            <div class="map__wrapper">
-              <div class="map__info">
-                <div class="map__info-text">Valitse sijainti kartalta</div>
-                <div class="map__info-close"></div>
+            <div class="view__container"> 
+              <div class="view__header type--map"><a href="#dashboard" class="view__header-link type--back"></a>
+                <h1 class="view__header-title">Karttaesitys</h1>
               </div>
-              <div class="map__zoom">
-                <div class="map__zoom-in"></div>
-                <div class="map__zoom-out"></div>
-                <div class="map__center"></div>
+              <div class="map__wrapper">
+                <div class="map__info">
+                  <div class="map__info-text">Valitse sijainti kartalta</div>
+                  <div class="map__info-close"></div>
+                </div>
+                <div class="map__zoom">
+                  <div class="map__zoom-in"></div>
+                  <div class="map__zoom-out"></div>
+                  <div class="map__center"></div>
+                </div>
+                <div class="map__tools"><a onclick="this.classList.toggle(&quot;is-selected&quot;)" class="map__tools-dot is-selected"></a><a onclick="this.classList.toggle(&quot;is-selected&quot;)" class="map__tools-area"></a>
+                  <div class="map__tools-coords">60°10′15″N, 024°56′15″E</div>
+                </div>
+                <div class="map__pointers"></div>
+                <div class="placeholder__map"></div>
               </div>
-              <div class="map__tools"><a onclick="this.classList.toggle(&quot;is-selected&quot;)" class="map__tools-dot is-selected"></a><a onclick="this.classList.toggle(&quot;is-selected&quot;)" class="map__tools-area"></a>
-                <div class="map__tools-coords">60°10′15″N, 024°56′15″E</div>
-              </div>
-              <div class="map__pointers"></div>
-              <div class="placeholder__map"></div>
             </div>
           </div>
           <div id="library" class="view">

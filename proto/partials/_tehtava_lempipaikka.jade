@@ -15,7 +15,7 @@
             li.list__item Merkitse kartalle valitsemasi paikka ja kerro miksi se on sinulle tärkeä.
       
       .accordion__footer
-        a.button(href='#map-lempipaikkani') Aloita tehtävä
+        a.button(href='#map-lempipaikkani', onclick='$(".view__container").addClass("is-loaded")') Aloita tehtävä
 
 .popup#task-lempipaikkani
   if compileWithDocumentation
@@ -34,7 +34,7 @@
             li.list__item Merkitse kartalle valitsemasi paikka ja kerro miksi se on sinulle tärkeä.
       
       .accordion__footer
-        a.button(href='#map-lempipaikkani') Jatka tehtävää
+        a.button(href='#map-lempipaikkani', onclick='$(".view__container").addClass("is-loaded")') Jatka tehtävää
 
 .popup#mark
 
@@ -79,24 +79,24 @@
     //- .form__footer
     //-   a.button(href='#map-lempipaikkani') Muokkaa merkintää
 
+.view__container
+  .view__header.type--map
+    a.view__header-link.type--back(href='#dashboard')
+    h1.view__header-title Lempipaikkani
+    a.view__header-link.type--info(href='#task-lempipaikkani') Ohjeet
 
-.view__header.type--map
-  a.view__header-link.type--back(href='#dashboard')
-  h1.view__header-title Lempipaikkani
-  a.view__header-link.type--info(href='#task-lempipaikkani') Ohjeet
+  .map__wrapper
+    .map__zoom
+      .map__zoom-in
+      .map__zoom-out
+      .map__center
 
-.map__wrapper
-  .map__zoom
-    .map__zoom-in
-    .map__zoom-out
-    .map__center
+    .map__tools
+      a.map__tools-dot(href='#mark')
+      .map__tools-coords 60°10′15″N, 024°56′15″E
 
-  .map__tools
-    a.map__tools-dot(href='#mark')
-    .map__tools-coords 60°10′15″N, 024°56′15″E
-
-  .map__pointers
-    a.map__pointer(style='top:300px;left:190px;', href='#mark-view')
+    .map__pointers
+      a.map__pointer(style='top:300px;left:190px;', href='#mark-view')
 
 
-  .placeholder__map
+    .placeholder__map

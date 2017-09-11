@@ -399,6 +399,9 @@ ul {
     margin: 0 0 0 20px;
   }
 }
+.view__container {
+  perspective: 800;
+}
 .map__wrapper {
   position: absolute;
   top: 3.6rem;
@@ -466,6 +469,25 @@ ul {
 .map__center:before {
   content: url("assets/icon_center.svg");
 }
+.view__container .map__zoom > * {
+  visibility: hidden;
+  transform-style: preserve-3d;
+  transform: rotateX(-90deg);
+}
+.view__container.is-loaded .map__zoom > * {
+  visibility: visible;
+  animation: appear 1s ease-in-out;
+  animation-fill-mode: forwards;
+}
+.map__zoom-in {
+  animation-delay: 900ms;
+}
+.map__zoom-out {
+  animation-delay: 1200ms;
+}
+.map__center {
+  animation-delay: 1500ms;
+}
 .map__tools {
   background: #fff;
   box-shadow: 2px 2px 12px rgba(0,0,0,0.5);
@@ -486,6 +508,16 @@ ul {
     right: auto;
     min-width: 40%;
   }
+}
+.view__container .map__tools {
+  visibility: hidden;
+  transform-style: preserve-3d;
+  transform: rotateX(-90deg);
+}
+.view__container.is-loaded .map__tools {
+  visibility: visible;
+  animation: appear 1s ease-in-out 300ms;
+  animation-fill-mode: forwards;
 }
 .map__tools-dot,
 .map__tools-area {
@@ -765,4 +797,60 @@ ul {
 .profile__footer-item {
   font-weight: 600;
   margin: 0 0 10px 0;
+}
+@-moz-keyframes appear {
+  0% {
+    transform: rotateX(-90deg);
+  }
+  40% {
+    transform: rotateX(0deg);
+  }
+  70% {
+    transform: rotateX(60deg);
+  }
+  100% {
+    transform: rotateX(0deg);
+  }
+}
+@-webkit-keyframes appear {
+  0% {
+    transform: rotateX(-90deg);
+  }
+  40% {
+    transform: rotateX(0deg);
+  }
+  70% {
+    transform: rotateX(60deg);
+  }
+  100% {
+    transform: rotateX(0deg);
+  }
+}
+@-o-keyframes appear {
+  0% {
+    transform: rotateX(-90deg);
+  }
+  40% {
+    transform: rotateX(0deg);
+  }
+  70% {
+    transform: rotateX(60deg);
+  }
+  100% {
+    transform: rotateX(0deg);
+  }
+}
+@keyframes appear {
+  0% {
+    transform: rotateX(-90deg);
+  }
+  40% {
+    transform: rotateX(0deg);
+  }
+  70% {
+    transform: rotateX(60deg);
+  }
+  100% {
+    transform: rotateX(0deg);
+  }
 }

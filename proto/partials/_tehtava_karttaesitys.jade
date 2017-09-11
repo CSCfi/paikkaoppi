@@ -1,24 +1,25 @@
-.view__header.type--map
-  a.view__header-link.type--back(href='#dashboard')
-  h1.view__header-title Karttaesitys
+.view__container  
+  .view__header.type--map
+    a.view__header-link.type--back(href='#dashboard')
+    h1.view__header-title Karttaesitys
 
-.map__wrapper
-  .map__info
-    .map__info-text Valitse sijainti kartalta
-    .map__info-close
+  .map__wrapper
+    .map__info
+      .map__info-text Valitse sijainti kartalta
+      .map__info-close
 
 
 
-  .map__zoom
-    .map__zoom-in
-    .map__zoom-out
-    .map__center
+    .map__zoom
+      .map__zoom-in
+      .map__zoom-out
+      .map__center
 
-  .map__tools
-    a.map__tools-dot.is-selected(onclick='this.classList.toggle("is-selected")')
-    a.map__tools-area(onclick='this.classList.toggle("is-selected")')
-    .map__tools-coords 60°10′15″N, 024°56′15″E
+    .map__tools
+      a.map__tools-dot.is-selected(onclick='this.classList.toggle("is-selected")')
+      a.map__tools-area(onclick='this.classList.toggle("is-selected")')
+      .map__tools-coords 60°10′15″N, 024°56′15″E
 
-  .map__pointers
+    .map__pointers
 
-  .placeholder__map
+    .placeholder__map
