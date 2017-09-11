@@ -1,9 +1,9 @@
-import { forEach } from '@angular/router/src/utils/collection';
-import { Component, NgZone, AfterViewInit } from '@angular/core';
-import OskariRPC from 'oskari-rpc';
-import { environment } from '../../environments/environment';
-import { Config } from './config';
-
+import { forEach } from '@angular/router/src/utils/collection'
+import { Component, NgZone, AfterViewInit, ViewChild } from '@angular/core'
+import OskariRPC from 'oskari-rpc'
+import { environment } from '../../environments/environment'
+import { Config } from './config'
+import { MarkComponent } from './mark.component'
 
 @Component({
   selector: 'app-oskari-rpc',
@@ -11,6 +11,9 @@ import { Config } from './config';
   styleUrls: ['./oskari-rpc.component.css']
 })
 export class OskariRpcComponent implements AfterViewInit {
+
+  @ViewChild(MarkComponent) markComponent: MarkComponent
+
   env = environment.mapEnv
   domain = environment.mapDomain
   channel: any
@@ -51,6 +54,11 @@ export class OskariRpcComponent implements AfterViewInit {
   setMarkerToMap(lon, lat) {
     console.info('setMarkerToMap:', lon, lat)
     this.addMarker(lon, lat)
+    this.markComponent.visible = true
+    this.markComponent.data = {
+      lat: lat,
+      lon: lon
+    }
   }
 
   removeMarker(id: string) {

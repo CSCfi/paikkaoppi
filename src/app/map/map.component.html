@@ -1,6 +1,6 @@
 <div class="view__header type--map">
     <a routerLink="/dashboard" class="view__header-link type--back"></a>
-    <h1 class="view__header-title">{{task.name}}</h1>
+    <h1 class="view__header-title">{{task?.name}}</h1>
     <a (click)="showHelp()" class="view__header-link type--info">Ohjeet</a>
 </div>
 <app-oskari-rpc></app-oskari-rpc>

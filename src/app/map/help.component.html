@@ -1,7 +1,7 @@
 <div id="task-lempipaikkani-aloita" class="popup" *ngIf="visible">
   <div class="view__content">
     <div class="accordion">
-      <h1 class="accordion__header">{{task.name}}</h1>
+      <h1 class="accordion__header">{{task?.name}}</h1>
       <div class="accordion__item">
         <ng-container *ngFor="let i of task.instructions">
           <h2 class="accordion__title">{{i.name}}</h2>

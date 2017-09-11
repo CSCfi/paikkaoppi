@@ -421,7 +421,7 @@ ul
 
 
 .view__columns
-  
+  margin 0 0 20px 0
   @media (min-width: media_medium)
     display flex
     align-items stretch
@@ -432,6 +432,8 @@ ul
   
   &:nth-child(1)
     flex 1 0 auto
+    @media (min-width: media_medium)
+      max-width calc(100vw \- 370px)
     
   &:nth-child(2)
     margin base_padding 0 0 0
