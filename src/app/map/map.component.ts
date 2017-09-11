@@ -1,8 +1,10 @@
+import 'rxjs/add/operator/switchMap';
 import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { OskariRpcComponent } from './oskari-rpc.component'
-import { PopupComponent } from './popup.component'
-
+import { HelpComponent } from './help.component'
+import { TaskService } from '../service/task.service'
+import { Task } from '../service/model'
 
 @Component({
   selector: 'app-map',
@@ -10,19 +12,26 @@ import { PopupComponent } from './popup.component'
   styleUrls: ['./map.component.css']
 })
 export class MapComponent implements OnInit {
-  showHelp : boolean = true
-  @Input() popupVisible : () => boolean
-
-  constructor(private router: Router) { }
-
-  ngOnInit() {
+  isHelpVisible: boolean = true
+  task: Task
+  @Input() helpClosed: () => boolean
+  
+  constructor(private taskService: TaskService, private route: ActivatedRoute) {
   }
 
-  showPopup() {
-    this.showHelp = true
+  ngOnInit(): void {
+    this.showHelp()
+    
+    this.route.paramMap
+      .switchMap((params: ParamMap) => this.taskService.getTask(+params.get('id')))
+      .subscribe(task => this.task = task)
   }
 
-  hidePopup() {
-    this.showHelp = false
+  showHelp() {
+    this.isHelpVisible = true
+  }
+
+  hideHelp() {
+    this.isHelpVisible = false
   }
 }

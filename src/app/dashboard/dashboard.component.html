@@ -10,7 +10,7 @@
       <div class="view__column"><a routerLink="/library" class="view__add"></a>
         <h1 class="title__list">Omat tehtävät</h1>
         <div class="list type--tasks">
-          <a routerLink="/map" class="list__item" *ngFor="let t of tasks">
+          <a [routerLink]="['/map', t.id]" class="list__item" *ngFor="let t of tasks">
             <div class="list__item-status">
               <div class="status">Uusi</div>
             </div>

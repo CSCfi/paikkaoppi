@@ -9,6 +9,7 @@ export class TaskTemplateService {
   constructor() {
     this.templates.push(
       {
+        id: 1,
         name: "Lempipaikkani",
         title: "Merkitse lempipaikkasi",
         description: "Opettele kartan käyttöä. Etsi kartalta oma lempipaikkasi. Merkitse kartalle valitsemasi paikka ja kerro miksi se on sinulle tärkeä.",
@@ -17,6 +18,7 @@ export class TaskTemplateService {
       })
     this.templates.push(
       {
+        id: 2,
         name: "Suomi-visa",
         title: "Merkitse 5 suurinta kaupunkia",
         description: "Opettele kartan käyttöä. Etsi kartalta viisi suurinta kaupunkia ja merkitse niiden sijainnit.",

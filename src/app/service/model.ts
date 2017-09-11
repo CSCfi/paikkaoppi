@@ -1,4 +1,5 @@
 export interface Task {
+    id: number
     name: string
     title: string
     description: string
@@ -8,6 +9,7 @@ export interface Task {
 }
 
 export interface TaskTemplate {
+    id: number
     name: string
     title: string
     description: string
