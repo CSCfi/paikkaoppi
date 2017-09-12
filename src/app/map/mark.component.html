@@ -1,21 +1,23 @@
 <div id="mark" class="popup" *ngIf="visible">
-  <div class="form type--basic">
-    <div class="popup__header"><a (click)="close();" class="popup__header-link type--back"></a>
-      <h1 class="popup__header-title">Uusi merkintä</h1>
+  <div class="popup__content">
+    <div class="form type--basic">
+      <div class="popup__header"><a (click)="close();" class="popup__header-link type--back"></a>
+        <h1 class="popup__header-title">Uusi merkintä</h1>
+      </div>
+      <div class="form__text">
+        <div class="form__text-title">Koordinaatit</div>
+        <div class="form__text-value">{{data.lat}} {{data.lon}} 60°10′15″N, 024°56′15″E</div>
+      </div>
+      <div class="form__item">
+        <label>Nimi</label>
+        <input type="text">
+      </div>
+      <div class="form__item">
+        <label>Kuvaus</label>
+        <textarea></textarea>
+      </div>
+      <div class="form__footer"><a class="button" (click)="save();">Poista merkintä</a></div>
+      <div class="form__footer"><a class="button" (click)="remove();">Tallenna merkintä</a></div>
     </div>
-    <div class="form__text">
-      <div class="form__text-title">Koordinaatit</div>
-      <div class="form__text-value">{{data.lat}} {{data.lon}} 60°10′15″N, 024°56′15″E</div>
-    </div>
-    <div class="form__item">
-      <label>Nimi</label>
-      <input type="text">
-    </div>
-    <div class="form__item">
-      <label>Kuvaus</label>
-      <textarea></textarea>
-    </div>
-    <div class="form__footer"><a class="button" (click)="save();">Poista merkintä</a></div>
-    <div class="form__footer"><a class="button" (click)="remove();">Tallenna merkintä</a></div>
   </div>
 </div>

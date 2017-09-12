@@ -6,7 +6,7 @@ import { Task } from '../service/model'
   templateUrl: './help.component.html',
   styleUrls: ['./help.component.css']
 })
-export class HelpComponent implements OnInit, AfterViewInit {
+export class HelpComponent implements OnInit {
   @Input() visible = true
   @Input() task: Task
   @Output() helpClosed = new EventEmitter<boolean>()
@@ -14,10 +14,6 @@ export class HelpComponent implements OnInit, AfterViewInit {
   constructor() { }
 
   ngOnInit() {
-  }
-
-  ngAfterViewInit() {
-    console.log("afterViewInit: ", this.visible)
   }
 
   close() {
