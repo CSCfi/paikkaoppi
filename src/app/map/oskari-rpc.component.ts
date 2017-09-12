@@ -13,7 +13,7 @@ import { MarkService } from '../service/mark.service'
 })
 export class OskariRpcComponent implements AfterViewInit {
 
-  @ViewChild(MarkComponent) markComponent: MarkComponent
+  @ViewChild(MarkComponent) markComponent
 
   env = environment.mapEnv
   domain = environment.mapDomain
