@@ -56,10 +56,12 @@
             </div>
           </div>
           <div id="dashboard-opettaja" class="view">
+            <div class="view__header">
+              <h1 class="view__header-title">Omat tehtävät</h1><a href="#library-opettaja" class="view__add"></a>
+            </div>
             <div class="view__content">
               <div class="view__columns">
-                <div class="view__column"><a href="#library-opettaja" class="view__add"></a>
-                  <h1 class="title__list">Omat tehtävät</h1>
+                <div class="view__column">
                   <div class="list type--tasks">
                     <div class="list__item">
                       <div class="list__item-title">Lataa tehtävä</div>
@@ -121,10 +123,12 @@
             </div>
           </div>
           <div id="dashboard" class="view">
+            <div class="view__header">
+              <h1 class="view__header-title">Omat tehtävät</h1><a href="#library" class="view__add"></a>
+            </div>
             <div class="view__content">
               <div class="view__columns">
-                <div class="view__column"><a href="#library" class="view__add"></a>
-                  <h1 class="title__list">Omat tehtävät</h1>
+                <div class="view__column">
                   <div class="list type--tasks">
                     <div class="list__item">
                       <div class="list__item-title">Lataa tehtävä</div>
@@ -386,20 +390,22 @@
           </div>
           <div id="library-opettaja" class="view">
             <div id="create-task" class="popup">
-              <div class="form type--basic">
-                <div class="popup__header"><a href="#library-opettaja" class="popup__header-link type--back"></a>
-                  <h1 class="popup__header-title">Uusi tehtävä</h1>
+              <div class="popup__content">
+                <div class="form type--basic">
+                  <div class="popup__header"><a href="#library-opettaja" class="popup__header-link type--back"></a>
+                    <h1 class="popup__header-title">Uusi tehtävä</h1>
+                  </div>
+                  <h1 class="accordion__header">Suomi-visa</h1>
+                  <div class="form__item">
+                    <label>Nimi</label>
+                    <input type="text" value="Suomi-visa">
+                  </div>
+                  <div class="form__footer"><a href="#dashboard-opettaja" class="button">Tallenna tehtävä</a></div>
                 </div>
-                <h1 class="accordion__header">Suomi-visa</h1>
-                <div class="form__item">
-                  <label>Nimi</label>
-                  <input type="text" value="Suomi-visa">
-                </div>
-                <div class="form__footer"><a href="#dashboard-opettaja" class="button">Tallenna tehtävä</a></div>
               </div>
-            </div>
-            <div class="view__header"><a href="#dashboard-opettaja" class="view__header-link type--back"></a>
-              <h1 class="view__header-title">Tehtäväkirjasto            </h1>
+              <div class="view__header"><a href="#dashboard-opettaja" class="view__header-link type--back"></a>
+                <h1 class="view__header-title">Tehtäväkirjasto            </h1>
+              </div>
             </div>
             <div class="view__content">
               <h1 class="title__list">Valitse tehtävä</h1>

@@ -313,8 +313,7 @@ ul
   left @top
   right @top
   bottom @top
-  overflow-x hidden
-  overflow-y auto
+  overflow hidden
 
 .app__logo
   background url(assets/Paikkaoppi_logo.png)
@@ -358,6 +357,7 @@ ul
   left 0
   right 0
   background #fff
+  z-index 1001
   @media (min-width: media_medium)
     left 20vw
     right @left
@@ -397,11 +397,13 @@ ul
 
 .view__content
   //- Restricted width wrapper
-  max-width page_max_width
+  // max-width page_max_width
   margin 0 auto
   text-align left
   padding base_padding
-  height 100%
+  height 'calc(100% - %s)' % page_header_height
+  overflow-x hidden
+  overflow-y auto
   
 .view__header
   position absolute
@@ -415,11 +417,11 @@ ul
   align-items center
   position relative
   z-index 3
-  max-width page_max_width
+  // max-width page_max_width
   margin 0 auto
+  box-shadow 0 2px 12px alpha(#000,.5)
+  max-width none
   &.type--map
-    box-shadow 0 2px 12px alpha(#000,.5)
-    max-width none
     padding 0 15px
   
 .view__header-title
@@ -439,9 +441,6 @@ ul
       margin 0 20px -3px 0
 
 .view__add
-  position absolute
-  top 0
-  right 0
   background brand_color[1]
   border-radius 100%
   width 30px
@@ -659,6 +658,10 @@ ul
       @media (min-width: media_medium)
         flex 1 0 calc(50% \- 15px)
         max-width calc(50% \- 15px)
+      @media (min-width: media_large)
+        flex 1 0 calc(33.332% \- 15px)
+        max-width calc(33.332% \- 15px)
+      
       &.type--progressing .list__item-link:before
         // content url(assets/icon_task_progressing.svg)
       &.type--done .list__item-link:before
@@ -842,6 +845,7 @@ ul
   border-radius 100%
   background #fff
   padding 10px
+  max-width 100%
   img
     width 100%
     height 100%
