@@ -23,3 +23,12 @@ export interface TaskTemplate {
     info: string
     tags: string[]
 }
+
+export interface Mark {
+    id: number
+    markerId: string
+    lat: number
+    lon: number
+    name: string
+    description: string
+}

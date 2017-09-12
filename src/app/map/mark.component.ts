@@ -1,5 +1,8 @@
 import { Component, Output, EventEmitter, OnInit } from '@angular/core'
 
+import { MarkService } from '../service/mark.service'
+import { Mark } from '../service/model'
+
 @Component({
   selector: 'app-mark',
   templateUrl: './mark.component.html',
@@ -8,10 +11,10 @@ import { Component, Output, EventEmitter, OnInit } from '@angular/core'
 export class MarkComponent implements OnInit {
   @Output() markDeleted = new EventEmitter()
 
-  data: any = {}
+  mark: Mark
   visible = false
 
-  constructor() {
+  constructor(private markService: MarkService) {
   }
 
   ngOnInit() {
@@ -22,11 +25,13 @@ export class MarkComponent implements OnInit {
   }
 
   save() {
+    this.markService.saveMark(this.mark)
     this.visible = !this.visible
   }
 
   remove() {
+    this.markService.deleteMark(this.mark)
     this.visible = !this.visible
-    this.markDeleted.emit(this.data)
+    this.markDeleted.emit(this.mark)
   }
 }

@@ -4,6 +4,7 @@ import OskariRPC from 'oskari-rpc'
 import { environment } from '../../environments/environment'
 import { Config } from './config'
 import { MarkComponent } from './mark.component'
+import { MarkService } from '../service/mark.service'
 
 @Component({
   selector: 'app-oskari-rpc',
@@ -21,7 +22,9 @@ export class OskariRpcComponent implements AfterViewInit {
   drawAreaAction = false
   actionHandlers: Map<string, any> = new Map<string, any>()
 
-  constructor(private zone: NgZone) { }
+  constructor(
+    private zone: NgZone,
+    private markService: MarkService) { }
 
   ngAfterViewInit() {
     console.info('OskariRpcComponent: ngAfterViewInit')
@@ -61,22 +64,19 @@ export class OskariRpcComponent implements AfterViewInit {
     this.channel.postRequest('MapModulePlugin.RemoveMarkersRequest', [id])
   }
 
-  openMarker(id: string) {
+  openMarker(markerId: string) {
     this.zone.runGuarded(() => {
-      console.info('openMarker:', id)
-      // TODO get data
-      this.markComponent.visible = true
-      this.markComponent.data = {
-        id: id,
-        lon: id,
-        lat: id
-      }
-      console.log(this.markComponent)
+      console.info('openMarker:', markerId)
+
+      this.markService.getMark(markerId).then(mark => {
+        this.markComponent.visible = true
+        this.markComponent.mark = mark
+      })
     })
   }
 
   handleMarkDeleted() {
-    this.removeMarker(this.markComponent.data.id)
+    this.removeMarker(this.markComponent.mark.markerId)
   }
 
   addMarker(lon, lat) {
@@ -91,8 +91,8 @@ export class OskariRpcComponent implements AfterViewInit {
 
     this.channel.handleEvent('AfterAddMarkerEvent', function(data) {
       this.markComponent.visible = true
-      this.markComponent.data = {
-        id: data.id,
+      this.markComponent.mark = {
+        markerId: data.id,
         lon: lon,
         lat: lat
       }
