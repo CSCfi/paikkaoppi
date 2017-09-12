@@ -421,6 +421,9 @@ ul {
   box-shadow: 2px 2px 12px rgba(0,0,0,0.5);
   display: flex;
   align-items: center;
+  transform-style: preserve-3d;
+  animation: appear 1s ease-in-out;
+  animation-fill-mode: forwards;
 }
 .map__info-text {
   display: inline-block;
