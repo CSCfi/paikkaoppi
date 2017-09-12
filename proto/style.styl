@@ -84,6 +84,28 @@ link()
   100%
     transform rotateX(0deg)
 
+@keyframes appear-easy
+  0%
+    visibility hidden
+    transform translateY(0)
+  10%
+    transform translateY(0)
+    visibility visible
+  20%
+    transform translateY(-20px)
+  55%
+    transform translateY(0)
+  60%
+    transform translateY(10px)
+  100%
+    transform translateY(0)
+
+@keyframes fade-in
+  0%
+    opacity 0
+  100%
+    opacity 1
+
 
 @import url('//fonts.googleapis.com/css?family='+ replace(' ', '+', font_family) +':'+ font_weights);
 
@@ -320,26 +342,26 @@ ul
   right 0
   bottom 0
   z-index 1000
-  background #fff
+  background alpha(#000,.4)
+  animation fade-in 400ms ease-in
+    
+.popup__content
+  text-align left
   padding base_padding
+  animation appear-easy 600ms ease-in 500ms
+  transform-style preserve-3d
   overflow-x hidden
   overflow-y auto
+  position absolute
+  top 0 
+  bottom 0
   @media (min-width: media_medium)
     left 20vw
     right @left
-    &:before,
-    &:after
-      content ''
-      display block
-      position fixed
-      top 0
-      bottom 0
-      width 20vw
-      background alpha(#000,.4)
-    &:before
-      left 0
-    &:after
-      right 0
+    background #fff
+    width 60vw
+    
+
 
 .popup__header
   padding 0 0 35px 0
