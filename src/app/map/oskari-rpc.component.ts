@@ -54,16 +54,15 @@ export class OskariRpcComponent implements AfterViewInit {
   setMarkerToMap(lon, lat) {
     console.info('setMarkerToMap:', lon, lat)
     this.addMarker(lon, lat)
-    this.markComponent.visible = true
-    this.markComponent.data = {
-      lat: lat,
-      lon: lon
-    }
   }
 
   removeMarker(id: string) {
     console.info('removeMarker:', id)
     this.channel.postRequest('MapModulePlugin.RemoveMarkersRequest', [id])
+  }
+
+  handleMarkDeleted(marker) {
+    this.removeMarker(this.markComponent.data.id)
   }
 
   addMarker(lon, lat) {
@@ -75,6 +74,16 @@ export class OskariRpcComponent implements AfterViewInit {
       shape: 2,
       size: 10
     }
+
+    this.channel.handleEvent('AfterAddMarkerEvent', function(data) {
+      this.markComponent.visible = true
+      this.markComponent.data = {
+        id: data.id,
+        lon: lon,
+        lat: lat
+      }
+    }.bind(this))
+
     this.channel.postRequest('MapModulePlugin.AddMarkerRequest', [markerOptions])
   }
 

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core'
+import { Component, Output, EventEmitter, OnInit } from '@angular/core'
 
 @Component({
   selector: 'app-mark',
@@ -6,10 +6,13 @@ import { Component, OnInit } from '@angular/core'
   styleUrls: ['./mark.component.css']
 })
 export class MarkComponent implements OnInit {
-  data = {}
+  @Output() markDeleted = new EventEmitter()
+
+  data: any = {}
   visible = false
 
-  constructor() { }
+  constructor() {
+  }
 
   ngOnInit() {
   }
@@ -24,5 +27,6 @@ export class MarkComponent implements OnInit {
 
   remove() {
     this.visible = !this.visible
+    this.markDeleted.emit(this.data)
   }
 }
