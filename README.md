@@ -2,9 +2,30 @@
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 1.3.2.
 
+## Environment
+### Ubuntu
+1. Install node and npm:
+- `curl -sL https://deb.nodesource.com/setup_8.x | sudo -E bash -`
+- `sudo apt-get install -y nodejs`
+
+2. Install @angular/cli globally
+- `npm install -g @angular/cli`
+
+3. Upgrade @angular/cli (optional)
+- `sudo npm uninstall -g angular-cli`
+- `sudo npm install -g @angular/cli`
+
+4. Test your environment
+- `node --version`
+- `npm --version`
+- `ng version`
+
 ## Development server
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
+1. Run development server locally
+- `npm install`
+- `ng serve`
+- Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
 ## Code scaffolding
 
