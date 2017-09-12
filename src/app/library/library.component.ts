@@ -13,7 +13,7 @@ import { TaskTemplate } from '../service/model'
 export class LibraryComponent implements OnInit {
   taskTemplates?: TaskTemplate[] = []
   selectedTemplate?: TaskTemplate
-  taskName?: string
+  model: NewTaskModel = new NewTaskModel(null)
 
   constructor(private taskTemplateService: TaskTemplateService,
     private taskService: TaskService, private router: Router) { }
@@ -24,19 +24,28 @@ export class LibraryComponent implements OnInit {
 
   createTask(id: number) {
     console.info("Create task from template ", id)
-
     this.taskTemplateService.getTaskTemplate(id).then(t => {
       this.selectedTemplate = t
+      this.model = new NewTaskModel(t.name)
     })
   }
 
   closePopup() {
     this.selectedTemplate = null
+    this.model = null
   }
 
-  createButtonPressed() {
-    this.taskService.createTaskFrom(this.selectedTemplate.id, this.taskName).then(
-      t => this.router.navigateByUrl("/dashboard")
+  onSubmit() {
+    this.taskService.createTaskFrom(this.selectedTemplate.id, this.model.name).then(
+      newTask => this.router.navigate(["/dashboard", newTask.id])
     )
+  }
+}
+
+export class NewTaskModel {
+  name?: string
+
+  constructor(name: string) {
+    this.name = name
   }
 }

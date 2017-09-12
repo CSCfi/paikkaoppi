@@ -20,16 +20,21 @@
 </div>
 <div class="popup" *ngIf="selectedTemplate">
   <div class="popup__content">
-    <div class="form type--basic">
-      <div class="popup__header"><a (click)="closePopup()" class="popup__header-link type--back"></a>
-        <h1 class="popup__header-title">Uusi tehtävä</h1>
+    <form (ngSubmit)="onSubmit()" #taskForm="ngForm">
+      <div class="form type--basic">
+        <div class="popup__header"><a (click)="closePopup()" class="popup__header-link type--back"></a>
+          <h1 class="popup__header-title">Uusi tehtävä</h1>
+        </div>
+        <h1 class="accordion__header">{{selectedTemplate.name}}</h1>
+        <div class="form__item">
+          <label>Nimi</label>
+          <input type="text" required [(ngModel)]="model.name" name="name" #name="ngModel">
+          <div [hidden]="name.valid || name.pristine" class="alert alert-danger">Pakollinen tieto</div>
+        </div>
+        <div class="form__footer">
+          <button type="submit" class="button" [disabled]="!taskForm.form.valid">Tallenna tehtävä</button>
+        </div>
       </div>
-      <h1 class="accordion__header">{{selectedTemplate.name}}</h1>
-      <div class="form__item">
-        <label>Nimi</label>
-        <input type="text" value="">
-      </div>
-      <div class="form__footer"><a (click)="createButtonPressed()" class="button">Tallenna tehtävä</a></div>
-    </div>
+    </form>
   </div>
 </div>

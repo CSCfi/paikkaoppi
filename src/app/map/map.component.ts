@@ -1,6 +1,6 @@
-import 'rxjs/add/operator/switchMap';
-import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import 'rxjs/add/operator/switchMap'
+import { Component, OnInit, Input } from '@angular/core'
+import { ActivatedRoute, ParamMap, Router } from '@angular/router'
 import { OskariRpcComponent } from './oskari-rpc.component'
 import { HelpComponent } from './help.component'
 import { TaskService } from '../service/task.service'

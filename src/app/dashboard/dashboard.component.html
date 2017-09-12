@@ -1,17 +1,14 @@
 <div class="view">
-  <div class="proto__documentation" *ngIf="role == 'student'">
-    <p>Oppilaan työpöytä. Tehtävälistaus näytetään staattisena. Linkistä pääsee katsomaan tehtävien ohjeet.</p>
-  </div>
-  <div class="proto__documentation" *ngIf="role == 'teacher'">
-    <p>Opettajan työpöytä. Tehtävälistaus näytetään alkuun staattisena. Linkistä pääsee katsomaan tehtävien ohjeet.</p>
+  <div class="view__header">
+    <h1 class="view__header-title">Omat tehtävät</h1><a routerLink="/library" class="view__add"></a>
   </div>
   <div class="view__content">
     <div class="view__columns">
-      <div class="view__column"><a routerLink="/library" class="view__add"></a>
+      <div class="view__column">
         <h1 class="title__list">Omat tehtävät</h1>
         <div class="list type--tasks">
           <a [routerLink]="['/map', t.id]" class="list__item" *ngFor="let t of tasks">
-            <div class="list__item-status">
+            <div class="list__item-status" *ngIf="t.id == taskId">
               <div class="status">Uusi</div>
             </div>
             <div class="list__item-image"></div>
