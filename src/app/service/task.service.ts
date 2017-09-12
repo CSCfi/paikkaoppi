@@ -8,7 +8,7 @@ export class TaskService {
   tasks: Task[] = []
 
   constructor(private taskTemplateService: TaskTemplateService) {
-    this.tasks = taskTemplateService.getTaskTemplates().map(this.toTask)
+    taskTemplateService.getTaskTemplates().then( t => this.tasks = t.map(this.toTask))
   }
 
   private toTask(template: TaskTemplate): Task {
@@ -40,5 +40,14 @@ export class TaskService {
   getTask(id: number): Promise<Task> {
     const task = this.tasks.find( t => t.id == id)
     return Promise.resolve(task)
+  }
+
+  createTaskFrom(id: number, name: string) : Promise<Task> {
+    return this.taskTemplateService.getTaskTemplate(id).then( template => {
+      let task = this.toTask(template)
+      task.name = name
+      this.tasks.push(task)
+      return task
+    })
   }
 }
