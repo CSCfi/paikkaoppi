@@ -261,19 +261,19 @@ ul {
 .popup__content {
   text-align: left;
   padding: 25px;
-  animation: appear-easy 600ms ease-in 500ms;
+  animation: appear-easy 600ms ease-in 400ms;
   transform-style: preserve-3d;
   overflow-x: hidden;
   overflow-y: auto;
   position: absolute;
   top: 0;
   bottom: 0;
+  background: #fff;
 }
 @media (min-width: 720px) {
   .popup__content {
     left: 20vw;
     right: 20vw;
-    background: #fff;
     width: 60vw;
   }
 }
