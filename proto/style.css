@@ -454,6 +454,9 @@ ul {
   box-shadow: 2px 2px 12px rgba(0,0,0,0.5);
   margin: 0 0 8px 0;
   cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
 .map__zoom-in:before {
   content: url("assets/icon_plus.svg");
