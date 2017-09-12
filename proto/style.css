@@ -356,14 +356,14 @@ ul {
   text-align: center;
   box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
   cursor: pointer;
+  transform-style: preserve-3d;
+  animation: appear 1s ease-in-out;
+  animation-fill-mode: forwards;
 }
 .view__add:before {
   content: url("assets/icon_plus-w.svg");
   display: inline-block;
   width: 14px;
-}
-.view__columns {
-  margin: 0 0 20px 0;
 }
 @media (min-width: 720px) {
   .view__columns {
