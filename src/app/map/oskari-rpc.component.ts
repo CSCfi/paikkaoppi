@@ -75,8 +75,8 @@ export class OskariRpcComponent implements AfterViewInit {
     })
   }
 
-  handleMarkDeleted() {
-    this.removeMarker(this.markComponent.mark.markerId)
+  handleMarkDeleted(mark) {
+    this.removeMarker(mark.markerId)
   }
 
   addMarker(lon, lat) {
