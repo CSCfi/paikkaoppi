@@ -61,7 +61,21 @@ export class OskariRpcComponent implements AfterViewInit {
     this.channel.postRequest('MapModulePlugin.RemoveMarkersRequest', [id])
   }
 
-  handleMarkDeleted(marker) {
+  openMarker(id: string) {
+    this.zone.runGuarded(() => {
+      console.info('openMarker:', id)
+      // TODO get data
+      this.markComponent.visible = true
+      this.markComponent.data = {
+        id: id,
+        lon: id,
+        lat: id
+      }
+      console.log(this.markComponent)
+    })
+  }
+
+  handleMarkDeleted() {
     this.removeMarker(this.markComponent.data.id)
   }
 
@@ -117,7 +131,7 @@ export class OskariRpcComponent implements AfterViewInit {
       console.log('Set marker off')
       const eventName = 'MarkerClickEvent'
       const markerHandler = function(data) {
-        this.removeMarker(data.id)
+        this.openMarker(data.id)
       }.bind(this)
 
       this.actionHandlers.set(eventName, markerHandler)
