@@ -409,23 +409,27 @@ ul {
 }
 .map__info {
   position: absolute;
-  border-radius: 30px;
   top: 15px;
-  left: 50%;
-  padding: 2px 15px;
-  font-size: 0.92rem;
-  font-weight: 600;
-  transform: translateX(-50%);
-  background: #fff;
+  left: 0;
+  right: 0;
+  text-align: center;
   z-index: 200;
-  box-shadow: 2px 2px 12px rgba(0,0,0,0.5);
-  display: flex;
-  align-items: center;
 }
 .map__info-text {
   display: inline-block;
   vertical-align: center;
   color: #e1854b;
+  border-radius: 30px;
+  padding: 2px 15px;
+  font-size: 0.92rem;
+  font-weight: 600;
+  background: #fff;
+  box-shadow: 2px 2px 12px rgba(0,0,0,0.5);
+  display: inline-flex;
+  align-items: center;
+  transform-style: preserve-3d;
+  animation: appear 1s ease-in-out;
+  animation-fill-mode: forwards;
 }
 .map__info-close {
   cursor: pointer;
@@ -454,6 +458,9 @@ ul {
   box-shadow: 2px 2px 12px rgba(0,0,0,0.5);
   margin: 0 0 8px 0;
   cursor: pointer;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
 .map__zoom-in:before {
   content: url("assets/icon_plus.svg");
