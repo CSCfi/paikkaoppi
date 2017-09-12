@@ -472,27 +472,27 @@ ul
 
 .map__info
   position absolute
-  border-radius border_radius
   top 15px
-  left 50%
-  padding 2px 15px
-  font-size .92rem
-  font-weight bold_font_weight
-  transform translateX(-50%)
-  background #fff
+  left 0
+  right 0
+  text-align center
   z-index 200
-  box-shadow 2px 2px 12px alpha(#000,.5)
-  display flex
-  align-items center
-  transform-style preserve-3d
-  animation appear 1s ease-in-out
-  animation-fill-mode forwards
-  
-    
+
 .map__info-text
   display inline-block
   vertical-align center
   color brand_color[3]
+  border-radius border_radius
+  padding 2px 15px
+  font-size .92rem
+  font-weight bold_font_weight
+  background #fff
+  box-shadow 2px 2px 12px alpha(#000,.5)
+  display inline-flex
+  align-items center
+  transform-style preserve-3d
+  animation appear 1s ease-in-out
+  animation-fill-mode forwards
 .map__info-close
   cursor pointer
   &:before
