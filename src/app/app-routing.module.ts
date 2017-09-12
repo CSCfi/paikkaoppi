@@ -9,6 +9,7 @@ import { MapComponent } from './map/map.component'
 const routes: Routes = [
   { path: 'home', component: HomeComponent },
   { path: 'dashboard', component: DashboardComponent },
+  { path: 'dashboard/:id', component: DashboardComponent },
   { path: 'map/:id', component: MapComponent },
   { path: 'library', component: LibraryComponent },
   { path: '', redirectTo: '/home', pathMatch: 'full' },
