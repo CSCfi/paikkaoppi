@@ -3,7 +3,7 @@
     .proto__documentation
       p Tehtävän ohjeet. Ensimmäisessä vaiheessa toteutetaan yhden pistemäisen merkinnän lisääminen kartalle, kartan zoomaus ja liikuttaminen.
 
-  .view__content
+  .popup__content
     .accordion
       h1.accordion__header Lempipaikkani
       .accordion__item
@@ -22,7 +22,7 @@
     .proto__documentation
       p Tehtävän ohjeet. Ensimmäisessä vaiheessa toteutetaan yhden pistemäisen merkinnän lisääminen kartalle, kartan zoomaus ja liikuttaminen.
 
-  .view__content
+  .popup__content
     .accordion
       h1.accordion__header Lempipaikkani
       .accordion__item
@@ -37,47 +37,47 @@
         a.button(href='#map-lempipaikkani', onclick='$(".view__container").addClass("is-loaded")') Jatka tehtävää
 
 .popup#mark
+  .popup__content
+    .form.type--basic
 
-  .form.type--basic
+      .popup__header
+        a.popup__header-link.type--back(href='#map-lempipaikkani')
+        h1.popup__header-title Uusi merkintä
 
-    .popup__header
-      a.popup__header-link.type--back(href='#map-lempipaikkani')
-      h1.popup__header-title Uusi merkintä
+      .form__text
+        .form__text-title Koordinaatit
+        .form__text-value 60°10′15″N, 024°56′15″E
 
-    .form__text
-      .form__text-title Koordinaatit
-      .form__text-value 60°10′15″N, 024°56′15″E
-
-    .form__item
-      label Nimi
-      input(type='text')
-    .form__item
-      label Kuvaus
-      textarea
-    .form__footer
-      a.button(href='#map-lempipaikkani') Tallenna merkintä
+      .form__item
+        label Nimi
+        input(type='text')
+      .form__item
+        label Kuvaus
+        textarea
+      .form__footer
+        a.button(href='#map-lempipaikkani') Tallenna merkintä
 
 
 .popup#mark-view
+  .popup__content
+    .form.type--basic
 
-  .form.type--basic
+      .popup__header
+        a.popup__header-link.type--back(href='#map-lempipaikkani')
+        h1.popup__header-title Kallen lempipaikka
 
-    .popup__header
-      a.popup__header-link.type--back(href='#map-lempipaikkani')
-      h1.popup__header-title Kallen lempipaikka
+      .form__text
+        .form__text-title Koordinaatit
+        .form__text-value 60°10′15″N, 024°56′15″E
 
-    .form__text
-      .form__text-title Koordinaatit
-      .form__text-value 60°10′15″N, 024°56′15″E
-
-    .form__item
-      label Nimi
-      .form__value Kallen lempipaikka
-    .form__item
-      label Kuvaus
-      .form__value Pieni kivi puron vieressä.
-    //- .form__footer
-    //-   a.button(href='#map-lempipaikkani') Muokkaa merkintää
+      .form__item
+        label Nimi
+        .form__value Kallen lempipaikka
+      .form__item
+        label Kuvaus
+        .form__value Pieni kivi puron vieressä.
+      //- .form__footer
+      //-   a.button(href='#map-lempipaikkani') Muokkaa merkintää
 
 .view__container
   .view__header.type--map

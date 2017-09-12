@@ -1,22 +1,22 @@
 .popup#create-task
+  .popup__content
+    .form.type--basic
 
-  .form.type--basic
+      .popup__header
+        a.popup__header-link.type--back(href='#library-opettaja')
+        h1.popup__header-title Uusi tehtävä
 
-    .popup__header
-      a.popup__header-link.type--back(href='#library-opettaja')
-      h1.popup__header-title Uusi tehtävä
+      h1.accordion__header Suomi-visa
 
-    h1.accordion__header Suomi-visa
+      .form__item
+        label Nimi
+        input(type='text', value='Suomi-visa')
+      .form__footer
+        a.button(href='#dashboard-opettaja') Tallenna tehtävä
 
-    .form__item
-      label Nimi
-      input(type='text', value='Suomi-visa')
-    .form__footer
-      a.button(href='#dashboard-opettaja') Tallenna tehtävä
-
-.view__header
-  a.view__header-link.type--back(href='#dashboard-opettaja')
-  h1.view__header-title Tehtäväkirjasto            
+  .view__header
+    a.view__header-link.type--back(href='#dashboard-opettaja')
+    h1.view__header-title Tehtäväkirjasto            
 
 
 .view__content

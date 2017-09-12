@@ -1,8 +1,4 @@
 <div id="library" class="view">
-  <div class="proto__documentation">
-    <p>Tehtäväkirjasto. Toteutetaan aluksi staattisena. Opettajat ja oppilaat voivat selata täällä julkisia tehtäviä, sekä aloittaa
-      haluamansa tehtävän.</p>
-  </div>
   <div class="view__header"><a routerLink="/dashboard" class="view__header-link type--back"></a>
     <h1 class="view__header-title">Tehtäväkirjasto</h1>
   </div>
@@ -17,8 +13,23 @@
         <div class="list__item-detail">{{t.title}} </div>
         <div class="list__item-description">{{t.description}}</div>
         <div class="list__item-info">{{t.info}}.</div>
-        <div class="list__item-footer"> <a routerLink="/dashboard" class="list__item-link">Luo tehtävä</a></div>
+        <div class="list__item-footer"> <a (click)="createTask(t.id)" class="list__item-link">Luo tehtävä</a></div>
       </div>
+    </div>
+  </div>
+</div>
+<div class="popup" *ngIf="selectedTemplate">
+  <div class="popup__content">
+    <div class="form type--basic">
+      <div class="popup__header"><a (click)="closePopup()" class="popup__header-link type--back"></a>
+        <h1 class="popup__header-title">Uusi tehtävä</h1>
+      </div>
+      <h1 class="accordion__header">{{selectedTemplate.name}}</h1>
+      <div class="form__item">
+        <label>Nimi</label>
+        <input type="text" value="">
+      </div>
+      <div class="form__footer"><a (click)="createButtonPressed()" class="button">Tallenna tehtävä</a></div>
     </div>
   </div>
 </div>

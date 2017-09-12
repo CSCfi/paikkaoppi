@@ -15,16 +15,16 @@ export class MapComponent implements OnInit {
   isHelpVisible: boolean = true
   task: Task
   @Input() helpClosed: () => boolean
-  
+
   constructor(private taskService: TaskService, private route: ActivatedRoute) {
   }
 
   ngOnInit(): void {
-    this.showHelp()
-    
     this.route.paramMap
       .switchMap((params: ParamMap) => this.taskService.getTask(+params.get('id')))
       .subscribe(task => this.task = task)
+
+    this.showHelp()
   }
 
   showHelp() {

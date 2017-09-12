@@ -24,7 +24,6 @@
         "../node_modules/font-awesome/css/font-awesome.min.css"
       ],
       "scripts": [
-        "./assets/script.js",
         "../node_modules/oskari-rpc/dist/rpc-client.js"
       ],
       "environmentSource": "environments/environment.ts",

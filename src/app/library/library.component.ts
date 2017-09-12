@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { User, Role, AuthService } from '../service/auth.service'
 import { TaskTemplateService } from '../service/task-template.service'
+import { TaskService } from '../service/task.service'
 import { TaskTemplate } from '../service/model'
 
 @Component({
@@ -9,12 +11,32 @@ import { TaskTemplate } from '../service/model'
   styleUrls: ['./library.component.css']
 })
 export class LibraryComponent implements OnInit {
-  taskTemplates: TaskTemplate[] = []
+  taskTemplates?: TaskTemplate[] = []
+  selectedTemplate?: TaskTemplate
+  taskName?: string
 
-  constructor(private taskTemplateService: TaskTemplateService) { }
+  constructor(private taskTemplateService: TaskTemplateService,
+    private taskService: TaskService, private router: Router) { }
 
   ngOnInit() {
-    this.taskTemplates = this.taskTemplateService.getTaskTemplates()
+    this.taskTemplateService.getTaskTemplates().then(t => this.taskTemplates = t)
   }
 
+  createTask(id: number) {
+    console.info("Create task from template ", id)
+
+    this.taskTemplateService.getTaskTemplate(id).then(t => {
+      this.selectedTemplate = t
+    })
+  }
+
+  closePopup() {
+    this.selectedTemplate = null
+  }
+
+  createButtonPressed() {
+    this.taskService.createTaskFrom(this.selectedTemplate.id, this.taskName).then(
+      t => this.router.navigateByUrl("/dashboard")
+    )
+  }
 }
