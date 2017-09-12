@@ -365,9 +365,6 @@ ul {
   display: inline-block;
   width: 14px;
 }
-.view__columns {
-  margin: 0 0 20px 0;
-}
 @media (min-width: 720px) {
   .view__columns {
     display: flex;
