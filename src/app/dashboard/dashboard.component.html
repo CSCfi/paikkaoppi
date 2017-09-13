@@ -11,10 +11,12 @@
             <form (ngSubmit)="addTask()" #newTaskForm="ngForm">
               <div class="list__item-title">Lataa tehtävä</div>
               <div class="list__item-description">Hae tehtävä koodilla.</div>
+              <div class="list__item-error" *ngIf="formError == 'not found'">
+                <div class="text">Tehtävää ei löytynyt. Tarkista että koodi on oikein ja yritä uudestaan.</div>
+              </div>
               <div class="list__item-footer">
-                <div class="list__item-input" [class.has-error]="code.invalid && code.dirty">
-                  <input type="text" class="input--code" required [(ngModel)]="model.code" name="code" #code="ngModel" placeholder="Kirjoita koodi tähän...">
-                  <div [hidden]="code.valid || code.pristine" class="alert alert-danger">Pakollinen tieto</div>
+                <div class="list__item-input">
+                  <input type="text" class="input--code" required [(ngModel)]="model.code" name="code" #code="ngModel" placeholder="Kirjoita koodi tähän..." (keyup)="codeKeyUp()">
                   <button type="submit" class="button--continue" [disabled]="!newTaskForm.form.valid"></button>
                 </div>
               </div>

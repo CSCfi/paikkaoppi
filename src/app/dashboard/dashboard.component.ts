@@ -20,6 +20,7 @@ export class DashboardComponent implements OnInit {
   // For Proto
   unusedCodes: string[]
   model: NewTaskModel = new NewTaskModel(null)
+  formError: string
 
   constructor(private authService: AuthService, private router: Router,
     private route: ActivatedRoute, private taskService: TaskService) { }
@@ -65,14 +66,20 @@ export class DashboardComponent implements OnInit {
       this.tasks = [task].concat(this.tasks.filter(t => t.id != this.taskId))
   }
 
+  codeKeyUp() {
+    this.formError = null
+  }
+  
   addTask() {
     console.log("addTask():", this.model.code)
+    this.formError = null
     this.taskService.addTaskWithCode(this.model.code)
       .then(t => { 
         this.model = new NewTaskModel(null)
         this.router.navigate(['/dashboard', t.id]) 
       })
       .catch(err => {
+        this.formError = "not found"
         console.info("Failed to add task with code:", this.model.code, ". Reason was:", err)
       })
   }
