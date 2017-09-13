@@ -22,13 +22,15 @@ export class TaskService {
     let code: string = codeCreator.createCode()
     return {
       id: template.id,
+      taskTemplateId: template.id,
       name: template.name,
       title: template.title,
       description: template.description,
       instructions: template.instructions,
       info: template.info,
       tags: template.tags,
-      code: code
+      code: code,
+      results: []
     }
   }
 
