@@ -5,12 +5,16 @@ import { TaskTemplateService } from './task-template.service'
 
 @Injectable()
 export class TaskService {
+  allTasks: Task[] = []
   tasks: Task[] = []
   // Remove this when real api is in use and you dont have to create taskCodes in UI
   private codeCreator: TaskCodeCreator = new TaskCodeCreator(new StableRandom(1))
 
   constructor(private taskTemplateService: TaskTemplateService) {
-    taskTemplateService.getTaskTemplates().then(t => this.tasks = t.map(template => this.toTask(template, this.codeCreator)))
+    taskTemplateService.getTaskTemplates().then(t => {
+      this.allTasks = t.map(template => this.toTask(template, this.codeCreator))
+      this.tasks = this.allTasks.slice(0, this.allTasks.length - 1)
+    })
   }
 
   private toTask(template: TaskTemplate, codeCreator: TaskCodeCreator): Task {
@@ -44,6 +48,28 @@ export class TaskService {
       this.tasks.push(task)
       return task
     })
+  }
+
+  getAllCodes(): string[] {
+    return this.allTasks.map(t => t.code)
+  }
+
+  addTaskWithCode(code: string): Promise<Task> {
+    const upperCaseCode = code.toUpperCase()
+    console.info("addTaskWithCode:", upperCaseCode)
+    if (this.tasks.find(t => t.code == upperCaseCode) != null) {
+      console.log("Task already added, rejecting result")
+      return Promise.reject("Task already added with code " + upperCaseCode)
+    }
+    const task = this.allTasks.find(t => t.code == upperCaseCode)
+    if(task == null) {
+      console.info("No task found with code:", upperCaseCode)
+      return Promise.reject("No task found with code " + upperCaseCode)
+    } else {
+      console.log("Task added:", task)
+      this.tasks = [task].concat(this.tasks)
+      return Promise.resolve(task)
+    }
   }
 }
 
