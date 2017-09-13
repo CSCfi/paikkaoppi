@@ -442,20 +442,27 @@ ul
 
 .view__add
   background brand_color[1]
-  border-radius 100%
-  width 30px
-  height @width
-  padding 3px 5px
+  border-radius border_radius
+  padding 8px 15px 9px
   text-align center
   box-shadow 2px 2px 8px alpha(#000,.2)
+  display inline-flex
+  align-items center
   cursor pointer
   transform-style preserve-3d
   animation appear 1s ease-in-out
   animation-fill-mode forwards
+  color #fff
+  line-height 1
+  font-size .9rem
+  font-weight bold_font_weight
   &:before
     content url(assets/icon_plus-w.svg)
     display inline-block
-    width 14px
+    vertical-align center
+    width 12px
+    margin 1px 5px -1px 0
+    
 
 
 .view__columns
@@ -648,6 +655,7 @@ ul
     display flex
     flex-wrap wrap
     margin 0 -15px 0 0
+    
     .list__item
       position relative
       flex 1 0 calc(100% \- 15px)
@@ -663,11 +671,40 @@ ul
       @media (min-width: media_large)
         flex 1 0 calc(33.332% \- 15px)
         max-width calc(33.332% \- 15px)
-      
-      &.type--progressing .list__item-link:before
-        // content url(assets/icon_task_progressing.svg)
-      &.type--done .list__item-link:before
-        // 
+      &.is-new
+        transform-style preserve-3d
+        animation appear 1s ease-in-out
+        animation-fill-mode forwards
+    
+    .list__item-error
+      font-size .92rem
+      line-height 1.3
+      font-weight bold_font_weight
+      margin 10px 0 0
+      position absolute
+      background brand_color[1]
+      color #fff
+      padding 10px
+      top 100%
+      z-index 20
+      left 0
+      right 0
+      box-shadow 2px 2px 8px alpha(#000,.4)
+      transform-style preserve-3d
+      animation appear 1s ease-in-out
+      animation-fill-mode forwards
+      &:before
+        content ''
+        position absolute
+        bottom 100%
+        left 50%
+        width: 0; 
+        height: 0; 
+        border-left: 5px solid transparent;
+        border-right: 5px solid transparent;
+        
+        border-bottom: 5px solid brand_color[1];
+
     .list__item-image
       width calc(100% \+ 20px)
       height 80px
@@ -749,6 +786,8 @@ ul
         padding 10px
         border-radius border_radius
         margin 0 0 0 10px
+        border none
+        cursor pointer
         &:before
           content url(assets/icon_arrow-r-w.svg)
           display inline-block

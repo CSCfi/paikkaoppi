@@ -57,7 +57,7 @@
           </div>
           <div id="dashboard-opettaja" class="view">
             <div class="view__header">
-              <h1 class="view__header-title">Omat tehtävät</h1><a href="#library-opettaja" class="view__add"></a>
+              <h1 class="view__header-title">Omat tehtävät</h1><a href="#library-opettaja" class="view__add">Uusi tehtävä</a>
             </div>
             <div class="view__content">
               <div class="view__columns">
@@ -124,7 +124,7 @@
           </div>
           <div id="dashboard" class="view">
             <div class="view__header">
-              <h1 class="view__header-title">Omat tehtävät</h1><a href="#library" class="view__add"></a>
+              <h1 class="view__header-title">Omat tehtävät</h1><a href="#library" class="view__add">Uusi tehtävä</a>
             </div>
             <div class="view__content">
               <div class="view__columns">
@@ -133,6 +133,9 @@
                     <div class="list__item">
                       <div class="list__item-title">Lataa tehtävä</div>
                       <div class="list__item-description">Hae tehtävä koodilla.</div>
+                      <div class="list__item-error">
+                        <div class="text">Tehtävää ei löytynyt. Tarkista että koodi on oikein ja yritä uudestaan.</div>
+                      </div>
                       <div class="list__item-footer">
                         <div class="list__item-input">
                           <input type="text" placeholder="Kirjoita koodi tähän..." class="input--code"><a href="#map-karttaesitys" class="button--continue"> </a>
