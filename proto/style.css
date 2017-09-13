@@ -596,7 +596,6 @@ ul {
   margin: -5px -10px 10px;
   background: url("assets/map.svg");
   background-size: cover;
-  border: 1px solid;
 }
 .list.type--tasks .list__item-title {
   font-size: 1.1rem;
