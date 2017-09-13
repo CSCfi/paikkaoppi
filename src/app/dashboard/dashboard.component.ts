@@ -26,18 +26,20 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.user = this.authService.getUser()
     this.role = this.authService.getRole()
+    this.route.paramMap
+      .switchMap((params: ParamMap) => Observable.of(params.has('id') ? +params.get('id') : null))
+      .subscribe(id => {
+        this.taskId = id
+        this.loadTasks()
+      })
+  }
+
+  private loadTasks() {
     this.taskService.getTasks().then(tasks => {
       this.tasks = tasks
       this.sortTasks()
       this.updateCodes()
     })
-    this.route.paramMap
-      .switchMap((params: ParamMap) => Observable.of(params.has('id') ? +params.get('id') : null))
-      .subscribe(id => {
-        this.taskId = id
-        this.sortTasks()
-        this.updateCodes()
-      })
   }
 
   private updateCodes() {

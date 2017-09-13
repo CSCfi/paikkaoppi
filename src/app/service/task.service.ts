@@ -5,6 +5,7 @@ import { TaskTemplateService } from './task-template.service'
 
 @Injectable()
 export class TaskService {
+  newTaskCount = 0
   allTasks: Task[] = []
   tasks: Task[] = []
   // Remove this when real api is in use and you dont have to create taskCodes in UI
@@ -41,10 +42,11 @@ export class TaskService {
   }
 
   createTaskFrom(id: number, name: string): Promise<Task> {
+    this.newTaskCount++
     return this.taskTemplateService.getTaskTemplate(id).then(template => {
       let task = this.toTask(template, this.codeCreator)
       task.name = name
-      task.id = this.tasks.length + 1
+      task.id = this.allTasks.length + this.newTaskCount
       this.tasks.push(task)
       return task
     })
