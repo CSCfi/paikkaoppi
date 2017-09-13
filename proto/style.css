@@ -349,21 +349,27 @@ ul {
 }
 .view__add {
   background: #f05348;
-  border-radius: 100%;
-  width: 30px;
-  height: 30px;
-  padding: 3px 5px;
+  border-radius: 30px;
+  padding: 8px 15px 9px;
   text-align: center;
   box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+  display: inline-flex;
+  align-items: center;
   cursor: pointer;
   transform-style: preserve-3d;
   animation: appear 1s ease-in-out;
   animation-fill-mode: forwards;
+  color: #fff;
+  line-height: 1;
+  font-size: 0.9rem;
+  font-weight: 600;
 }
 .view__add:before {
   content: url("assets/icon_plus-w.svg");
   display: inline-block;
-  width: 14px;
+  vertical-align: center;
+  width: 12px;
+  margin: 1px 5px -1px 0;
 }
 @media (min-width: 720px) {
   .view__columns {

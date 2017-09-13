@@ -442,20 +442,27 @@ ul
 
 .view__add
   background brand_color[1]
-  border-radius 100%
-  width 30px
-  height @width
-  padding 3px 5px
+  border-radius border_radius
+  padding 8px 15px 9px
   text-align center
   box-shadow 2px 2px 8px alpha(#000,.2)
+  display inline-flex
+  align-items center
   cursor pointer
   transform-style preserve-3d
   animation appear 1s ease-in-out
   animation-fill-mode forwards
+  color #fff
+  line-height 1
+  font-size .9rem
+  font-weight bold_font_weight
   &:before
     content url(assets/icon_plus-w.svg)
     display inline-block
-    width 14px
+    vertical-align center
+    width 12px
+    margin 1px 5px -1px 0
+    
 
 
 .view__columns
