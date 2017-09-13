@@ -615,6 +615,9 @@ ul {
   left: 0;
   right: 0;
   box-shadow: 2px 2px 8px rgba(0,0,0,0.4);
+  transform-style: preserve-3d;
+  animation: appear 1s ease-in-out;
+  animation-fill-mode: forwards;
 }
 .list.type--tasks .list__item-error:before {
   content: '';
