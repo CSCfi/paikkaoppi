@@ -65,7 +65,7 @@ export class DashboardComponent implements OnInit {
       this.tasks = [task].concat(this.tasks.filter(t => t.id != this.taskId))
   }
 
-  addTask(code: string) {
+  addTask() {
     console.log("addTask():", this.model.code)
     this.taskService.addTaskWithCode(this.model.code)
       .then(t => { 
