@@ -4,7 +4,7 @@
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
 export const environment = {
-  production: false,
+  production: true,
   mapEnv : "test",
   mapDomain : "https://kartta.paikkatietoikkuna.fi",
   mapId : "3ccb28fc-2df8-4ad8-b5b2-85d415297882",

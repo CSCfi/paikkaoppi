@@ -73,7 +73,7 @@ export class DashboardComponent implements OnInit {
         this.router.navigate(['/dashboard', t.id]) 
       })
       .catch(err => {
-        console.info("Failed to add task with code:", code, ". Reason was:", err)
+        console.info("Failed to add task with code:", this.model.code, ". Reason was:", err)
       })
   }
 
