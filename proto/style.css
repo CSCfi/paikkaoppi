@@ -590,6 +590,11 @@ ul {
     max-width: calc(33.332% - 15px);
   }
 }
+.list.type--tasks .list__item.is-new {
+  transform-style: preserve-3d;
+  animation: appear 1s ease-in-out;
+  animation-fill-mode: forwards;
+}
 .list.type--tasks .list__item-image {
   width: calc(100% + 20px);
   height: 80px;
@@ -705,6 +710,8 @@ ul {
   padding: 10px;
   border-radius: 30px;
   margin: 0 0 0 10px;
+  border: none;
+  cursor: pointer;
 }
 .list.type--tasks .list__item-input .button--continue:before {
   content: url("assets/icon_arrow-r-w.svg");
