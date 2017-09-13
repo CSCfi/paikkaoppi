@@ -26,7 +26,7 @@
           <h1 class="popup__header-title">Uusi tehtävä</h1>
         </div>
         <h1 class="accordion__header">{{selectedTemplate.name}}</h1>
-        <div class="form__item">
+        <div class="form__item" [class.has-error]="name.invalid && name.dirty">
           <label>Nimi</label>
           <input type="text" required [(ngModel)]="model.name" name="name" #name="ngModel">
           <div [hidden]="name.valid || name.pristine" class="alert alert-danger">Pakollinen tieto</div>

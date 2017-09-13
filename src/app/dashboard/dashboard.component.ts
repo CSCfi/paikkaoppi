@@ -19,6 +19,7 @@ export class DashboardComponent implements OnInit {
   taskId?: number
   // For Proto
   unusedCodes: string[]
+  model: NewTaskModel = new NewTaskModel(null)
 
   constructor(private authService: AuthService, private router: Router,
     private route: ActivatedRoute, private taskService: TaskService) { }
@@ -65,12 +66,12 @@ export class DashboardComponent implements OnInit {
   }
 
   addTask(code: string) {
-    if (code == null || code.length == 0)
-      return
-    
-    console.log("addTask():", code)
-    this.taskService.addTaskWithCode(code)
-      .then(t => this.router.navigate(['/dashboard', t.id]))
+    console.log("addTask():", this.model.code)
+    this.taskService.addTaskWithCode(this.model.code)
+      .then(t => { 
+        this.model = new NewTaskModel(null)
+        this.router.navigate(['/dashboard', t.id]) 
+      })
       .catch(err => {
         console.info("Failed to add task with code:", code, ". Reason was:", err)
       })
@@ -79,5 +80,12 @@ export class DashboardComponent implements OnInit {
   logout() {
     this.authService.logout()
     this.router.navigateByUrl("/home")
+  }
+}
+export class NewTaskModel {
+  code: string
+
+  constructor(code: string) {
+    this.code = code
   }
 }

@@ -8,16 +8,19 @@
         <h1 class="title__list">Omat tehtävät</h1>
         <div class="list type--tasks">
           <div class="list__item">
-            <div class="list__item-title">Lataa tehtävä</div>
-            <div class="list__item-description">Hae tehtävä koodilla.</div>
-            <div class="list__item-footer">
-              <div class="list__item-input">
-                <input type="text" placeholder="Kirjoita koodi tähän..." class="input--code" #newTaskInput>
-                <button class="button--continue" (click)="addTask(newTaskInput.value)"></button>
+            <form (ngSubmit)="addTask()" #newTaskForm="ngForm">
+              <div class="list__item-title">Lataa tehtävä</div>
+              <div class="list__item-description">Hae tehtävä koodilla.</div>
+              <div class="list__item-footer">
+                <div class="list__item-input" [class.has-error]="code.invalid && code.dirty">
+                  <input type="text" class="input--code" required [(ngModel)]="model.code" name="code" #code="ngModel" placeholder="Kirjoita koodi tähän...">
+                  <div [hidden]="code.valid || code.pristine" class="alert alert-danger">Pakollinen tieto</div>
+                  <button type="submit" class="button--continue" [disabled]="!newTaskForm.form.valid"></button>
+                </div>
               </div>
-            </div>
+            </form>
           </div>
-          <a [routerLink]="['/map', t.id]" class="list__item" *ngFor="let t of tasks">
+          <a [routerLink]="['/map', t.id]" class="list__item" *ngFor="let t of tasks" [ngClass]="{'is-new': t.id == taskId}">
             <div class="list__item-status" *ngIf="t.id == taskId">
               <div class="status">Uusi</div>
             </div>
