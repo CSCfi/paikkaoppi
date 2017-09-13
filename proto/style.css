@@ -910,12 +910,6 @@ ul {
     transform: translateY(0);
     visibility: visible;
   }
-  20% {
-    transform: translateY(-20px);
-  }
-  55% {
-    transform: translateY(0);
-  }
   60% {
     transform: translateY(10px);
   }
@@ -931,12 +925,6 @@ ul {
   10% {
     transform: translateY(0);
     visibility: visible;
-  }
-  20% {
-    transform: translateY(-20px);
-  }
-  55% {
-    transform: translateY(0);
   }
   60% {
     transform: translateY(10px);
@@ -954,12 +942,6 @@ ul {
     transform: translateY(0);
     visibility: visible;
   }
-  20% {
-    transform: translateY(-20px);
-  }
-  55% {
-    transform: translateY(0);
-  }
   60% {
     transform: translateY(10px);
   }
@@ -975,12 +957,6 @@ ul {
   10% {
     transform: translateY(0);
     visibility: visible;
-  }
-  20% {
-    transform: translateY(-20px);
-  }
-  55% {
-    transform: translateY(0);
   }
   60% {
     transform: translateY(10px);
