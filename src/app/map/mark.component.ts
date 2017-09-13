@@ -21,7 +21,11 @@ export class MarkComponent implements OnInit {
   }
 
   close() {
-    this.visible = !this.visible
+    if (this.mark.id === undefined) {
+      this.remove()
+    } else {
+      this.visible = !this.visible
+    }
   }
 
   save() {
