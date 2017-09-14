@@ -5,6 +5,7 @@ import { environment } from '../../environments/environment'
 import { Config } from './config'
 import { MarkComponent } from './mark.component'
 import { MarkService } from '../service/mark.service'
+import { GeoService } from './geo.service'
 
 @Component({
   selector: 'app-oskari-rpc',
@@ -23,6 +24,7 @@ export class OskariRpcComponent implements AfterViewInit {
 
   constructor(
     private zone: NgZone,
+    private geoService: GeoService,
     private markService: MarkService) { }
 
   ngAfterViewInit() {
@@ -37,32 +39,23 @@ export class OskariRpcComponent implements AfterViewInit {
     )
   }
 
-  zoomIn() {
-    this.channel.zoomIn((data) => this.zone.runGuarded(() => {
-      console.log('Zoom level after: ', data)
-    }))
+  setMarkerToMap(lat, lon) {
+    console.info('setMarkerToMap:', lat, lon)
+    this.addMarker(lat, lon)
   }
 
-  zoomOut() {
-    this.channel.zoomOut((data) => this.zone.runGuarded(() => {
-      console.log('Zoom level after: ', data)
-    }))
-  }
+  addMarker(lat, lon) {
+    const markerOptions = this.geoService.marker(lat, lon)
+    this.channel.handleEvent('AfterAddMarkerEvent', function (data) {
+      this.markComponent.visible = true
+      this.markComponent.mark = {
+        markerId: data.id,
+        lon: lon,
+        lat: lat
+      }
+    }.bind(this))
 
-  reset() {
-    this.channel.resetState(() => this.zone.runGuarded(() => {
-      console.log('State reset.')
-    }))
-  }
-
-  setMarkerToMap(lon, lat) {
-    console.info('setMarkerToMap:', lon, lat)
-    this.addMarker(lon, lat)
-  }
-
-  removeMarker(id: string) {
-    console.info('removeMarker:', id)
-    this.channel.postRequest('MapModulePlugin.RemoveMarkersRequest', [id])
+    this.channel.postRequest('MapModulePlugin.AddMarkerRequest', [markerOptions])
   }
 
   openMarker(markerId: string) {
@@ -80,26 +73,38 @@ export class OskariRpcComponent implements AfterViewInit {
     this.removeMarker(mark.markerId)
   }
 
-  addMarker(lon, lat) {
-    const markerOptions = {
-      x: lon,
-      y: lat,
-      color: 'ff0000',
-      msg: '',
-      shape: 2,
-      size: 10
+  removeMarker(id: string) {
+    console.info('removeMarker:', id)
+    this.channel.postRequest('MapModulePlugin.RemoveMarkersRequest', [id])
+  }
+
+  toggleMarkerAction() {
+    this.clearActionHandlers()
+    this.markerAction = !this.markerAction
+
+    if (this.markerAction) {
+      console.log('Set marker on')
+      const eventName = 'MapClickedEvent'
+      const markerHandler = function (data) {
+        this.setMarkerToMap(data.lat, data.lon)
+        this.toggleMarkerAction()
+      }.bind(this)
+
+      this.actionHandlers.set(eventName, markerHandler)
+      this.channel.handleEvent(eventName, markerHandler)
+      this.channel.setCursorStyle(['pointer'], (data) => this.zone.runGuarded(() => { }))
+
+    } else {
+      console.log('Set marker off')
+      const eventName = 'MarkerClickEvent'
+      const markerHandler = function (data) {
+        this.openMarker(data.id)
+      }.bind(this)
+
+      this.actionHandlers.set(eventName, markerHandler)
+      this.channel.handleEvent(eventName, markerHandler)
+      this.channel.setCursorStyle(['default'], (data) => this.zone.runGuarded(() => { }))
     }
-
-    this.channel.handleEvent('AfterAddMarkerEvent', function(data) {
-      this.markComponent.visible = true
-      this.markComponent.mark = {
-        markerId: data.id,
-        lon: lon,
-        lat: lat
-      }
-    }.bind(this))
-
-    this.channel.postRequest('MapModulePlugin.AddMarkerRequest', [markerOptions])
   }
 
   startDrawArea() {
@@ -112,35 +117,6 @@ export class OskariRpcComponent implements AfterViewInit {
     this.channel.postRequest('DrawTools.StopDrawingRequest', config)
   }
 
-  toggleMarkerAction() {
-    this.clearActionHandlers()
-    this.markerAction = !this.markerAction
-
-    if (this.markerAction) {
-      console.log('Set marker on')
-      const eventName = 'MapClickedEvent'
-      const markerHandler = function(data) {
-        this.setMarkerToMap(data.lon, data.lat)
-        this.toggleMarkerAction()
-      }.bind(this)
-
-      this.actionHandlers.set(eventName, markerHandler)
-      this.channel.handleEvent(eventName, markerHandler)
-      this.channel.setCursorStyle(['pointer'], (data) => this.zone.runGuarded(() => {}))
-
-    } else {
-      console.log('Set marker off')
-      const eventName = 'MarkerClickEvent'
-      const markerHandler = function(data) {
-        this.openMarker(data.id)
-      }.bind(this)
-
-      this.actionHandlers.set(eventName, markerHandler)
-      this.channel.handleEvent(eventName, markerHandler)
-      this.channel.setCursorStyle(['default'], (data) => this.zone.runGuarded(() => {}))
-    }
-  }
-
   toggleDrawAreaAction() {
     this.clearActionHandlers()
     this.drawAreaAction = !this.drawAreaAction
@@ -148,7 +124,7 @@ export class OskariRpcComponent implements AfterViewInit {
     if (this.drawAreaAction) {
       console.log('Set draw area on')
       const eventName = 'DrawingEvent'
-      const drawAreaHandler = function(event) {
+      const drawAreaHandler = function (event) {
         if (event.isFinished) {
           this.zone.runGuarded(() => {
             console.log(event.geojson)
@@ -172,6 +148,24 @@ export class OskariRpcComponent implements AfterViewInit {
       this.channel.unregisterEventHandler(eventName, handler)
     })
     this.actionHandlers.clear()
+  }
+
+  zoomIn() {
+    this.channel.zoomIn((data) => this.zone.runGuarded(() => {
+      console.log('Zoom level after: ', data)
+    }))
+  }
+
+  zoomOut() {
+    this.channel.zoomOut((data) => this.zone.runGuarded(() => {
+      console.log('Zoom level after: ', data)
+    }))
+  }
+
+  reset() {
+    this.channel.resetState(() => this.zone.runGuarded(() => {
+      console.log('State reset.')
+    }))
   }
 
   checkRpcVersion() {
