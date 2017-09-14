@@ -5,13 +5,13 @@ import { TaskTemplateService } from './task-template.service'
 
 @Injectable()
 export class TaskService {
-  newTaskCount = 0
-  allTasks: Task[] = []
-  tasks: Task[] = []
-  taskSequence = new Sequence()
-  resultSequence = new Sequence()
-  resultItemSequence = new Sequence()
-  userId = "test.user@test.test"
+  private newTaskCount = 0
+  private allTasks: Task[] = []
+  private tasks: Task[] = []
+  private taskSequence = new Sequence()
+  private resultSequence = new Sequence()
+  private resultItemSequence = new Sequence()
+  private userId = "test.user@test.test"
 
   // Remove this when real api is in use and you dont have to create taskCodes in UI
   private codeCreator: TaskCodeCreator = new TaskCodeCreator(new StableRandom(1))
@@ -24,12 +24,15 @@ export class TaskService {
   }
 
   getTasks(): Promise<Task[]> {
-    return Promise.resolve(this.tasks)
+    return Promise.resolve(this.tasks.map(t => this.cloneTask(t, true, true)))
   }
 
-  getTask(id: number): Promise<Task> {
+  getTask(id: number, includeResultItems: boolean): Promise<Task> {
     const task = this.tasks.find(t => t.id == id)
-    return Promise.resolve(task)
+    if (task != null)
+      return Promise.resolve(this.cloneTask(task, true, includeResultItems))
+    else
+      return Promise.reject("Task not found with id " + id)
   }
 
   createTaskFrom(taskTemplateId: number, name: string): Promise<Task> {
@@ -61,16 +64,53 @@ export class TaskService {
     }
   }
 
+  saveResultItem(resultId: number, resultItem: ResultItem): Promise<ResultItem> {
+    try {
+      const result = this.findResultById(resultId)
+      const clonedItem = this.cloneResultItem(resultItem)
+      clonedItem.id = this.resultItemSequence.next()
+      result.resultItems.push(clonedItem)
+      return Promise.resolve(this.cloneResultItem(clonedItem))
+    } catch (e) {
+      console.error(e)
+      return Promise.reject("Failed to save ResultItem for resultId " + resultId + " with data " + resultItem)
+    }
+  }
+
+  removeResultItem(resultItemId: number): Promise<number> {
+    try {
+      const result = this.findResultWithItemId(resultItemId)
+      result.resultItems = result.resultItems.filter(i => i.id != resultItemId)
+      return Promise.resolve(resultItemId)
+    } catch (e) {
+      console.error(e)
+      return Promise.reject("Failed to remove resultItem with id " + resultItemId)
+    }
+  }
+
+  updateResultItem(resultItemId: number, resultItem: ResultItem): Promise<ResultItem> {
+    try {
+      const result = this.findResultWithItemId(resultItem.id)
+      result.resultItems = result.resultItems.filter(i => i.id != resultItem.id)
+      const clonedItem = this.cloneResultItem(resultItem)
+      result.resultItems.push(clonedItem)
+      return Promise.resolve(this.cloneResultItem(clonedItem))
+    } catch (e) {
+      console.error(e)
+      return Promise.reject("Failed to update resultItem. Item: " + JSON.stringify(resultItem))
+    }
+  }
+
   private addTaskForUser(task: Task): Task {
     console.log("addTaskForUser:", task)
+    const clonedTask = this.cloneTask(task, false, false)
+    clonedTask.id = this.taskSequence.next()
     let result: Result = {
       id: this.resultSequence.next(),
-      taskId: task.id,
+      taskId: clonedTask.id,
       userId: this.userId,
       resultItems: []
     }
-
-    const clonedTask = this.cloneTask(task)
     clonedTask.results = [result]
     this.tasks = [clonedTask].concat(this.tasks)
     return clonedTask
@@ -79,7 +119,7 @@ export class TaskService {
   private toTask(template: TaskTemplate): Task {
     let code: string = this.codeCreator.createCode()
     return {
-      id: this.taskSequence.next(),
+      id: 0,
       taskTemplateId: template.id,
       name: template.name,
       title: template.title,
@@ -92,9 +132,9 @@ export class TaskService {
     }
   }
 
-  private cloneTask(task: Task): Task {
-    return {
-      id: this.taskSequence.next(),
+  private cloneTask(task: Task, includeResults: boolean, includeResultItems: boolean): Task {
+    const cloned: Task = {
+      id: task.id,
       taskTemplateId: task.taskTemplateId,
       name: task.name,
       title: task.title,
@@ -105,5 +145,53 @@ export class TaskService {
       code: task.code,
       results: []
     }
+    if (includeResults) {
+      cloned.results = task.results.map(r => this.cloneResult(r, includeResultItems))
+    }
+    return cloned
+  }
+
+  private cloneResult(result: Result, includeResultItems: boolean): Result {
+    const cloned: Result = {
+      id: result.id,
+      taskId: result.taskId,
+      userId: result.userId,
+      resultItems: []
+    }
+    if (includeResultItems) {
+      cloned.resultItems = result.resultItems.map(this.cloneResultItem)
+    }
+    return cloned
+  }
+
+  private cloneResultItem(resultItem: ResultItem): ResultItem {
+    return {
+      id: resultItem.id,
+      resultId: resultItem.resultId,
+      geometry: resultItem.geometry,
+      name: resultItem.name,
+      description: resultItem.description
+    }
+  }
+
+  private findResultById(resultId: number): Result {
+    for (let task of this.tasks) {
+      let result = task.results.find(r => r.id == resultId)
+      if (result != null) {
+        return result
+      }
+    }
+    throw new Error("Result not found with id " + resultId)
+  }
+
+  private findResultWithItemId(resultItemId: number): Result {
+    for (let task of this.tasks) {
+      for (let result of task.results) {
+        let resultItem: ResultItem = result.resultItems.find(r => r.id == resultItemId)
+        if (resultItem != null)
+          return result
+      }
+    }
+    throw new Error("ResultItem not found with id " + resultItemId)
   }
 }

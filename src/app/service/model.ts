@@ -95,6 +95,7 @@ export class TaskCodeCreator {
 export class Sequence {
     value = 0
     next(): number {
-        return this.value++
+        this.value = this.value + 1
+        return this.value
     }
 }

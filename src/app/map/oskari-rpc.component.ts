@@ -1,5 +1,5 @@
 import { forEach } from '@angular/router/src/utils/collection'
-import { Component, NgZone, AfterViewInit, ViewChild } from '@angular/core'
+import { Component, NgZone, AfterViewInit, ViewChild, EventEmitter, Output } from '@angular/core'
 import OskariRPC from 'oskari-rpc'
 import { environment } from '../../environments/environment'
 import { Config } from './config'
@@ -12,7 +12,6 @@ import { MarkService } from '../service/mark.service'
   styleUrls: ['./oskari-rpc.component.css']
 })
 export class OskariRpcComponent implements AfterViewInit {
-
   @ViewChild(MarkComponent) markComponent
 
   env = environment.mapEnv
@@ -31,9 +30,11 @@ export class OskariRpcComponent implements AfterViewInit {
     const iframe = document.getElementById('oskari-map')
     console.info('Connect IFrame to ', this.domain)
     this.channel = OskariRPC.connect(iframe, this.domain)
-    this.channel.onReady(() => {
-      this.zone.runGuarded(() => this.checkRpcVersion())
-    })
+    this.channel.onReady(
+      () => this.zone.runGuarded(
+        () => this.checkRpcVersion()
+      )
+    )
   }
 
   zoomIn() {
