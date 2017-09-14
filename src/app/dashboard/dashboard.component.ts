@@ -66,7 +66,7 @@ export class DashboardComponent implements OnInit {
       this.tasks = [task].concat(this.tasks.filter(t => t.id != this.taskId))
   }
 
-  codeKeyUp() {
+  codeChanged() {
     this.formError = null
   }
   

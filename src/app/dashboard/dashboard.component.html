@@ -16,7 +16,7 @@
               </div>
               <div class="list__item-footer">
                 <div class="list__item-input">
-                  <input type="text" class="input--code" required [(ngModel)]="model.code" name="code" #code="ngModel" placeholder="Kirjoita koodi tähän..." (keyup)="codeKeyUp()">
+                  <input type="text" class="input--code" required [(ngModel)]="model.code" name="code" #code="ngModel" placeholder="Kirjoita koodi tähän..." (change)="codeChanged()">
                   <button type="submit" class="button--continue" [disabled]="!newTaskForm.form.valid"></button>
                 </div>
               </div>

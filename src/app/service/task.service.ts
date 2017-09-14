@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 
-import { Task, TaskTemplate } from './model'
+import { Task, TaskTemplate, Result, ResultItem, Sequence, TaskCodeCreator, StableRandom } from './model'
 import { TaskTemplateService } from './task-template.service'
 
 @Injectable()
@@ -8,30 +8,19 @@ export class TaskService {
   newTaskCount = 0
   allTasks: Task[] = []
   tasks: Task[] = []
+  taskSequence = new Sequence()
+  resultSequence = new Sequence()
+  resultItemSequence = new Sequence()
+  userId = "test.user@test.test"
+
   // Remove this when real api is in use and you dont have to create taskCodes in UI
   private codeCreator: TaskCodeCreator = new TaskCodeCreator(new StableRandom(1))
 
   constructor(private taskTemplateService: TaskTemplateService) {
     taskTemplateService.getTaskTemplates().then(t => {
-      this.allTasks = t.map(template => this.toTask(template, this.codeCreator))
-      this.tasks = this.allTasks.slice(0, this.allTasks.length - 1)
+      this.allTasks = t.map(template => this.toTask(template))
+      this.addTaskForUser(this.allTasks[0])
     })
-  }
-
-  private toTask(template: TaskTemplate, codeCreator: TaskCodeCreator): Task {
-    let code: string = codeCreator.createCode()
-    return {
-      id: template.id,
-      taskTemplateId: template.id,
-      name: template.name,
-      title: template.title,
-      description: template.description,
-      instructions: template.instructions,
-      info: template.info,
-      tags: template.tags,
-      code: code,
-      results: []
-    }
   }
 
   getTasks(): Promise<Task[]> {
@@ -43,14 +32,12 @@ export class TaskService {
     return Promise.resolve(task)
   }
 
-  createTaskFrom(id: number, name: string): Promise<Task> {
+  createTaskFrom(taskTemplateId: number, name: string): Promise<Task> {
     this.newTaskCount++
-    return this.taskTemplateService.getTaskTemplate(id).then(template => {
-      let task = this.toTask(template, this.codeCreator)
+    return this.taskTemplateService.getTaskTemplate(taskTemplateId).then(template => {
+      let task = this.toTask(template)
       task.name = name
-      task.id = this.allTasks.length + this.newTaskCount
-      this.tasks.push(task)
-      return task
+      return this.addTaskForUser(task)
     })
   }
 
@@ -66,38 +53,57 @@ export class TaskService {
       return Promise.reject("Task already added with code " + upperCaseCode)
     }
     const task = this.allTasks.find(t => t.code == upperCaseCode)
-    if(task == null) {
+    if (task == null) {
       console.info("No task found with code:", upperCaseCode)
       return Promise.reject("No task found with code " + upperCaseCode)
     } else {
-      console.log("Task added:", task)
-      this.tasks = [task].concat(this.tasks)
-      return Promise.resolve(task)
+      return Promise.resolve(this.addTaskForUser(task))
     }
   }
-}
 
-// Remove this when real api is in use and you dont have to create taskCodes in UI
-class StableRandom {
-  constructor(private seed: number) {
+  private addTaskForUser(task: Task): Task {
+    console.log("addTaskForUser:", task)
+    let result: Result = {
+      id: this.resultSequence.next(),
+      taskId: task.id,
+      userId: this.userId,
+      resultItems: []
+    }
+
+    const clonedTask = this.cloneTask(task)
+    clonedTask.results = [result]
+    this.tasks = [clonedTask].concat(this.tasks)
+    return clonedTask
   }
 
-  random(): number {
-    const x = Math.sin(this.seed++) * 10000
-    return x - Math.floor(x)
+  private toTask(template: TaskTemplate): Task {
+    let code: string = this.codeCreator.createCode()
+    return {
+      id: this.taskSequence.next(),
+      taskTemplateId: template.id,
+      name: template.name,
+      title: template.title,
+      description: template.description,
+      instructions: template.instructions,
+      info: template.info,
+      tags: template.tags,
+      code: code,
+      results: []
+    }
   }
-}
 
-// Remove this when real api is in use and you dont have to create taskCodes in UI
-class TaskCodeCreator {
-  constructor(private random: StableRandom) { }
-
-  createCode() {
-    var text: string = "";
-    var possible: string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
-
-    for (var i = 0; i < 6; i++)
-      text += possible.charAt(Math.floor(this.random.random() * possible.length))
-    return text
+  private cloneTask(task: Task): Task {
+    return {
+      id: this.taskSequence.next(),
+      taskTemplateId: task.taskTemplateId,
+      name: task.name,
+      title: task.title,
+      description: task.description,
+      instructions: task.instructions,
+      info: task.info,
+      tags: task.tags,
+      code: task.code,
+      results: []
+    }
   }
 }

@@ -66,3 +66,35 @@ export interface Mark {
     name: string
     description: string
 }
+
+// Remove this when real api is in use and you dont have to create taskCodes in UI
+export class StableRandom {
+    constructor(private seed: number) {
+    }
+
+    random(): number {
+        const x = Math.sin(this.seed++) * 10000
+        return x - Math.floor(x)
+    }
+}
+
+// Remove this when real api is in use and you dont have to create taskCodes in UI
+export class TaskCodeCreator {
+    constructor(private random: StableRandom) { }
+
+    createCode() {
+        var text: string = "";
+        var possible: string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+
+        for (var i = 0; i < 6; i++)
+            text += possible.charAt(Math.floor(this.random.random() * possible.length))
+        return text
+    }
+}
+
+export class Sequence {
+    value = 0
+    next(): number {
+        return this.value++
+    }
+}
