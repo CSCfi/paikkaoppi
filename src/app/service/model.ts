@@ -17,7 +17,6 @@ export interface TaskTemplate {
     tags: string[]
 }
 
-
 export interface Instruction {
     name: string
     description: string

@@ -8,7 +8,7 @@ import { Task } from '../service/model'
 })
 export class HelpComponent implements OnInit {
   @Input() visible = true
-  @Input() task: Task
+  @Input() task : Task | null
   @Output() helpClosed = new EventEmitter<boolean>()
 
   constructor() { }

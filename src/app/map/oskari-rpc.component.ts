@@ -83,7 +83,6 @@ export class OskariRpcComponent implements AfterViewInit {
     this.markerAction = !this.markerAction
 
     if (this.markerAction) {
-      console.log('Set marker on')
       const eventName = 'MapClickedEvent'
       const markerHandler = function (data) {
         this.setMarkerToMap(data.lat, data.lon)
@@ -93,9 +92,7 @@ export class OskariRpcComponent implements AfterViewInit {
       this.actionHandlers.set(eventName, markerHandler)
       this.channel.handleEvent(eventName, markerHandler)
       this.channel.setCursorStyle(['pointer'], (data) => this.zone.runGuarded(() => { }))
-
     } else {
-      console.log('Set marker off')
       const eventName = 'MarkerClickEvent'
       const markerHandler = function (data) {
         this.openMarker(data.id)
@@ -132,11 +129,9 @@ export class OskariRpcComponent implements AfterViewInit {
           })
         }
       }.bind(this)
-
       this.actionHandlers.set(eventName, drawAreaHandler)
       this.channel.handleEvent(eventName, drawAreaHandler)
       this.startDrawArea()
-
     } else {
       console.log('Set draw area off')
       this.stopDrawArea()
