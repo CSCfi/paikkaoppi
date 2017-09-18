@@ -57,9 +57,6 @@ export interface ResultItem {
 // only point and polygon current supported by domain.
 export type Geometry = GeoJSON.Point | GeoJSON.Polygon
 
-export const geometryTypePoint = "Point"
-export const geometryTypePolygon = "Polygon"
-
 export interface Mark {
     id: number
     markerId: string

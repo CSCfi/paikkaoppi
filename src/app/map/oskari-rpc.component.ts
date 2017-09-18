@@ -2,8 +2,7 @@ import { forEach } from '@angular/router/src/utils/collection'
 import { Component, NgZone, AfterViewInit, ViewChild, EventEmitter, Input, Output } from '@angular/core'
 import OskariRPC from 'oskari-rpc'
 import { environment } from '../../environments/environment'
-import { Task, Result, ResultItem, geometryTypePoint, geometryTypePolygon } from '../service/model'
-import { Config } from './config'
+import { Task, Result, ResultItem } from '../service/model'
 import { ResultItemComponent } from './result-item.component'
 import { GeoService } from './geo.service'
 import { TaskService } from '../service/task.service'
@@ -14,8 +13,9 @@ import { TaskService } from '../service/task.service'
   styleUrls: ['./oskari-rpc.component.css']
 })
 export class OskariRpcComponent implements AfterViewInit {
-  @ViewChild(ResultItemComponent) resultItemComponent
   @Input() task: Task | null
+  resultItemPopupVisible: boolean = false
+  resultItemPopupResultItem: any
 
   env = environment.mapEnv
   domain = environment.mapDomain
@@ -49,15 +49,12 @@ export class OskariRpcComponent implements AfterViewInit {
   private drawTaskResultsToMap(task: Task) {
     for (let result of task.results) {
       for (let resultItem of result.resultItems) {
-        switch (resultItem.geometry.type) {
-          case geometryTypePoint: {
-            const markerOptions = this.geoService.resultItemMarker(resultItem)
-            this.channel.postRequest('MapModulePlugin.AddMarkerRequest', [markerOptions, "" + resultItem.id])
-            break
-          }
-          default: {
-            console.log("Skipping drawing ResultItem: ", resultItem)
-          }
+        if (this.geoService.isPoint(resultItem)) {
+          // Add marker to map
+          const markerOptions = this.geoService.resultItemMarker(resultItem)
+          this.channel.postRequest('MapModulePlugin.AddMarkerRequest', [markerOptions, "" + resultItem.id])
+        } else {
+          console.log("Skipping drawing ResultItem, since not supported yet!", resultItem)
         }
       }
     }
@@ -117,6 +114,10 @@ export class OskariRpcComponent implements AfterViewInit {
     }
   }
 
+  resultItemPopupHidden(event: any) {
+    this.resultItemPopupVisible = false
+  }
+
   private setMarkerToMap(lat, lon) {
     console.info('setMarkerToMap:', lat, lon)
     this.addMarkerToMap(lat, lon)
@@ -132,8 +133,8 @@ export class OskariRpcComponent implements AfterViewInit {
       resultItem["isNew"] = true
       resultItem["markerId"] = data.id
       console.log(eventName, data, resultItem)
-      this.resultItemComponent.model = resultItem
-      this.resultItemComponent.visible = true
+      this.resultItemPopupResultItem = resultItem
+      this.resultItemPopupVisible = true
       this.channel.unregisterEventHandler(eventName, afterAddMarkerEventFunction)
     }.bind(this)
 
@@ -153,8 +154,8 @@ export class OskariRpcComponent implements AfterViewInit {
       const resutlId: number = this.resultId()
       const resultItem: ResultItem = this.geoService.cloneResultItem(this.findResultItemFromTask(markerId))
       console.log("Open markerId", markerId, "ResultId:", resutlId, "ResultItem:", resultItem)
-      this.resultItemComponent.model = resultItem
-      this.resultItemComponent.visible = true
+      this.resultItemPopupResultItem = resultItem
+      this.resultItemPopupVisible = true
     })
   }
 
