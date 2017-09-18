@@ -16,6 +16,7 @@ export class OskariRpcComponent implements AfterViewInit {
   @Input() task: Task | null
   resultItemPopupVisible: boolean = false
   resultItemPopupResultItem: any
+  coordinates : Coordinates | null
 
   env = environment.mapEnv
   domain = environment.mapDomain
@@ -31,7 +32,6 @@ export class OskariRpcComponent implements AfterViewInit {
     private taskService: TaskService) { }
 
   ngAfterViewInit() {
-    console.info('OskariRpcComponent: ngAfterViewInit')
     const iframe = document.getElementById('oskari-map')
     console.info('Connect IFrame to ', this.domain)
     this.channel = OskariRPC.connect(iframe, this.domain)
@@ -63,14 +63,13 @@ export class OskariRpcComponent implements AfterViewInit {
   private setInitialMapToolMode(task: Task) {
     // Set open marker listener active by default
     this.setOpenMarkerListenerActive()
+    this.setShowCoordinateActive()
   }
 
   saveResultItem(event: any) {
-    console.log("saveResultItem")
     const resultId = this.resultId()
     if (event.isNew) {
-      console.log("Saving new result item to db to resultId", resultId)
-      console.log(event)
+      console.log("saveResultItem -- Saving new result item to db to resultId", resultId, event)
       const markerId = event["markerId"]
       this.taskService.saveResultItem(resultId, event).then(resultItem => {
         console.log("resultItemSaved:", resultItem)
@@ -78,8 +77,7 @@ export class OskariRpcComponent implements AfterViewInit {
         this.replaceMarkerIdOnMap(markerId, resultItem)
       })
     } else {
-      console.log("Updating resultItem with id ", event.id)
-      console.log(event)
+      console.log("saveResultItem -- Updating resultItem with id ", event.id, event)
       this.taskService.updateResultItem(event.id, event).then(_ => this.reloadTask())
     }
   }
@@ -89,9 +87,6 @@ export class OskariRpcComponent implements AfterViewInit {
     this.taskService.getTask(this.task.id, true).then(task => {
       this.task = task
       console.log("Task loaded:", task)
-      for (let r of task.results) {
-        r.resultItems.forEach(console.log)
-      }
     })
   }
 
@@ -103,12 +98,11 @@ export class OskariRpcComponent implements AfterViewInit {
   }
 
   deleteResultItem(event: any) {
-    console.log("deleteResultItem", event)
     if (event.isNew) {
-      console.log("Marker was a new one. Only remove it from map.")
+      console.log("deleteResultItem -- Marker was a new one. Only remove it from map.", event)
       this.removeMarkerFromMap(event.markerId)
     } else {
-      console.log("Marker was already saved. Remove it from map and DB.")
+      console.log("deleteResultItem -- Marker was already saved. Remove it from map and DB.", event)
       this.removeMarkerFromMap(event.id)
       this.taskService.removeResultItem(event.id)
     }
@@ -183,7 +177,10 @@ export class OskariRpcComponent implements AfterViewInit {
     }
     console.log("markerAction:", this.markerAction)
     if (this.markerAction) this.setAddMarkerListenerActive()
-    else this.setOpenMarkerListenerActive()
+    else {
+      this.setOpenMarkerListenerActive()
+      this.setShowCoordinateActive()
+    }
   }
 
   private setAddMarkerListenerActive() {
@@ -191,12 +188,26 @@ export class OskariRpcComponent implements AfterViewInit {
     const markerHandler = function (data) {
       console.log(eventName)
       this.setMarkerToMap(data.lat, data.lon)
+      this.coordinates = this.geoService.toEPSG4326(data.lat, data.lon)
       this.toggleMarkerAction()
     }.bind(this)
 
     this.actionHandlers.set(eventName, markerHandler)
     this.channel.handleEvent(eventName, markerHandler)
     this.channel.setCursorStyle(['pointer'], (data) => this.zone.runGuarded(() => { }))
+  }
+
+  private setShowCoordinateActive() {
+    const eventName = 'MapClickedEvent'
+    const mapClickedEventFn = function (data) {
+      this.zone.runGuarded(() => { 
+        this.coordinates = this.geoService.toEPSG4326(data.lat, data.lon)
+        console.log(eventName, this.coordinates)
+      })
+    }.bind(this)
+
+    this.actionHandlers.set(eventName, mapClickedEventFn)
+    this.channel.handleEvent(eventName, mapClickedEventFn)
   }
 
   private setOpenMarkerListenerActive() {

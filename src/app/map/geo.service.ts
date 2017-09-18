@@ -72,7 +72,7 @@ export class HourMinuteSecond {
   }
 
   asString(decimals?: number): string {
-    return this.hour + "° " + this.minute + "' " + this.formatAsString(this.second, decimals) + "\""
+    return this.hour + "°" + this.minute + "'" + this.formatAsString(this.second, decimals) + "\""
   }
 
   formatAsString(value: number, decimals?: number) : string {
