@@ -7,13 +7,14 @@ import { OskariRpcComponent } from './oskari-rpc.component'
 import { HelpComponent } from './help.component'
 import { MarkComponent } from './mark.component'
 import { MarkService } from '../service/mark.service'
-import { GeoService } from './geo.service'
+import { GeoService } from './geo.service';
+import { ResultItemComponent } from './result-item.component'
 
 @NgModule({
   imports: [
     CommonModule, RouterModule, FormsModule
   ],
-  declarations: [MapComponent, OskariRpcComponent, HelpComponent, MarkComponent],
+  declarations: [MapComponent, OskariRpcComponent, HelpComponent, MarkComponent, ResultItemComponent],
   providers: [MarkService, GeoService],
   exports: [MapComponent]
 })

@@ -1,0 +1,24 @@
+<div class="popup" *ngIf="visible === true">
+  <div class="popup__content">
+    <div class="form type--basic">
+      <div class="popup__header"><a (click)="close()" class="popup__header-link type--back"></a>
+        <h1 class="popup__header-title" *ngIf="model.isNew">Uusi merkintä</h1>
+        <h1 class="popup__header-title" *ngIf="!model.isNew">Päivitä merkintää</h1>
+      </div>
+      <div class="form__text">
+        <div class="form__text-title">Koordinaatit</div>
+        <div class="form__text-value" *ngIf="model.geometry.coordinates.length == 2">{{model.geometry.coordinates[0]}} {{model.geometry.coordinates[1]}}</div>
+      </div>
+      <div class="form__item">
+        <label>Nimi</label>
+        <input [(ngModel)]="model.name" type="text">
+      </div>
+      <div class="form__item">
+        <label>Kuvaus</label>
+        <textarea [(ngModel)]="model.description"></textarea>
+      </div>
+      <div class="form__footer"><a class="button" (click)="delete()">Poista merkintä</a></div>
+      <div class="form__footer"><a class="button" (click)="save()">Tallenna merkintä</a></div>
+    </div>
+  </div>
+</div>

@@ -4,6 +4,6 @@
         <h1 class="view__header-title">{{task?.name}}</h1>
         <a (click)="showHelp()" class="view__header-link type--info">Ohjeet</a>
     </div>
-    <app-oskari-rpc></app-oskari-rpc>
+    <app-oskari-rpc [task]="task"></app-oskari-rpc>
 </div>
 <app-help (helpClosed)="hideHelp()" [task]="task" [visible]="isHelpVisible"></app-help>
