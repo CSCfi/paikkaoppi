@@ -22,10 +22,7 @@ export class ResultItemComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     console.log("ResultItemComponent.ngOnChanges", this.model)
     const resultItem = this.model as ResultItem
-    this.isPoint = this.geoService.isPoint(resultItem)
-    if (this.isPoint) {
-      this.EPSG4326 = this.geoService.toEPSG4326(resultItem.geometry.coordinates[0], resultItem.geometry.coordinates[1])
-    }
+    this.EPSG4326 = this.geoService.getPointCoordinates(resultItem)
   }
 
   close() {

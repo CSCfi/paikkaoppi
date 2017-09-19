@@ -5,6 +5,7 @@ const EPSG4326 = '+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs'
 
 const geometryTypePoint = 'Point'
 const geometryTypePolygon = 'Polygon'
+const geometryTypeFeatureCollection = 'FeatureCollection'
 
 const MARKER_OPTIONS: any = {
     color: 'ff0000',
@@ -13,4 +14,4 @@ const MARKER_OPTIONS: any = {
     size: 10
 }
 
-export { MARKER_OPTIONS, EPSG3067, EPSG4326, geometryTypePoint, geometryTypePolygon }
+export { MARKER_OPTIONS, EPSG3067, EPSG4326, geometryTypePoint, geometryTypePolygon, geometryTypeFeatureCollection }

@@ -2,7 +2,7 @@ import { forEach } from '@angular/router/src/utils/collection'
 import { Component, NgZone, AfterViewInit, ViewChild, EventEmitter, Input, Output } from '@angular/core'
 import OskariRPC from 'oskari-rpc'
 import { environment } from '../../environments/environment'
-import { Task, Result, ResultItem } from '../service/model'
+import { Task, Result, ResultItem, PolygonFeatureCollection } from '../service/model'
 import { ResultItemComponent } from './result-item.component'
 import { GeoService, Coordinates } from './geo.service'
 import { TaskService } from '../service/task.service'
@@ -25,6 +25,7 @@ export class OskariRpcComponent implements AfterViewInit {
   markerAction = false
   drawAreaAction = false
   actionHandlers: Map<string, any> = new Map<string, any>()
+  readonly drawAreaId: string = 'drawArea'
 
   constructor(
     private zone: NgZone,
@@ -41,6 +42,11 @@ export class OskariRpcComponent implements AfterViewInit {
           this.checkRpcVersion()
           this.drawTaskResultsToMap(this.task)
           this.setInitialMapToolMode(this.task)
+          this.debugAllChannelFunctions()
+          const eventName = 'FeatureEvent'
+          this.channel.handleEvent(eventName, function(event) {
+            console.log(eventName, event)
+          })
         }
       )
     )
@@ -53,8 +59,10 @@ export class OskariRpcComponent implements AfterViewInit {
           // Add marker to map
           const markerOptions = this.geoService.resultItemMarker(resultItem)
           this.channel.postRequest('MapModulePlugin.AddMarkerRequest', [markerOptions, "" + resultItem.id])
+        } else if (this.geoService.isPolygon(resultItem)) {
+          this.addPolygonToMap(resultItem)
         } else {
-          console.log("Skipping drawing ResultItem, since not supported yet!", resultItem)
+          console.error("Skipping drawing ResultItem, since not supported yet!", resultItem)
         }
       }
     }
@@ -74,7 +82,7 @@ export class OskariRpcComponent implements AfterViewInit {
       this.taskService.saveResultItem(resultId, event).then(resultItem => {
         console.log("resultItemSaved:", resultItem)
         this.reloadTask()
-        this.replaceMarkerIdOnMap(markerId, resultItem)
+        this.replaceGeometryIdOnMap(markerId, resultItem)
       })
     } else {
       console.log("saveResultItem -- Updating resultItem with id ", event.id, event)
@@ -90,21 +98,29 @@ export class OskariRpcComponent implements AfterViewInit {
     })
   }
 
-  private replaceMarkerIdOnMap(oldMarkerId: string, resultItem: ResultItem) {
-    const markerOptions = this.geoService.resultItemMarker(resultItem)
-    console.log("replaceMarkerIdOnMap: oldMarkerId: ", oldMarkerId, ". New ResultItem: ", resultItem)
-    this.channel.postRequest('MapModulePlugin.AddMarkerRequest', [markerOptions, "" + resultItem.id])
-    this.channel.postRequest('MapModulePlugin.RemoveMarkersRequest', [oldMarkerId])
+  private replaceGeometryIdOnMap(oldMarkerId: string, resultItem: ResultItem) {
+    if (this.geoService.isPoint(resultItem)) {
+      const markerOptions = this.geoService.resultItemMarker(resultItem)
+      console.log("replaceMarkerIdOnMap: oldMarkerId: ", oldMarkerId, ". New ResultItem: ", resultItem)
+      this.channel.postRequest('MapModulePlugin.AddMarkerRequest', [markerOptions, "" + resultItem.id])
+      this.channel.postRequest('MapModulePlugin.RemoveMarkersRequest', [oldMarkerId])
+    } else if (this.geoService.isPolygon(resultItem)) {
+      console.error("Replace saved area ResultItem on map -- TODO")
+    } else {
+      throw new SyntaxError("Unknown ResultItem type:" + resultItem.geometry.type)
+    }
   }
 
-  deleteResultItem(event: any) {
-    if (event.isNew) {
-      console.log("deleteResultItem -- Marker was a new one. Only remove it from map.", event)
-      this.removeMarkerFromMap(event.markerId)
+  deleteResultItem(resultItem: ResultItem) {
+    if ((resultItem as any).isNew) {
+      console.log("deleteResultItem -- Marker was a new one. Only remove it from map.", resultItem)
+      const markerId: string = (resultItem as any).markerId
+      // TODO: Tarkista polygonille, mikä on id?
+      this.removeGeometryFromMap(resultItem, markerId)
     } else {
-      console.log("deleteResultItem -- Marker was already saved. Remove it from map and DB.", event)
-      this.removeMarkerFromMap(event.id)
-      this.taskService.removeResultItem(event.id)
+      console.log("deleteResultItem -- Marker was already saved. Remove it from map and DB.", resultItem)
+      this.removeGeometryFromMap(resultItem, resultItem.id.toString())
+      this.taskService.removeResultItem(resultItem.id)
     }
   }
 
@@ -141,7 +157,7 @@ export class OskariRpcComponent implements AfterViewInit {
     if (this.task != null && this.task.results.length == 1) {
       return this.task.results[0].id
     }
-    throw Error("ResultId not found since task did not have only one result")
+    throw new SyntaxError("ResultId not found since task did not have only one result")
   }
 
   private findResultItemFromTask(id: number | string) {
@@ -151,7 +167,18 @@ export class OskariRpcComponent implements AfterViewInit {
         return resultItem
       }
     }
-    throw new Error("ResultItem with id " + id + " not found")
+    throw new SyntaxError("ResultItem with id " + id + " not found")
+  }
+
+  private removeGeometryFromMap(resultItem: ResultItem, id: string) {
+    if (this.geoService.isPoint(resultItem))
+      this.removeMarkerFromMap(id)
+    else if (this.geoService.isPolygon(resultItem))
+      // TODO: Tarkista polygon, mikä on ID?
+      this.removeDrawAreaFromMap(id)
+    else {
+      throw new SyntaxError("deleteResultItem - Unknown resultItem type:" + resultItem.geometry.type)
+    }
   }
 
   private removeMarkerFromMap(id: string) {
@@ -240,38 +267,195 @@ export class OskariRpcComponent implements AfterViewInit {
     if (this.markerAction && this.drawAreaAction) {
       this.toggleMarkerAction()
     }
-
-    if (this.drawAreaAction) {
-      console.log('Set draw area on')
-      const eventName = 'DrawingEvent'
-      const drawAreaHandler = function (event) {
-        console.log(eventName)
-        if (event.isFinished) {
-          this.zone.runGuarded(() => {
-            console.log(event.geojson)
-            this.toggleDrawAreaAction()
-          })
-        }
-      }.bind(this)
-      this.actionHandlers.set(eventName, drawAreaHandler)
-      this.channel.handleEvent(eventName, drawAreaHandler)
-      this.startDrawArea()
-    } else {
-      console.log('Set draw area off')
+    console.log("drawAreaAction:", this.drawAreaAction)
+    if (this.drawAreaAction) this.setDrawAreaListenerActive()
+    else {
       this.stopDrawArea()
+      this.setShowCoordinateActive()
+      this.setOpenMarkerListenerActive()
     }
   }
 
+  setDrawAreaListenerActive() {
+    const eventName = 'DrawingEvent'
+    const drawAreaHandler = function (event) {
+      this.zone.runGuarded(() => {
+        console.log(eventName, event)
+        if (event.isFinished) {
+          this.toggleDrawAreaAction()
+          this.testFeatureCollectionReplace(event.geojson)
+        }
+      })
+    }.bind(this)
+    this.actionHandlers.set(eventName, drawAreaHandler)
+    this.channel.handleEvent(eventName, drawAreaHandler)
+    this.startDrawArea()
+  }
+
+  addPolygonToMap(resultItem: ResultItem) {
+    var params = [resultItem.geometry, {
+      clearPrevious: false,
+    }]
+
+    this.channel.postRequest('MapModulePlugin.AddFeaturesToMapRequest', params)
+  }
+
+  testFeatureCollectionReplace(geojson: PolygonFeatureCollection) {
+    const geojsonObject = geojson
+
+    this.removeDrawAreaFromMap(this.drawAreaId)
+
+    const resultItem = this.geoService.polygonResultItem(this.resultId(), geojson)
+    this.taskService.saveResultItem(resultItem.resultId, resultItem).then( item => this.addPolygonToMap(item))
+
+    
+
+    /*
+    var x = 488704;
+    var y = 6939136;
+    var geojsonObject = {
+      'type': 'FeatureCollection',
+      'crs': {
+        'type': 'name',
+        'properties': {
+          'name': 'EPSG:3067'
+        }
+      },
+      'features': [
+        {
+          'type': 'Feature',
+          'geometry': {
+            'type': 'LineString',
+            'coordinates': [[x, y], [x + 100000, y + 100000]]
+          },
+          'properties': {
+            'test_property': 1
+          }
+        },
+        {
+          'type': 'Feature',
+          'geometry': {
+            'type': 'Point',
+            'coordinates': [x, y]
+          },
+          'properties': {
+            'test_property': 2
+          }
+        }
+
+      ]
+    };
+    var testOptions = {
+      'minResolution': 0,
+      'maxResolution': 1000
+    };
+    */
+
+    /*
+    var params = [geojsonObject, {
+      clearPrevious: false,
+    }];
+
+    this.channel.postRequest(
+      'MapModulePlugin.AddFeaturesToMapRequest',
+      params
+    );
+    this.channel.log('MapModulePlugin.AddFeaturesToMapRequest posted with data', params);
+
+    */
+    /*
+    var geojsonObject2 = {
+      'type': 'FeatureCollection',
+      'crs': {
+        'type': 'name',
+        'properties': {
+          'name': 'EPSG:3067'
+        }
+      },
+      'features': [
+        {
+          'type': 'Feature',
+          'geometry': {
+            'type': 'LineString',
+            'coordinates': [[x + 30000, y], [x + 130000, y + 100000]]
+          },
+          'properties': {
+            'test_property': 'Line'
+          }
+        },
+        {
+          'type': 'Feature',
+          'geometry': {
+            'type': 'Point',
+            'coordinates': [x + 30000, y]
+          },
+          'properties': {
+            'test_property': 'empty'
+          }
+        }
+
+      ]
+    };
+
+    var testOptions2 = {
+      'minResolution': 0,
+      'maxResolution': 1000
+    };
+    var params2 = [geojsonObject2, {
+      clearPrevious: false,
+      layerOptions: testOptions2,
+      centerTo: true,
+      featureStyle: {
+        fill: {
+          color: '#ff0000'
+        },
+        stroke: {
+          color: '#ff0000',
+          width: 5
+        },
+        text: {
+          scale: 1.3,
+          fill: {
+            color: 'rgba(0,0,0,1)'
+          },
+          stroke: {
+            color: 'rgba(255,255,255,1)',
+            width: 2
+          },
+          labelProperty: 'test_property'
+        }
+      },
+      cursor: 'zoom-out',
+      prio: 1
+    }];
+
+
+    this.channel.postRequest(
+      'MapModulePlugin.AddFeaturesToMapRequest',
+      params2
+    );
+    this.channel.log('MapModulePlugin.AddFeaturesToMapRequest posted with data', params2);
+    */
+  }
+
   startDrawArea() {
-    const config = ['drawArea', 'Polygon']
+    const config = [this.drawAreaId, 'Polygon']
     this.channel.postRequest('DrawTools.StartDrawingRequest', config)
   }
 
   stopDrawArea() {
-    const config = ['drawArea', false]
+    console.log("stopDrawArea", this.drawAreaId)
+    // This removes unfinished drawings
+    const config = [this.drawAreaId, false]
     this.channel.postRequest('DrawTools.StopDrawingRequest', config)
   }
 
+  removeDrawAreaFromMap(id: any) {
+    console.log("removeDrawArea:", id)
+    // This removes finished drawings
+    const config = [this.drawAreaId, true]
+    this.channel.postRequest('DrawTools.StopDrawingRequest', config)
+  }
 
   clearActionHandlers() {
     this.actionHandlers.forEach((handler: any, eventName: string) => {
@@ -320,5 +504,18 @@ export class OskariRpcComponent implements AfterViewInit {
         console.info('Client is supported by Oskari.')
       }
     }))
+  }
+
+  debugAllChannelFunctions() {
+    this.channel.getAllLayers( items => items.forEach(item => console.log("getAllLayers", item)))
+    this.channel.getMapPosition( pos => console.log("getMapPosition", pos))
+    this.channel.getSupportedEvents( items => console.log("getSupportedEvents", items))
+    this.channel.getSupportedFunctions( items => console.log("getSupportedFunctions", items))
+    this.channel.getSupportedRequests( items => console.log("getSupportedRequests", items))
+    this.channel.getZoomRange( items => console.log("getZoomRange", items))
+    this.channel.getMapBbox( pos => console.log("getMapBbox", pos))
+    this.channel.getCurrentState( pos => console.log("getCurrentState", pos))
+    this.channel.useState( pos => console.log("useState", pos))
+    this.channel.getFeatures( items => console.log("getFeatures", items))
   }
 }

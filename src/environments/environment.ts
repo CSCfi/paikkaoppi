@@ -8,5 +8,6 @@ export const environment = {
   mapEnv : "dev",
   mapDomain : "https://kartta.paikkatietoikkuna.fi",
   mapId : "87e9ad3a-a91f-4888-8262-4fc625102ee1",
-  mapTools: {markerTool: true, areaTool: false},
+  mapTools: {markerTool: true, areaTool: true},
+  mapHelpVisibleInitially: false,
 };

@@ -181,7 +181,7 @@ export class TaskService {
         return result
       }
     }
-    throw new Error("Result not found with id " + resultId)
+    throw new SyntaxError("Result not found with id " + resultId)
   }
 
   private findResultWithItemId(resultItemId: number): Result {
@@ -192,6 +192,6 @@ export class TaskService {
           return result
       }
     }
-    throw new Error("ResultItem not found with id " + resultItemId)
+    throw new SyntaxError("ResultItem not found with id " + resultItemId)
   }
 }

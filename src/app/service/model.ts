@@ -54,8 +54,11 @@ export interface ResultItem {
     description?: string
 }
 
+export type Geometry = Point | PolygonFeatureCollection
+export type Point = GeoJSON.Point
+export type FeatureCollection = GeoJSON.FeatureCollection<GeoJSON.GeometryObject>
+export type PolygonFeatureCollection = GeoJSON.FeatureCollection<GeoJSON.Polygon>
 // only point and polygon current supported by domain.
-export type Geometry = GeoJSON.Point | GeoJSON.Polygon
 
 export interface Mark {
     id: number

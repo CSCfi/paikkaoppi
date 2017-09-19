@@ -1,13 +1,13 @@
 import { Injectable } from '@angular/core';
 import * as GeoJSON from "geojson"
 import proj4 from 'proj4';
-import { EPSG3067, EPSG4326, MARKER_OPTIONS, geometryTypePoint, geometryTypePolygon } from './config'
-import { ResultItem } from '../service/model'
+import { EPSG3067, EPSG4326, MARKER_OPTIONS, geometryTypePoint, geometryTypePolygon, geometryTypeFeatureCollection } from './config'
+import { ResultItem, Geometry, Point, FeatureCollection, PolygonFeatureCollection } from '../service/model'
 
 @Injectable()
 export class GeoService {
-
-  constructor() { }
+  constructor() {
+  }
 
   marker(coordinates: number[]): any {
     return Object.assign({ y: coordinates[0], x: coordinates[1] }, MARKER_OPTIONS)
@@ -36,12 +36,24 @@ export class GeoService {
     }
   }
 
+  polygonResultItem(resultId: number, geojson: any): ResultItem {
+    return {
+      resultId: resultId,
+      geometry: geojson as PolygonFeatureCollection,
+    }
+  }
+
   isPoint(resultItem: ResultItem) {
     return resultItem && resultItem.geometry && resultItem.geometry.type == geometryTypePoint
   }
 
   isPolygon(resultItem: ResultItem) {
-    return resultItem && resultItem.geometry && resultItem.geometry.type == geometryTypePolygon
+    const geometry: Geometry = resultItem.geometry
+    if (geometry.type == geometryTypeFeatureCollection) {
+      const featureCollection = geometry as FeatureCollection
+      return featureCollection.features.every(feature => feature.geometry.type == geometryTypePolygon)
+    }
+    return false
   }
 
   point(lat: number, lon: number): GeoJSON.Point {
@@ -58,7 +70,7 @@ export class GeoService {
     }
     return null
   }
-  
+
   // Same as WGS84
   toEPSG4326(lat, lon): Coordinates {
     // FYI: Now you have to give the coordinates in different order than with oskari-coordinates
@@ -87,13 +99,13 @@ export class HourMinuteSecond {
     const rounded = this.round(value, decimals)
     return rounded.toString().replace(".", ",")
   }
+
   round(value: number, decimals?: number) {
     if (decimals) return value.toFixed(decimals)
     else return value
   }
-
-
 }
+
 export class Coordinates {
   lat: HourMinuteSecond
   lon: HourMinuteSecond

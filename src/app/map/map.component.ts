@@ -2,6 +2,7 @@ import 'rxjs/add/operator/switchMap'
 import * as GeoJSON from "geojson"
 import { Component, OnInit, Input } from '@angular/core'
 import { ActivatedRoute, ParamMap, Router } from '@angular/router'
+import { environment } from '../../environments/environment'
 import { OskariRpcComponent } from './oskari-rpc.component'
 import { HelpComponent } from './help.component'
 import { TaskService } from '../service/task.service'
@@ -14,7 +15,7 @@ import { Task, Result, ResultItem, Geometry } from '../service/model'
   styleUrls: ['./map.component.css']
 })
 export class MapComponent implements OnInit {
-  isHelpVisible: boolean = true
+  isHelpVisible: boolean = environment.mapHelpVisibleInitially
   task: Task
   @Input() helpClosed: () => boolean
 
@@ -27,7 +28,6 @@ export class MapComponent implements OnInit {
       .subscribe(task => {
         this.task = task
       })
-    this.showHelp()
   }
 
   private async testTaskService(taskId: number) {
