@@ -51,6 +51,14 @@ export class GeoService {
     }
   }
 
+  getPointCoordinates(resultItem: ResultItem): Coordinates | null {
+    if (this.isPoint(resultItem)) {
+      const geometry = resultItem.geometry as GeoJSON.Point
+      return this.toEPSG4326(geometry.coordinates[0], geometry.coordinates[1])
+    }
+    return null
+  }
+  
   // Same as WGS84
   toEPSG4326(lat, lon): Coordinates {
     // FYI: Now you have to give the coordinates in different order than with oskari-coordinates
@@ -75,7 +83,7 @@ export class HourMinuteSecond {
     return this.hour + "°" + this.minute + "'" + this.formatAsString(this.second, decimals) + "\""
   }
 
-  formatAsString(value: number, decimals?: number) : string {
+  formatAsString(value: number, decimals?: number): string {
     const rounded = this.round(value, decimals)
     return rounded.toString().replace(".", ",")
   }
@@ -84,7 +92,7 @@ export class HourMinuteSecond {
     else return value
   }
 
-  
+
 }
 export class Coordinates {
   lat: HourMinuteSecond

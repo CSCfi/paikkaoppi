@@ -4,7 +4,7 @@ import OskariRPC from 'oskari-rpc'
 import { environment } from '../../environments/environment'
 import { Task, Result, ResultItem } from '../service/model'
 import { ResultItemComponent } from './result-item.component'
-import { GeoService } from './geo.service'
+import { GeoService, Coordinates } from './geo.service'
 import { TaskService } from '../service/task.service'
 
 @Component({
@@ -16,7 +16,7 @@ export class OskariRpcComponent implements AfterViewInit {
   @Input() task: Task | null
   resultItemPopupVisible: boolean = false
   resultItemPopupResultItem: any
-  coordinates : Coordinates | null
+  coordinates: Coordinates | null
 
   env = environment.mapEnv
   domain = environment.mapDomain
@@ -62,8 +62,8 @@ export class OskariRpcComponent implements AfterViewInit {
 
   private setInitialMapToolMode(task: Task) {
     // Set open marker listener active by default
-    this.setOpenMarkerListenerActive()
     this.setShowCoordinateActive()
+    this.setOpenMarkerListenerActive()
   }
 
   saveResultItem(event: any) {
@@ -108,8 +108,9 @@ export class OskariRpcComponent implements AfterViewInit {
     }
   }
 
-  resultItemPopupHidden(event: any) {
+  resultItemPopupHidden(resultItem: ResultItem) {
     this.resultItemPopupVisible = false
+    this.updateToolbarCoordinatesFromResultItem(resultItem)
   }
 
   private setMarkerToMap(lat, lon) {
@@ -143,16 +144,6 @@ export class OskariRpcComponent implements AfterViewInit {
     throw Error("ResultId not found since task did not have only one result")
   }
 
-  private openMarker(markerId: string) {
-    this.zone.runGuarded(() => {
-      const resutlId: number = this.resultId()
-      const resultItem: ResultItem = this.geoService.cloneResultItem(this.findResultItemFromTask(markerId))
-      console.log("Open markerId", markerId, "ResultId:", resutlId, "ResultItem:", resultItem)
-      this.resultItemPopupResultItem = resultItem
-      this.resultItemPopupVisible = true
-    })
-  }
-
   private findResultItemFromTask(id: number | string) {
     for (let result of this.task.results) {
       let resultItem = result.resultItems.find(item => item.id == id)
@@ -168,6 +159,23 @@ export class OskariRpcComponent implements AfterViewInit {
     this.channel.postRequest('MapModulePlugin.RemoveMarkersRequest', [id])
   }
 
+  private openMarker(markerId: string) {
+    const resutlId: number = this.resultId()
+    const resultItem: ResultItem = this.geoService.cloneResultItem(this.findResultItemFromTask(markerId))
+    this.updateToolbarCoordinatesFromResultItem(resultItem)
+    console.log("Open markerId", markerId, "ResultId:", resutlId, "ResultItem:", resultItem, "Coordinates:", this.coordinates)
+    this.resultItemPopupResultItem = resultItem
+    this.resultItemPopupVisible = true
+  }
+
+  private updateToolbarCoordinatesFromResultItem(resultItem: ResultItem) {
+    this.coordinates = this.geoService.getPointCoordinates(resultItem)
+  }
+
+  private updateToolbarCoordinates(lat: number, lon: number) {
+    this.coordinates = this.geoService.toEPSG4326(lat, lon)
+  }
+
   toggleMarkerAction() {
     console.log("toggleMarkerAction")
     this.clearActionHandlers()
@@ -178,18 +186,20 @@ export class OskariRpcComponent implements AfterViewInit {
     console.log("markerAction:", this.markerAction)
     if (this.markerAction) this.setAddMarkerListenerActive()
     else {
-      this.setOpenMarkerListenerActive()
       this.setShowCoordinateActive()
+      this.setOpenMarkerListenerActive()
     }
   }
 
   private setAddMarkerListenerActive() {
     const eventName = 'MapClickedEvent'
     const markerHandler = function (data) {
-      console.log(eventName)
-      this.setMarkerToMap(data.lat, data.lon)
-      this.coordinates = this.geoService.toEPSG4326(data.lat, data.lon)
-      this.toggleMarkerAction()
+      this.zone.runGuarded(() => {
+        this.setMarkerToMap(data.lat, data.lon)
+        this.updateToolbarCoordinates(data.lat, data.lon)
+        console.log("AddMarker", eventName, this.coordinates)
+        this.toggleMarkerAction()
+      })
     }.bind(this)
 
     this.actionHandlers.set(eventName, markerHandler)
@@ -200,9 +210,9 @@ export class OskariRpcComponent implements AfterViewInit {
   private setShowCoordinateActive() {
     const eventName = 'MapClickedEvent'
     const mapClickedEventFn = function (data) {
-      this.zone.runGuarded(() => { 
-        this.coordinates = this.geoService.toEPSG4326(data.lat, data.lon)
-        console.log(eventName, this.coordinates)
+      this.zone.runGuarded(() => {
+        this.updateToolbarCoordinates(data.lat, data.lon)
+        console.log("showCoordinate:", eventName, this.coordinates)
       })
     }.bind(this)
 
@@ -213,8 +223,10 @@ export class OskariRpcComponent implements AfterViewInit {
   private setOpenMarkerListenerActive() {
     const eventName = 'MarkerClickEvent'
     const markerHandler = function (data) {
-      console.log(eventName)
-      this.openMarker(data.id)
+      this.zone.runGuarded(() => {
+        console.log(eventName)
+        this.openMarker(data.id)
+      })
     }.bind(this)
 
     this.actionHandlers.set(eventName, markerHandler)

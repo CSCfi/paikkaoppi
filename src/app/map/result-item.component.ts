@@ -15,7 +15,7 @@ export class ResultItemComponent implements OnChanges {
 
   @Output() deleteResultItem = new EventEmitter<ResultItem>()
   @Output() saveResultItem = new EventEmitter<ResultItem>()
-  @Output() resultItemPopupHidden = new EventEmitter<boolean>()
+  @Output() resultItemPopupHidden = new EventEmitter<ResultItem>()
 
   constructor(private geoService: GeoService) { }
 
@@ -46,7 +46,8 @@ export class ResultItemComponent implements OnChanges {
   }
 
   private hide() {
+    const tmpModel = this.model
     this.model = null
-    this.resultItemPopupHidden.emit(true)
+    this.resultItemPopupHidden.emit(tmpModel)
   }
 }
