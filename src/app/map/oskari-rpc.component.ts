@@ -41,6 +41,7 @@ export class OskariRpcComponent implements AfterViewInit {
           this.checkRpcVersion()
           this.drawTaskResultsToMap(this.task)
           this.setInitialMapToolMode(this.task)
+          this.resetMapLocation()
         }
       )
     )
@@ -292,10 +293,18 @@ export class OskariRpcComponent implements AfterViewInit {
     }))
   }
 
-  reset() {
-    this.channel.resetState(() => this.zone.runGuarded(() => {
-      console.log('State reset.')
-    }))
+  resetMapLocation() {
+    const mapPosition = {
+      "centerX": 443367,
+      "centerY": 7187167,
+      "zoom": 1,
+      "scale": 5805343,
+      "srsName": "EPSG:3067"
+    }
+
+    this.channel.postRequest(
+      'MapMoveRequest', [mapPosition.centerX, mapPosition.centerY, mapPosition.zoom]
+    );
   }
 
   checkRpcVersion() {
