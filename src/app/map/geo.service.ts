@@ -36,7 +36,7 @@ export class GeoService {
     }
   }
 
-  polygonResultItem(resultId: number, geojson: any): ResultItem {
+  polygonResultItem(resultId: number, geojson: PolygonFeatureCollection): ResultItem {
     return {
       resultId: resultId,
       geometry: geojson as PolygonFeatureCollection,
@@ -44,10 +44,12 @@ export class GeoService {
   }
 
   isPoint(resultItem: ResultItem) {
-    return resultItem && resultItem.geometry && resultItem.geometry.type == geometryTypePoint
+    return resultItem && resultItem["geometry"] && resultItem.geometry.type == geometryTypePoint
   }
 
   isPolygon(resultItem: ResultItem) {
+    if (!(resultItem && resultItem["geometry"]))
+      return false
     const geometry: Geometry = resultItem.geometry
     if (geometry.type == geometryTypeFeatureCollection) {
       const featureCollection = geometry as FeatureCollection

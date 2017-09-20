@@ -11,6 +11,7 @@ export class ResultItemComponent implements OnChanges {
   @Input() visible = false
   @Input() model: any
   isPoint: boolean = false
+  isPolygon: boolean = false
   EPSG4326: Coordinates
 
   @Output() deleteResultItem = new EventEmitter<ResultItem>()
@@ -23,6 +24,8 @@ export class ResultItemComponent implements OnChanges {
     console.log("ResultItemComponent.ngOnChanges", this.model)
     const resultItem = this.model as ResultItem
     this.EPSG4326 = this.geoService.getPointCoordinates(resultItem)
+    this.isPoint = this.geoService.isPoint(resultItem)
+    this.isPolygon = this.geoService.isPolygon(resultItem)
   }
 
   close() {

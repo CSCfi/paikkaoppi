@@ -6,9 +6,14 @@
         <h1 class="popup__header-title" *ngIf="!model.isNew">Päivitä merkintää</h1>
       </div>
       <div class="form__text">
-        <div class="form__text-title">Koordinaatit</div>
-        <div class="form__text-value" *ngIf="isPoint">N:{{model.geometry.coordinates[0]}}, E:{{model.geometry.coordinates[1]}}</div>
-        <div class="form__text-value" *ngIf="isPoint">N:{{EPSG4326.lat.asString(3)}} E:{{EPSG4326.lon.asString(3)}}</div>
+        <ng-container *ngIf="isPoint">
+          <div class="form__text-title">Koordinaatit</div>
+          <div class="form__text-value">N:{{model.geometry.coordinates[0]}}, E:{{model.geometry.coordinates[1]}}</div>
+          <div class="form__text-value">N:{{EPSG4326.lat.asString(3)}} E:{{EPSG4326.lon.asString(3)}}</div>
+        </ng-container>
+        <ng-container *ngIf="isPolygon">
+          <div class="form__text-title">Alue</div>
+        </ng-container>
       </div>
       <div class="form__item">
         <label>Nimi</label>

@@ -2,7 +2,7 @@
   <div class="map__zoom">
     <div (click)="zoomIn()" class="map__zoom-in"></div>
     <div (click)="zoomOut()" class="map__zoom-out"></div>
-    <div (click)="reset()" class="map__center"></div>
+    <div (click)="resetMapLocation()" class="map__center"></div>
   </div>
   <div class="map__tools">
     <a *ngIf="mapTools['markerTool']" (click)="toggleMarkerAction()" class="map__tools-dot" [ngClass]="markerAction == true ? 'is-selected' : ''"></a>

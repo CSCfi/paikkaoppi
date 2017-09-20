@@ -6,6 +6,8 @@ import { Task, Result, ResultItem, PolygonFeatureCollection } from '../service/m
 import { ResultItemComponent } from './result-item.component'
 import { GeoService, Coordinates } from './geo.service'
 import { TaskService } from '../service/task.service'
+import { OskariPointService } from './oskari-point.service'
+import { OskariPolygonService } from './oskari-polygon.service'
 
 @Component({
   selector: 'app-oskari-rpc',
@@ -25,12 +27,15 @@ export class OskariRpcComponent implements AfterViewInit {
   markerAction = false
   drawAreaAction = false
   actionHandlers: Map<string, any> = new Map<string, any>()
-  readonly drawAreaId: string = 'drawArea'
+
+  pointService: OskariPointService
+  polygonService: OskariPolygonService
 
   constructor(
     private zone: NgZone,
     private geoService: GeoService,
-    private taskService: TaskService) { }
+    private taskService: TaskService) {
+  }
 
   ngAfterViewInit() {
     const iframe = document.getElementById('oskari-map')
@@ -39,14 +44,13 @@ export class OskariRpcComponent implements AfterViewInit {
     this.channel.onReady(
       () => this.zone.runGuarded(
         () => {
+          this.pointService = new OskariPointService(this.geoService, this.channel)
+          this.polygonService = new OskariPolygonService(this.geoService, this.channel)
           this.checkRpcVersion()
           this.drawTaskResultsToMap(this.task)
-          this.setInitialMapToolMode(this.task)
+          this.setInitialMapToolMode()
+          this.resetMapLocation()
           this.debugAllChannelFunctions()
-          const eventName = 'FeatureEvent'
-          this.channel.handleEvent(eventName, function(event) {
-            console.log(eventName, event)
-          })
         }
       )
     )
@@ -56,11 +60,9 @@ export class OskariRpcComponent implements AfterViewInit {
     for (let result of task.results) {
       for (let resultItem of result.resultItems) {
         if (this.geoService.isPoint(resultItem)) {
-          // Add marker to map
-          const markerOptions = this.geoService.resultItemMarker(resultItem)
-          this.channel.postRequest('MapModulePlugin.AddMarkerRequest', [markerOptions, "" + resultItem.id])
+          this.pointService.addPointToMap(resultItem)
         } else if (this.geoService.isPolygon(resultItem)) {
-          this.addPolygonToMap(resultItem)
+          this.polygonService.addPolygonToMap(resultItem)
         } else {
           console.error("Skipping drawing ResultItem, since not supported yet!", resultItem)
         }
@@ -68,22 +70,28 @@ export class OskariRpcComponent implements AfterViewInit {
     }
   }
 
-  private setInitialMapToolMode(task: Task) {
-    // Set open marker listener active by default
-    this.setShowCoordinateActive()
-    this.setOpenMarkerListenerActive()
-  }
-
   saveResultItem(event: any) {
     const resultId = this.resultId()
+    const resultItem = event as ResultItem
     if (event.isNew) {
-      console.log("saveResultItem -- Saving new result item to db to resultId", resultId, event)
-      const markerId = event["markerId"]
-      this.taskService.saveResultItem(resultId, event).then(resultItem => {
-        console.log("resultItemSaved:", resultItem)
-        this.reloadTask()
-        this.replaceGeometryIdOnMap(markerId, resultItem)
-      })
+      if (this.geoService.isPoint(resultItem)) {
+        console.log("saveResultItem -- Saving new resultItem to db to resultId", resultId, event)
+        const markerId = event["markerId"]
+        this.taskService.saveResultItem(resultId, event).then(resultItem => {
+          console.log("resultItemSaved:", resultItem)
+          this.reloadTask()
+          this.pointService.replacePointOnMap(markerId, resultItem)
+        })
+      } else if (this.geoService.isPolygon(resultItem)) {
+        console.log("saveResultItem -- Saving new resultItem to db to resultId", resultId, event)
+        this.taskService.saveResultItem(resultId, resultItem).then(item => {
+          console.log("resultItemSaved:", item)
+          this.reloadTask()
+          this.polygonService.replaceDrawingWithPolygonOnMap(item)
+        })
+      } else {
+        console.error("Not supported resultItem type")
+      }
     } else {
       console.log("saveResultItem -- Updating resultItem with id ", event.id, event)
       this.taskService.updateResultItem(event.id, event).then(_ => this.reloadTask())
@@ -98,28 +106,14 @@ export class OskariRpcComponent implements AfterViewInit {
     })
   }
 
-  private replaceGeometryIdOnMap(oldMarkerId: string, resultItem: ResultItem) {
-    if (this.geoService.isPoint(resultItem)) {
-      const markerOptions = this.geoService.resultItemMarker(resultItem)
-      console.log("replaceMarkerIdOnMap: oldMarkerId: ", oldMarkerId, ". New ResultItem: ", resultItem)
-      this.channel.postRequest('MapModulePlugin.AddMarkerRequest', [markerOptions, "" + resultItem.id])
-      this.channel.postRequest('MapModulePlugin.RemoveMarkersRequest', [oldMarkerId])
-    } else if (this.geoService.isPolygon(resultItem)) {
-      console.error("Replace saved area ResultItem on map -- TODO")
-    } else {
-      throw new SyntaxError("Unknown ResultItem type:" + resultItem.geometry.type)
-    }
-  }
-
   deleteResultItem(resultItem: ResultItem) {
-    if ((resultItem as any).isNew) {
-      console.log("deleteResultItem -- Marker was a new one. Only remove it from map.", resultItem)
-      const markerId: string = (resultItem as any).markerId
-      // TODO: Tarkista polygonille, mikä on id?
-      this.removeGeometryFromMap(resultItem, markerId)
-    } else {
-      console.log("deleteResultItem -- Marker was already saved. Remove it from map and DB.", resultItem)
-      this.removeGeometryFromMap(resultItem, resultItem.id.toString())
+    if (this.geoService.isPoint(resultItem)) {
+      this.pointService.removePointFromMap(resultItem)
+    } else if (this.geoService.isPolygon(resultItem)) {
+      this.polygonService.removePolygonFromMap(resultItem)
+    }
+
+    if (!(resultItem as any).isNew) {
       this.taskService.removeResultItem(resultItem.id)
     }
   }
@@ -129,28 +123,24 @@ export class OskariRpcComponent implements AfterViewInit {
     this.updateToolbarCoordinatesFromResultItem(resultItem)
   }
 
-  private setMarkerToMap(lat, lon) {
-    console.info('setMarkerToMap:', lat, lon)
-    this.addMarkerToMap(lat, lon)
+  showResultItemPopup(resultItem: ResultItem) {
+    this.resultItemPopupResultItem = resultItem
+    this.resultItemPopupVisible = true
   }
 
-  private addMarkerToMap(lat, lon) {
-    const markerOptions = this.geoService.marker([lat, lon])
-    const resutlId: number = this.resultId()
-
+  private addNewPointToMap(lat, lon) {
     const eventName = 'AfterAddMarkerEvent'
     const afterAddMarkerEventFunction = function (data) {
-      const resultItem: any = this.geoService.pointResultItem(resutlId, lat, lon)
+      const resultItem: any = this.geoService.pointResultItem(this.resultId(), lat, lon)
       resultItem["isNew"] = true
       resultItem["markerId"] = data.id
       console.log(eventName, data, resultItem)
-      this.resultItemPopupResultItem = resultItem
-      this.resultItemPopupVisible = true
+      this.showResultItemPopup(resultItem)
       this.channel.unregisterEventHandler(eventName, afterAddMarkerEventFunction)
     }.bind(this)
 
     this.channel.handleEvent(eventName, afterAddMarkerEventFunction)
-    this.channel.postRequest('MapModulePlugin.AddMarkerRequest', [markerOptions])
+    this.pointService.addNewPointToMap(this.resultId(), lat, lon)
   }
 
   private resultId(): number {
@@ -168,31 +158,6 @@ export class OskariRpcComponent implements AfterViewInit {
       }
     }
     throw new SyntaxError("ResultItem with id " + id + " not found")
-  }
-
-  private removeGeometryFromMap(resultItem: ResultItem, id: string) {
-    if (this.geoService.isPoint(resultItem))
-      this.removeMarkerFromMap(id)
-    else if (this.geoService.isPolygon(resultItem))
-      // TODO: Tarkista polygon, mikä on ID?
-      this.removeDrawAreaFromMap(id)
-    else {
-      throw new SyntaxError("deleteResultItem - Unknown resultItem type:" + resultItem.geometry.type)
-    }
-  }
-
-  private removeMarkerFromMap(id: string) {
-    console.info('removeMarkerFromMap:', id)
-    this.channel.postRequest('MapModulePlugin.RemoveMarkersRequest', [id])
-  }
-
-  private openMarker(markerId: string) {
-    const resutlId: number = this.resultId()
-    const resultItem: ResultItem = this.geoService.cloneResultItem(this.findResultItemFromTask(markerId))
-    this.updateToolbarCoordinatesFromResultItem(resultItem)
-    console.log("Open markerId", markerId, "ResultId:", resutlId, "ResultItem:", resultItem, "Coordinates:", this.coordinates)
-    this.resultItemPopupResultItem = resultItem
-    this.resultItemPopupVisible = true
   }
 
   private updateToolbarCoordinatesFromResultItem(resultItem: ResultItem) {
@@ -213,8 +178,7 @@ export class OskariRpcComponent implements AfterViewInit {
     console.log("markerAction:", this.markerAction)
     if (this.markerAction) this.setAddMarkerListenerActive()
     else {
-      this.setShowCoordinateActive()
-      this.setOpenMarkerListenerActive()
+      this.setInitialMapToolMode()
     }
   }
 
@@ -222,7 +186,7 @@ export class OskariRpcComponent implements AfterViewInit {
     const eventName = 'MapClickedEvent'
     const markerHandler = function (data) {
       this.zone.runGuarded(() => {
-        this.setMarkerToMap(data.lat, data.lon)
+        this.addNewPointToMap(data.lat, data.lon)
         this.updateToolbarCoordinates(data.lat, data.lon)
         console.log("AddMarker", eventName, this.coordinates)
         this.toggleMarkerAction()
@@ -232,6 +196,12 @@ export class OskariRpcComponent implements AfterViewInit {
     this.actionHandlers.set(eventName, markerHandler)
     this.channel.handleEvent(eventName, markerHandler)
     this.channel.setCursorStyle(['pointer'], (data) => this.zone.runGuarded(() => { }))
+  }
+
+  private setInitialMapToolMode() {
+    // Set open marker listener active by default
+    this.setShowCoordinateActive()
+    this.setAllOpenPopupListenersActive()
   }
 
   private setShowCoordinateActive() {
@@ -247,18 +217,59 @@ export class OskariRpcComponent implements AfterViewInit {
     this.channel.handleEvent(eventName, mapClickedEventFn)
   }
 
-  private setOpenMarkerListenerActive() {
+  private setAllOpenPopupListenersActive() {
+    this.setOpenPointListenerActive()
+    this.setOpenPolygonListenerActive()
+  }
+
+  private setOpenPointListenerActive() {
     const eventName = 'MarkerClickEvent'
     const markerHandler = function (data) {
       this.zone.runGuarded(() => {
         console.log(eventName)
-        this.openMarker(data.id)
+        this.openPointPopup(data.id)
       })
     }.bind(this)
 
     this.actionHandlers.set(eventName, markerHandler)
     this.channel.handleEvent(eventName, markerHandler)
     this.channel.setCursorStyle(['default'], (data) => this.zone.runGuarded(() => { }))
+  }
+
+  private openPointPopup(id: string) {
+    const resultId: number = this.resultId()
+    const resultItem: ResultItem = this.geoService.cloneResultItem(this.findResultItemFromTask(id))
+    this.updateToolbarCoordinatesFromResultItem(resultItem)
+    console.log("Open markerId", id, "ResultId:", resultId, "ResultItem:", resultItem, "Coordinates:", this.coordinates)
+    this.showResultItemPopup(resultItem)
+  }
+
+
+  private setOpenPolygonListenerActive() {
+    const eventName = 'FeatureEvent'
+    const featureClickedHandler = function (event) {
+      this.zone.runGuarded(() => {
+        if (event["operation"] == 'click') {
+          this.openPolygonPopup(event.features)
+        }
+      })
+    }.bind(this)
+    this.actionHandlers.set(eventName, featureClickedHandler)
+    this.channel.handleEvent(eventName, featureClickedHandler)
+    this.channel.setCursorStyle(['default'], (data) => this.zone.runGuarded(() => { }))
+  }
+
+  openPolygonPopup(features: any[]) {
+    if (features.length > 1) {
+      console.info("There are multiple features clicked at the same time, opening the first one.")
+    }
+    const feature = features[0]
+    const layerId: string = feature.layerId
+    const id: number = this.polygonService.polygonIdForLayerId(layerId)
+    const resultId: number = this.resultId()
+    const resultItem: ResultItem = this.geoService.cloneResultItem(this.findResultItemFromTask(id))
+    console.log("openPolygonPopup: layerId", layerId, "id", id, "resultId", resultId, "resultItem", resultItem)
+    this.showResultItemPopup(resultItem)
   }
 
   toggleDrawAreaAction() {
@@ -270,9 +281,8 @@ export class OskariRpcComponent implements AfterViewInit {
     console.log("drawAreaAction:", this.drawAreaAction)
     if (this.drawAreaAction) this.setDrawAreaListenerActive()
     else {
-      this.stopDrawArea()
-      this.setShowCoordinateActive()
-      this.setOpenMarkerListenerActive()
+      this.polygonService.stopDrawPolygon()
+      this.setInitialMapToolMode()
     }
   }
 
@@ -282,179 +292,18 @@ export class OskariRpcComponent implements AfterViewInit {
       this.zone.runGuarded(() => {
         console.log(eventName, event)
         if (event.isFinished) {
+          const geojson: PolygonFeatureCollection = event.geojson
+          const resultItem = this.geoService.polygonResultItem(this.resultId(), geojson) as any
+          resultItem["isNew"] = true
+          this.showResultItemPopup(resultItem)
+          console.log("DrawingEvent.isFinished:", eventName, event, resultItem)
           this.toggleDrawAreaAction()
-          this.testFeatureCollectionReplace(event.geojson)
         }
       })
     }.bind(this)
     this.actionHandlers.set(eventName, drawAreaHandler)
     this.channel.handleEvent(eventName, drawAreaHandler)
-    this.startDrawArea()
-  }
-
-  addPolygonToMap(resultItem: ResultItem) {
-    var params = [resultItem.geometry, {
-      clearPrevious: false,
-    }]
-
-    this.channel.postRequest('MapModulePlugin.AddFeaturesToMapRequest', params)
-  }
-
-  testFeatureCollectionReplace(geojson: PolygonFeatureCollection) {
-    const geojsonObject = geojson
-
-    this.removeDrawAreaFromMap(this.drawAreaId)
-
-    const resultItem = this.geoService.polygonResultItem(this.resultId(), geojson)
-    this.taskService.saveResultItem(resultItem.resultId, resultItem).then( item => this.addPolygonToMap(item))
-
-    
-
-    /*
-    var x = 488704;
-    var y = 6939136;
-    var geojsonObject = {
-      'type': 'FeatureCollection',
-      'crs': {
-        'type': 'name',
-        'properties': {
-          'name': 'EPSG:3067'
-        }
-      },
-      'features': [
-        {
-          'type': 'Feature',
-          'geometry': {
-            'type': 'LineString',
-            'coordinates': [[x, y], [x + 100000, y + 100000]]
-          },
-          'properties': {
-            'test_property': 1
-          }
-        },
-        {
-          'type': 'Feature',
-          'geometry': {
-            'type': 'Point',
-            'coordinates': [x, y]
-          },
-          'properties': {
-            'test_property': 2
-          }
-        }
-
-      ]
-    };
-    var testOptions = {
-      'minResolution': 0,
-      'maxResolution': 1000
-    };
-    */
-
-    /*
-    var params = [geojsonObject, {
-      clearPrevious: false,
-    }];
-
-    this.channel.postRequest(
-      'MapModulePlugin.AddFeaturesToMapRequest',
-      params
-    );
-    this.channel.log('MapModulePlugin.AddFeaturesToMapRequest posted with data', params);
-
-    */
-    /*
-    var geojsonObject2 = {
-      'type': 'FeatureCollection',
-      'crs': {
-        'type': 'name',
-        'properties': {
-          'name': 'EPSG:3067'
-        }
-      },
-      'features': [
-        {
-          'type': 'Feature',
-          'geometry': {
-            'type': 'LineString',
-            'coordinates': [[x + 30000, y], [x + 130000, y + 100000]]
-          },
-          'properties': {
-            'test_property': 'Line'
-          }
-        },
-        {
-          'type': 'Feature',
-          'geometry': {
-            'type': 'Point',
-            'coordinates': [x + 30000, y]
-          },
-          'properties': {
-            'test_property': 'empty'
-          }
-        }
-
-      ]
-    };
-
-    var testOptions2 = {
-      'minResolution': 0,
-      'maxResolution': 1000
-    };
-    var params2 = [geojsonObject2, {
-      clearPrevious: false,
-      layerOptions: testOptions2,
-      centerTo: true,
-      featureStyle: {
-        fill: {
-          color: '#ff0000'
-        },
-        stroke: {
-          color: '#ff0000',
-          width: 5
-        },
-        text: {
-          scale: 1.3,
-          fill: {
-            color: 'rgba(0,0,0,1)'
-          },
-          stroke: {
-            color: 'rgba(255,255,255,1)',
-            width: 2
-          },
-          labelProperty: 'test_property'
-        }
-      },
-      cursor: 'zoom-out',
-      prio: 1
-    }];
-
-
-    this.channel.postRequest(
-      'MapModulePlugin.AddFeaturesToMapRequest',
-      params2
-    );
-    this.channel.log('MapModulePlugin.AddFeaturesToMapRequest posted with data', params2);
-    */
-  }
-
-  startDrawArea() {
-    const config = [this.drawAreaId, 'Polygon']
-    this.channel.postRequest('DrawTools.StartDrawingRequest', config)
-  }
-
-  stopDrawArea() {
-    console.log("stopDrawArea", this.drawAreaId)
-    // This removes unfinished drawings
-    const config = [this.drawAreaId, false]
-    this.channel.postRequest('DrawTools.StopDrawingRequest', config)
-  }
-
-  removeDrawAreaFromMap(id: any) {
-    console.log("removeDrawArea:", id)
-    // This removes finished drawings
-    const config = [this.drawAreaId, true]
-    this.channel.postRequest('DrawTools.StopDrawingRequest', config)
+    this.polygonService.startDrawPolygon()
   }
 
   clearActionHandlers() {
@@ -476,10 +325,17 @@ export class OskariRpcComponent implements AfterViewInit {
     }))
   }
 
-  reset() {
-    this.channel.resetState(() => this.zone.runGuarded(() => {
-      console.log('State reset.')
-    }))
+  resetMapLocation() {
+    // These properties are made up. Looked pretty decent.
+    const mapPosition = {
+      "centerX": 443367,
+      "centerY": 7187167,
+      "zoom": 1,
+    }
+
+    this.channel.postRequest(
+      'MapMoveRequest', [mapPosition.centerX, mapPosition.centerY, mapPosition.zoom]
+    );
   }
 
   checkRpcVersion() {
@@ -507,15 +363,14 @@ export class OskariRpcComponent implements AfterViewInit {
   }
 
   debugAllChannelFunctions() {
-    this.channel.getAllLayers( items => items.forEach(item => console.log("getAllLayers", item)))
-    this.channel.getMapPosition( pos => console.log("getMapPosition", pos))
-    this.channel.getSupportedEvents( items => console.log("getSupportedEvents", items))
-    this.channel.getSupportedFunctions( items => console.log("getSupportedFunctions", items))
-    this.channel.getSupportedRequests( items => console.log("getSupportedRequests", items))
-    this.channel.getZoomRange( items => console.log("getZoomRange", items))
-    this.channel.getMapBbox( pos => console.log("getMapBbox", pos))
-    this.channel.getCurrentState( pos => console.log("getCurrentState", pos))
-    this.channel.useState( pos => console.log("useState", pos))
-    this.channel.getFeatures( items => console.log("getFeatures", items))
+    this.channel.getAllLayers(items => items.forEach(item => console.log("getAllLayers", item)))
+    this.channel.getMapPosition(pos => console.log("getMapPosition", pos))
+    this.channel.getSupportedEvents(items => console.log("getSupportedEvents", items))
+    this.channel.getSupportedFunctions(items => console.log("getSupportedFunctions", items))
+    this.channel.getSupportedRequests(items => console.log("getSupportedRequests", items))
+    this.channel.getZoomRange(items => console.log("getZoomRange", items))
+    this.channel.getMapBbox(pos => console.log("getMapBbox", pos))
+    this.channel.getCurrentState(pos => console.log("getCurrentState", pos))
+    this.channel.getFeatures(items => console.log("getFeatures", items))
   }
 }
