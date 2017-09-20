@@ -47,9 +47,9 @@ export class OskariRpcComponent implements AfterViewInit {
           this.pointService = new OskariPointService(this.geoService, this.channel)
           this.polygonService = new OskariPolygonService(this.geoService, this.channel)
           this.checkRpcVersion()
+          this.resetMapLocation()
           this.drawTaskResultsToMap(this.task)
           this.setInitialMapToolMode()
-          this.resetMapLocation()
           this.debugAllChannelFunctions()
         }
       )
@@ -330,12 +330,10 @@ export class OskariRpcComponent implements AfterViewInit {
     const mapPosition = {
       "centerX": 443367,
       "centerY": 7187167,
-      "zoom": 1,
+      "zoom": 0,
     }
 
-    this.channel.postRequest(
-      'MapMoveRequest', [mapPosition.centerX, mapPosition.centerY, mapPosition.zoom]
-    );
+    this.channel.postRequest('MapMoveRequest', [mapPosition.centerX, mapPosition.centerY, mapPosition.zoom])
   }
 
   checkRpcVersion() {
