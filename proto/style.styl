@@ -347,6 +347,7 @@ ul
   transform-style preserve-3d
   overflow-x hidden
   overflow-y auto
+  -webkit-overflow-scrolling touch
   position absolute
   top 0 
   bottom 0
@@ -396,10 +397,11 @@ ul
   // max-width page_max_width
   margin 0 auto
   text-align left
-  padding base_padding
+  padding base_padding base_padding 80px base_padding 
   height 'calc(100% - %s)' % page_header_height
   overflow-x hidden
   overflow-y auto
+  -webkit-overflow-scrolling touch
   
 .view__header
   position absolute
@@ -578,7 +580,7 @@ ul
 .map__tools
   background #fff
   box-shadow 2px 2px 12px alpha(#000,.5)
-  position absolute
+  position fixed
   left 10px
   bottom 10px
   right 10px
@@ -671,7 +673,10 @@ ul
         transform-style preserve-3d
         animation appear 1s ease-in-out
         animation-fill-mode forwards
-    
+      form
+        height 100%
+        display flex
+        flex-direction column
     .list__item-error
       font-size .92rem
       line-height 1.3
