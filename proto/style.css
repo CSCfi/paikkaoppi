@@ -604,7 +604,7 @@ ul {
   animation-fill-mode: forwards;
 }
 .list.type--tasks .list__item form {
-  height: 100%;
+  display: -webkit-flex;
   display: flex;
   flex-direction: column;
 }
