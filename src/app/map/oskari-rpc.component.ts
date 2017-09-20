@@ -329,7 +329,7 @@ export class OskariRpcComponent implements AfterViewInit {
     // These properties are made up. Looked pretty decent.
     const mapPosition = {
       "centerX": 443367,
-      "centerY": 7187167,
+      "centerY": 7067167,
       "zoom": 0,
     }
 
