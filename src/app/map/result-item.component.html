@@ -15,16 +15,34 @@
           <div class="form__text-title">Alue</div>
         </ng-container>
       </div>
-      <div class="form__item">
-        <label>Nimi</label>
-        <input [(ngModel)]="model.name" type="text">
-      </div>
-      <div class="form__item">
-        <label>Kuvaus</label>
-        <textarea [(ngModel)]="model.description"></textarea>
-      </div>
-      <div class="form__footer"><a class="button" (click)="save()">Tallenna merkintä</a></div>
-      <div class="form__footer" *ngIf="model.id"><a class="button" (click)="delete()">Poista merkintä</a></div>
+      <ng-container *ngIf="isEditMode">
+        <div class="form__item">
+          <label>Nimi</label>
+          <input [(ngModel)]="model.name" type="text">
+        </div>
+        <div class="form__item">
+          <label>Kuvaus</label>
+          <textarea [(ngModel)]="model.description"></textarea>
+        </div>
+        <div class="form__footer">
+          <a class="button" (click)="save()">Tallenna merkintä</a>
+          <a class="button type--secondary" (click)="delete()" *ngIf="model['id'] != null">Poista merkintä</a>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="!isEditMode">
+        <div class="form__item">
+          <label>Nimi</label>
+          <div class="form__value">{{model.name}}</div>
+        </div>
+        <div class="form__item">
+          <label>Kuvaus</label>
+          <div class="form__value">{{model.description}}</div>
+        </div>
+        <div class="form__footer">
+          <a class="button" (click)="edit()">Muokkaa merkintää</a>
+          <a class="button type--secondary" (click)="delete()" *ngIf="model['id'] != null">Poista merkintä</a>
+        </div>
+      </ng-container>
     </div>
   </div>
 </div>

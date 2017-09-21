@@ -12,6 +12,7 @@ export class ResultItemComponent implements OnChanges {
   @Input() model: any
   isPoint: boolean = false
   isPolygon: boolean = false
+  isEditMode: boolean = false
   EPSG4326: Coordinates
 
   @Output() deleteResultItem = new EventEmitter<ResultItem>()
@@ -26,6 +27,8 @@ export class ResultItemComponent implements OnChanges {
     this.EPSG4326 = this.geoService.getPointCoordinates(resultItem)
     this.isPoint = this.geoService.isPoint(resultItem)
     this.isPolygon = this.geoService.isPolygon(resultItem)
+    if (this.model != null && this.model["id"] == null)
+      this.isEditMode = true
   }
 
   close() {
@@ -45,9 +48,14 @@ export class ResultItemComponent implements OnChanges {
     this.hide()
   }
 
+  edit() {
+    this.isEditMode = true
+  }
+
   private hide() {
     const tmpModel = this.model
     this.model = null
+    this.isEditMode = false
     this.resultItemPopupHidden.emit(tmpModel)
   }
 }
