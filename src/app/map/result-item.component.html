@@ -23,8 +23,8 @@
         <label>Kuvaus</label>
         <textarea [(ngModel)]="model.description"></textarea>
       </div>
-      <div class="form__footer"><a class="button" (click)="delete()">Poista merkintä</a></div>
       <div class="form__footer"><a class="button" (click)="save()">Tallenna merkintä</a></div>
+      <div class="form__footer" *ngIf="model.id"><a class="button" (click)="delete()">Poista merkintä</a></div>
     </div>
   </div>
 </div>
