@@ -103,6 +103,10 @@ textarea {
   -moz-user-select: none;
   user-select: none;
 }
+.button.type--secondary {
+  color: #e1854b;
+  background: none;
+}
 .input,
 input {
   border: 1px solid #333;
@@ -797,10 +801,12 @@ ul {
 }
 .form__footer {
   text-align: center;
-  margin: 20px 0 0 0;
+  margin: 65px 0 0 0;
   -webkit-position: sticky;
   position: sticky;
   bottom: 0;
+  display: flex;
+  flex-direction: column;
 }
 .accordion {
   counter-reset: accordion__item;

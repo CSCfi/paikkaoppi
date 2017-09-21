@@ -196,6 +196,10 @@ button()
  
 .button
   button()
+  &.type--secondary
+    color brand_color[3]
+    background none
+    
 
 input()
   border 1px solid input_border_color
@@ -836,10 +840,12 @@ ul
 
 .form__footer
   text-align center
-  margin 20px 0 0 0
+  margin 65px 0 0 0
   -webkit-position sticky
   position sticky
   bottom 0
+  display flex
+  flex-direction column
 
 
 //- ACCORDION
