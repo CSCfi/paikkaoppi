@@ -2,8 +2,9 @@
   <div class="popup__content">
     <div class="form type--basic">
       <div class="popup__header"><a (click)="close()" class="popup__header-link type--back"></a>
-        <h1 class="popup__header-title" *ngIf="model.isNew">Uusi merkintä</h1>
-        <h1 class="popup__header-title" *ngIf="!model.isNew">Päivitä merkintää</h1>
+        <h1 class="popup__header-title" *ngIf="!isEditMode">Merkintä</h1>
+        <h1 class="popup__header-title" *ngIf="isEditMode && model.isNew">Uusi merkintä</h1>
+        <h1 class="popup__header-title" *ngIf="isEditMode && !model.isNew">Päivitä merkintää</h1>
       </div>
       <div class="form__text">
         <ng-container *ngIf="isPoint">
@@ -16,18 +17,21 @@
         </ng-container>
       </div>
       <ng-container *ngIf="isEditMode">
-        <div class="form__item">
-          <label>Nimi</label>
-          <input [(ngModel)]="model.name" type="text">
-        </div>
-        <div class="form__item">
-          <label>Kuvaus</label>
-          <textarea [(ngModel)]="model.description"></textarea>
-        </div>
-        <div class="form__footer">
-          <a class="button" (click)="save()">Tallenna merkintä</a>
-          <a class="button type--secondary" (click)="delete()" *ngIf="model['id'] != null">Poista merkintä</a>
-        </div>
+        <form (ngSubmit)="save()" #resultItemForm="ngForm">
+          <div class="form__item" [class.has-error]="name.invalid && name.dirty">
+            <label>Nimi</label>
+            <input type="text" required [(ngModel)]="model.name" name="name" #name="ngModel">
+            <div [hidden]="name.valid || name.pristine" class="alert alert-danger">Pakollinen tieto</div>
+          </div>
+          <div class="form__item">
+            <label>Kuvaus</label>
+            <textarea [(ngModel)]="model.description" name="description"></textarea>
+          </div>
+          <div class="form__footer">
+            <button type="submit" class="button" [disabled]="!resultItemForm.form.valid">Tallenna merkintä</button>
+            <a class="button type--secondary" (click)="delete()" *ngIf="model['id'] != null">Poista merkintä</a>
+          </div>
+        </form>
       </ng-container>
       <ng-container *ngIf="!isEditMode">
         <div class="form__item">

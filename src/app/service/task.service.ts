@@ -1,4 +1,8 @@
 import { Injectable } from '@angular/core';
+import { HttpClient, HttpParams } from '@angular/common/http'
+import { Observable } from 'rxjs/Observable'
+import { Subject } from 'rxjs/Subject'
+import { environment } from '../../environments/environment'
 
 import { Task, TaskTemplate, Result, ResultItem, Sequence, TaskCodeCreator, StableRandom } from './model'
 import { TaskTemplateService } from './task-template.service'
@@ -16,7 +20,7 @@ export class TaskService {
   // Remove this when real api is in use and you dont have to create taskCodes in UI
   private codeCreator: TaskCodeCreator = new TaskCodeCreator(new StableRandom(1))
 
-  constructor(private taskTemplateService: TaskTemplateService) {
+  constructor(private http: HttpClient, private taskTemplateService: TaskTemplateService) {
     taskTemplateService.getTaskTemplates().subscribe(
       (data) => {
         this.allTasks = data.map(template => this.toTask(template))
@@ -24,81 +28,129 @@ export class TaskService {
       })
   }
 
-  getTasks(): Promise<Task[]> {
-    return Promise.resolve(this.tasks.map(t => this.cloneTask(t, true, true)))
+  getTasks(): Observable<Task[]> {
+    if (environment.apiMock) return Observable.of(this.tasks.map(t => this.cloneTask(t, true, true)))
+    else {
+      return this.http.get<Task[]>(`${environment.apiUri}/task`)
+    }
   }
 
-  getTask(id: number, includeResultItems: boolean): Promise<Task> {
+  getTask(id: number, includeResults: boolean): Observable<Task> {
+    if (environment.apiMock) return this.getTaskMock(id, includeResults)
+    else return this.http.get<Task>(`${environment.apiUri}/task/${id}`, { params: new HttpParams().append("includeResults", "" + includeResults) })
+  }
+
+  private getTaskMock(id: number, includeResultItems: boolean): Observable<Task> {
     const task = this.tasks.find(t => t.id == id)
     if (task != null)
-      return Promise.resolve(this.cloneTask(task, true, includeResultItems))
+      return Observable.of(this.cloneTask(task, true, includeResultItems))
     else
-      return Promise.reject("Task not found with id " + id)
+      return Observable.throw("Task not found with id " + id)
   }
 
-  createTaskFrom(taskTemplateId: number, name: string): Promise<Task> {
+  createTaskFrom(taskTemplateId: number, name: string): Observable<Task> {
+    if (environment.apiMock) return this.createTaskFromMock(taskTemplateId, name)
+    else {
+      return this.http.post<Task>(`${environment.apiUri}/task`, {
+        taskTemplateId: taskTemplateId,
+        name: name
+      })
+    }
+  }
+  private createTaskFromMock(taskTemplateId: number, name: string): Observable<Task> {
     this.newTaskCount++
-    return this.taskTemplateService.getTaskTemplate(taskTemplateId).then(template => {
-      let task = this.toTask(template)
-      task.name = name
-      return this.addTaskForUser(task)
-    })
+    let subject: Subject<Task> = new Subject()
+    this.taskTemplateService.getTaskTemplate(taskTemplateId)
+      .subscribe(
+      (data) => {
+        let task = this.toTask(data)
+        task.name = name
+        let savedTask = this.addTaskForUser(task)
+        subject.next(savedTask)
+        subject.complete()
+      })
+    return subject
   }
 
   getAllCodes(): string[] {
     return this.allTasks.map(t => t.code)
   }
 
-  addTaskWithCode(code: string): Promise<Task> {
+  addTaskWithCode(code: string): Observable<Task> {
+    if (environment.apiMock) return this.addTaskWithCodeMock(code)
+    else {
+      return this.http.post<Result>(`${environment.apiUri}/result`, { code: code })
+        .switchMap(data => this.getTask(data.taskId, true))
+    }
+  }
+  private addTaskWithCodeMock(code: string): Observable<Task> {
     const upperCaseCode = code.toUpperCase()
     console.info("addTaskWithCode:", upperCaseCode)
     if (this.tasks.find(t => t.code == upperCaseCode) != null) {
       console.log("Task already added, rejecting result")
-      return Promise.reject("Task already added with code " + upperCaseCode)
+      return Observable.throw("Task already added with code " + upperCaseCode)
     }
     const task = this.allTasks.find(t => t.code == upperCaseCode)
     if (task == null) {
       console.info("No task found with code:", upperCaseCode)
-      return Promise.reject("No task found with code " + upperCaseCode)
+      return Observable.throw("No task found with code " + upperCaseCode)
     } else {
-      return Promise.resolve(this.addTaskForUser(task))
+      return Observable.of(this.addTaskForUser(task))
     }
   }
 
-  saveResultItem(resultId: number, resultItem: ResultItem): Promise<ResultItem> {
+  saveResultItem(resultId: number, resultItem: ResultItem): Observable<ResultItem> {
+    if (environment.apiMock) return this.saveResultItemMock(resultId, resultItem)
+    else {
+      return this.http.post<ResultItem>(`${environment.apiUri}/result/${resultId}/resultitem`, resultItem)
+    }
+  }
+  private saveResultItemMock(resultId: number, resultItem: ResultItem): Observable<ResultItem> {
     try {
       const result = this.findResultById(resultId)
       const clonedItem = this.cloneResultItem(resultItem)
       clonedItem.id = this.resultItemSequence.next()
       result.resultItems.push(clonedItem)
-      return Promise.resolve(this.cloneResultItem(clonedItem))
+      return Observable.of(this.cloneResultItem(clonedItem))
     } catch (e) {
       console.error(e)
-      return Promise.reject("Failed to save ResultItem for resultId " + resultId + " with data " + resultItem)
+      return Observable.throw("Failed to save ResultItem for resultId " + resultId + " with data " + resultItem)
     }
   }
 
-  removeResultItem(resultItemId: number): Promise<number> {
+  removeResultItem(resultItemId: number): Observable<void> {
+    if (environment.apiMock) return this.removeResultItemMock(resultItemId)
+    else {
+      return this.http.delete<void>(`${environment.apiUri}/resultitem/${resultItemId}`)
+    }
+  }
+  private removeResultItemMock(resultItemId: number): Observable<void> {
     try {
       const result = this.findResultWithItemId(resultItemId)
       result.resultItems = result.resultItems.filter(i => i.id != resultItemId)
-      return Promise.resolve(resultItemId)
+      return Observable.of()
     } catch (e) {
       console.error(e)
-      return Promise.reject("Failed to remove resultItem with id " + resultItemId)
+      return Observable.throw("Failed to remove resultItem with id " + resultItemId)
     }
   }
 
-  updateResultItem(resultItemId: number, resultItem: ResultItem): Promise<ResultItem> {
+  updateResultItem(resultItemId: number, resultItem: ResultItem): Observable<ResultItem> {
+    if (environment.apiMock) return this.updateResultItem(resultItemId, resultItem)
+    else {
+      return this.http.put<ResultItem>(`${environment.apiUri}/resultitem/${resultItemId}`, resultItem)
+    }
+  }
+  private updateResultItemMock(resultItemId: number, resultItem: ResultItem): Observable<ResultItem> {
     try {
       const result = this.findResultWithItemId(resultItem.id)
       result.resultItems = result.resultItems.filter(i => i.id != resultItem.id)
       const clonedItem = this.cloneResultItem(resultItem)
       result.resultItems.push(clonedItem)
-      return Promise.resolve(this.cloneResultItem(clonedItem))
+      return Observable.of(this.cloneResultItem(clonedItem))
     } catch (e) {
       console.error(e)
-      return Promise.reject("Failed to update resultItem. Item: " + JSON.stringify(resultItem))
+      return Observable.throw("Failed to update resultItem. Item: " + JSON.stringify(resultItem))
     }
   }
 

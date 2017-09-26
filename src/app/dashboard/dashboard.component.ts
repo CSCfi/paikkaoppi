@@ -37,11 +37,12 @@ export class DashboardComponent implements OnInit {
   }
 
   private loadTasks() {
-    this.taskService.getTasks().then(tasks => {
-      this.tasks = tasks
-      this.sortTasks()
-      this.updateCodes()
-    })
+    this.taskService.getTasks().subscribe(
+      (data) => {
+        this.tasks = data
+        this.sortTasks()
+        this.updateCodes()
+      })
   }
 
   private updateCodes() {
@@ -69,16 +70,17 @@ export class DashboardComponent implements OnInit {
   codeChanged() {
     this.formError = null
   }
-  
+
   addTask() {
     console.log("addTask():", this.model.code)
     this.formError = null
     this.taskService.addTaskWithCode(this.model.code)
-      .then(t => { 
+      .subscribe(
+      (data) => {
         this.model = new NewTaskModel(null)
-        this.router.navigate(['/dashboard', t.id]) 
-      })
-      .catch(err => {
+        this.router.navigate(['/dashboard', data.id])
+      },
+      (err) => {
         this.formError = "not found"
         console.info("Failed to add task with code:", this.model.code, ". Reason was:", err)
       })

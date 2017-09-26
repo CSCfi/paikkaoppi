@@ -42,12 +42,6 @@ export class TaskTemplateService {
       })
   }
 
-  /*
-  getTaskTemplates(): Promise<TaskTemplate[]> {
-    return Promise.resolve(this.templates)
-  }
-  */
-
   getTaskTemplates(): Observable<TaskTemplate[]> {
     if (environment.apiMock) return Observable.of(this.templates)
     else {
@@ -55,7 +49,8 @@ export class TaskTemplateService {
     }
   }
 
-  getTaskTemplate(id: number): Promise<TaskTemplate> {
-    return Promise.resolve(this.templates.find(t => t.id == id))
+  getTaskTemplate(id: number): Observable<TaskTemplate> {
+    if (environment.apiMock) return Observable.of(this.templates.find(t => t.id == id))
+    else return this.http.get<TaskTemplate>(`${environment.apiUri}/tasktemplate/${id}`)
   }
 }

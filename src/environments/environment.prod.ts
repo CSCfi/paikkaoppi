@@ -14,5 +14,6 @@ export const environment = {
   mapId : "b1de7e10-256d-4ded-acf6-4621d0e67394",
   mapTools: {markerTool: true, areaTool: true},
   mapHelpVisibleInitially: true,
-  apiUri: 'http://localhost:8000/api/v1'
+  apiUri: 'http://localhost:8000/api/v1',
+  apiMock : false,
 };

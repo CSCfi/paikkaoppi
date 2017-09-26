@@ -77,14 +77,14 @@ export class OskariRpcComponent implements AfterViewInit {
       if (this.geoService.isPoint(resultItem)) {
         console.log("saveResultItem -- Saving new resultItem to db to resultId", resultId, event)
         const markerId = event["markerId"]
-        this.taskService.saveResultItem(resultId, event).then(resultItem => {
+        this.taskService.saveResultItem(resultId, event).subscribe(resultItem => {
           console.log("resultItemSaved:", resultItem)
           this.reloadTask()
           this.pointService.replacePointOnMap(markerId, resultItem)
         })
       } else if (this.geoService.isPolygon(resultItem)) {
         console.log("saveResultItem -- Saving new resultItem to db to resultId", resultId, event)
-        this.taskService.saveResultItem(resultId, resultItem).then(item => {
+        this.taskService.saveResultItem(resultId, resultItem).subscribe(item => {
           console.log("resultItemSaved:", item)
           this.reloadTask()
           this.polygonService.replaceDrawingWithPolygonOnMap(item)
@@ -94,28 +94,30 @@ export class OskariRpcComponent implements AfterViewInit {
       }
     } else {
       console.log("saveResultItem -- Updating resultItem with id ", event.id, event)
-      this.taskService.updateResultItem(event.id, event).then(_ => this.reloadTask())
+      this.taskService.updateResultItem(event.id, event).subscribe(_ => this.reloadTask())
     }
   }
 
   private reloadTask() {
     console.log("Loading task again...")
-    this.taskService.getTask(this.task.id, true).then(task => {
-      this.task = task
-      console.log("Task loaded:", task)
-    })
+    this.taskService.getTask(this.task.id, true).subscribe(
+      (data) => {
+        this.task = data
+        console.log("Task loaded:", data)
+      })
   }
 
   deleteResultItem(resultItem: ResultItem) {
-    if (this.geoService.isPoint(resultItem)) {
-      this.pointService.removePointFromMap(resultItem)
-    } else if (this.geoService.isPolygon(resultItem)) {
-      this.polygonService.removePolygonFromMap(resultItem)
-    }
+    let removeFromMap = function (resultItem: ResultItem) {
+      if (this.geoService.isPoint(resultItem)) {
+        this.pointService.removePointFromMap(resultItem)
+      } else if (this.geoService.isPolygon(resultItem)) {
+        this.polygonService.removePolygonFromMap(resultItem)
+      }
+    }.bind(this)
 
-    if (!(resultItem as any).isNew) {
-      this.taskService.removeResultItem(resultItem.id)
-    }
+    if (resultItem.id) this.taskService.removeResultItem(resultItem.id).subscribe(_ => removeFromMap(resultItem))
+    else removeFromMap(resultItem)
   }
 
   resultItemPopupHidden(resultItem: ResultItem) {

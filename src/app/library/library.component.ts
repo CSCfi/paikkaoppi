@@ -27,10 +27,13 @@ export class LibraryComponent implements OnInit {
 
   createTask(id: number) {
     console.info("Create task from template ", id)
-    this.taskTemplateService.getTaskTemplate(id).then(t => {
-      this.selectedTemplate = t
-      this.model = new NewTaskModel(t.name)
-    })
+    this.taskTemplateService.getTaskTemplate(id)
+    .subscribe(
+      (data) => {
+        this.selectedTemplate = data
+        this.model = new NewTaskModel(data.name)
+      }
+    )
   }
 
   closePopup() {
@@ -39,8 +42,8 @@ export class LibraryComponent implements OnInit {
   }
 
   onSubmit() {
-    this.taskService.createTaskFrom(this.selectedTemplate.id, this.model.name).then(
-      newTask => this.router.navigate(["/dashboard", newTask.id])
+    this.taskService.createTaskFrom(this.selectedTemplate.id, this.model.name).subscribe(
+      (data) => this.router.navigate(["/dashboard", data.id])
     )
   }
 }
