@@ -13,4 +13,6 @@ export const environment = {
   mapId : "87e9ad3a-a91f-4888-8262-4fc625102ee1",
   mapTools: {markerTool: true, areaTool: true},
   mapHelpVisibleInitially: false,
+  apiUri: 'http://localhost:8000/api/v1',
+  apiMock : false,
 };

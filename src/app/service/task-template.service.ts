@@ -1,5 +1,7 @@
-import { Injectable } from '@angular/core';
-
+import { Injectable } from '@angular/core'
+import { HttpClient } from '@angular/common/http'
+import { Observable } from 'rxjs/Observable'
+import { environment } from '../../environments/environment'
 import { Task, TaskTemplate, Sequence } from './model'
 
 @Injectable()
@@ -7,7 +9,7 @@ export class TaskTemplateService {
   templates: TaskTemplate[] = []
   taskTemplateSequence = new Sequence()
 
-  constructor() {
+  constructor(private http: HttpClient) {
     this.templates.push(
       {
         id: this.taskTemplateSequence.next(),
@@ -40,8 +42,17 @@ export class TaskTemplateService {
       })
   }
 
+  /*
   getTaskTemplates(): Promise<TaskTemplate[]> {
     return Promise.resolve(this.templates)
+  }
+  */
+
+  getTaskTemplates(): Observable<TaskTemplate[]> {
+    if (environment.apiMock) return Observable.of(this.templates)
+    else {
+      return this.http.get<TaskTemplate[]>(`${environment.apiUri}/tasktemplate`)
+    }
   }
 
   getTaskTemplate(id: number): Promise<TaskTemplate> {

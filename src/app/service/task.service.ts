@@ -17,10 +17,11 @@ export class TaskService {
   private codeCreator: TaskCodeCreator = new TaskCodeCreator(new StableRandom(1))
 
   constructor(private taskTemplateService: TaskTemplateService) {
-    taskTemplateService.getTaskTemplates().then(t => {
-      this.allTasks = t.map(template => this.toTask(template))
-      this.addTaskForUser(this.allTasks[0])
-    })
+    taskTemplateService.getTaskTemplates().subscribe(
+      (data) => {
+        this.allTasks = data.map(template => this.toTask(template))
+        this.addTaskForUser(this.allTasks[0])
+      })
   }
 
   getTasks(): Promise<Task[]> {

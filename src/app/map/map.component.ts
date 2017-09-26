@@ -31,13 +31,9 @@ export class MapComponent implements OnInit {
   }
 
   private async testTaskService(taskId: number) {
-    console.log("testTaskService")
     const taskService = this.taskService
     const taskTemplateservice = this.taskTemplateService
-    taskTemplateservice.getTaskTemplates().then(console.log)
-    taskService.getTasks().then(console.log)
     let task = await taskService.getTask(this.task.id, true)
-    console.log(task)
     let result = task.results[0]
     let point: GeoJSON.Point = {
       type: 'Point',

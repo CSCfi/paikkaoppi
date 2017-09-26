@@ -19,7 +19,10 @@ export class LibraryComponent implements OnInit {
     private taskService: TaskService, private router: Router) { }
 
   ngOnInit() {
-    this.taskTemplateService.getTaskTemplates().then(t => this.taskTemplates = t)
+    this.taskTemplateService.getTaskTemplates().subscribe(
+      (data) => {
+        this.taskTemplates = data
+      })
   }
 
   createTask(id: number) {
