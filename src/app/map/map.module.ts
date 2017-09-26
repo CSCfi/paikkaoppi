@@ -5,8 +5,6 @@ import { FormsModule } from '@angular/forms'
 import { MapComponent } from './map.component'
 import { OskariRpcComponent } from './oskari-rpc.component'
 import { HelpComponent } from './help.component'
-import { MarkComponent } from './mark.component'
-import { MarkService } from '../service/mark.service'
 import { GeoService } from './geo.service';
 import { ResultItemComponent } from './result-item.component'
 
@@ -14,8 +12,8 @@ import { ResultItemComponent } from './result-item.component'
   imports: [
     CommonModule, RouterModule, FormsModule
   ],
-  declarations: [MapComponent, OskariRpcComponent, HelpComponent, MarkComponent, ResultItemComponent],
-  providers: [MarkService, GeoService],
+  declarations: [MapComponent, OskariRpcComponent, HelpComponent, ResultItemComponent],
+  providers: [GeoService],
   exports: [MapComponent]
 })
 export class MapModule { }

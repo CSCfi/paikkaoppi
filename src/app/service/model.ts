@@ -60,15 +60,6 @@ export type FeatureCollection = GeoJSON.FeatureCollection<GeoJSON.GeometryObject
 export type PolygonFeatureCollection = GeoJSON.FeatureCollection<GeoJSON.Polygon>
 // only point and polygon current supported by domain.
 
-export interface Mark {
-    id: number
-    markerId: string
-    lat: number
-    lon: number
-    name: string
-    description: string
-}
-
 // Remove this when real api is in use and you dont have to create taskCodes in UI
 export class StableRandom {
     constructor(private seed: number) {
