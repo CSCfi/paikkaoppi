@@ -29,6 +29,7 @@ export class MapComponent implements OnInit {
         this.task = task
       },
       error => {
+        console.error("Failed get task")
         console.error(error)
         if (error.status == 404) this.router.navigate(["/dashboard"])
       })

@@ -13,6 +13,8 @@ import { AppRoutingModule } from './app-routing.module'
 import { HomeComponent } from './home/home.component'
 
 import { AuthService } from './service/auth.service'
+import { AuthGuard } from './service/auth.guard'
+import { NotLoggedInGuard } from './service/not-logged-in.guard'
 import { TaskService } from './service/task.service'
 import { TaskTemplateService } from './service/task-template.service'
 
@@ -26,7 +28,7 @@ import { TaskTemplateService } from './service/task-template.service'
   imports: [
     AppRoutingModule, BrowserModule, FormsModule, HttpClientModule, MapModule
   ],
-  providers: [AuthService, TaskService, TaskTemplateService],
+  providers: [AuthService, TaskService, TaskTemplateService, AuthGuard, NotLoggedInGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

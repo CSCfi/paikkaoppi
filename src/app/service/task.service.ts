@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpParams } from '@angular/common/http'
+import { HttpClient, HttpParams, HttpErrorResponse } from '@angular/common/http'
 import { Observable } from 'rxjs/Observable'
+import 'rxjs/add/observable/throw';
 import { environment } from '../../environments/environment'
 import { TaskTemplateService } from './task-template.service'
 import { AuthService } from './auth.service'
@@ -46,7 +47,7 @@ export class TaskService {
     if (task != null)
       return Observable.of(this.cloneTask(task, true, includeResultItems))
     else
-      return Observable.throw("Task not found with id " + id)
+      return Observable.throw(new HttpErrorResponse({status: 404, statusText: "NotFound", error: "Task not found"}))
   }
 
   createTaskFrom(taskTemplateId: number, name: string): Observable<Task> {
@@ -85,12 +86,12 @@ export class TaskService {
     console.info("addTaskWithCode:", upperCaseCode)
     if (this.tasks.find(t => t.code == upperCaseCode) != null) {
       console.log("Task already added, rejecting result")
-      return Observable.throw("Task already added with code " + upperCaseCode)
+      return Observable.throw(new HttpErrorResponse({status: 400, error: "Task already added with code " + upperCaseCode}))
     }
     const task = this.allTasks.find(t => t.code == upperCaseCode)
     if (task == null) {
       console.info("No task found with code:", upperCaseCode)
-      return Observable.throw("No task found with code " + upperCaseCode)
+      return Observable.throw(new HttpErrorResponse({status: 404, error: "No task found with code " + upperCaseCode}) )
     } else {
       return Observable.of(this.addTaskForUser(task))
     }
@@ -111,7 +112,7 @@ export class TaskService {
       return Observable.of(this.cloneResultItem(clonedItem))
     } catch (e) {
       console.error(e)
-      return Observable.throw("Failed to save ResultItem for resultId " + resultId + " with data " + resultItem)
+      return Observable.throw(new HttpErrorResponse({status: 500, error: "Failed to save"}) )
     }
   }
 
@@ -148,7 +149,7 @@ export class TaskService {
       return Observable.of(this.cloneResultItem(clonedItem))
     } catch (e) {
       console.error(e)
-      return Observable.throw("Failed to update resultItem. Item: " + JSON.stringify(resultItem))
+      return Observable.throw(new HttpErrorResponse({status: 500, error: "Failed to update"}) )
     }
   }
 

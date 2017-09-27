@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http'
+import { HttpClient, HttpErrorResponse } from '@angular/common/http'
 import { Observable } from 'rxjs/Observable'
 import { environment } from '../../environments/environment'
 
@@ -24,7 +24,7 @@ export class AuthService {
         this.setRole(user.role)
       }
       if (user != null) return Observable.of(user)
-      else return Observable.throw("Login failed.")
+      else return Observable.throw(new HttpErrorResponse({status: 401, error: "Login failed"}) )
     } else {
       return this.http.get<User>(`${environment.apiUri}/login/${username}`).switchMap((user: User) => {
         this.setRole(user.role)
