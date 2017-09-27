@@ -5,6 +5,7 @@ import { environment } from '../../environments/environment'
 import { Task, Result, ResultItem, PolygonFeatureCollection } from '../service/model'
 import { ResultItemComponent } from './result-item.component'
 import { GeoService, Coordinates } from './geo.service'
+import { AuthService } from '../service/auth.service'
 import { TaskService } from '../service/task.service'
 import { OskariPointService } from './oskari-point.service'
 import { OskariPolygonService } from './oskari-polygon.service'
@@ -34,7 +35,8 @@ export class OskariRpcComponent implements AfterViewInit {
   constructor(
     private zone: NgZone,
     private geoService: GeoService,
-    private taskService: TaskService) {
+    private taskService: TaskService,
+    private authService: AuthService) {
   }
 
   ngAfterViewInit() {
@@ -147,10 +149,12 @@ export class OskariRpcComponent implements AfterViewInit {
   }
 
   private resultId(): number {
-    if (this.task != null && this.task.results.length == 1) {
-      return this.task.results[0].id
+    const currentUsername = this.authService.getUsername()
+    if (this.task != null && this.task.results.length > 0) {
+      const result: Result | null = this.task.results.find(r => r.user != null && r.user.username === currentUsername)
+      if (result != null) return result.id
     }
-    throw new SyntaxError("ResultId not found since task did not have only one result")
+    throw new SyntaxError(`No result found for user ${this.authService.getUser()} from task ${this.task}`)
   }
 
   private findResultItemFromTask(id: number | string) {

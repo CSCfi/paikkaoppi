@@ -1,15 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http'
 import { Observable } from 'rxjs/Observable'
-//import 'rxjs/observable/empty'
-import 'rxjs/add/observable/empty'
-
-import { EmptyObservable } from 'rxjs/observable/EmptyObservable'
-import { Subject } from 'rxjs/Subject'
 import { environment } from '../../environments/environment'
-
-import { Task, TaskTemplate, Result, ResultItem, Sequence, TaskCodeCreator, StableRandom } from './model'
 import { TaskTemplateService } from './task-template.service'
+import { AuthService } from './auth.service'
+import { User, Role, Roles, Task, TaskTemplate, Result, ResultItem, Sequence, TaskCodeCreator, StableRandom } from './model'
 
 @Injectable()
 export class TaskService {
@@ -19,12 +14,14 @@ export class TaskService {
   private taskSequence = new Sequence()
   private resultSequence = new Sequence()
   private resultItemSequence = new Sequence()
-  private userId = "test.user@test.test"
 
   // Remove this when real api is in use and you dont have to create taskCodes in UI
   private codeCreator: TaskCodeCreator = new TaskCodeCreator(new StableRandom(1))
 
-  constructor(private http: HttpClient, private taskTemplateService: TaskTemplateService) {
+  constructor(
+    private http: HttpClient,
+    private taskTemplateService: TaskTemplateService,
+    private authService: AuthService) {
     taskTemplateService.getTaskTemplates().subscribe(
       (data) => {
         this.allTasks = data.map(template => this.toTask(template))
@@ -162,7 +159,7 @@ export class TaskService {
     let result: Result = {
       id: this.resultSequence.next(),
       taskId: clonedTask.id,
-      userId: this.userId,
+      user: this.createUser(),
       resultItems: []
     }
     clonedTask.results = [result]
@@ -182,8 +179,13 @@ export class TaskService {
       info: template.info,
       tags: template.tags,
       code: code,
+      user: this.createUser(),
       results: []
     }
+  }
+
+  private createUser(): User {
+    return this.authService.getUser()
   }
 
   private cloneTask(task: Task, includeResults: boolean, includeResultItems: boolean): Task {
@@ -197,6 +199,7 @@ export class TaskService {
       info: task.info,
       tags: task.tags,
       code: task.code,
+      user: task.user,
       results: []
     }
     if (includeResults) {
@@ -209,7 +212,7 @@ export class TaskService {
     const cloned: Result = {
       id: result.id,
       taskId: result.taskId,
-      userId: result.userId,
+      user: result.user,
       resultItems: []
     }
     if (includeResultItems) {

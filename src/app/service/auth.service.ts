@@ -3,30 +3,16 @@ import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs/Observable'
 import { environment } from '../../environments/environment'
 
-export type Role = "teacher" | "student";
-
-export class Roles {
-  static teacherRole: Role = "teacher";
-  static studentRole: Role = "student";
-}
-
-export interface User {
-  username: string,
-  email: string,
-  firstName: string,
-  lastName: string,
-  role: Role
-}
+import { User, Role, Roles } from '../service/model'
 
 @Injectable()
 export class AuthService {
-
   static KEY_ROLE = "role"
   static KEY_USER = "user"
   // Mock users
   static mockUsers: User[] = [
-    { username: "OrvokkiOpettaja", firstName: "Orvokki", lastName: "Opettaja", email: "Orvokki.Opettaja@koulu.fi", role: Roles.teacherRole },
-    { username: "OliviaOppilas", firstName: "Olivia", lastName: "Oppilas", email: "olivia.oppilas@koulu.fi", role: Roles.studentRole }]
+    { username: "OliviaOppilas", firstName: "Olivia", lastName: "Oppilas", email: "olivia.oppilas@koulu.fi", role: Roles.studentRole },
+    { username: "OrvokkiOpettaja", firstName: "Orvokki", lastName: "Opettaja", email: "Orvokki.Opettaja@koulu.fi", role: Roles.teacherRole },]
 
   constructor(private http: HttpClient) { }
 
@@ -60,6 +46,11 @@ export class AuthService {
   getUser(): User | null {
     let userStr = localStorage.getItem(AuthService.KEY_USER)
     return (userStr) ? JSON.parse(userStr) : null
+  }
+
+  getUsername(): string {
+    const user = this.getUser()
+    return user ? user.username : null
   }
 
   isLoggedIn(): boolean {

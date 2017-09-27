@@ -3,9 +3,9 @@ import { Observable } from "rxjs/Observable";
 import 'rxjs/add/observable/of'
 import { Component, OnInit } from '@angular/core';
 import { Router, ParamMap, ActivatedRoute } from '@angular/router';
-import { AuthService, User, Role } from '../service/auth.service'
+import { AuthService } from '../service/auth.service'
 import { TaskService } from '../service/task.service'
-import { Task } from '../service/model'
+import { Task, User, Role } from '../service/model'
 
 @Component({
   selector: 'app-dashboard',

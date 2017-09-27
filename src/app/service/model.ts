@@ -1,5 +1,20 @@
 import * as GeoJSON from "geojson"
 
+export type Role = "teacher" | "student"
+
+export class Roles {
+  static teacherRole: Role = "teacher"
+  static studentRole: Role = "student"
+}
+
+export interface User {
+  username: string,
+  email: string,
+  firstName: string,
+  lastName: string,
+  role: Role
+}
+
 /**
  * `TaskTemplate` is a template for a task, which contain all information about the `Task`.
  * `TaskTemplate` can be instantiated as a `Task`, and then code is generated for the `Task`.
@@ -36,13 +51,14 @@ export interface Task {
     info: string
     tags: string[]
     code: string
+    user: User
     results: Result[]
 }
 
 export interface Result {
     id: number
     taskId: number
-    userId: string
+    user: User
     resultItems: ResultItem[]
 }
 

@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { User, Role, AuthService } from '../service/auth.service'
+import { AuthService } from '../service/auth.service'
 import { TaskTemplateService } from '../service/task-template.service'
 import { TaskService } from '../service/task.service'
-import { TaskTemplate } from '../service/model'
+import { TaskTemplate, User, Role } from '../service/model'
 
 @Component({
   selector: 'app-library',
