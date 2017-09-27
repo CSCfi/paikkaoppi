@@ -21,6 +21,7 @@ export class HomeComponent implements OnInit {
 
   loginUser(username: string) {
     console.log("loginUser:", username)
-    this.authService.login(username).subscribe(user => this.router.navigateByUrl("/dashboard"))
+    this.authService.login(username)
+      .subscribe(user => this.router.navigateByUrl("/dashboard"))
   }
 }
