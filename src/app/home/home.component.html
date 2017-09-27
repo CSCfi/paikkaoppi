@@ -8,16 +8,25 @@
       <div class="form__ingress">
         <p>PaikkaOppi on kouluille maksuton verkkopohjainen oppimisympäristö.</p>
       </div>
-      <div class="form__item">
-        <label>Käyttäjänimi</label>
-        <input type="text" value="">
-      </div>
-      <div class="form__item">
-        <label>Salasana</label>
-        <input type="password">
-      </div>
-      <div class="form__footer"><a (click)="loginStudent()" class="button">Kirjaudu sisään opiskelijana</a></div>
-      <div class="form__footer"><a (click)="loginTeacher()" class="button">Kirjaudu sisään opettajana</a></div>
+      <ng-container *ngIf="environment.apiMock">
+        <div class="form__item">
+          <label>Käyttäjänimi</label>
+          <input type="text" value="">
+        </div>
+        <div class="form__item">
+          <label>Salasana</label>
+          <input type="password">
+        </div>
+        <div class="form__footer">
+          <a (click)="loginUser('OliviaOppilas')" class="button">Kirjaudu sisään opiskelijana</a>
+          <a (click)="loginUser('OrvokkiOpettaja')" class="button">Kirjaudu sisään opettajana</a>
+        </div>
+      </ng-container>
+      <ng-container *ngIf="!environment.apiMock">
+        <ng-container *ngFor="let u of users">
+          <div class="form__footer"><a (click)='loginUser(u)' class="button">Kirjaudu sisään: {{u}}</a></div>
+        </ng-container>
+      </ng-container>
     </div>
   </div>
 </div>

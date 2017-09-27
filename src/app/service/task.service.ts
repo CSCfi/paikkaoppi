@@ -1,6 +1,10 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpParams } from '@angular/common/http'
 import { Observable } from 'rxjs/Observable'
+//import 'rxjs/observable/empty'
+import 'rxjs/add/observable/empty'
+
+import { EmptyObservable } from 'rxjs/observable/EmptyObservable'
 import { Subject } from 'rxjs/Subject'
 import { environment } from '../../environments/environment'
 
@@ -59,17 +63,13 @@ export class TaskService {
   }
   private createTaskFromMock(taskTemplateId: number, name: string): Observable<Task> {
     this.newTaskCount++
-    let subject: Subject<Task> = new Subject()
-    this.taskTemplateService.getTaskTemplate(taskTemplateId)
-      .subscribe(
-      (data) => {
-        let task = this.toTask(data)
-        task.name = name
-        let savedTask = this.addTaskForUser(task)
-        subject.next(savedTask)
-        subject.complete()
-      })
-    return subject
+    //let subject: Subject<Task> = new Subject()
+    return this.taskTemplateService.getTaskTemplate(taskTemplateId).switchMap((data) => {
+      let task = this.toTask(data)
+      task.name = name
+      let savedTask = this.addTaskForUser(task)
+      return Observable.of(savedTask)
+    })
   }
 
   getAllCodes(): string[] {
@@ -118,17 +118,18 @@ export class TaskService {
     }
   }
 
-  removeResultItem(resultItemId: number): Observable<void> {
+  removeResultItem(resultItemId: number): Observable<number> {
     if (environment.apiMock) return this.removeResultItemMock(resultItemId)
     else {
-      return this.http.delete<void>(`${environment.apiUri}/resultitem/${resultItemId}`)
+      return this.http.delete(`${environment.apiUri}/resultitem/${resultItemId}`)
+        .switchMap((data) => Observable.of(resultItemId))
     }
   }
-  private removeResultItemMock(resultItemId: number): Observable<void> {
+  private removeResultItemMock(resultItemId: number): Observable<number> {
     try {
       const result = this.findResultWithItemId(resultItemId)
       result.resultItems = result.resultItems.filter(i => i.id != resultItemId)
-      return Observable.of()
+      return Observable.of(resultItemId)
     } catch (e) {
       console.error(e)
       return Observable.throw("Failed to remove resultItem with id " + resultItemId)
@@ -136,7 +137,7 @@ export class TaskService {
   }
 
   updateResultItem(resultItemId: number, resultItem: ResultItem): Observable<ResultItem> {
-    if (environment.apiMock) return this.updateResultItem(resultItemId, resultItem)
+    if (environment.apiMock) return this.updateResultItemMock(resultItemId, resultItem)
     else {
       return this.http.put<ResultItem>(`${environment.apiUri}/resultitem/${resultItemId}`, resultItem)
     }

@@ -108,6 +108,7 @@ export class OskariRpcComponent implements AfterViewInit {
   }
 
   deleteResultItem(resultItem: ResultItem) {
+    console.log("deleteResultItem")
     let removeFromMap = function (resultItem: ResultItem) {
       if (this.geoService.isPoint(resultItem)) {
         this.pointService.removePointFromMap(resultItem)
@@ -116,7 +117,7 @@ export class OskariRpcComponent implements AfterViewInit {
       }
     }.bind(this)
 
-    if (resultItem.id) this.taskService.removeResultItem(resultItem.id).subscribe(_ => removeFromMap(resultItem))
+    if (resultItem.id) this.taskService.removeResultItem(resultItem.id).subscribe((data) => removeFromMap(resultItem))
     else removeFromMap(resultItem)
   }
 

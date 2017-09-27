@@ -1,7 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
-import {AuthService} from '../service/auth.service'
+import { AuthService } from '../service/auth.service'
+import { environment } from '../../environments/environment'
 
 @Component({
   selector: 'app-home',
@@ -9,20 +10,17 @@ import {AuthService} from '../service/auth.service'
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+  users: string[] = []
+  environment = environment
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
-    if(this.authService.isLoggedIn()) this.router.navigateByUrl("/dashboard")
+    this.users = this.authService.backendUsers()
+    if (this.authService.isLoggedIn()) this.router.navigateByUrl("/dashboard")
   }
 
-  loginStudent() {
-    this.authService.loginAsStudent()
-    this.router.navigateByUrl("/dashboard")
-  }
-  
-  loginTeacher() {
-    this.authService.loginAsTeacher()
-    this.router.navigateByUrl("/dashboard")
+  loginUser(username: string) {
+    console.log("loginUser:", username)
+    this.authService.login(username).subscribe(user => this.router.navigateByUrl("/dashboard"))
   }
 }

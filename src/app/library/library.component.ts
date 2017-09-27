@@ -28,22 +28,27 @@ export class LibraryComponent implements OnInit {
   createTask(id: number) {
     console.info("Create task from template ", id)
     this.taskTemplateService.getTaskTemplate(id)
-    .subscribe(
+      .subscribe(
       (data) => {
         this.selectedTemplate = data
         this.model = new NewTaskModel(data.name)
       }
-    )
+      )
   }
 
   closePopup() {
+    console.log("closePopup")
     this.selectedTemplate = null
     this.model = null
   }
 
   onSubmit() {
+    console.log("onSubmit")
     this.taskService.createTaskFrom(this.selectedTemplate.id, this.model.name).subscribe(
-      (data) => this.router.navigate(["/dashboard", data.id])
+      (data) => {
+        console.log(data)
+        this.router.navigate(["/dashboard", data.id])
+      }
     )
   }
 }
