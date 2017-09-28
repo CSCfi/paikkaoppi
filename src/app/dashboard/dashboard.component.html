@@ -16,23 +16,27 @@
               </div>
               <div class="list__item-footer">
                 <div class="list__item-input">
-                  <input type="text" class="input--code" required [(ngModel)]="model.code" name="code" #code="ngModel" placeholder="Kirjoita koodi tähän..." (change)="codeChanged()">
+                  <input type="text" class="input--code" required [(ngModel)]="model.code" name="code" #code="ngModel" placeholder="Kirjoita koodi tähän..."
+                    (change)="codeChanged()">
                   <button type="submit" class="button--continue" [disabled]="!newTaskForm.form.valid"></button>
                 </div>
               </div>
             </form>
           </div>
-          <a [routerLink]="['/map', t.id]" class="list__item" *ngFor="let t of tasks" [ngClass]="{'is-new': t.id == taskId}">
-            <div class="list__item-status" *ngIf="t.id == taskId">
-              <div class="status">Uusi</div>
-            </div>
-            <div class="list__item-image"></div>
-            <div class="list__item-title">{{t.name}}</div>
-            <div class="list__item-detail">{{t.title}} </div>
+          <div class="list__item" *ngFor="let t of tasks" [ngClass]="{'is-new': t.id == taskId}">
+            <a [routerLink]="['/map', t.id]">
+              <div class="list__item-status" *ngIf="t.id == taskId">
+                <div class="status">Uusi</div>
+              </div>
+              <div class="list__item-image"></div>
+              <div class="list__item-title">{{t.name}}</div>
+              <div class="list__item-detail">{{t.title}} </div>
+            </a>
             <div class="list__item-code">
               <div class="code">{{t.code}}</div>
             </div>
-          </a>
+          </div>
+
         </div>
         <div class="list type--tasks" style="display: block;" *ngIf="unusedCodes?.length > 0">
           <div class="list__item-title" style="color: gray;">Käyttämättömät koodit <span style="color: gray; font-size: 0.8rem;">(näytetään vain protossa)</span></div>
