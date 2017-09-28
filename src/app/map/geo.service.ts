@@ -15,7 +15,7 @@ export class GeoService {
 
   resultItemMarker(resultItem: ResultItem): any {
     const geometry: GeoJSON.Point = resultItem.geometry as GeoJSON.Point
-    console.log(this.toEPSG4326(geometry.coordinates[0], geometry.coordinates[1]))
+    console.log(this.toWGS84(geometry.coordinates[0], geometry.coordinates[1]))
     return this.marker(geometry.coordinates)
   }
 
@@ -65,16 +65,32 @@ export class GeoService {
     }
   }
 
-  getPointCoordinates(resultItem: ResultItem): Coordinates | null {
+  pointWGS84Coordinates(resultItem: ResultItem): Coordinates | null {
     if (this.isPoint(resultItem)) {
       const geometry = resultItem.geometry as GeoJSON.Point
-      return this.toEPSG4326(geometry.coordinates[0], geometry.coordinates[1])
+      return this.toWGS84(geometry.coordinates[0], geometry.coordinates[1])
     }
     return null
   }
 
+  polygonCoordinates(resultItem: ResultItem) : number[][] {
+    const polygon = resultItem.geometry as PolygonFeatureCollection
+    const features = polygon.features
+    const coordinates = polygon.features.map(f => f.geometry.coordinates)
+    if( features.length != 1 || coordinates.length != 1) {
+      throw Error("Failed to get coordinates for polygon: " + JSON.stringify(polygon))
+    }
+    return coordinates[0][0]
+  } 
+
+  polygonWGS84Coordinates(resultItem: ResultItem): Coordinates[] {
+    const coordinates = this.polygonCoordinates(resultItem)
+    coordinates.forEach(console.log)
+    return coordinates.map(c => this.toWGS84(c[0], c[1]))
+  }
+
   // Same as WGS84
-  toEPSG4326(lat, lon): Coordinates {
+  toWGS84(lat, lon): Coordinates {
     // FYI: Now you have to give the coordinates in different order than with oskari-coordinates
     const coordinates = proj4(EPSG3067, EPSG4326, [lon, lat])
     return new Coordinates(coordinates[1], coordinates[0])

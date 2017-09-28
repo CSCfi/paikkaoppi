@@ -12,12 +12,26 @@
       </div>
       <div class="form__text">
         <ng-container *ngIf="isPoint">
-          <div class="form__text-title">Koordinaatit</div>
-          <div class="form__text-value">N:{{model.geometry.coordinates[0]}}, E:{{model.geometry.coordinates[1]}}</div>
-          <div class="form__text-value">N:{{EPSG4326.lat.asString(3)}} E:{{EPSG4326.lon.asString(3)}}</div>
+          <div class="form__text-title">Koordinaatit ETRS-TM35FIN</div>
+          <div class="form__text-value">N:{{model.geometry.coordinates[0]}} E:{{model.geometry.coordinates[1]}}</div>
+          <div class="form__text-title">Koordinaatit WGS84</div>
+          <div class="form__text-value">N:{{pointWGS84Coordinates.lat.asString(3)}} E:{{pointWGS84Coordinates.lon.asString(3)}}</div>
         </ng-container>
         <ng-container *ngIf="isPolygon">
-          <div class="form__text-title">Alue</div>
+          <div class="form__text-title">Koordinaatit ETRS-TM35FIN</div>
+          <div class="form__text-value">
+            <ul>
+              <li *ngFor="let c of polygonCoordinates">N:{{c[0]}} E:{{c[1]}}</li>
+            </ul>
+          </div>
+          <div class="form__text-title">Koordinaatit WGS84</div>
+          <div class="form__text-value">
+            <ul>
+              <ng-template ngFor let-c [ngForOf]="polygonWGS84Coordinates">
+                <li>N:{{c.lat.asString(3)}} E:{{c.lon.asString(3)}}</li>
+              </ng-template>
+            </ul>
+          </div>
         </ng-container>
       </div>
       <ng-container *ngIf="isEditMode">
@@ -33,7 +47,8 @@
           </div>
           <div class="form__footer">
             <button type="submit" class="button" [disabled]="!resultItemForm.form.valid">Tallenna merkintä</button>
-            <a class="button type--secondary" (click)="delete()" *ngIf="model['id'] != null">Poista merkintä</a>
+            <button class="button type--secondary" (click)="delete()" *ngIf="model['id'] != null">Poista merkintä</button>
+            <button class="button type--secondary" (click)="close()">Sulje</button>
           </div>
         </form>
       </ng-container>
@@ -47,8 +62,8 @@
           <div class="form__value">{{model.description}}</div>
         </div>
         <div class="form__footer">
-          <a class="button" (click)="edit()">Muokkaa merkintää</a>
-          <a class="button type--secondary" (click)="delete()" *ngIf="model['id'] != null">Poista merkintä</a>
+          <button class="button" (click)="edit()">Muokkaa merkintää</button>
+          <button class="button type--secondary" (click)="close()">Sulje</button>
         </div>
       </ng-container>
     </div>

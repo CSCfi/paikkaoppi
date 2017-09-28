@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Input, Output, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core';
-import { Result, ResultItem, User } from '../service/model'
+import { Result, ResultItem, User, PolygonFeatureCollection } from '../service/model'
 import { GeoService, Coordinates } from './geo.service'
 import { AuthService } from '../service/auth.service'
 
@@ -13,9 +13,11 @@ export class ResultItemComponent implements OnChanges {
   @Input() result: Result
   @Input() model: any
   isPoint: boolean = false
+  pointWGS84Coordinates: Coordinates
   isPolygon: boolean = false
+  polygonCoordinates: number[][]
+  polygonWGS84Coordinates: Coordinates[]
   isEditMode: boolean = false
-  EPSG4326: Coordinates
   showUser: boolean = false
 
   @Output() deleteResultItem = new EventEmitter<ResultItem>()
@@ -27,13 +29,18 @@ export class ResultItemComponent implements OnChanges {
   ngOnChanges(changes: SimpleChanges) {
     console.log("ResultItemComponent.ngOnChanges", this.model)
     const resultItem = this.model as ResultItem
-    this.EPSG4326 = this.geoService.getPointCoordinates(resultItem)
+    this.pointWGS84Coordinates = this.geoService.pointWGS84Coordinates(resultItem)
     this.isPoint = this.geoService.isPoint(resultItem)
     this.isPolygon = this.geoService.isPolygon(resultItem)
+    if (this.isPolygon) {
+      this.polygonCoordinates = this.geoService.polygonCoordinates(resultItem)
+      console.log(this.polygonCoordinates)
+      this.polygonWGS84Coordinates = this.geoService.polygonWGS84Coordinates(resultItem)
+      console.log(this.polygonWGS84Coordinates)
+    }
     if (this.model != null && this.model["id"] == null) {
       this.isEditMode = true
     }
-
     if (this.result != null && this.authService.getUsername() != this.result.user.username) {
       this.showUser = true
     } else {

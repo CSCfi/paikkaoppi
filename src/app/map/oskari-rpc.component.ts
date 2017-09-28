@@ -174,11 +174,11 @@ export class OskariRpcComponent implements AfterViewInit {
   }
 
   private updateToolbarCoordinatesFromResultItem(resultItem: ResultItem) {
-    this.coordinates = this.geoService.getPointCoordinates(resultItem)
+    this.coordinates = this.geoService.pointWGS84Coordinates(resultItem)
   }
 
   private updateToolbarCoordinates(lat: number, lon: number) {
-    this.coordinates = this.geoService.toEPSG4326(lat, lon)
+    this.coordinates = this.geoService.toWGS84(lat, lon)
   }
 
   toggleMarkerAction() {
@@ -308,7 +308,7 @@ export class OskariRpcComponent implements AfterViewInit {
           const geojson: PolygonFeatureCollection = event.geojson
           const resultItem = this.geoService.polygonResultItem(this.resultId(), geojson) as any
           resultItem["isNew"] = true
-          this.showResultItemPopup(this.result(), resultItem)
+          this.showResultItemPopup(resultItem)
           console.log("DrawingEvent.isFinished:", eventName, event, resultItem)
           this.toggleDrawAreaAction()
         }
