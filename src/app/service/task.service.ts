@@ -47,7 +47,7 @@ export class TaskService {
     if (task != null)
       return Observable.of(this.cloneTask(task, true, includeResultItems))
     else
-      return Observable.throw(new HttpErrorResponse({status: 404, statusText: "NotFound", error: "Task not found"}))
+      return Observable.throw(new HttpErrorResponse({ status: 404, statusText: "NotFound", error: "Task not found" }))
   }
 
   createTaskFrom(taskTemplateId: number, name: string): Observable<Task> {
@@ -70,8 +70,20 @@ export class TaskService {
     })
   }
 
-  getAllCodes(): string[] {
-    return this.allTasks.map(t => t.code)
+  getUnusedCodes(): Observable<string[]> {
+    if (environment.apiMock) {
+      const allCodes = this.allTasks.map(t => t.code)
+      if (this.tasks == null || this.tasks.length == 0)
+        return Observable.of(allCodes)
+      else {
+        return Observable.of(allCodes.filter(code => {
+          const taskWithCode = this.tasks.find(t => t.code == code)
+          return taskWithCode == null
+        }))
+      }
+    } else {
+      return this.http.get<string[]>(`${environment.apiUri}/task/unusedcodes`)
+    }
   }
 
   addTaskWithCode(code: string): Observable<Task> {
@@ -86,12 +98,12 @@ export class TaskService {
     console.info("addTaskWithCode:", upperCaseCode)
     if (this.tasks.find(t => t.code == upperCaseCode) != null) {
       console.log("Task already added, rejecting result")
-      return Observable.throw(new HttpErrorResponse({status: 400, error: "Task already added with code " + upperCaseCode}))
+      return Observable.throw(new HttpErrorResponse({ status: 400, error: "Task already added with code " + upperCaseCode }))
     }
     const task = this.allTasks.find(t => t.code == upperCaseCode)
     if (task == null) {
       console.info("No task found with code:", upperCaseCode)
-      return Observable.throw(new HttpErrorResponse({status: 404, error: "No task found with code " + upperCaseCode}) )
+      return Observable.throw(new HttpErrorResponse({ status: 404, error: "No task found with code " + upperCaseCode }))
     } else {
       return Observable.of(this.addTaskForUser(task))
     }
@@ -112,7 +124,7 @@ export class TaskService {
       return Observable.of(this.cloneResultItem(clonedItem))
     } catch (e) {
       console.error(e)
-      return Observable.throw(new HttpErrorResponse({status: 500, error: "Failed to save"}) )
+      return Observable.throw(new HttpErrorResponse({ status: 500, error: "Failed to save" }))
     }
   }
 
@@ -149,7 +161,7 @@ export class TaskService {
       return Observable.of(this.cloneResultItem(clonedItem))
     } catch (e) {
       console.error(e)
-      return Observable.throw(new HttpErrorResponse({status: 500, error: "Failed to update"}) )
+      return Observable.throw(new HttpErrorResponse({ status: 500, error: "Failed to update" }))
     }
   }
 

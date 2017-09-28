@@ -46,15 +46,7 @@ export class DashboardComponent implements OnInit {
   }
 
   private updateCodes() {
-    const allCodes = this.taskService.getAllCodes()
-    if (this.tasks == null || this.tasks.length == 0)
-      this.unusedCodes == allCodes
-    else {
-      this.unusedCodes = allCodes.filter(code => {
-        const taskWithCode = this.tasks.find(t => t.code == code)
-        return taskWithCode == null
-      })
-    }
+    this.taskService.getUnusedCodes().subscribe(codes => this.unusedCodes = codes)
   }
 
   private sortTasks() {

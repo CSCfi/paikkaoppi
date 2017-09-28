@@ -6,6 +6,10 @@
         <h1 class="popup__header-title" *ngIf="isEditMode && model.isNew">Uusi merkintä</h1>
         <h1 class="popup__header-title" *ngIf="isEditMode && !model.isNew">Päivitä merkintää</h1>
       </div>
+      <div class="form__text" *ngIf="showUser">
+        <div class="form__text-title">Käyttäjä</div>
+        <div class="form__text-value">{{result.user.firstName}} {{result.user.lastName}} {{result.user.email}}</div>
+      </div>
       <div class="form__text">
         <ng-container *ngIf="isPoint">
           <div class="form__text-title">Koordinaatit</div>

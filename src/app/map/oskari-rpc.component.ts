@@ -18,6 +18,7 @@ import { OskariPolygonService } from './oskari-polygon.service'
 export class OskariRpcComponent implements AfterViewInit {
   @Input() task: Task | null
   resultItemPopupVisible: boolean = false
+  resultItemPopupResult: Result
   resultItemPopupResultItem: any
   coordinates: Coordinates | null
 
@@ -130,6 +131,7 @@ export class OskariRpcComponent implements AfterViewInit {
 
   showResultItemPopup(resultItem: ResultItem) {
     this.resultItemPopupResultItem = resultItem
+    this.resultItemPopupResult = this.task.results.find( r => r.id == resultItem.resultId)
     this.resultItemPopupVisible = true
   }
 
@@ -148,13 +150,17 @@ export class OskariRpcComponent implements AfterViewInit {
     this.pointService.addNewPointToMap(this.resultId(), lat, lon)
   }
 
-  private resultId(): number {
+  private result() : Result {
     const currentUsername = this.authService.getUsername()
     if (this.task != null && this.task.results.length > 0) {
       const result: Result | null = this.task.results.find(r => r.user != null && r.user.username === currentUsername)
-      if (result != null) return result.id
+      if (result != null) return result
     }
     throw new SyntaxError(`No result found for user ${this.authService.getUser()} from task ${this.task}`)
+    
+  }
+  private resultId(): number {
+    return this.result().id
   }
 
   private findResultItemFromTask(id: number | string) {
@@ -302,7 +308,7 @@ export class OskariRpcComponent implements AfterViewInit {
           const geojson: PolygonFeatureCollection = event.geojson
           const resultItem = this.geoService.polygonResultItem(this.resultId(), geojson) as any
           resultItem["isNew"] = true
-          this.showResultItemPopup(resultItem)
+          this.showResultItemPopup(this.result(), resultItem)
           console.log("DrawingEvent.isFinished:", eventName, event, resultItem)
           this.toggleDrawAreaAction()
         }
