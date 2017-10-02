@@ -61,9 +61,12 @@
           <label>Kuvaus</label>
           <div class="form__value">{{model.description}}</div>
         </div>
-        <div class="form__footer">
+        <div class="form__footer" *ngIf="!showUser">
           <button class="button" (click)="edit()">Muokkaa merkintää</button>
           <button class="button type--secondary" (click)="close()">Sulje</button>
+        </div>
+        <div class="form__footer" *ngIf="showUser">
+          <button class="button" (click)="close()">Sulje</button>
         </div>
       </ng-container>
     </div>

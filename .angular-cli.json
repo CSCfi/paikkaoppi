@@ -29,8 +29,8 @@
       "environmentSource": "environments/environment.ts",
       "environments": {
         "dev": "environments/environment.ts",
-        "test": "environments/environment.test.ts",
-        "prod": "environments/environment.prod.ts"
+        "aws-test": "environments/environment.aws-test.ts",
+        "aws-prod": "environments/environment.aws-prod.ts"
       }
     }
   ],

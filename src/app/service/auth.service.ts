@@ -34,23 +34,16 @@ export class AuthService {
       this.setUser(user)
       return Observable.of(user)
     } else {
-      const result = new Subject<User>()
-      this.http.get<User>(`${environment.apiUri}/auth/login/${username}`).subscribe(
+      this.setUser(null)
+      return this.http.get<User>(`${environment.apiUri}/auth/login/${username}`).switchMap(
         (loginUser: User) => {
-          this.updateCurrentUser().subscribe(
-            (user) => {
+          return this.updateCurrentUser().switchMap(
+            (user: User) => {
               console.log(`CurrentUser: ${user.username}`)
               this.setUser(user)
-              result.next(user)
-              result.complete()
-            },
-            (err) => {
-              this.setUser(null)
-              result.error(err)
+              return Observable.of(user)
             })
-        },
-        (err) => result.error(err))
-      return result
+        })
     }
   }
 
@@ -60,22 +53,22 @@ export class AuthService {
       this.localStorageLogout()
       return Observable.empty()
     } else {
-      const result = new Subject<void>()
-      this.http.get<void>(`${environment.apiUri}/auth/logout`).subscribe(
+      return this.http.get<void>(`${environment.apiUri}/auth/logout`).switchMap(
         _ => {
           console.log("LogoutResult")
           this.localStorageLogout()
-          result.next()
+          return Observable.empty()
         }
       )
-      return result
     }
   }
 
   private updateCurrentUser(): Observable<User> {
     console.info("AuthService.updateCurrentUser()")
     if (environment.apiMock) {
-      return Observable.of(this.getUser())
+      const user = this.getUser()
+      if (user) return Observable.of(this.getUser())
+      else return Observable.throw(new HttpErrorResponse({ status: 400, error: "Not logged in" }))
     } else {
       return this.http.get<User>(`${environment.apiUri}/user/current`)
     }

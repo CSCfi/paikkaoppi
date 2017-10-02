@@ -2,12 +2,12 @@
 
 function build {
     echo "Building app..."
-    eval "ng build --target=production --environment=prod"
+    eval "ng build --target=production --environment=aws-prod"
 }
 
 function deploy {
     echo "Deploy app to S3."
-    eval "aws s3 cp --recursive --profile paikkaoppi-deploy ./dist s3://demo-paikkaoppi/app/prod"
+    eval "aws s3 cp --recursive --profile paikkaoppi-dev ./dist s3://paikkaoppi/app/prod"
 }
 
 build && deploy

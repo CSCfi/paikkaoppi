@@ -61,7 +61,6 @@ export class TaskService {
   }
   private createTaskFromMock(taskTemplateId: number, name: string): Observable<Task> {
     this.newTaskCount++
-    //let subject: Subject<Task> = new Subject()
     return this.taskTemplateService.getTaskTemplate(taskTemplateId).switchMap((data) => {
       let task = this.toTask(data)
       task.name = name

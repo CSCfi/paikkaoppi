@@ -1010,3 +1010,10 @@ ul {
     opacity: 1;
   }
 }
+
+.form__text-title {
+  font-weight: bold;
+}
+.form__item label {
+  font-weight: bold;
+}

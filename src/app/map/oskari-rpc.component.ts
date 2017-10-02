@@ -152,11 +152,11 @@ export class OskariRpcComponent implements AfterViewInit {
 
   private result() : Result {
     const currentUsername = this.authService.getUsername()
-    if (this.task != null && this.task.results.length > 0) {
+    if (this.task != null && this.task.results && this.task.results.length > 0) {
       const result: Result | null = this.task.results.find(r => r.user != null && r.user.username === currentUsername)
       if (result != null) return result
     }
-    throw new SyntaxError(`No result found for user ${this.authService.getUser()} from task ${this.task}`)
+    throw new SyntaxError(`No result found for user ${JSON.stringify(this.authService.getUser())} from task ${JSON.stringify(this.task)}`)
     
   }
   private resultId(): number {
