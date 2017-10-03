@@ -15,5 +15,4 @@ export const environment = {
   mapTools: {markerTool: true, areaTool: true},
   mapHelpVisibleInitially: true,
   apiUri: 'https://d2esrtjkfszxd1.cloudfront.net/api/v1',
-  apiMock : false,
 };
