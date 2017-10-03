@@ -17,7 +17,7 @@ import { OskariPolygonService } from './oskari-polygon.service'
 })
 export class OskariRpcComponent implements AfterViewInit {
   @Input() task: Task | null
-  resultItemPopupVisible: boolean = false
+  resultItemPopupVisible = false
   resultItemPopupResult: Result
   resultItemPopupResultItem: any
   coordinates: Coordinates | null
@@ -60,14 +60,14 @@ export class OskariRpcComponent implements AfterViewInit {
   }
 
   private drawTaskResultsToMap(task: Task) {
-    for (let result of task.results) {
-      for (let resultItem of result.resultItems) {
+    for (const result of task.results) {
+      for (const resultItem of result.resultItems) {
         if (this.geoService.isPoint(resultItem)) {
           this.pointService.addPointToMap(resultItem)
         } else if (this.geoService.isPolygon(resultItem)) {
           this.polygonService.addPolygonToMap(resultItem)
         } else {
-          console.error("Skipping drawing ResultItem, since not supported yet!", resultItem)
+          console.error('Skipping drawing ResultItem, since not supported yet!', resultItem)
         }
       }
     }
@@ -78,50 +78,53 @@ export class OskariRpcComponent implements AfterViewInit {
     const resultItem = event as ResultItem
     if (event.isNew) {
       if (this.geoService.isPoint(resultItem)) {
-        console.log("saveResultItem -- Saving new resultItem to db to resultId", resultId, event)
-        const markerId = event["markerId"]
-        this.taskService.saveResultItem(resultId, event).subscribe(resultItem => {
-          console.log("resultItemSaved:", resultItem)
+        console.log('saveResultItem -- Saving new resultItem to db to resultId', resultId, event)
+        const markerId = event['markerId']
+        this.taskService.saveResultItem(resultId, event).subscribe(ri => {
+          console.log('resultItemSaved:', ri)
           this.reloadTask()
-          this.pointService.replacePointOnMap(markerId, resultItem)
+          this.pointService.replacePointOnMap(markerId, ri)
         })
       } else if (this.geoService.isPolygon(resultItem)) {
-        console.log("saveResultItem -- Saving new resultItem to db to resultId", resultId, event)
+        console.log('saveResultItem -- Saving new resultItem to db to resultId', resultId, event)
         this.taskService.saveResultItem(resultId, resultItem).subscribe(item => {
-          console.log("resultItemSaved:", item)
+          console.log('resultItemSaved:', item)
           this.reloadTask()
           this.polygonService.replaceDrawingWithPolygonOnMap(item)
         })
       } else {
-        console.error("Not supported resultItem type")
+        console.error('Not supported resultItem type')
       }
     } else {
-      console.log("saveResultItem -- Updating resultItem with id ", event.id, event)
+      console.log('saveResultItem -- Updating resultItem with id ', event.id, event)
       this.taskService.updateResultItem(event.id, event).subscribe(_ => this.reloadTask())
     }
   }
 
   private reloadTask() {
-    console.log("Loading task again...")
+    console.log('Loading task again...')
     this.taskService.getTask(this.task.id, true).subscribe(
       (data) => {
         this.task = data
-        console.log("Task loaded:", data)
+        console.log('Task loaded:', data)
       })
   }
 
   deleteResultItem(resultItem: ResultItem) {
-    console.log("deleteResultItem")
-    let removeFromMap = function (resultItem: ResultItem) {
-      if (this.geoService.isPoint(resultItem)) {
-        this.pointService.removePointFromMap(resultItem)
-      } else if (this.geoService.isPolygon(resultItem)) {
-        this.polygonService.removePolygonFromMap(resultItem)
+    console.log('deleteResultItem')
+    const removeFromMap = function (x: ResultItem) {
+      if (this.geoService.isPoint(x)) {
+        this.pointService.removePointFromMap(x)
+      } else if (this.geoService.isPolygon(x)) {
+        this.polygonService.removePolygonFromMap(x)
       }
     }.bind(this)
 
-    if (resultItem.id) this.taskService.removeResultItem(resultItem.id).subscribe((data) => removeFromMap(resultItem))
-    else removeFromMap(resultItem)
+    if (resultItem.id) {
+      this.taskService.removeResultItem(resultItem.id).subscribe((data) => removeFromMap(resultItem))
+    } else {
+      removeFromMap(resultItem)
+    }
   }
 
   resultItemPopupHidden(resultItem: ResultItem) {
@@ -131,7 +134,7 @@ export class OskariRpcComponent implements AfterViewInit {
 
   showResultItemPopup(resultItem: ResultItem) {
     this.resultItemPopupResultItem = resultItem
-    this.resultItemPopupResult = this.task.results.find( r => r.id == resultItem.resultId)
+    this.resultItemPopupResult = this.task.results.find(r => r.id === resultItem.resultId)
     this.resultItemPopupVisible = true
   }
 
@@ -139,8 +142,8 @@ export class OskariRpcComponent implements AfterViewInit {
     const eventName = 'AfterAddMarkerEvent'
     const afterAddMarkerEventFunction = function (data) {
       const resultItem: any = this.geoService.pointResultItem(this.resultId(), lat, lon)
-      resultItem["isNew"] = true
-      resultItem["markerId"] = data.id
+      resultItem['isNew'] = true
+      resultItem['markerId'] = data.id
       console.log(eventName, data, resultItem)
       this.showResultItemPopup(resultItem)
       this.channel.unregisterEventHandler(eventName, afterAddMarkerEventFunction)
@@ -150,27 +153,25 @@ export class OskariRpcComponent implements AfterViewInit {
     this.pointService.addNewPointToMap(this.resultId(), lat, lon)
   }
 
-  private result() : Result {
+  private result(): Result {
     const currentUsername = this.authService.getUsername()
     if (this.task != null && this.task.results && this.task.results.length > 0) {
       const result: Result | null = this.task.results.find(r => r.user != null && r.user.username === currentUsername)
       if (result != null) return result
     }
     throw new SyntaxError(`No result found for user ${JSON.stringify(this.authService.getUser())} from task ${JSON.stringify(this.task)}`)
-    
   }
+
   private resultId(): number {
     return this.result().id
   }
 
   private findResultItemFromTask(id: number | string) {
-    for (let result of this.task.results) {
-      let resultItem = result.resultItems.find(item => item.id == id)
-      if (resultItem != null) {
-        return resultItem
-      }
+    for (const result of this.task.results) {
+      const resultItem = result.resultItems.find(item => item.id === id)
+      if (resultItem != null) return resultItem
     }
-    throw new SyntaxError("ResultItem with id " + id + " not found")
+    throw new SyntaxError('ResultItem with id ' + id + ' not found')
   }
 
   private updateToolbarCoordinatesFromResultItem(resultItem: ResultItem) {
@@ -182,13 +183,13 @@ export class OskariRpcComponent implements AfterViewInit {
   }
 
   toggleMarkerAction() {
-    console.log("toggleMarkerAction")
+    console.log('toggleMarkerAction')
     this.clearActionHandlers()
     this.markerAction = !this.markerAction
     if (this.markerAction && this.drawAreaAction) {
       this.toggleDrawAreaAction()
     }
-    console.log("markerAction:", this.markerAction)
+    console.log('markerAction:', this.markerAction)
     if (this.markerAction) this.setAddMarkerListenerActive()
     else {
       this.setInitialMapToolMode()
@@ -201,7 +202,7 @@ export class OskariRpcComponent implements AfterViewInit {
       this.zone.runGuarded(() => {
         this.addNewPointToMap(data.lat, data.lon)
         this.updateToolbarCoordinates(data.lat, data.lon)
-        console.log("AddMarker", eventName, this.coordinates)
+        console.log('AddMarker', eventName, this.coordinates)
         this.toggleMarkerAction()
       })
     }.bind(this)
@@ -222,7 +223,7 @@ export class OskariRpcComponent implements AfterViewInit {
     const mapClickedEventFn = function (data) {
       this.zone.runGuarded(() => {
         this.updateToolbarCoordinates(data.lat, data.lon)
-        console.log("showCoordinate:", eventName, this.coordinates)
+        console.log('showCoordinate:', eventName, this.coordinates)
       })
     }.bind(this)
 
@@ -253,7 +254,7 @@ export class OskariRpcComponent implements AfterViewInit {
     const resultId: number = this.resultId()
     const resultItem: ResultItem = this.geoService.cloneResultItem(this.findResultItemFromTask(id))
     this.updateToolbarCoordinatesFromResultItem(resultItem)
-    console.log("Open markerId", id, "ResultId:", resultId, "ResultItem:", resultItem, "Coordinates:", this.coordinates)
+    console.log('Open markerId', id, 'ResultId:', resultId, 'ResultItem:', resultItem, 'Coordinates:', this.coordinates)
     this.showResultItemPopup(resultItem)
   }
 
@@ -262,7 +263,7 @@ export class OskariRpcComponent implements AfterViewInit {
     const eventName = 'FeatureEvent'
     const featureClickedHandler = function (event) {
       this.zone.runGuarded(() => {
-        if (event["operation"] == 'click') {
+        if (event['operation'] === 'click') {
           this.openPolygonPopup(event.features)
         }
       })
@@ -274,14 +275,14 @@ export class OskariRpcComponent implements AfterViewInit {
 
   openPolygonPopup(features: any[]) {
     if (features.length > 1) {
-      console.info("There are multiple features clicked at the same time, opening the first one.")
+      console.info('There are multiple features clicked at the same time, opening the first one.')
     }
     const feature = features[0]
     const layerId: string = feature.layerId
     const id: number = this.polygonService.polygonIdForLayerId(layerId)
     const resultId: number = this.resultId()
     const resultItem: ResultItem = this.geoService.cloneResultItem(this.findResultItemFromTask(id))
-    console.log("openPolygonPopup: layerId", layerId, "id", id, "resultId", resultId, "resultItem", resultItem)
+    console.log('openPolygonPopup: layerId', layerId, 'id', id, 'resultId', resultId, 'resultItem', resultItem)
     this.showResultItemPopup(resultItem)
   }
 
@@ -291,7 +292,7 @@ export class OskariRpcComponent implements AfterViewInit {
     if (this.markerAction && this.drawAreaAction) {
       this.toggleMarkerAction()
     }
-    console.log("drawAreaAction:", this.drawAreaAction)
+    console.log('drawAreaAction:', this.drawAreaAction)
     if (this.drawAreaAction) this.setDrawAreaListenerActive()
     else {
       this.polygonService.stopDrawPolygon()
@@ -307,9 +308,9 @@ export class OskariRpcComponent implements AfterViewInit {
         if (event.isFinished) {
           const geojson: PolygonFeatureCollection = event.geojson
           const resultItem = this.geoService.polygonResultItem(this.resultId(), geojson) as any
-          resultItem["isNew"] = true
+          resultItem['isNew'] = true
           this.showResultItemPopup(resultItem)
-          console.log("DrawingEvent.isFinished:", eventName, event, resultItem)
+          console.log('DrawingEvent.isFinished:', eventName, event, resultItem)
           this.toggleDrawAreaAction()
         }
       })
@@ -341,9 +342,9 @@ export class OskariRpcComponent implements AfterViewInit {
   resetMapLocation() {
     // These properties are made up. Looked pretty decent.
     const mapPosition = {
-      "centerX": 443367,
-      "centerY": 7067167,
-      "zoom": 0,
+      'centerX': 443367,
+      'centerY': 7067167,
+      'zoom': 0,
     }
 
     this.channel.postRequest('MapMoveRequest', [mapPosition.centerX, mapPosition.centerY, mapPosition.zoom])
@@ -374,14 +375,14 @@ export class OskariRpcComponent implements AfterViewInit {
   }
 
   debugAllChannelFunctions() {
-    this.channel.getAllLayers(items => items.forEach(item => console.log("getAllLayers", item)))
-    this.channel.getMapPosition(pos => console.log("getMapPosition", pos))
-    this.channel.getSupportedEvents(items => console.log("getSupportedEvents", items))
-    this.channel.getSupportedFunctions(items => console.log("getSupportedFunctions", items))
-    this.channel.getSupportedRequests(items => console.log("getSupportedRequests", items))
-    this.channel.getZoomRange(items => console.log("getZoomRange", items))
-    this.channel.getMapBbox(pos => console.log("getMapBbox", pos))
-    this.channel.getCurrentState(pos => console.log("getCurrentState", pos))
-    this.channel.getFeatures(items => console.log("getFeatures", items))
+    this.channel.getAllLayers(items => items.forEach(item => console.log('getAllLayers', item)))
+    this.channel.getMapPosition(pos => console.log('getMapPosition', pos))
+    this.channel.getSupportedEvents(items => console.log('getSupportedEvents', items))
+    this.channel.getSupportedFunctions(items => console.log('getSupportedFunctions', items))
+    this.channel.getSupportedRequests(items => console.log('getSupportedRequests', items))
+    this.channel.getZoomRange(items => console.log('getZoomRange', items))
+    this.channel.getMapBbox(pos => console.log('getMapBbox', pos))
+    this.channel.getCurrentState(pos => console.log('getCurrentState', pos))
+    this.channel.getFeatures(items => console.log('getFeatures', items))
   }
 }
