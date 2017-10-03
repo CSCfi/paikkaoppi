@@ -1,25 +1,25 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 
-import { OskariRpcComponent } from './oskari-rpc.component';
+import { OskariRpcComponent } from './oskari-rpc.component'
 
 describe('OskariRpcComponent', () => {
-  let component: OskariRpcComponent;
-  let fixture: ComponentFixture<OskariRpcComponent>;
+  let component: OskariRpcComponent
+  let fixture: ComponentFixture<OskariRpcComponent>
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [ OskariRpcComponent ]
     })
-    .compileComponents();
-  }));
+    .compileComponents()
+  }))
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(OskariRpcComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
-  });
+    fixture = TestBed.createComponent(OskariRpcComponent)
+    component = fixture.componentInstance
+    fixture.detectChanges()
+  })
 
   it('should be created', () => {
-    expect(component).toBeTruthy();
-  });
-});
+    expect(component).toBeTruthy()
+  })
+})
