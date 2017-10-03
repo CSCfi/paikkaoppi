@@ -24,7 +24,7 @@
       </ng-container>
       <ng-container *ngIf="!environment.apiMock">
         <ng-container *ngFor="let u of users">
-          <div class="form__footer"><a (click)='loginUser(u)' class="button">Kirjaudu sisään: {{u}}</a></div>
+          <div><a (click)='loginUser(u)' class="button">Kirjaudu sisään: {{u}}</a></div>
         </ng-container>
       </ng-container>
     </div>

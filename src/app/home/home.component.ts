@@ -16,7 +16,7 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.users = this.authService.backendUsers()
-    if (this.authService.isLoggedIn()) this.router.navigateByUrl("/dashboard")
+    if (this.authService.isLoggedIn()) { this.router.navigateByUrl("/dashboard") }
   }
 
   loginUser(username: string) {

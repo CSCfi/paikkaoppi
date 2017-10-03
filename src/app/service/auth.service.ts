@@ -11,10 +11,6 @@ import { User, Role, Roles } from '../service/model'
 export class AuthService {
   static KEY_ROLE = "role"
   static KEY_USER = "user"
-  // Mock users
-  static mockUsers: User[] = [
-    { username: "OliviaOppilas", firstName: "Olivia", lastName: "Oppilas", email: "olivia.oppilas@koulu.fi", role: Roles.studentRole },
-    { username: "OrvokkiOpettaja", firstName: "Orvokki", lastName: "Opettaja", email: "Orvokki.Opettaja@koulu.fi", role: Roles.teacherRole },]
 
   constructor(private http: HttpClient) {
     console.info("AuthService()")
@@ -29,49 +25,32 @@ export class AuthService {
   }
 
   login(username: string): Observable<User> {
-    if (environment.apiMock) {
-      let user = AuthService.mockUsers.find(u => u.username == username)
-      this.setUser(user)
-      return Observable.of(user)
-    } else {
-      this.setUser(null)
-      return this.http.get<User>(`${environment.apiUri}/auth/login/${username}`).switchMap(
-        (loginUser: User) => {
-          return this.updateCurrentUser().switchMap(
-            (user: User) => {
-              console.log(`CurrentUser: ${user.username}`)
-              this.setUser(user)
-              return Observable.of(user)
-            })
-        })
-    }
+    this.setUser(null)
+    return this.http.get<User>(`${environment.apiUri}/auth/login/${username}`).switchMap(
+      (loginUser: User) => {
+        return this.updateCurrentUser().switchMap(
+          (user: User) => {
+            console.log(`CurrentUser: ${user.username}`)
+            this.setUser(user)
+            return Observable.of(user)
+          })
+      })
   }
 
   logout(): Observable<void> {
     console.log("AuthService.logout()")
-    if (environment.apiMock) {
-      this.localStorageLogout()
-      return Observable.empty()
-    } else {
-      return this.http.get<void>(`${environment.apiUri}/auth/logout`).switchMap(
-        _ => {
-          console.log("LogoutResult")
-          this.localStorageLogout()
-          return Observable.empty()
-        }
-      )
-    }
+    return this.http.get<void>(`${environment.apiUri}/auth/logout`).switchMap(
+      _ => {
+        console.log("LogoutResult")
+        this.localStorageLogout()
+        return Observable.empty()
+      }
+    )
   }
 
   private updateCurrentUser(): Observable<User> {
     console.info("AuthService.updateCurrentUser()")
-    if (environment.apiMock) {
-      const user = this.getUser()
-      if (user) return Observable.of(this.getUser())
-      else return Observable.throw(new HttpErrorResponse({ status: 400, error: "Not logged in" }))
-    } else {
-      return this.http.get<User>(`${environment.apiUri}/user/current`)
-    }
+    return this.http.get<User>(`${environment.apiUri}/user/current`)
   }
 
   private localStorageLogout() {
@@ -84,7 +63,7 @@ export class AuthService {
   }
 
   getUser(): User | null {
-    let userStr = localStorage.getItem(AuthService.KEY_USER)
+    const userStr = localStorage.getItem(AuthService.KEY_USER)
     return (userStr) ? JSON.parse(userStr) : null
   }
 
@@ -109,8 +88,9 @@ export class AuthService {
     if (user) {
       localStorage.setItem(AuthService.KEY_USER, JSON.stringify(user))
       localStorage.setItem(AuthService.KEY_ROLE, user.role)
-    } else
+    } else {
       this.localStorageLogout()
+    }
   }
 
   backendUsers(): string[] {
