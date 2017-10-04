@@ -59,7 +59,6 @@ export class OskariLocationService {
   private showLocationOnMap(lat: number, lon: number) {
     // Add marker to map
     const params = [this.geoService.location(lat, lon), this.locationId]
-    this.removeLocationOnMap()
     this.channel.postRequest('MapModulePlugin.AddMarkerRequest', params)
   }
 
