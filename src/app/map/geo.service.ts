@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core'
 import * as GeoJSON from 'geojson'
 import proj4 from 'proj4'
-import { EPSG3067, EPSG4326, MARKER_OPTIONS, geometryTypePoint, geometryTypePolygon, geometryTypeFeatureCollection } from './config'
 import { ResultItem, Geometry, Point, FeatureCollection, PolygonFeatureCollection } from '../service/model'
+import { EPSG3067, EPSG4326, MARKER_OPTIONS, LOCATION_OPTIONS, geometryTypePoint, geometryTypePolygon,
+  geometryTypeFeatureCollection } from './config'
 
 @Injectable()
 export class GeoService {
@@ -14,7 +15,7 @@ export class GeoService {
   }
 
   location(lat: number, lon: number): any {
-    return Object.assign({ y: lat, x: lon }, MARKER_OPTIONS)
+    return Object.assign({ y: lat, x: lon }, LOCATION_OPTIONS)
   }
 
   resultItemMarker(resultItem: ResultItem): any {

@@ -14,4 +14,11 @@ const MARKER_OPTIONS: any = {
     size: 10
 }
 
-export { MARKER_OPTIONS, EPSG3067, EPSG4326, geometryTypePoint, geometryTypePolygon, geometryTypeFeatureCollection }
+const LOCATION_OPTIONS: any = {
+    color: '4292f4',
+    msg: '',
+    shape: 4,
+    size: 5
+}
+
+export { MARKER_OPTIONS, LOCATION_OPTIONS, EPSG3067, EPSG4326, geometryTypePoint, geometryTypePolygon, geometryTypeFeatureCollection }
