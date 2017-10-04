@@ -9,11 +9,11 @@ import { User, Role, Roles } from '../service/model'
 
 @Injectable()
 export class AuthService {
-  static KEY_ROLE = "role"
-  static KEY_USER = "user"
+  static KEY_ROLE = 'role'
+  static KEY_USER = 'user'
 
   constructor(private http: HttpClient) {
-    console.info("AuthService()")
+    console.info('AuthService()')
     this.updateCurrentUser().subscribe(
       (user) => {
         console.log(`CurrentUser: ${user.username}`)
@@ -38,10 +38,10 @@ export class AuthService {
   }
 
   logout(): Observable<void> {
-    console.log("AuthService.logout()")
+    console.log('AuthService.logout()')
     return this.http.get<void>(`${environment.apiUri}/auth/logout`).switchMap(
       _ => {
-        console.log("LogoutResult")
+        console.log('LogoutResult')
         this.localStorageLogout()
         return Observable.empty()
       }
@@ -49,7 +49,7 @@ export class AuthService {
   }
 
   private updateCurrentUser(): Observable<User> {
-    console.info("AuthService.updateCurrentUser()")
+    console.info('AuthService.updateCurrentUser()')
     return this.http.get<User>(`${environment.apiUri}/user/current`)
   }
 

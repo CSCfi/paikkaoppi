@@ -30,7 +30,9 @@
       "environments": {
         "dev": "environments/environment.ts",
         "aws-test": "environments/environment.aws-test.ts",
-        "aws-prod": "environments/environment.aws-prod.ts"
+        "aws-prod": "environments/environment.aws-prod.ts",
+        "test": "environments/environment.test.ts",
+        "prod": "environments/environment.prod.ts"
       }
     }
   ],

@@ -1,8 +1,8 @@
 import 'rxjs/add/operator/switchMap'
-import { Observable } from "rxjs/Observable";
+import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/observable/of'
-import { Component, OnInit } from '@angular/core';
-import { Router, ParamMap, ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core'
+import { Router, ParamMap, ActivatedRoute } from '@angular/router'
 import { AuthService } from '../service/auth.service'
 import { TaskService } from '../service/task.service'
 import { Task, User, Role } from '../service/model'
@@ -54,9 +54,9 @@ export class DashboardComponent implements OnInit {
       return
 
     // If id is defined, put that item first.
-    const task = this.tasks.find(t => t.id == this.taskId)
+    const task = this.tasks.find(t => t.id === this.taskId)
     if (task != null)
-      this.tasks = [task].concat(this.tasks.filter(t => t.id != this.taskId))
+      this.tasks = [task].concat(this.tasks.filter(t => t.id !== this.taskId))
   }
 
   codeChanged() {
@@ -64,7 +64,7 @@ export class DashboardComponent implements OnInit {
   }
 
   addTask() {
-    console.log("addTask():", this.model.code)
+    console.log('addTask():', this.model.code)
     this.formError = null
     this.taskService.addTaskWithCode(this.model.code)
       .subscribe(
@@ -73,17 +73,17 @@ export class DashboardComponent implements OnInit {
         this.router.navigate(['/dashboard', data.id])
       },
       (err) => {
-        this.formError = "not found"
-        console.info("Failed to add task with code:", this.model.code, ". Reason was:", err)
+        this.formError = 'not found'
+        console.info('Failed to add task with code:', this.model.code, '. Reason was:', err)
       })
   }
 
   logout() {
-    console.log("dashboard.logout()")
+    console.log('dashboard.logout()')
     this.authService.logout().subscribe(
       (_) => { },
-      (err) => console.error("Dashboard.logout error", err),
-      () => this.router.navigateByUrl("/home")
+      (err) => console.error('Dashboard.logout error', err),
+      () => this.router.navigateByUrl('/home')
     )
   }
 }

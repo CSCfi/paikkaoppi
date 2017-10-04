@@ -9,7 +9,7 @@ import { ResultItem } from '../service/model'
  */
 export class OskariPolygonService {
   readonly drawAreaId: string = 'drawArea'
-  readonly layerIdPrefix: string = "polygon-"
+  readonly layerIdPrefix: string = 'polygon-'
   geoService: GeoService
   channel: any
 
@@ -31,25 +31,25 @@ export class OskariPolygonService {
       clearPrevious: false,
       layerId: this.polygonLayerIdForId(resultItem.id)
     }]
-    console.log("addPolygonToMap", resultItem, params)
+    console.log('addPolygonToMap', resultItem, params)
     this.channel.postRequest('MapModulePlugin.AddFeaturesToMapRequest', params)
   }
 
   startDrawPolygon() {
     const params = [this.drawAreaId, 'Polygon']
-    console.log("startDrawPolygon", params)
+    console.log('startDrawPolygon', params)
     this.channel.postRequest('DrawTools.StartDrawingRequest', params)
   }
 
   stopDrawPolygon() {
     // This removes unfinished drawings
     const params = [this.drawAreaId, false]
-    console.log("stopDrawPolygon", params)
+    console.log('stopDrawPolygon', params)
     this.channel.postRequest('DrawTools.StopDrawingRequest', params)
   }
 
   removePolygonFromMap(resultItem: ResultItem) {
-    console.log("removePolygonFromMap", resultItem)
+    console.log('removePolygonFromMap', resultItem)
     // Removes finished drawings
     const item = resultItem as any
     const id = item.isNew ? this.drawAreaId : resultItem.id
@@ -60,14 +60,14 @@ export class OskariPolygonService {
   removeDrawingFromMapById(id: string) {
     // Removes finished drawings
     const params = [id.toString(), true]
-    console.log("removeDrawingFromMapById", params)
+    console.log('removeDrawingFromMapById', params)
     this.channel.postRequest('DrawTools.StopDrawingRequest', params)
   }
 
   removePolygonFromMapByLayerId(layerId: string) {
     // Removes finished drawings
     const params = [null, null, layerId]
-    console.log("removePolygonFromMapByLayerId", params)
+    console.log('removePolygonFromMapByLayerId', params)
     this.channel.postRequest('MapModulePlugin.RemoveFeaturesFromMapRequest', params)
   }
 

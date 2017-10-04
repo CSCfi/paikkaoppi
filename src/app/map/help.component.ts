@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, AfterViewInit } from '@angular/core'
 import { Task } from '../service/model'
 
 @Component({
@@ -8,7 +8,7 @@ import { Task } from '../service/model'
 })
 export class HelpComponent implements OnInit {
   @Input() visible = true
-  @Input() task : Task | null
+  @Input() task: Task | null
   @Output() helpClosed = new EventEmitter<boolean>()
 
   constructor() { }

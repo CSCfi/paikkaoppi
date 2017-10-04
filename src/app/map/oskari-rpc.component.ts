@@ -1,14 +1,16 @@
-import { forEach } from '@angular/router/src/utils/collection'
-import { Component, NgZone, AfterViewInit, ViewChild, EventEmitter, Input, Output } from '@angular/core'
-import OskariRPC from 'oskari-rpc'
-import { environment } from '../../environments/environment'
-import { Task, Result, ResultItem, PolygonFeatureCollection } from '../service/model'
-import { ResultItemComponent } from './result-item.component'
-import { GeoService, Coordinates } from './geo.service'
-import { AuthService } from '../service/auth.service'
-import { TaskService } from '../service/task.service'
-import { OskariPointService } from './oskari-point.service'
-import { OskariPolygonService } from './oskari-polygon.service'
+import 'rxjs/add/observable/interval';
+
+import { AfterViewInit, Component, Input, NgZone } from '@angular/core';
+import OskariRPC from 'oskari-rpc';
+import { Observable } from 'rxjs/Rx';
+
+import { environment } from '../../environments/environment';
+import { AuthService } from '../service/auth.service';
+import { PolygonFeatureCollection, Result, ResultItem, Task } from '../service/model';
+import { TaskService } from '../service/task.service';
+import { Coordinates, GeoService } from './geo.service';
+import { OskariPointService } from './oskari-point.service';
+import { OskariPolygonService } from './oskari-polygon.service';
 
 @Component({
   selector: 'app-oskari-rpc',
@@ -28,6 +30,7 @@ export class OskariRpcComponent implements AfterViewInit {
   channel: any
   markerAction = false
   drawAreaAction = false
+  showUserLocation = true
   actionHandlers: Map<string, any> = new Map<string, any>()
 
   pointService: OskariPointService
@@ -54,6 +57,7 @@ export class OskariRpcComponent implements AfterViewInit {
           this.drawTaskResultsToMap(this.task)
           this.setInitialMapToolMode()
           this.debugAllChannelFunctions()
+          //this.showLocation(true)
         }
       )
     )
@@ -372,6 +376,44 @@ export class OskariRpcComponent implements AfterViewInit {
         console.info('Client is supported by Oskari.')
       }
     }))
+  }
+
+  private updateUserLocationOnMap(lat: number, lon: number): void {
+    console.log('updateUserLocationOnMap', lat, lon)
+  }
+
+  private showLocation(enabled: boolean): void {
+    this.showUserLocation = enabled
+    const interval = 5000
+    const centerToUserLocation = false
+
+    const eventName = 'UserLocationEvent'
+    const userLocationEventFn = function (event) {
+      this.zone.runGuarded(() => {
+        if (this.showUserLocation) {
+          console.log('eventName:', eventName, 'event:', event)
+          this.updateUserLocationOnMap(event.lat, event.lon)
+        }
+      })
+    }.bind(this)
+
+    const requestLocationFn = function () {
+      this.channel.postRequest('MyLocationPlugin.GetUserLocationRequest', [centerToUserLocation])
+    }.bind(this)
+
+    this.channel.handleEvent(eventName, userLocationEventFn)
+    requestLocationFn()
+
+    Observable.interval(interval).timeInterval().subscribe(
+      (currentInterval) => {
+        this.zone.runGuarded(() => {
+          console.log('event', currentInterval)
+          requestLocationFn()
+        })
+      },
+      (err) => console.error(err),
+      () => console.info('ShowLocationStopped')
+    )
   }
 
   debugAllChannelFunctions() {

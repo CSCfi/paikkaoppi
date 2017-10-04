@@ -1,5 +1,5 @@
 import 'rxjs/add/operator/switchMap'
-import * as GeoJSON from "geojson"
+import * as GeoJSON from 'geojson'
 import { Component, OnInit, Input } from '@angular/core'
 import { ActivatedRoute, ParamMap, Router } from '@angular/router'
 import { environment } from '../../environments/environment'
@@ -19,7 +19,8 @@ export class MapComponent implements OnInit {
   task: Task
   @Input() helpClosed: () => boolean
 
-  constructor(private taskService: TaskService, private route: ActivatedRoute, private router: Router, private taskTemplateService: TaskTemplateService) {
+  constructor(private taskService: TaskService, private route: ActivatedRoute, private router: Router,
+    private taskTemplateService: TaskTemplateService) {
   }
 
   ngOnInit(): void {
@@ -29,9 +30,9 @@ export class MapComponent implements OnInit {
         this.task = task
       },
       error => {
-        console.error("Failed get task")
+        console.error('Failed get task')
         console.error(error)
-        if (error.status == 404) this.router.navigate(["/dashboard"])
+        if (error.status === 404) this.router.navigate(['/dashboard'])
       })
   }
 

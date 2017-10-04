@@ -1,4 +1,4 @@
-import { Component, OnInit, EventEmitter, Input, Output, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core';
+import { Component, OnInit, EventEmitter, Input, Output, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core'
 import { Result, ResultItem, User, PolygonFeatureCollection } from '../service/model'
 import { GeoService, Coordinates } from './geo.service'
 import { AuthService } from '../service/auth.service'
@@ -12,13 +12,13 @@ export class ResultItemComponent implements OnChanges {
   @Input() visible = false
   @Input() result: Result
   @Input() model: any
-  isPoint: boolean = false
+  isPoint = false
   pointWGS84Coordinates: Coordinates
-  isPolygon: boolean = false
+  isPolygon = false
   polygonCoordinates: number[][]
   polygonWGS84Coordinates: Coordinates[]
-  isEditMode: boolean = false
-  showUser: boolean = false
+  isEditMode = false
+  showUser = false
 
   @Output() deleteResultItem = new EventEmitter<ResultItem>()
   @Output() saveResultItem = new EventEmitter<ResultItem>()
@@ -27,7 +27,7 @@ export class ResultItemComponent implements OnChanges {
   constructor(private geoService: GeoService, private authService: AuthService) { }
 
   ngOnChanges(changes: SimpleChanges) {
-    console.log("ResultItemComponent.ngOnChanges", this.model)
+    console.log('ResultItemComponent.ngOnChanges', this.model)
     const resultItem = this.model as ResultItem
     this.pointWGS84Coordinates = this.geoService.pointWGS84Coordinates(resultItem)
     this.isPoint = this.geoService.isPoint(resultItem)
@@ -38,10 +38,10 @@ export class ResultItemComponent implements OnChanges {
       this.polygonWGS84Coordinates = this.geoService.polygonWGS84Coordinates(resultItem)
       console.log(this.polygonWGS84Coordinates)
     }
-    if (this.model != null && this.model["id"] == null) {
+    if (this.model != null && this.model['id'] == null) {
       this.isEditMode = true
     }
-    if (this.result != null && this.authService.getUsername() != this.result.user.username) {
+    if (this.result != null && this.authService.getUsername() !== this.result.user.username) {
       this.showUser = true
     } else {
       this.showUser = false

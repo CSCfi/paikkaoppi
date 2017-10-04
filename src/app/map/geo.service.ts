@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
-import * as GeoJSON from "geojson"
-import proj4 from 'proj4';
+import { Injectable } from '@angular/core'
+import * as GeoJSON from 'geojson'
+import proj4 from 'proj4'
 import { EPSG3067, EPSG4326, MARKER_OPTIONS, geometryTypePoint, geometryTypePolygon, geometryTypeFeatureCollection } from './config'
 import { ResultItem, Geometry, Point, FeatureCollection, PolygonFeatureCollection } from '../service/model'
 
@@ -44,16 +44,16 @@ export class GeoService {
   }
 
   isPoint(resultItem: ResultItem) {
-    return resultItem && resultItem["geometry"] && resultItem.geometry.type == geometryTypePoint
+    return resultItem && resultItem['geometry'] && resultItem.geometry.type === geometryTypePoint
   }
 
   isPolygon(resultItem: ResultItem) {
-    if (!(resultItem && resultItem["geometry"]))
+    if (!(resultItem && resultItem['geometry']))
       return false
     const geometry: Geometry = resultItem.geometry
-    if (geometry.type == geometryTypeFeatureCollection) {
+    if (geometry.type === geometryTypeFeatureCollection) {
       const featureCollection = geometry as FeatureCollection
-      return featureCollection.features.every(feature => feature.geometry.type == geometryTypePolygon)
+      return featureCollection.features.every(feature => feature.geometry.type === geometryTypePolygon)
     }
     return false
   }
@@ -73,15 +73,15 @@ export class GeoService {
     return null
   }
 
-  polygonCoordinates(resultItem: ResultItem) : number[][] {
+  polygonCoordinates(resultItem: ResultItem): number[][] {
     const polygon = resultItem.geometry as PolygonFeatureCollection
     const features = polygon.features
     const coordinates = polygon.features.map(f => f.geometry.coordinates)
-    if( features.length != 1 || coordinates.length != 1) {
-      throw Error("Failed to get coordinates for polygon: " + JSON.stringify(polygon))
+    if (features.length !== 1 || coordinates.length !== 1) {
+      throw Error('Failed to get coordinates for polygon: ' + JSON.stringify(polygon))
     }
     return coordinates[0][0]
-  } 
+  }
 
   polygonWGS84Coordinates(resultItem: ResultItem): Coordinates[] {
     const coordinates = this.polygonCoordinates(resultItem)
@@ -110,12 +110,12 @@ export class HourMinuteSecond {
   }
 
   asString(decimals?: number): string {
-    return this.hour + "°" + this.minute + "'" + this.formatAsString(this.second, decimals) + "\""
+    return this.hour + '°' + this.minute + '\'' + this.formatAsString(this.second, decimals) + '\''
   }
 
   formatAsString(value: number, decimals?: number): string {
     const rounded = this.round(value, decimals)
-    return rounded.toString().replace(".", ",")
+    return rounded.toString().replace('.', ',')
   }
 
   round(value: number, decimals?: number) {
