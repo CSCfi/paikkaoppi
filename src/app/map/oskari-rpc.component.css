@@ -8,3 +8,7 @@
     height: 100vh;
     width: 100vw;
 }
+
+.map__location:before {
+    content: url("/assets/icon_location.svg");
+}

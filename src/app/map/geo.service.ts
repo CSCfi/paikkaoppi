@@ -13,6 +13,10 @@ export class GeoService {
     return Object.assign({ y: coordinates[0], x: coordinates[1] }, MARKER_OPTIONS)
   }
 
+  location(lat: number, lon: number): any {
+    return Object.assign({ y: lat, x: lon }, MARKER_OPTIONS)
+  }
+
   resultItemMarker(resultItem: ResultItem): any {
     const geometry: GeoJSON.Point = resultItem.geometry as GeoJSON.Point
     console.log(this.toWGS84(geometry.coordinates[0], geometry.coordinates[1]))

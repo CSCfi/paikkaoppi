@@ -1,16 +1,17 @@
-import 'rxjs/add/observable/interval';
+import { OskariLocationService } from './oskari-location.service'
+import 'rxjs/add/observable/interval'
 
-import { AfterViewInit, Component, Input, NgZone } from '@angular/core';
-import OskariRPC from 'oskari-rpc';
-import { Observable } from 'rxjs/Rx';
+import { AfterViewInit, Component, Input, NgZone } from '@angular/core'
+import OskariRPC from 'oskari-rpc'
+import { Observable } from 'rxjs/Rx'
 
-import { environment } from '../../environments/environment';
-import { AuthService } from '../service/auth.service';
-import { PolygonFeatureCollection, Result, ResultItem, Task } from '../service/model';
-import { TaskService } from '../service/task.service';
-import { Coordinates, GeoService } from './geo.service';
-import { OskariPointService } from './oskari-point.service';
-import { OskariPolygonService } from './oskari-polygon.service';
+import { environment } from '../../environments/environment'
+import { AuthService } from '../service/auth.service'
+import { PolygonFeatureCollection, Result, ResultItem, Task } from '../service/model'
+import { TaskService } from '../service/task.service'
+import { Coordinates, GeoService } from './geo.service'
+import { OskariPointService } from './oskari-point.service'
+import { OskariPolygonService } from './oskari-polygon.service'
 
 @Component({
   selector: 'app-oskari-rpc',
@@ -35,6 +36,7 @@ export class OskariRpcComponent implements AfterViewInit {
 
   pointService: OskariPointService
   polygonService: OskariPolygonService
+  locationService: OskariLocationService
 
   constructor(
     private zone: NgZone,
@@ -52,12 +54,13 @@ export class OskariRpcComponent implements AfterViewInit {
         () => {
           this.pointService = new OskariPointService(this.geoService, this.channel)
           this.polygonService = new OskariPolygonService(this.geoService, this.channel)
+          this.locationService = new OskariLocationService(this.geoService, this.channel)
           this.checkRpcVersion()
           this.resetMapLocation()
           this.drawTaskResultsToMap(this.task)
           this.setInitialMapToolMode()
           this.debugAllChannelFunctions()
-          //this.showLocation(true)
+          this.showLocation(true)
         }
       )
     )
@@ -343,6 +346,11 @@ export class OskariRpcComponent implements AfterViewInit {
     }))
   }
 
+  zoomToLocation() {
+    console.log('zoomToLocation')
+    this.locationService.zoomToLocation()
+  }
+
   resetMapLocation() {
     // These properties are made up. Looked pretty decent.
     const mapPosition = {
@@ -380,6 +388,7 @@ export class OskariRpcComponent implements AfterViewInit {
 
   private updateUserLocationOnMap(lat: number, lon: number): void {
     console.log('updateUserLocationOnMap', lat, lon)
+    //this.locationService.showLocationOnMap(lat, lon)
   }
 
   private showLocation(enabled: boolean): void {

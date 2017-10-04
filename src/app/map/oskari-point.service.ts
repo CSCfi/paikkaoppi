@@ -4,7 +4,7 @@ import { ResultItem } from '../service/model'
 
 /**
  * No Injectable annotation, since this has to be instantiated manually
- * 
+ *
  * @Injectable()
  */
 export class OskariPointService {
