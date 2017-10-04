@@ -29,9 +29,12 @@ export class OskariRpcComponent implements AfterViewInit {
   domain = environment.mapDomain
   mapTools = environment.mapTools
   channel: any
+
+  // These booleans are for setting correct state for the tool button in html
   markerAction = false
   drawAreaAction = false
-  showUserLocation = true
+  trackLocation = false
+
   actionHandlers: Map<string, any> = new Map<string, any>()
 
   pointService: OskariPointService
@@ -60,7 +63,6 @@ export class OskariRpcComponent implements AfterViewInit {
           this.drawTaskResultsToMap(this.task)
           this.setInitialMapToolMode()
           this.debugAllChannelFunctions()
-          this.showLocation(true)
         }
       )
     )
@@ -386,43 +388,13 @@ export class OskariRpcComponent implements AfterViewInit {
     }))
   }
 
-  private updateUserLocationOnMap(lat: number, lon: number): void {
-    console.log('updateUserLocationOnMap', lat, lon)
-    //this.locationService.showLocationOnMap(lat, lon)
+  toggleTrackLocation(): void {
+    this.locationService.trackUserLocationOnMap(!this.trackLocation)
+    this.trackLocation = !this.trackLocation
   }
 
   private showLocation(enabled: boolean): void {
-    this.showUserLocation = enabled
-    const interval = 5000
-    const centerToUserLocation = false
-
-    const eventName = 'UserLocationEvent'
-    const userLocationEventFn = function (event) {
-      this.zone.runGuarded(() => {
-        if (this.showUserLocation) {
-          console.log('eventName:', eventName, 'event:', event)
-          this.updateUserLocationOnMap(event.lat, event.lon)
-        }
-      })
-    }.bind(this)
-
-    const requestLocationFn = function () {
-      this.channel.postRequest('MyLocationPlugin.GetUserLocationRequest', [centerToUserLocation])
-    }.bind(this)
-
-    this.channel.handleEvent(eventName, userLocationEventFn)
-    requestLocationFn()
-
-    Observable.interval(interval).timeInterval().subscribe(
-      (currentInterval) => {
-        this.zone.runGuarded(() => {
-          console.log('event', currentInterval)
-          requestLocationFn()
-        })
-      },
-      (err) => console.error(err),
-      () => console.info('ShowLocationStopped')
-    )
+    this.locationService.trackUserLocationOnMap(enabled)
   }
 
   debugAllChannelFunctions() {
