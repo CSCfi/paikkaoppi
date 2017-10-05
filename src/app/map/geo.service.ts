@@ -20,7 +20,6 @@ export class GeoService {
 
   resultItemMarker(resultItem: ResultItem): any {
     const geometry: GeoJSON.Point = resultItem.geometry as GeoJSON.Point
-    console.log(this.toWGS84(geometry.coordinates[0], geometry.coordinates[1]))
     return this.marker(geometry.coordinates)
   }
 
