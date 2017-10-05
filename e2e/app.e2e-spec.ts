@@ -17,6 +17,7 @@ describe('Paikkaoppi App', () => {
   })
 
   it('should allow login and redirect to main page', () => {
+    loginPage.navigateTo()
     loginPage.getLoginLink().click()
     expect(mainPage.getItemTitleText()).toEqual('Lataa tehtävä')
   })
