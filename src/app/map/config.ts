@@ -1,5 +1,5 @@
 // ETRS-TM35FIN
-const EPSG3067 = '+proj=utm +zone=35 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs';
+const EPSG3067 = '+proj=utm +zone=35 +ellps=GRS80 +towgs84=0,0,0,0,0,0,0 +units=m +no_defs'
 // WGS84
 const EPSG4326 = '+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs'
 

@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core'
 import { GeoService } from './geo.service'
 import { ResultItem } from '../service/model'
 
@@ -10,6 +10,8 @@ import { ResultItem } from '../service/model'
 export class OskariPolygonService {
   readonly drawAreaId: string = 'drawArea'
   readonly layerIdPrefix: string = 'polygon-'
+  readonly measureLineId: string = 'measureLine'
+  readonly measureAreaId: string = 'measureArea'
   geoService: GeoService
   channel: any
 
@@ -27,7 +29,7 @@ export class OskariPolygonService {
   }
 
   addPolygonToMap(resultItem: ResultItem) {
-    var params = [resultItem.geometry, {
+    const params = [resultItem.geometry, {
       clearPrevious: false,
       layerId: this.polygonLayerIdForId(resultItem.id)
     }]
@@ -46,6 +48,28 @@ export class OskariPolygonService {
     const params = [this.drawAreaId, false]
     console.log('stopDrawPolygon', params)
     this.channel.postRequest('DrawTools.StopDrawingRequest', params)
+  }
+
+  startMeasureLine() {
+    const params = [this.measureLineId, 'LineString', {showMeasureOnMap: true, allowMultipleDrawing: 'single'}]
+    console.log('startMeasureLine', params)
+    this.channel.postRequest('DrawTools.StartDrawingRequest', params)
+  }
+
+  stopMeasureLine() {
+    console.log('stopMeasureLine', this.measureLineId)
+    this.channel.postRequest('DrawTools.StopDrawingRequest', [this.measureLineId, true])
+  }
+
+  startMeasureArea() {
+    const params = [this.measureAreaId, 'Polygon', {showMeasureOnMap: true, allowMultipleDrawing: 'single'}]
+    console.log('startMeasureArea', params)
+    this.channel.postRequest('DrawTools.StartDrawingRequest', params)
+  }
+
+  stopMeasureArea() {
+    console.log('stopMeasureArea', this.measureAreaId)
+    this.channel.postRequest('DrawTools.StopDrawingRequest', [this.measureAreaId, true])
   }
 
   removePolygonFromMap(resultItem: ResultItem) {

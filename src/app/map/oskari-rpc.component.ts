@@ -36,6 +36,8 @@ export class OskariRpcComponent implements AfterViewInit {
   markerAction = false
   drawAreaAction = false
   trackLocation = false
+  measureLineAction = false
+  measureAreaAction = false
 
   actionHandlers: Map<string, any> = new Map<string, any>()
 
@@ -180,7 +182,7 @@ export class OskariRpcComponent implements AfterViewInit {
 
   private findResultItemFromTask(id: number | string) {
     for (const result of this.task.results) {
-      const resultItem = result.resultItems.find(item => item.id === id)
+      const resultItem = result.resultItems.find(item => '' + item.id === '' + id)
       if (resultItem != null) return resultItem
     }
     throw new SyntaxError('ResultItem with id ' + id + ' not found')
@@ -198,9 +200,7 @@ export class OskariRpcComponent implements AfterViewInit {
     console.log('toggleMarkerAction')
     this.clearActionHandlers()
     this.markerAction = !this.markerAction
-    if (this.markerAction && this.drawAreaAction) {
-      this.toggleDrawAreaAction()
-    }
+    if (this.markerAction) this.toggleActions(MapAction.Marker)
     console.log('markerAction:', this.markerAction)
     if (this.markerAction) this.setAddMarkerListenerActive()
     else {
@@ -301,9 +301,7 @@ export class OskariRpcComponent implements AfterViewInit {
   toggleDrawAreaAction() {
     this.clearActionHandlers()
     this.drawAreaAction = !this.drawAreaAction
-    if (this.markerAction && this.drawAreaAction) {
-      this.toggleMarkerAction()
-    }
+    if (this.drawAreaAction) this.toggleActions(MapAction.DrawArea)
     console.log('drawAreaAction:', this.drawAreaAction)
     if (this.drawAreaAction) this.setDrawAreaListenerActive()
     else {
@@ -413,13 +411,85 @@ export class OskariRpcComponent implements AfterViewInit {
   }
 
   selectLayer(id: any): void {
-    const newLayer = this.mapLayers.find( l => '' + l.id === '' + id)
+    const newLayer = this.mapLayers.find(l => '' + l.id === '' + id)
     console.log('SelectLayer:', id, 'OldLayer:', this.selectedLayer, 'NewLayer:', newLayer)
     if (newLayer == null)
       return
     if (this.selectedLayer) this.channel.postRequest('MapModulePlugin.MapLayerVisibilityRequest', [this.selectedLayer.id, false])
     this.channel.postRequest('MapModulePlugin.MapLayerVisibilityRequest', [newLayer.id, true])
     this.selectedLayer = newLayer
+  }
+
+  toggleMeasureLine(): void {
+    this.clearActionHandlers()
+    this.measureLineAction = !this.measureLineAction
+    const action = MapAction.MeasureLine
+    if (this.measureLineAction) {
+      this.toggleActions(action)
+      this.setMeasureListenerActive(action)
+    } else {
+      this.polygonService.stopMeasureLine()
+      this.setInitialMapToolMode()
+    }
+  }
+
+  toggleMeasureArea(): void {
+    this.clearActionHandlers()
+    this.measureAreaAction = !this.measureAreaAction
+    const action = MapAction.MeasureArea
+    if (this.measureAreaAction) {
+      this.toggleActions(action)
+      this.setMeasureListenerActive(action)
+    } else {
+      this.polygonService.stopMeasureArea()
+      this.setInitialMapToolMode()
+    }
+  }
+
+  setMeasureListenerActive(action: MapAction.MeasureLine | MapAction.MeasureArea) {
+    const eventName = 'DrawingEvent'
+    const drawingEventFn = function (event) {
+      this.zone.runGuarded(() => {
+        if (event.isFinished) {
+          console.log('Measurement finished', event)
+        }
+      })
+    }.bind(this)
+    this.actionHandlers.set(eventName, drawingEventFn)
+    this.channel.handleEvent(eventName, drawingEventFn)
+    if (action === MapAction.MeasureLine)
+      this.polygonService.startMeasureLine()
+    else if (action === MapAction.MeasureArea)
+      this.polygonService.startMeasureArea()
+  }
+
+  private toggleActions(currentActionActive: MapAction): void {
+    switch (currentActionActive) {
+      case MapAction.Marker: {
+        if (this.drawAreaAction) this.toggleDrawAreaAction()
+        if (this.measureLineAction) this.toggleMeasureLine()
+        if (this.measureAreaAction) this.toggleMeasureArea()
+        break
+      }
+      case MapAction.DrawArea: {
+        if (this.markerAction) this.toggleMarkerAction()
+        if (this.measureLineAction) this.toggleMeasureLine()
+        if (this.measureAreaAction) this.toggleMeasureArea()
+        break
+      }
+      case MapAction.MeasureLine: {
+        if (this.markerAction) this.toggleMarkerAction()
+        if (this.drawAreaAction) this.toggleDrawAreaAction()
+        if (this.measureAreaAction) this.toggleMeasureArea()
+        break
+      }
+      case MapAction.MeasureArea: {
+        if (this.markerAction) this.toggleMarkerAction()
+        if (this.drawAreaAction) this.toggleDrawAreaAction()
+        if (this.measureLineAction) this.toggleMeasureLine()
+        break
+      }
+    }
   }
 
   debugAllChannelFunctions() {
@@ -445,4 +515,8 @@ export interface MapLayer {
   readonly visible: boolean
   readonly minZoom?: number
   readonly maxZoom?: number
+}
+
+export enum MapAction {
+  Marker, DrawArea, MeasureLine, MeasureArea
 }

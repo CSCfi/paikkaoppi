@@ -15,6 +15,8 @@
     <a *ngIf="mapTools['markerTool']" (click)="toggleMarkerAction()" class="map__tools-dot" [ngClass]="markerAction == true ? 'is-selected' : ''" title="Merkitse piste"></a>
     <a *ngIf="mapTools['areaTool']" (click)="toggleDrawAreaAction()" class="map__tools-area" [ngClass]="drawAreaAction == true ? 'is-selected' : ''" title="Merkitse alue"></a>
     <a *ngIf="mapTools['trackLocation']" (click)="toggleTrackLocation()" class="map__tools-dot" [ngClass]="trackLocation == true ? 'is-selected' : ''" title="Seuraa sijaintiasi"></a>
+    <a *ngIf="mapTools['measureLineTool']" (click)="toggleMeasureLine()" class="map__tools-dot" [ngClass]="measureLineAction == true ? 'is-selected' : ''" title="Mittaa etäisyys"></a>
+    <a *ngIf="mapTools['measureAreaTool']" (click)="toggleMeasureArea()" class="map__tools-dot" [ngClass]="measureAreaAction == true ? 'is-selected' : ''" title="Mittaa pinta-ala"></a>
     <div class="map__tools-coords" *ngIf="coordinates">N:{{coordinates.lat.asString(3)}} E:{{coordinates.lon.asString(3)}}</div>
   </div>
   <iframe *ngIf="env == 'dev'" id="oskari-map" src="https://kartta.paikkatietoikkuna.fi/published/fi/87e9ad3a-a91f-4888-8262-4fc625102ee1"></iframe>
