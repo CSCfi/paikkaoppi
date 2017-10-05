@@ -6,7 +6,7 @@ import { HttpClientModule } from '@angular/common/http'
 
 import { AuthService } from '../service/auth.service'
 import { GeoService } from './geo.service'
-import { MockComponent } from '../test/mocks'
+import { MockComponent, AuthServiceMock } from '../../tests/mocks.spec'
 
 import { ResultItemComponent } from './result-item.component'
 
@@ -24,7 +24,9 @@ describe('ResultItemComponent', () => {
           { path: 'map', component: MockComponent }
         ])
       ],
-      providers: [ AuthService, GeoService ]
+      providers: [
+        { provide: AuthService, useClass: AuthServiceMock },
+        GeoService ]
     })
     .compileComponents()
   }))

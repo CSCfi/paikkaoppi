@@ -1,24 +1,28 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing'
-import { HttpClient, HttpHandler } from '@angular/common/http'
+import { RouterTestingModule } from '@angular/router/testing'
+import { HttpClientModule } from '@angular/common/http'
 import { Router } from '@angular/router'
 
-import { HomeComponent } from './home.component'
 import { AuthService } from '../service/auth.service'
+import { MockComponent, AuthServiceMock } from '../../tests/mocks.spec'
+
+import { HomeComponent } from './home.component'
 
 describe('HomeComponent', () => {
   let component: HomeComponent
   let fixture: ComponentFixture<HomeComponent>
 
-  const mockRouter = {
-    navigate: jasmine.createSpy('navigate')
-  }
-
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomeComponent ],
+      declarations: [ HomeComponent, MockComponent ],
+      imports: [
+        HttpClientModule,
+        RouterTestingModule.withRoutes([
+          { path: 'map', component: MockComponent }
+        ])
+      ],
       providers: [
-        { provide: Router, useValue: mockRouter },
-        AuthService, HttpClient, HttpHandler
+        { provide: AuthService, useClass: AuthServiceMock }
       ]
     })
     .compileComponents()
