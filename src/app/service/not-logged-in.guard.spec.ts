@@ -3,7 +3,7 @@ import { RouterTestingModule } from '@angular/router/testing'
 import { HttpClientModule } from '@angular/common/http'
 
 import { AuthService } from '../service/auth.service'
-import { MockComponent } from '../test/mocks'
+import { MockComponent } from '../../tests/mocks.spec'
 
 import { NotLoggedInGuard } from './not-logged-in.guard'
 

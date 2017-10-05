@@ -7,7 +7,7 @@ import { HttpClientModule } from '@angular/common/http'
 import { AuthService } from '../service/auth.service'
 import { TaskService } from '../service/task.service'
 import { TaskTemplateService } from '../service/task-template.service'
-import { MockComponent } from '../test/mocks'
+import { MockComponent, AuthServiceMock, TaskServiceMock, TaskTemplateServiceMock } from '../../tests/mocks.spec'
 
 import { LibraryComponent } from './library.component'
 
@@ -25,7 +25,11 @@ describe('LibraryComponent', () => {
           { path: 'map', component: MockComponent }
         ])
       ],
-      providers: [ AuthService, TaskService, TaskTemplateService ]
+      providers: [
+        { provide: AuthService, useClass: AuthServiceMock },
+        { provide: TaskService, useClass: TaskServiceMock },
+        { provide: TaskTemplateService, useClass: TaskTemplateServiceMock }
+      ]
     })
     .compileComponents()
   }))
