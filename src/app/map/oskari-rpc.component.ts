@@ -24,6 +24,8 @@ export class OskariRpcComponent implements AfterViewInit {
   resultItemPopupResult: Result
   resultItemPopupResultItem: any
   coordinates: Coordinates | null
+  mapLayers: MapLayer[] = []
+  selectedLayer?: MapLayer = null
 
   env = environment.mapEnv
   domain = environment.mapDomain
@@ -60,6 +62,7 @@ export class OskariRpcComponent implements AfterViewInit {
           this.locationService = new OskariLocationService(this.geoService, this.channel)
           this.checkRpcVersion()
           this.resetMapLocation()
+          this.loadLayers()
           this.drawTaskResultsToMap(this.task)
           this.setInitialMapToolMode()
           this.debugAllChannelFunctions()
@@ -397,8 +400,33 @@ export class OskariRpcComponent implements AfterViewInit {
     this.locationService.trackUserLocationOnMap(enabled)
   }
 
+  private loadLayers(): void {
+    this.channel.getAllLayers(items => {
+      if (items != null && items.length > 0) {
+        this.mapLayers = items.map(l => l as MapLayer)
+        this.selectedLayer = this.mapLayers.find(l => l.visible)
+      } else {
+        this.mapLayers = []
+        this.selectedLayer = null
+      }
+    })
+  }
+
+  selectLayer(id: any): void {
+    const newLayer = this.mapLayers.find( l => '' + l.id === '' + id)
+    console.log('SelectLayer:', id, 'OldLayer:', this.selectedLayer, 'NewLayer:', newLayer)
+    if (newLayer == null)
+      return
+    if (this.selectedLayer) this.channel.postRequest('MapModulePlugin.MapLayerVisibilityRequest', [this.selectedLayer.id, false])
+    this.channel.postRequest('MapModulePlugin.MapLayerVisibilityRequest', [newLayer.id, true])
+    this.selectedLayer = newLayer
+  }
+
   debugAllChannelFunctions() {
-    this.channel.getAllLayers(items => items.forEach(item => console.log('getAllLayers', item)))
+    this.channel.getAllLayers(items => {
+      console.log('getAllLayers')
+      items.forEach(item => console.log(item))
+    })
     this.channel.getMapPosition(pos => console.log('getMapPosition', pos))
     this.channel.getSupportedEvents(items => console.log('getSupportedEvents', items))
     this.channel.getSupportedFunctions(items => console.log('getSupportedFunctions', items))
@@ -408,4 +436,13 @@ export class OskariRpcComponent implements AfterViewInit {
     this.channel.getCurrentState(pos => console.log('getCurrentState', pos))
     this.channel.getFeatures(items => console.log('getFeatures', items))
   }
+}
+
+export interface MapLayer {
+  readonly id: any
+  readonly name: string
+  readonly opacity: number
+  readonly visible: boolean
+  readonly minZoom?: number
+  readonly maxZoom?: number
 }
