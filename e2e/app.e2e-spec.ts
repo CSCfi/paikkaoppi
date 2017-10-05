@@ -1,4 +1,4 @@
-import { browser } from 'protractor'
+import { browser, by, element } from 'protractor'
 
 import { LoginPage, MainPage } from './app.po'
 
@@ -17,8 +17,15 @@ describe('Paikkaoppi App', () => {
   })
 
   it('should allow login and redirect to main page', () => {
-    loginPage.navigateTo()
+    browser.driver.sleep(500)
+
     loginPage.getLoginLink().click()
+    browser.driver.sleep(500)
+
+    console.log(element(by.css('app-root')).getText())
+
     expect(mainPage.getItemTitleText()).toEqual('Lataa tehtävä')
+
+    browser.driver.sleep(500)
   })
 })
