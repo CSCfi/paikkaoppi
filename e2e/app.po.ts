@@ -10,9 +10,3 @@ export class LoginPage {
     return element.all(by.css('app-root a')).first()
   }
 }
-
-export class MainPage {
-  getItemTitleText(): any {
-    return element.all(by.css('app-root .list__item-title')).first().getText()
-  }
-}
