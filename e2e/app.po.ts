@@ -1,11 +1,18 @@
-import { browser, by, element } from 'protractor';
+import { ElementFinder } from 'protractor/built/element';
+import { browser, by, element } from 'protractor'
 
-export class AppPage {
-  navigateTo() {
-    return browser.get('/');
+export class LoginPage {
+  navigateTo(): any {
+    return browser.get('/')
   }
 
-  getParagraphText() {
-    return element(by.css('app-root h1')).getText();
+  getLoginLink(): ElementFinder {
+    return element.all(by.css('app-root a')).first()
+  }
+}
+
+export class MainPage {
+  getItemTitleText(): any {
+    return element.all(by.css('app-root .list__item-title')).first().getText()
   }
 }
