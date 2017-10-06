@@ -10,8 +10,6 @@ import { ResultItem } from '../service/model'
 export class OskariPolygonService {
   readonly drawAreaId: string = 'drawArea'
   readonly layerIdPrefix: string = 'polygon-'
-  readonly measureLineId: string = 'measureLine'
-  readonly measureAreaId: string = 'measureArea'
   geoService: GeoService
   channel: any
 
@@ -51,27 +49,25 @@ export class OskariPolygonService {
   }
 
   startMeasureLine() {
-    const params = [this.measureLineId, 'LineString', {showMeasureOnMap: true, allowMultipleDrawing: 'single'}]
+    const params = [this.drawAreaId, 'LineString', {showMeasureOnMap: true, allowMultipleDrawing: 'single'}]
     console.log('startMeasureLine', params)
     this.channel.postRequest('DrawTools.StartDrawingRequest', params)
   }
 
   stopMeasureLine() {
-    console.log('stopMeasureLine', this.measureLineId)
-    this.channel.postRequest('DrawTools.StopDrawingRequest', [this.measureLineId, true])
-    this.channel.postRequest('DrawTools.StopDrawingRequest', [this.measureLineId, false])
+    console.log('stopMeasureLine', this.drawAreaId)
+    this.channel.postRequest('DrawTools.StopDrawingRequest', [this.drawAreaId, true])
   }
 
   startMeasureArea() {
-    const params = [this.measureAreaId, 'Polygon', {showMeasureOnMap: true, allowMultipleDrawing: 'single'}]
+    const params = [this.drawAreaId, 'Polygon', {showMeasureOnMap: true, allowMultipleDrawing: 'single'}]
     console.log('startMeasureArea', params)
     this.channel.postRequest('DrawTools.StartDrawingRequest', params)
   }
 
   stopMeasureArea() {
-    console.log('stopMeasureArea', this.measureAreaId)
-    this.channel.postRequest('DrawTools.StopDrawingRequest', [this.measureAreaId, true])
-    this.channel.postRequest('DrawTools.StopDrawingRequest', [this.measureAreaId, false])
+    console.log('stopMeasureArea', this.drawAreaId)
+    this.channel.postRequest('DrawTools.StopDrawingRequest', [this.drawAreaId, true])
   }
 
   removePolygonFromMap(resultItem: ResultItem) {

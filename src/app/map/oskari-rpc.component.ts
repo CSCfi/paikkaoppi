@@ -197,34 +197,6 @@ export class OskariRpcComponent implements AfterViewInit {
     this.coordinates = this.geoService.toWGS84(lat, lon)
   }
 
-  toggleMarkerAction() {
-    console.log('toggleMarkerAction')
-    this.clearActionHandlers()
-    this.markerAction = !this.markerAction
-    if (this.markerAction) this.toggleActions(MapAction.Marker)
-    console.log('markerAction:', this.markerAction)
-    if (this.markerAction) this.setAddMarkerListenerActive()
-    else {
-      this.setInitialMapToolMode()
-    }
-  }
-
-  private setAddMarkerListenerActive() {
-    const eventName = 'MapClickedEvent'
-    const markerHandler = function (data) {
-      this.zone.runGuarded(() => {
-        this.addNewPointToMap(data.lat, data.lon)
-        this.updateToolbarCoordinates(data.lat, data.lon)
-        console.log('AddMarker', eventName, this.coordinates)
-        this.toggleMarkerAction()
-      })
-    }.bind(this)
-
-    this.actionHandlers.set(eventName, markerHandler)
-    this.channel.handleEvent(eventName, markerHandler)
-    this.channel.setCursorStyle(['pointer'], (data) => this.zone.runGuarded(() => { }))
-  }
-
   private setInitialMapToolMode() {
     // Set open marker listener active by default
     this.setShowCoordinateActive()
@@ -299,38 +271,6 @@ export class OskariRpcComponent implements AfterViewInit {
     this.showResultItemPopup(resultItem)
   }
 
-  toggleDrawAreaAction() {
-    this.clearActionHandlers()
-    this.drawAreaAction = !this.drawAreaAction
-    if (this.drawAreaAction) this.toggleActions(MapAction.DrawArea)
-    console.log('drawAreaAction:', this.drawAreaAction)
-    if (this.drawAreaAction) this.setDrawAreaListenerActive()
-    else {
-      this.polygonService.stopDrawPolygon()
-      this.setInitialMapToolMode()
-    }
-  }
-
-  setDrawAreaListenerActive() {
-    const eventName = 'DrawingEvent'
-    const drawAreaHandler = function (event) {
-      this.zone.runGuarded(() => {
-        console.log(eventName, event)
-        if (event.isFinished) {
-          const geojson: PolygonFeatureCollection = event.geojson
-          const resultItem = this.geoService.polygonResultItem(this.resultId(), geojson) as any
-          resultItem['isNew'] = true
-          this.showResultItemPopup(resultItem)
-          console.log('DrawingEvent.isFinished:', eventName, event, resultItem)
-          this.toggleDrawAreaAction()
-        }
-      })
-    }.bind(this)
-    this.actionHandlers.set(eventName, drawAreaHandler)
-    this.channel.handleEvent(eventName, drawAreaHandler)
-    this.polygonService.startDrawPolygon()
-  }
-
   clearActionHandlers() {
     this.actionHandlers.forEach((handler: any, eventName: string) => {
       this.channel.unregisterEventHandler(eventName, handler)
@@ -390,11 +330,6 @@ export class OskariRpcComponent implements AfterViewInit {
     }))
   }
 
-  toggleTrackLocation(): void {
-    this.locationService.trackUserLocationOnMap(!this.trackLocation)
-    this.trackLocation = !this.trackLocation
-  }
-
   private showLocation(enabled: boolean): void {
     this.locationService.trackUserLocationOnMap(enabled)
   }
@@ -421,9 +356,78 @@ export class OskariRpcComponent implements AfterViewInit {
     this.selectedLayer = newLayer
   }
 
+  toggleTrackLocation(): void {
+    this.locationService.trackUserLocationOnMap(!this.trackLocation)
+    this.trackLocation = !this.trackLocation
+  }
+
+  toggleMarkerAction() {
+    this.clearActionHandlers()
+    this.markerAction = !this.markerAction
+    console.log('toggleMarkerAction', this.markerAction)
+    if (this.markerAction) {
+      this.toggleActions(MapAction.Marker)
+      this.setAddMarkerListenerActive()
+    } else {
+      this.setInitialMapToolMode()
+    }
+  }
+
+  private setAddMarkerListenerActive() {
+    const eventName = 'MapClickedEvent'
+    const markerHandler = function (data) {
+      this.zone.runGuarded(() => {
+        this.addNewPointToMap(data.lat, data.lon)
+        this.updateToolbarCoordinates(data.lat, data.lon)
+        console.log('AddMarker', eventName, this.coordinates)
+        this.channel.unregisterEventHandler(eventName, markerHandler)
+        this.toggleMarkerAction()
+      })
+    }.bind(this)
+
+    this.actionHandlers.set(eventName, markerHandler)
+    this.channel.handleEvent(eventName, markerHandler)
+    this.channel.setCursorStyle(['pointer'], (data) => this.zone.runGuarded(() => { }))
+  }
+
+  toggleDrawAreaAction() {
+    this.clearActionHandlers()
+    this.drawAreaAction = !this.drawAreaAction
+    console.log('toggleDrawAreaAction:', this.drawAreaAction)
+    if (this.drawAreaAction) {
+      this.toggleActions(MapAction.DrawArea)
+      this.setDrawAreaListenerActive()
+    } else {
+      this.polygonService.stopDrawPolygon()
+      this.setInitialMapToolMode()
+    }
+  }
+
+  setDrawAreaListenerActive() {
+    const eventName = 'DrawingEvent'
+    const drawAreaHandler = function (event) {
+      this.zone.runGuarded(() => {
+        console.log(eventName, event)
+        if (event.isFinished) {
+          const geojson: PolygonFeatureCollection = event.geojson
+          const resultItem = this.geoService.polygonResultItem(this.resultId(), geojson) as any
+          resultItem['isNew'] = true
+          this.showResultItemPopup(resultItem)
+          console.log('DrawingEvent.isFinished:', eventName, event, resultItem)
+          this.channel.unregisterEventHandler(eventName, drawAreaHandler)
+          this.toggleDrawAreaAction()
+        }
+      })
+    }.bind(this)
+    this.actionHandlers.set(eventName, drawAreaHandler)
+    this.channel.handleEvent(eventName, drawAreaHandler)
+    this.polygonService.startDrawPolygon()
+  }
+
   toggleMeasureLine(): void {
     this.clearActionHandlers()
     this.measureLineAction = !this.measureLineAction
+    console.log('toggleMeasureLine', this.measureLineAction)
     const action = MapAction.MeasureLine
     if (this.measureLineAction) {
       this.toggleActions(action)
@@ -437,6 +441,7 @@ export class OskariRpcComponent implements AfterViewInit {
   toggleMeasureArea(): void {
     this.clearActionHandlers()
     this.measureAreaAction = !this.measureAreaAction
+    console.log('toggleMeasureArea', this.measureAreaAction)
     const action = MapAction.MeasureArea
     if (this.measureAreaAction) {
       this.toggleActions(action)
@@ -448,16 +453,6 @@ export class OskariRpcComponent implements AfterViewInit {
   }
 
   setMeasureListenerActive(action: MapAction.MeasureLine | MapAction.MeasureArea) {
-    const eventName = 'DrawingEvent'
-    const drawingEventFn = function (event) {
-      this.zone.runGuarded(() => {
-        if (event.isFinished) {
-          console.log('Measurement finished', event)
-        }
-      })
-    }.bind(this)
-    this.actionHandlers.set(eventName, drawingEventFn)
-    this.channel.handleEvent(eventName, drawingEventFn)
     if (action === MapAction.MeasureLine)
       this.polygonService.startMeasureLine()
     else if (action === MapAction.MeasureArea)
