@@ -529,37 +529,6 @@ export class OskariRpcComponent implements AfterViewInit {
     return result.message
   }
 
-  /*
-  showMessage(type: MessageType, message: string, action: MapAction) {
-    this.messages.push({
-      class: 'type--' + type,
-      description: message,
-      action: action
-    })
-  }
-  */
-
-  /*
-  closeActionMessage(action: MapAction) {
-    for (const message of this.messages) {
-      if (action === message.action) {
-        this.closeMessage(message)
-      }
-    }
-  }
-
-    closeMessage(message: Message): void {
-    if (message.action !== null) {
-      this.closeAction(message.action)
-    }
-
-    const index = this.messages.indexOf(message, 0)
-    if (index > -1) {
-      this.messages.splice(index, 1)
-    }
-  }
-  */
-
   private messageClosed(messageAction: MessageAction): void {
     const code = messageAction.message.code
     const action = MapAction[code]

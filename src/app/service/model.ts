@@ -65,14 +65,6 @@ export interface ResultItem {
     description?: string
 }
 
-export interface Message {
-    class: string
-    description: string,
-    action: MapAction
-}
-
-export type MessageType = 'info' | 'warn' | 'error'
-
 export type Geometry = Point | PolygonFeatureCollection
 export type Point = GeoJSON.Point
 export type FeatureCollection = GeoJSON.FeatureCollection<GeoJSON.GeometryObject>
@@ -95,10 +87,10 @@ export class TaskCodeCreator {
     constructor(private random: StableRandom) { }
 
     createCode() {
-        var text: string = "";
-        var possible: string = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
+        let text = ''
+        const possible = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'
 
-        for (var i = 0; i < 6; i++)
+        for (let i = 0; i < 6; i++)
             text += possible.charAt(Math.floor(this.random.random() * possible.length))
         return text
     }
