@@ -1,5 +1,6 @@
 import * as GeoJSON from "geojson"
 import { MapAction } from '../map/oskari-rpc.component'
+import { Result } from './model-result'
 
 export type Role = "teacher" | "student"
 
@@ -38,7 +39,7 @@ export interface Instruction {
     description: string
 }
 
-/** 
+/**
  * For a student task has 0-1 results.
  * For a teacher task has 0-* results.
  */
@@ -54,13 +55,6 @@ export interface Task {
     code: string
     user: User
     results: Result[]
-}
-
-export interface Result {
-    id: number
-    taskId: number
-    user: User
-    resultItems: ResultItem[]
 }
 
 export interface ResultItem {

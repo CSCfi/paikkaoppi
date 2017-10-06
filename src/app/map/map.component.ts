@@ -7,7 +7,8 @@ import { OskariRpcComponent } from './oskari-rpc.component'
 import { HelpComponent } from './help.component'
 import { TaskService } from '../service/task.service'
 import { TaskTemplateService } from '../service/task-template.service'
-import { Task, Result, ResultItem, Geometry } from '../service/model'
+import { Task, ResultItem, Geometry } from '../service/model'
+import { Result } from '../service/model-result'
 
 @Component({
   selector: 'app-map',

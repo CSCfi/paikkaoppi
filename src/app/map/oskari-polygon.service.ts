@@ -59,6 +59,7 @@ export class OskariPolygonService {
   stopMeasureLine() {
     console.log('stopMeasureLine', this.measureLineId)
     this.channel.postRequest('DrawTools.StopDrawingRequest', [this.measureLineId, true])
+    this.channel.postRequest('DrawTools.StopDrawingRequest', [this.measureLineId, false])
   }
 
   startMeasureArea() {
@@ -70,6 +71,7 @@ export class OskariPolygonService {
   stopMeasureArea() {
     console.log('stopMeasureArea', this.measureAreaId)
     this.channel.postRequest('DrawTools.StopDrawingRequest', [this.measureAreaId, true])
+    this.channel.postRequest('DrawTools.StopDrawingRequest', [this.measureAreaId, false])
   }
 
   removePolygonFromMap(resultItem: ResultItem) {

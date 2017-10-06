@@ -5,7 +5,8 @@ import 'rxjs/add/observable/throw';
 import { environment } from '../../environments/environment'
 import { TaskTemplateService } from './task-template.service'
 import { AuthService } from './auth.service'
-import { User, Role, Roles, Task, TaskTemplate, Result, ResultItem, Sequence, TaskCodeCreator, StableRandom } from './model'
+import { User, Role, Roles, Task, TaskTemplate, ResultItem, Sequence, TaskCodeCreator, StableRandom } from './model'
+import { Result } from './model-result'
 
 @Injectable()
 export class TaskService {

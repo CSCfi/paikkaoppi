@@ -1,5 +1,6 @@
 import { Component, OnInit, EventEmitter, Input, Output, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core'
-import { Result, ResultItem, User, PolygonFeatureCollection } from '../service/model'
+import { ResultItem, User, PolygonFeatureCollection } from '../service/model'
+import { Result } from '../service/model-result'
 import { GeoService, Coordinates } from './geo.service'
 import { AuthService } from '../service/auth.service'
 
