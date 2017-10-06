@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Rx'
 
 import { environment } from '../../environments/environment'
 import { AuthService } from '../service/auth.service'
-import { PolygonFeatureCollection, Result, ResultItem, Task } from '../service/model'
+import { PolygonFeatureCollection, Result, ResultItem, Task, Message, MessageType } from '../service/model'
 import { TaskService } from '../service/task.service'
 import { Coordinates, GeoService } from './geo.service'
 import { OskariPointService } from './oskari-point.service'
@@ -26,6 +26,7 @@ export class OskariRpcComponent implements AfterViewInit {
   coordinates: Coordinates | null
   mapLayers: MapLayer[] = []
   selectedLayer?: MapLayer = null
+  messages: Message[] = []
 
   env = environment.mapEnv
   domain = environment.mapDomain
@@ -200,11 +201,67 @@ export class OskariRpcComponent implements AfterViewInit {
     console.log('toggleMarkerAction')
     this.clearActionHandlers()
     this.markerAction = !this.markerAction
-    if (this.markerAction) this.toggleActions(MapAction.Marker)
+    const action = MapAction.Marker
+    if (this.markerAction) this.toggleActions(action)
     console.log('markerAction:', this.markerAction)
-    if (this.markerAction) this.setAddMarkerListenerActive()
-    else {
+    if (this.markerAction) {
+      this.setAddMarkerListenerActive()
+      this.showActionMessage('Merkitse piste', action)
+    } else {
       this.setInitialMapToolMode()
+      this.closeActionMessage(action)
+    }
+  }
+
+  showActionMessage(message: string, action: MapAction) {
+    this.showMessage('info', message, action)
+  }
+
+  showMessage(type: MessageType, message: string, action: MapAction) {
+    this.messages.push({
+        class: 'type--' + type,
+        description: message,
+        action: action
+      })
+  }
+
+  closeActionMessage(action: MapAction) {
+    for (const message of this.messages) {
+      if (action === message.action) {
+        this.closeMessage(message)
+      }
+    }
+  }
+
+  closeMessage(message: Message): void {
+    if (message.action !== null) {
+      this.closeAction(message.action)
+    }
+
+    const index = this.messages.indexOf(message, 0)
+    if (index > -1) {
+      this.messages.splice(index, 1)
+    }
+  }
+
+  private closeAction(action: MapAction): void {
+    switch (action) {
+      case MapAction.Marker: {
+        if (this.markerAction) this.toggleMarkerAction()
+        break
+      }
+      case MapAction.DrawArea: {
+        if (this.drawAreaAction) this.toggleDrawAreaAction()
+        break
+      }
+      case MapAction.MeasureLine: {
+        if (this.measureLineAction) this.toggleMeasureLine()
+        break
+      }
+      case MapAction.MeasureArea: {
+        if (this.measureAreaAction) this.toggleMeasureArea()
+        break
+      }
     }
   }
 
@@ -301,12 +358,16 @@ export class OskariRpcComponent implements AfterViewInit {
   toggleDrawAreaAction() {
     this.clearActionHandlers()
     this.drawAreaAction = !this.drawAreaAction
-    if (this.drawAreaAction) this.toggleActions(MapAction.DrawArea)
+    const action = MapAction.DrawArea
+    if (this.drawAreaAction) this.toggleActions(action)
     console.log('drawAreaAction:', this.drawAreaAction)
-    if (this.drawAreaAction) this.setDrawAreaListenerActive()
-    else {
+    if (this.drawAreaAction) {
+      this.setDrawAreaListenerActive()
+      this.showActionMessage('Merkitse alue', action)
+    } else {
       this.polygonService.stopDrawPolygon()
       this.setInitialMapToolMode()
+      this.closeActionMessage(action)
     }
   }
 
@@ -427,9 +488,11 @@ export class OskariRpcComponent implements AfterViewInit {
     if (this.measureLineAction) {
       this.toggleActions(action)
       this.setMeasureListenerActive(action)
+      this.showActionMessage('Mittaa etäisyys', action)
     } else {
       this.polygonService.stopMeasureLine()
       this.setInitialMapToolMode()
+      this.closeActionMessage(action)
     }
   }
 
@@ -440,9 +503,11 @@ export class OskariRpcComponent implements AfterViewInit {
     if (this.measureAreaAction) {
       this.toggleActions(action)
       this.setMeasureListenerActive(action)
+      this.showActionMessage('Mittaa pinta-ala', action)
     } else {
       this.polygonService.stopMeasureArea()
       this.setInitialMapToolMode()
+      this.closeActionMessage(action)
     }
   }
 
