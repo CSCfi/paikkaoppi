@@ -1,0 +1,8 @@
+<div *ngFor="let message of messages">
+  <div class="map__info" [ngClass]="message.cssClass">
+    <div class="map__{{message.severity}}-text">
+      <div class="text">{{ message.message }}</div>
+      <div (click)="closeMessage(message)" class="map__info-close"></div>
+    </div>
+  </div>
+</div>

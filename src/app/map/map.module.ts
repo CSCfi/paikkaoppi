@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core'
 import { CommonModule } from '@angular/common'
 import { RouterModule } from '@angular/router'
 import { FormsModule } from '@angular/forms'
+import { MessageModule } from '../message/message.module'
 import { MapComponent } from './map.component'
 import { OskariRpcComponent } from './oskari-rpc.component'
 import { HelpComponent } from './help.component'
@@ -10,7 +11,7 @@ import { ResultItemComponent } from './result-item.component'
 
 @NgModule({
   imports: [
-    CommonModule, RouterModule, FormsModule
+    CommonModule, RouterModule, FormsModule, MessageModule
   ],
   declarations: [MapComponent, OskariRpcComponent, HelpComponent, ResultItemComponent],
   providers: [GeoService],

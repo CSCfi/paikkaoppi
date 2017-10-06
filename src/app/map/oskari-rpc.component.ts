@@ -1,18 +1,19 @@
-import { OskariLocationService } from './oskari-location.service'
-import 'rxjs/add/observable/interval'
-
 import { AfterViewInit, Component, Input, NgZone } from '@angular/core'
 import OskariRPC from 'oskari-rpc'
 import { Observable } from 'rxjs/Rx'
+import 'rxjs/add/observable/interval';
 
 import { environment } from '../../environments/environment'
 import { AuthService } from '../service/auth.service'
-import { PolygonFeatureCollection, ResultItem, Task, Message, MessageType } from '../service/model'
+import { MessageService, Message, MessageSeverity, MessageAction, MessageActionType } from '../message/message.service';
+
+import { PolygonFeatureCollection, ResultItem, Task } from '../service/model'
 import { Result } from '../service/model-result'
 import { TaskService } from '../service/task.service'
 import { Coordinates, GeoService } from './geo.service'
 import { OskariPointService } from './oskari-point.service'
 import { OskariPolygonService } from './oskari-polygon.service'
+import { OskariLocationService } from './oskari-location.service'
 
 @Component({
   selector: 'app-oskari-rpc',
@@ -27,7 +28,7 @@ export class OskariRpcComponent implements AfterViewInit {
   coordinates: Coordinates | null
   mapLayers: MapLayer[] = []
   selectedLayer?: MapLayer = null
-  messages: Message[] = []
+  actionMessages: Map<MapAction, Message> = new Map
 
   env = environment.mapEnv
   domain = environment.mapDomain
@@ -51,7 +52,8 @@ export class OskariRpcComponent implements AfterViewInit {
     private zone: NgZone,
     private geoService: GeoService,
     private taskService: TaskService,
-    private authService: AuthService) {
+    private authService: AuthService,
+    private messageService: MessageService) {
   }
 
   ngAfterViewInit() {
@@ -514,10 +516,20 @@ export class OskariRpcComponent implements AfterViewInit {
     this.channel.getFeatures(items => console.log('getFeatures', items))
   }
 
-  showActionMessage(message: string, action: MapAction) {
-    this.showMessage('info', message, action)
+  showActionMessage(message: string, action: MapAction): Message {
+    const result = this.messageService.info('info', MapAction[action], message)
+    this.actionMessages[action] = result.message
+    result.observable.subscribe(
+      messageAction => {
+        console.log('Message ' + messageAction.type + ' event received')
+        this.actionMessages.delete(action)
+        this.closeAction(action)
+      }
+    )
+    return result.message
   }
 
+  /*
   showMessage(type: MessageType, message: string, action: MapAction) {
     this.messages.push({
       class: 'type--' + type,
@@ -525,7 +537,9 @@ export class OskariRpcComponent implements AfterViewInit {
       action: action
     })
   }
+  */
 
+  /*
   closeActionMessage(action: MapAction) {
     for (const message of this.messages) {
       if (action === message.action) {
@@ -534,7 +548,7 @@ export class OskariRpcComponent implements AfterViewInit {
     }
   }
 
-  closeMessage(message: Message): void {
+    closeMessage(message: Message): void {
     if (message.action !== null) {
       this.closeAction(message.action)
     }
@@ -543,6 +557,23 @@ export class OskariRpcComponent implements AfterViewInit {
     if (index > -1) {
       this.messages.splice(index, 1)
     }
+  }
+  */
+
+  private messageClosed(messageAction: MessageAction): void {
+    const code = messageAction.message.code
+    const action = MapAction[code]
+    if (action != null) {
+      this.closeAction(action)
+    }
+  }
+
+  private closeActionMessage(action: MapAction) {
+    const message = this.actionMessages[action]
+    if (message) {
+      this.messageService.closeMessage(message)
+    }
+    this.closeAction(action)
   }
 
   private closeAction(action: MapAction): void {

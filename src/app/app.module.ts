@@ -17,16 +17,17 @@ import { AuthGuard } from './service/auth.guard'
 import { NotLoggedInGuard } from './service/not-logged-in.guard'
 import { TaskService } from './service/task.service'
 import { TaskTemplateService } from './service/task-template.service'
+import { MessageModule } from './message/message.module'
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
     DashboardComponent,
-    LibraryComponent
+    LibraryComponent,
   ],
   imports: [
-    AppRoutingModule, BrowserModule, FormsModule, HttpClientModule, MapModule
+    AppRoutingModule, BrowserModule, FormsModule, HttpClientModule, MapModule, MessageModule
   ],
   providers: [AuthService, TaskService, TaskTemplateService, AuthGuard, NotLoggedInGuard],
   bootstrap: [AppComponent]
