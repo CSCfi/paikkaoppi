@@ -37,7 +37,7 @@ export interface Instruction {
     description: string
 }
 
-/** 
+/**
  * For a student task has 0-1 results.
  * For a teacher task has 0-* results.
  */
