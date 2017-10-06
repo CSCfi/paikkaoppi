@@ -1,4 +1,6 @@
 import * as GeoJSON from "geojson"
+import { MapAction } from '../map/oskari-rpc.component'
+import { Result } from './model-result'
 
 export type Role = "teacher" | "student"
 
@@ -55,13 +57,6 @@ export interface Task {
     results: Result[]
 }
 
-export interface Result {
-    id: number
-    taskId: number
-    user: User
-    resultItems: ResultItem[]
-}
-
 export interface ResultItem {
     id?: number
     resultId: number
@@ -69,6 +64,14 @@ export interface ResultItem {
     name?: string
     description?: string
 }
+
+export interface Message {
+    class: string
+    description: string,
+    action: MapAction
+}
+
+export type MessageType = 'info' | 'warn' | 'error'
 
 export type Geometry = Point | PolygonFeatureCollection
 export type Point = GeoJSON.Point

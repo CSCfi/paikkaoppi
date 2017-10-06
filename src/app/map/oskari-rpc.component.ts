@@ -7,7 +7,7 @@ import { Observable } from 'rxjs/Rx'
 
 import { environment } from '../../environments/environment'
 import { AuthService } from '../service/auth.service'
-import { PolygonFeatureCollection, ResultItem, Task } from '../service/model'
+import { PolygonFeatureCollection, ResultItem, Task, Message, MessageType } from '../service/model'
 import { Result } from '../service/model-result'
 import { TaskService } from '../service/task.service'
 import { Coordinates, GeoService } from './geo.service'
@@ -27,6 +27,7 @@ export class OskariRpcComponent implements AfterViewInit {
   coordinates: Coordinates | null
   mapLayers: MapLayer[] = []
   selectedLayer?: MapLayer = null
+  messages: Message[] = []
 
   env = environment.mapEnv
   domain = environment.mapDomain
@@ -365,11 +366,14 @@ export class OskariRpcComponent implements AfterViewInit {
     this.clearActionHandlers()
     this.markerAction = !this.markerAction
     console.log('toggleMarkerAction', this.markerAction)
+    const action = MapAction.Marker
     if (this.markerAction) {
-      this.toggleActions(MapAction.Marker)
+      this.toggleActions(action)
+      this.showActionMessage('Merkitse piste', action)
       this.setAddMarkerListenerActive()
     } else {
       this.setInitialMapToolMode()
+      this.closeActionMessage(action)
     }
   }
 
@@ -393,13 +397,16 @@ export class OskariRpcComponent implements AfterViewInit {
   toggleDrawAreaAction() {
     this.clearActionHandlers()
     this.drawAreaAction = !this.drawAreaAction
+    const action = MapAction.DrawArea
     console.log('toggleDrawAreaAction:', this.drawAreaAction)
     if (this.drawAreaAction) {
-      this.toggleActions(MapAction.DrawArea)
+      this.toggleActions(action)
+      this.showActionMessage('Merkitse alue', action)
       this.setDrawAreaListenerActive()
     } else {
       this.polygonService.stopDrawPolygon()
       this.setInitialMapToolMode()
+      this.closeActionMessage(action)
     }
   }
 
@@ -432,9 +439,11 @@ export class OskariRpcComponent implements AfterViewInit {
     if (this.measureLineAction) {
       this.toggleActions(action)
       this.setMeasureListenerActive(action)
+      this.showActionMessage('Mittaa etäisyys', action)
     } else {
       this.polygonService.stopMeasureLine()
       this.setInitialMapToolMode()
+      this.closeActionMessage(action)
     }
   }
 
@@ -446,9 +455,11 @@ export class OskariRpcComponent implements AfterViewInit {
     if (this.measureAreaAction) {
       this.toggleActions(action)
       this.setMeasureListenerActive(action)
+      this.showActionMessage('Mittaa pinta-ala', action)
     } else {
       this.polygonService.stopMeasureArea()
       this.setInitialMapToolMode()
+      this.closeActionMessage(action)
     }
   }
 
@@ -501,6 +512,58 @@ export class OskariRpcComponent implements AfterViewInit {
     this.channel.getMapBbox(pos => console.log('getMapBbox', pos))
     this.channel.getCurrentState(pos => console.log('getCurrentState', pos))
     this.channel.getFeatures(items => console.log('getFeatures', items))
+  }
+
+  showActionMessage(message: string, action: MapAction) {
+    this.showMessage('info', message, action)
+  }
+
+  showMessage(type: MessageType, message: string, action: MapAction) {
+    this.messages.push({
+      class: 'type--' + type,
+      description: message,
+      action: action
+    })
+  }
+
+  closeActionMessage(action: MapAction) {
+    for (const message of this.messages) {
+      if (action === message.action) {
+        this.closeMessage(message)
+      }
+    }
+  }
+
+  closeMessage(message: Message): void {
+    if (message.action !== null) {
+      this.closeAction(message.action)
+    }
+
+    const index = this.messages.indexOf(message, 0)
+    if (index > -1) {
+      this.messages.splice(index, 1)
+    }
+  }
+
+  private closeAction(action: MapAction): void {
+    switch (action) {
+      case MapAction.Marker: {
+        if (this.markerAction) this.toggleMarkerAction()
+        break
+      }
+      case MapAction.DrawArea: {
+        if (this.drawAreaAction) this.toggleDrawAreaAction()
+        break
+      }
+      case MapAction.MeasureLine: {
+        if (this.measureLineAction) this.toggleMeasureLine()
+        break
+      }
+      case MapAction.MeasureArea: {
+        if (this.measureAreaAction) this.toggleMeasureArea()
+        break
+      }
+    }
   }
 }
 
