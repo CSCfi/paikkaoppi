@@ -44,6 +44,15 @@
         a.popup__header-link.type--back(href='#map-lempipaikkani')
         h1.popup__header-title Uusi merkintä
 
+      .form__image#imageAdd
+        .form__image-placement
+          .text(onclick='$("#imageChange").show();$(this).parents(".form__image").hide()') Lisää kuva
+
+      .form__image#imageChange(style='display:none')
+        .form__image-placement
+          .form__image-placement-cover(style='background-image:url(images/image.jpg)')
+          .text(onclick='$("#imageAdd").show();$(this).parents(".form__image").hide()') Vaihda kuva
+
       .form__text
         .form__text-title Koordinaatit
         .form__text-value 60°10′15″N, 024°56′15″E
@@ -65,6 +74,10 @@
       .popup__header
         a.popup__header-link.type--back(href='#map-lempipaikkani')
         h1.popup__header-title Kallen lempipaikka
+
+      .form__image
+        .form__image-placement
+          .form__image-placement-preview(style='background-image:url(images/image.jpg)')
 
       .form__text
         .form__text-title Koordinaatit

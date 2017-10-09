@@ -838,6 +838,59 @@ ul
 .form__item
   padding 5px 0
 
+.form__image
+  margin 0 0 15px 0
+
+.form__image-placement
+  width 100%
+  height 180px
+  background #efefef
+  display flex
+  align-items center
+  justify-content center
+  position relative
+  overflow hidden
+  .text
+    color brand_color[1]
+    font-weight 600
+    position relative
+    z-index 2
+    button()
+    border 1px solid brand_color[1]
+    background transparent
+    color brand_color[1]
+    
+.form__image-placement-preview
+  display block
+  position absolute
+  top 0
+  left 0
+  right 0
+  bottom 0
+  background no-repeat center center
+  background-size cover
+  
+
+.form__image-placement-cover
+  display block
+  position absolute
+  -webkit-filter blur(3px)
+  filter blur(3px)
+  top 0
+  left 0
+  right 0
+  bottom 0
+  background no-repeat center center
+  background-size cover
+  &:before
+    content ''
+    background alpha(#fff,.6)
+    top 0
+    left 0
+    right 0
+    bottom 0
+    position absolute
+    
 .form__footer
   text-align center
   margin 65px 0 0 0

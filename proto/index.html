@@ -212,6 +212,17 @@
                   <div class="popup__header"><a href="#map-lempipaikkani" class="popup__header-link type--back"></a>
                     <h1 class="popup__header-title">Uusi merkintä</h1>
                   </div>
+                  <div id="imageAdd" class="form__image">
+                    <div class="form__image-placement">
+                      <div onclick="$(&quot;#imageChange&quot;).show();$(this).parents(&quot;.form__image&quot;).hide()" class="text">Lisää kuva</div>
+                    </div>
+                  </div>
+                  <div id="imageChange" style="display:none" class="form__image">
+                    <div class="form__image-placement">
+                      <div style="background-image:url(images/image.jpg)" class="form__image-placement-cover"></div>
+                      <div onclick="$(&quot;#imageAdd&quot;).show();$(this).parents(&quot;.form__image&quot;).hide()" class="text">Vaihda kuva</div>
+                    </div>
+                  </div>
                   <div class="form__text">
                     <div class="form__text-title">Koordinaatit</div>
                     <div class="form__text-value">60°10′15″N, 024°56′15″E</div>
@@ -233,6 +244,11 @@
                 <div class="form type--basic">
                   <div class="popup__header"><a href="#map-lempipaikkani" class="popup__header-link type--back"></a>
                     <h1 class="popup__header-title">Kallen lempipaikka</h1>
+                  </div>
+                  <div class="form__image">
+                    <div class="form__image-placement">
+                      <div style="background-image:url(images/image.jpg)" class="form__image-placement-preview"></div>
+                    </div>
                   </div>
                   <div class="form__text">
                     <div class="form__text-title">Koordinaatit</div>
