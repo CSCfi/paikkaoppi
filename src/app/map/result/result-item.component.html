@@ -45,10 +45,14 @@
             <label>Kuvaus</label>
             <textarea [(ngModel)]="model.description" name="description"></textarea>
           </div>
+          Lisää kuva: <input type="file" ng2FileSelect [uploader]="uploader" />
+          <div class="progress">
+            <div class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+          </div>
           <div class="form__footer">
             <button type="submit" class="button" [disabled]="!resultItemForm.form.valid">Tallenna merkintä</button>
-            <button class="button type--secondary" (click)="delete()" *ngIf="model['id'] != null">Poista merkintä</button>
-            <button class="button type--secondary" (click)="close()">Sulje</button>
+            <button class="button type--secondary" [disabled]="uploader.isUploading" (click)="delete()" *ngIf="model['id'] != null">Poista merkintä</button>
+            <button class="button type--secondary" [disabled]="uploader.isUploading" (click)="close()">Sulje</button>
           </div>
         </form>
       </ng-container>

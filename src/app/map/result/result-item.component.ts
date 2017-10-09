@@ -1,8 +1,11 @@
 import { Component, OnInit, EventEmitter, Input, Output, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core'
-import { ResultItem, User, PolygonFeatureCollection } from '../service/model'
-import { Result } from '../service/model-result'
-import { GeoService, Coordinates } from './geo.service'
-import { AuthService } from '../service/auth.service'
+import { FileUploader } from 'ng2-file-upload';
+
+import { environment } from '../../../environments/environment'
+import { ResultItem, User, PolygonFeatureCollection } from '../../service/model'
+import { Result } from '../../service/model-result'
+import { GeoService, Coordinates } from '../geo.service'
+import { AuthService } from '../../service/auth.service'
 
 @Component({
   selector: 'app-result-item',
@@ -20,12 +23,21 @@ export class ResultItemComponent implements OnChanges {
   polygonWGS84Coordinates: Coordinates[]
   isEditMode = false
   showUser = false
+  uploader: FileUploader;
 
   @Output() deleteResultItem = new EventEmitter<ResultItem>()
   @Output() saveResultItem = new EventEmitter<ResultItem>()
   @Output() resultItemPopupHidden = new EventEmitter<ResultItem>()
 
-  constructor(private geoService: GeoService, private authService: AuthService) { }
+  constructor(private geoService: GeoService, private authService: AuthService) {
+    this.uploader = new FileUploader({
+      url: `${environment.apiUri}/attachment`,
+      disableMultipart: false,
+      autoUpload: true
+    })
+
+    //this.uploader.response.subscribe( res => this.response = res );
+  }
 
   ngOnChanges(changes: SimpleChanges) {
     console.log('ResultItemComponent.ngOnChanges', this.model)
