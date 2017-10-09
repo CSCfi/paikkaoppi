@@ -23,7 +23,8 @@ export class ResultItemComponent implements OnChanges {
   polygonWGS84Coordinates: Coordinates[]
   isEditMode = false
   showUser = false
-  uploader: FileUploader;
+
+  uploader: FileUploader
 
   @Output() deleteResultItem = new EventEmitter<ResultItem>()
   @Output() saveResultItem = new EventEmitter<ResultItem>()
@@ -36,7 +37,15 @@ export class ResultItemComponent implements OnChanges {
       autoUpload: true
     })
 
-    //this.uploader.response.subscribe( res => this.response = res );
+    this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
+      if (this.model.newAttachmentIds === undefined) {
+        this.model.newAttachmentIds = []
+      }
+
+      const attachment = JSON.parse(response)
+      this.model.newAttachmentIds.push(attachment.id)
+      console.log(this.model.newAttachmentIds)
+    }
   }
 
   ngOnChanges(changes: SimpleChanges) {
