@@ -374,7 +374,7 @@ ul {
   content: url("assets/icon_plus-w.svg");
   display: inline-block;
   vertical-align: center;
-  width: 12px;
+  width: 11px;
   margin: 1px 5px -1px 0;
 }
 @media (min-width: 720px) {
@@ -607,6 +607,10 @@ ul {
   animation: appear 1s ease-in-out;
   animation-fill-mode: forwards;
 }
+.list.type--tasks .list__item.type--special {
+  border: 1px solid #f05348;
+color
+}
 .list.type--tasks .list__item form {
   display: -webkit-flex;
   display: flex;
@@ -692,6 +696,16 @@ ul {
 .list.type--tasks .list__item-link.is-inactive {
   opacity: 0.3;
   cursor: default;
+}
+.list.type--tasks .list__item-link.type--add {
+  background: #f05348;
+}
+.list.type--tasks .list__item-link.type--add:before {
+  content: url("assets/icon_plus-w.svg");
+  display: inline-block;
+  vertical-align: center;
+  width: 11px;
+  margin: 0 5px 0 0;
 }
 .list.type--tasks .list__item-info {
   margin: 15px 0 0 0;
