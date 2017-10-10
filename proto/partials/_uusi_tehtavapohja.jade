@@ -1,11 +1,69 @@
 .view__header
-  a.view__header-link.type--back(href='#library')
+  a.view__header-link.type--back(href='#library-opettaja')
   h1.view__header-title Uusi tehtäväpohja
 
 .view__content
-  .view__columns
-    .view__column
-      
+  .view__wizard
+    .view__wizard-back.is-disabled
+    .view__wizard-step
+      a.link 1. Tehtävän kuvaus
+    .view__wizard-step.is-selected
+      a.link 2. Tehtävän askeleet
+    .view__wizard-step
+      a.link 3. Lisäasetukset
+    .view__wizard-forward
+  .form.type--basic
+    .view__grid#tehtava1
+      .view__grid-item
+        
 
-    .view__column
-      
+          //- .form__image#imageAdd1
+          //-   .form__image-placement
+          //-     .text(onclick='$("#imageChange1").show();$(this).parents(".form__image").hide()') Lisää kuva
+
+          //- .form__image#imageChange1(style='display:none')
+          //-   .form__image-placement
+          //-     .form__image-placement-cover(style='background-image:url(images/image.jpg)')
+          //-     .text(onclick='$("#imageAdd1").show();$(this).parents(".form__image").hide()') Vaihda kuva
+
+          .form__item
+            label Nimi
+            input(type='text')
+          
+          .form__item
+            label Lyhyt otsikko
+            input(type='text')
+
+          .form__item
+            label Tehtävän kuvaus
+            textarea
+
+          .form__item
+            label Ohje opettajalle
+            textarea
+
+          .form__footer
+            a.button(onclick='$("#tehtava2").show();$("#tehtava1").hide()') Jatka
+
+          
+    .view__grid#tehtava2(style='display:none')
+      .view__grid-item
+        .form__title Tehtävän askeleet
+        .form__ingress Ohje aiheesta tulee tähän.
+        .form__item
+          label 1.
+          textarea
+        .form__item#osio(style='display:none')
+          label 2.
+          textarea
+        .form__item.type--centered
+          a.button.type--form(onclick='$("#osio").show()') Lisää uusi askel
+        .form__footer
+            a.button(onclick='$("#tehtava3").show()') Jatka
+
+
+
+
+
+
+                  

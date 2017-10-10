@@ -434,8 +434,13 @@
               <h1 class="view__header-title">Tehtäväkirjasto  </h1>
             </div>
             <div class="view__content">
-              <h1 class="title__list">Valitse tehtävä</h1>
+              <h1 class="title__list">Valitse tehtäväpohja</h1>
               <div class="list type--tasks">
+                <div class="list__item type--special">
+                  <div class="list__item-title">Uusi tehtäväpohja</div>
+                  <div class="list__item-description">Rakenna oma tehtäväpohja.</div>
+                  <div class="list__item-footer"><a href="#uusi-tehtavapohja" class="list__item-link type--add">Uusi tehtäväpohja</a></div>
+                </div>
                 <div class="list__item">
                   <div class="list__item-tag">
                     <div class="tag">Monialainen</div>
@@ -470,22 +475,59 @@
                   <div class="list__item-description">Tämä tehtävä ei ole vielä käytössä.</div>
                   <div class="list__item-footer"><a class="list__item-link is-inactive">Aloita tehtävä</a></div>
                 </div>
-                <div class="list__item type--special">
-                  <div class="list__item-title">Uusi tehtäväpohja</div>
-                  <div class="list__item-description">Rakenna oma tehtäväpohja.</div>
-                  <div class="list__item-footer"><a href="#uusi-tehtavapohja" class="list__item-link type--add">Uusi tehtäväpohja</a></div>
-                </div>
               </div>
             </div>
           </div>
           <div id="uusi-tehtavapohja" class="view">
-            <div class="view__header"><a href="#library" class="view__header-link type--back"></a>
+            <div class="view__header"><a href="#library-opettaja" class="view__header-link type--back"></a>
               <h1 class="view__header-title">Uusi tehtäväpohja</h1>
             </div>
             <div class="view__content">
-              <div class="view__columns">
-                <div class="view__column"></div>
-                <div class="view__column"></div>
+              <div class="view__wizard">
+                <div class="view__wizard-back is-disabled"></div>
+                <div class="view__wizard-step"><a class="link">1. Tehtävän kuvaus</a></div>
+                <div class="view__wizard-step is-selected"><a class="link">2. Tehtävän askeleet</a></div>
+                <div class="view__wizard-step"><a class="link">3. Lisäasetukset</a></div>
+                <div class="view__wizard-forward"></div>
+              </div>
+              <div class="form type--basic">
+                <div id="tehtava1" class="view__grid">
+                  <div class="view__grid-item">
+                    <div class="form__item">
+                      <label>Nimi</label>
+                      <input type="text">
+                    </div>
+                    <div class="form__item">
+                      <label>Lyhyt otsikko</label>
+                      <input type="text">
+                    </div>
+                    <div class="form__item">
+                      <label>Tehtävän kuvaus</label>
+                      <textarea></textarea>
+                    </div>
+                    <div class="form__item">
+                      <label>Ohje opettajalle</label>
+                      <textarea></textarea>
+                    </div>
+                    <div class="form__footer"><a onclick="$(&quot;#tehtava2&quot;).show();$(&quot;#tehtava1&quot;).hide()" class="button">Jatka</a></div>
+                  </div>
+                </div>
+                <div id="tehtava2" style="display:none" class="view__grid">
+                  <div class="view__grid-item">
+                    <div class="form__title">Tehtävän askeleet</div>
+                    <div class="form__ingress">Ohje aiheesta tulee tähän.</div>
+                    <div class="form__item">
+                      <label>1.</label>
+                      <textarea></textarea>
+                    </div>
+                    <div id="osio" style="display:none" class="form__item">
+                      <label>2.</label>
+                      <textarea></textarea>
+                    </div>
+                    <div class="form__item type--centered"><a onclick="$(&quot;#osio&quot;).show()" class="button type--form">Lisää uusi askel</a></div>
+                    <div class="form__footer"><a onclick="$(&quot;#tehtava3&quot;).show()" class="button">Jatka</a></div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>

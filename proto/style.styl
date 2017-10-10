@@ -200,8 +200,12 @@ button()
   &.type--secondary
     color brand_color[3]
     background none
+  &.type--form
+    border 1px solid brand_color[1]
+    background transparent
+    color brand_color[1]
+    margin 10px auto
     
-
 input()
   border 1px solid input_border_color
   border-radius input_border_radius
@@ -467,6 +471,7 @@ ul
     margin 1px 5px -1px 0
     
 
+//- MAIN COLUMN LAYOUT
 
 .view__columns
   @media (min-width: media_medium)
@@ -490,6 +495,20 @@ ul
       min-width 300px
       margin 0 0 0 20px
  
+
+//- GRID LAYOUT
+
+.view__grid
+  display flex
+  justify-content center
+  
+.view__grid-item
+  flex 1 1 50%
+  max-width 50%
+  padding-right 25px
+  @media (max-width: media_medium)
+    flex 1 1 100%
+    max-width 100%
 
 //- Wrapper for view animation, gets is-loaded when the view appears
 
@@ -843,11 +862,20 @@ ul
     margin 0 auto
     text-align left
 
+.form__title
+  font-weight bold_font_weight
+  margin 0 0 10px 0
+  text-align center
+    
 .form__ingress
   text-align center
     
 .form__item
   padding 5px 0
+  &.type--centered
+    text-align center
+  label
+    font-weight bold_font_weight
 
 .form__image
   margin 0 0 15px 0
@@ -967,5 +995,48 @@ ul
 .profile__footer-item
   font-weight bold_font_weight
   margin 0 0 10px 0
+
+
+.view__wizard
+  display flex
+  justify-content center
+  margin 0 -25px 35px 0
+
+.view__wizard-back
+  &.is-disabled
+    visibility hidden
+  &:before
+    content url(assets/icon_arrow-l.svg)
+    display inline-block
+    vertical-align bottom
+    width 20px
+    margin 3px 20px -3px 0
+  @media (min-width: media_medium)
+    display none
+ 
+.view__wizard-forward
+  &.is-disabled
+    opacity .5
+  &:before
+    content url(assets/icon_arrow-r.svg)
+    display inline-block
+    vertical-align bottom
+    width 20px
+    margin 3px 20px -3px 0
+  @media (min-width: media_medium)
+    display none
+
+.view__wizard-step
+  margin 0 25px 0 0
+  padding 0 0 2px 0
+  @media (max-width: media_medium)
+    display none
+  &.is-selected
+    border-bottom 1px solid brand_color[1]
+    @media (max-width: media_medium)
+      display block
+  .link
+    link()
+    font-weight bold_font_weight
 
 
