@@ -69,7 +69,7 @@ export interface ResultItem {
 export interface Attachment {
     id: number
     name: string
-    conetntType: string
+    contentType: string
     sizeInBytes: number
 }
 

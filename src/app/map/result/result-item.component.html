@@ -37,9 +37,9 @@
       <ng-container *ngIf="isEditMode">
         <div id="imageAdd" class="form__image">
           <div class="form__image-placement">
+            <div *ngIf="hasImage() == true" [ngStyle]="{ 'background-image': 'url(' + imageUrl() + ')' }" class="form__image-placement-cover"></div>
             <label for="upload">
               <div class="text">
-                <div *ngIf="hasImage() == true" style="background-image:url(images/image.jpg)" class="form__image-placement-cover"></div>
                 <span class="glyphicon glyphicon-folder-open" aria-hidden="true">Lisää kuva</span>
                 <input type="file" id="upload" ng2FileSelect [uploader]="uploader" style="display:none"/>
               </div>

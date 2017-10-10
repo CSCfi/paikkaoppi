@@ -75,6 +75,13 @@ export class ResultItemComponent implements OnChanges {
     return resultItem.attachments !== undefined && resultItem.attachments.length > 0
   }
 
+  imageUrl(): string {
+    if (!this.hasImage()) return;
+    const resultItem = this.model as ResultItem
+    const id = resultItem.attachments[0].id
+    return `${environment.apiUri}/attachment/${id}/content`
+  }
+
   close() {
     if (this.model.id === undefined) {
       this.deleteResultItem.emit(this.model)
