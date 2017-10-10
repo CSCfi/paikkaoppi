@@ -877,6 +877,9 @@ ul
   label
     font-weight bold_font_weight
 
+.form__row
+  margin-bottom 10px
+
 .form__image
   margin 0 0 15px 0
 
@@ -898,6 +901,21 @@ ul
     border 1px solid brand_color[1]
     background transparent
     color brand_color[1]
+
+.form__image-placement-buttons
+  display flex
+  flex-direction column
+  align-items center
+  justify-content center
+  .text
+    margin 0 0 25px 0
+    &:last-child
+      margin-bottom 0
+    &.type--remove
+      border none
+      border-radius 0
+      border-bottom 1px solid brand_color[1]
+      padding 0 0 3px 0
     
 .form__image-placement-preview
   display block
