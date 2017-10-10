@@ -29,7 +29,8 @@ export class GeoService {
       resultId: resultItem.resultId,
       geometry: resultItem.geometry,
       name: resultItem.name,
-      description: resultItem.description
+      description: resultItem.description,
+      attachments: resultItem.attachments
     }
   }
 

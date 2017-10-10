@@ -63,7 +63,7 @@ export interface ResultItem {
     geometry: Geometry
     name?: string
     description?: string
-    attachments: Attachment[]
+    attachments?: Attachment[]
 }
 
 export interface Attachment {

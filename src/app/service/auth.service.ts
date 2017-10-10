@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http'
+import { Router } from '@angular/router'
 import { Observable } from 'rxjs/Observable'
 import { Subject } from 'rxjs/Subject'
 import 'rxjs/add/observable/empty'
@@ -11,24 +12,18 @@ import { User, Role, Roles } from '../service/model'
 export class AuthService {
   static KEY_ROLE = 'role'
   static KEY_USER = 'user'
+  initialized: Boolean = false
 
-  constructor(private http: HttpClient) {
+  constructor(private http: HttpClient, private router: Router) {
     console.info('AuthService()')
-    this.updateCurrentUser().subscribe(
-      (user) => {
-        console.log(`CurrentUser: ${user.username}`)
-        this.setUser(user)
-      },
-      (err) => {
-        this.setUser(null)
-      })
+    this.updateCurrentUser()
   }
 
   login(username: string): Observable<User> {
     this.setUser(null)
     return this.http.get<User>(`${environment.apiUri}/auth/login/${username}`).switchMap(
       (loginUser: User) => {
-        return this.updateCurrentUser().switchMap(
+        return this.requestCurrentUser().switchMap(
           (user: User) => {
             console.log(`CurrentUser: ${user.username}`)
             this.setUser(user)
@@ -48,8 +43,29 @@ export class AuthService {
     )
   }
 
-  private updateCurrentUser(): Observable<User> {
+  private updateCurrentUser(): Observable<void> {
     console.info('AuthService.updateCurrentUser()')
+    const done = new Subject<void>()
+    this.requestCurrentUser().subscribe(
+      (user) => {
+        console.log(`CurrentUser: ${user.username}`)
+        this.setUser(user)
+        this.initialized = true
+        done.next()
+        done.complete()
+      },
+      (err) => {
+        console.log(`Not logged in. Removing currentUser`)
+        this.setUser(null)
+        this.initialized = true
+        done.next()
+        done.complete()
+      })
+      return done.asObservable()
+  }
+
+  private requestCurrentUser(): Observable<User> {
+    console.info('AuthService.requestCurrentUser()')
     return this.http.get<User>(`${environment.apiUri}/user/current`)
   }
 
@@ -72,8 +88,15 @@ export class AuthService {
     return user ? user.username : null
   }
 
-  isLoggedIn(): boolean {
-    return this.getRole() != null
+  isLoggedIn(): Observable<boolean> {
+    console.log("isLoggedIn()")
+    if (this.initialized)
+      return Observable.of(this.getRole() != null)
+    else {
+      return this.updateCurrentUser().mergeMap( () => {
+        return Observable.of(this.getRole() != null)
+      })
+    }
   }
 
   isTeacher(): boolean {
