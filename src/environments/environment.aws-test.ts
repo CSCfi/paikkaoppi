@@ -13,8 +13,8 @@ export const environment = {
   mapDomain : 'https://kartta.paikkatietoikkuna.fi',
   mapId : '3ccb28fc-2df8-4ad8-b5b2-85d415297882',
   mapTools: {
-    markerTool: true, areaTool: true, trackLocation: true,
-    measureLineTool: true, measureAreaTool: true},
+    markerTool: true, areaTool: true, trackLocation: false,
+    measureLineTool: false, measureAreaTool: false},
   mapHelpVisibleInitially: true,
   apiUri: 'https://d2esrtjkfszxd1.cloudfront.net/api/v1',
 }
