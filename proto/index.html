@@ -517,7 +517,7 @@
                     <div class="form__title">Tehtävän askeleet</div>
                     <div class="form__ingress">Ohje aiheesta tulee tähän.</div>
                     <div class="form__item">
-                      <label>1.</label>
+                      <label class="type--step">1.</label>
                       <div class="form__row">
                         <input type="text" placeholder="Askeleen otsikko" class="type--wysiwyg-title">
                       </div>
@@ -526,9 +526,15 @@
                       </div>
                     </div>
                     <div id="osio" style="display:none" class="form__item">
-                      <label>2.</label>
-                      <textarea></textarea>
+                      <label class="type--step">2.</label>
+                      <div class="form__row">
+                        <input type="text" placeholder="Askeleen otsikko" class="type--wysiwyg-title">
+                      </div>
+                      <div class="form__row">
+                        <textarea placeholder="Askeleen ohje" class="type--wysiwyg-text"></textarea>
+                      </div>
                     </div>
+                    <div id="osio" style="display:none" class="form__item"></div>
                     <div class="form__item type--centered"><a onclick="$(&quot;#osio&quot;).show()" class="button type--form">Lisää uusi askel</a></div>
                     <div class="form__footer"><a onclick="$(&quot;#tehtava3&quot;).show()" class="button">Jatka</a></div>
                   </div>

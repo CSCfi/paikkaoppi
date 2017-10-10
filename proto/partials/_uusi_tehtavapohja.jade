@@ -51,14 +51,18 @@
         .form__title Tehtävän askeleet
         .form__ingress Ohje aiheesta tulee tähän.
         .form__item
-          label 1.
+          label.type--step 1.
           .form__row
             input.type--wysiwyg-title(type='text', placeholder='Askeleen otsikko')
           .form__row
             textarea.type--wysiwyg-text(placeholder='Askeleen ohje')
         .form__item#osio(style='display:none')
-          label 2.
-          textarea
+          label.type--step 2.
+          .form__row
+            input.type--wysiwyg-title(type='text', placeholder='Askeleen otsikko')
+          .form__row
+            textarea.type--wysiwyg-text(placeholder='Askeleen ohje')
+        .form__item#osio(style='display:none')
         .form__item.type--centered
           a.button.type--form(onclick='$("#osio").show()') Lisää uusi askel
         .form__footer
