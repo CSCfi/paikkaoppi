@@ -609,7 +609,6 @@ ul {
 }
 .list.type--tasks .list__item.type--special {
   border: 1px solid #f05348;
-color
 }
 .list.type--tasks .list__item form {
   display: -webkit-flex;

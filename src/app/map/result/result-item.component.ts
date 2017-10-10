@@ -44,7 +44,6 @@ export class ResultItemComponent implements OnChanges {
 
       const attachment = JSON.parse(response)
       this.model.newAttachmentIds.push(attachment.id)
-      console.log(this.model.newAttachmentIds)
     }
   }
 
@@ -68,6 +67,12 @@ export class ResultItemComponent implements OnChanges {
     } else {
       this.showUser = false
     }
+  }
+
+  hasImage(): boolean {
+    const resultItem = this.model as ResultItem
+    console.log(resultItem.attachments !== undefined && resultItem.attachments.length > 0)
+    return resultItem.attachments !== undefined && resultItem.attachments.length > 0
   }
 
   close() {

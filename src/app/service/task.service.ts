@@ -35,9 +35,9 @@ export class TaskService {
     return this.http.get<Task[]>(`${environment.apiUri}/task`)
   }
 
-  getTask(id: number, includeResults: boolean): Observable<Task> {
+  getTask(id: number, includeResults: boolean, includeAttachments: boolean): Observable<Task> {
     return this.http.get<Task>(`${environment.apiUri}/task/${id}`, {
-      params: new HttpParams().append('includeResults', '' + includeResults)
+      params: new HttpParams().append('includeResults', '' + includeResults).append('includeAttachments', '' + includeAttachments)
     })
   }
 
@@ -54,7 +54,7 @@ export class TaskService {
 
   addTaskWithCode(code: string): Observable<Task> {
     return this.http.post<Result>(`${environment.apiUri}/result`, { code: code })
-      .switchMap(data => this.getTask(data.taskId, true))
+      .switchMap(data => this.getTask(data.taskId, true, true))
   }
 
   saveResultItem(resultId: number, resultItem: ResultItem): Observable<ResultItem> {
@@ -145,7 +145,8 @@ export class TaskService {
       resultId: resultItem.resultId,
       geometry: resultItem.geometry,
       name: resultItem.name,
-      description: resultItem.description
+      description: resultItem.description,
+      attachments: resultItem.attachments
     }
   }
 

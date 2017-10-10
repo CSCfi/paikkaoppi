@@ -121,7 +121,7 @@ export class OskariRpcComponent implements AfterViewInit {
 
   private reloadTask() {
     console.log('Loading task again...')
-    this.taskService.getTask(this.task.id, true).subscribe(
+    this.taskService.getTask(this.task.id, true, true).subscribe(
       (data) => {
         this.task = data
         console.log('Task loaded:', data)

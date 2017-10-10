@@ -26,7 +26,7 @@ export class MapComponent implements OnInit {
 
   ngOnInit(): void {
     this.route.paramMap
-      .switchMap((params: ParamMap) => this.taskService.getTask(+params.get('id'), true))
+      .switchMap((params: ParamMap) => this.taskService.getTask(+params.get('id'), true, true))
       .subscribe(task => {
         this.task = task
       },

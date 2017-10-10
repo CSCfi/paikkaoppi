@@ -63,6 +63,14 @@ export interface ResultItem {
     geometry: Geometry
     name?: string
     description?: string
+    attachments: Attachment[]
+}
+
+export interface Attachment {
+    id: number
+    name: string
+    conetntType: string
+    sizeInBytes: number
 }
 
 export type Geometry = Point | PolygonFeatureCollection
