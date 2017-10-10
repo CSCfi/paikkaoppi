@@ -6,7 +6,7 @@ import { environment } from '../../environments/environment'
 import { TaskTemplateService } from './task-template.service'
 import { AuthService } from './auth.service'
 import { User, Role, Roles, Task, TaskTemplate, ResultItem, TaskCodeCreator, StableRandom } from './model'
-import { Result} from './model-result'
+import { Result } from './model-result'
 
 @Injectable()
 export class TaskService {
