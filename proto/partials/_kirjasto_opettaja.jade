@@ -19,8 +19,11 @@
     h1.view__header-title Tehtäväkirjasto            
 
 
-.view__content
+.view__header
+  a.view__header-link.type--back(href='#dashboard')
+  h1.view__header-title Tehtäväkirjasto  
 
+.view__content
 
   h1.title__list Valitse tehtävä
 
@@ -32,7 +35,7 @@
       .list__item-description Kartta ja työkalut oman esityksen luomiseen.
       .list__item-info Tehtävä sopii omien esitysten tekemiseen ja karttatyökaluihin tutustumiseen.
       .list__item-footer
-        a.list__item-link.is-inactive Luo tehtävä
+        a.list__item-link.is-inactive Aloita tehtävä
 
     .list__item
       .list__item-tag
@@ -41,7 +44,7 @@
       .list__item-description Tässä visassa harjoitellaan kartan käyttöä hyödyntäen kartta-alustan työkaluja.
       .list__item-info Tehtävä sopii ala- ja yläkouluun sekä lukioon maantieteen ja ympäristöopin tunneille.
       .list__item-footer  
-        a.list__item-link(href='#create-task') Luo tehtävä
+        a.list__item-link(href='#create-task') Aloita tehtävä
 
     .list__item
       .list__item-tag
@@ -49,7 +52,7 @@
       .list__item-title Lempipaikkani
       .list__item-description Tämä tehtävä ei ole vielä käytössä.
       .list__item-footer
-        a.list__item-link.is-inactive Luo tehtävä
+        a.list__item-link.is-inactive Aloita tehtävä
 
     .list__item
       .list__item-tag
@@ -57,8 +60,13 @@
       .list__item-title Luokkaretki
       .list__item-description Tämä tehtävä ei ole vielä käytössä.
       .list__item-footer
-        a.list__item-link.is-inactive Luo tehtävä
+        a.list__item-link.is-inactive Aloita tehtävä
 
+    .list__item.type--special
+      .list__item-title Uusi tehtäväpohja
+      .list__item-description Rakenna oma tehtäväpohja.
+      .list__item-footer
+        a.list__item-link.type--add(href='#uusi-tehtavapohja') Uusi tehtäväpohja
 
 
 

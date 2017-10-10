@@ -1,13 +1,13 @@
-font_family = 'Source Sans Pro'
-font_weights = '300,400,700,900'
+font_family = 'Nunito'
+font_weights = '300,400,600,700,900'
 
 brand_color = ( linear-gradient(65deg, #F05348, #E1854B) #F05348 darken(#F05348, 20) #E1854B )
 ui_color = ( #35b577 #ffb448 #FF312E #587792 )
 neutral = ( #FAF7F5 #F5F5F5 darken(#F5F5F5,5) )
 text_color = ( #333 #888 )
 
-base_font_size = 100%
-base_line_height = 1.55
+base_font_size = 95%
+base_line_height = 1.45
 base_smooth_font = true
 
 placeholder_color = darken(text_color[1],10)
@@ -16,7 +16,8 @@ placeholder_weight = 400
 base_font_weight = 400
 title_font_weight = 700
 thin_font_weight = 300
-bold_font_weight = 600
+bold_font_weight = 700
+semibold_font_weight = 600
 
 border_radius = 30px
 
@@ -462,7 +463,7 @@ ul
     content url(assets/icon_plus-w.svg)
     display inline-block
     vertical-align center
-    width 12px
+    width 11px
     margin 1px 5px -1px 0
     
 
@@ -677,6 +678,8 @@ ul
         transform-style preserve-3d
         animation appear 1s ease-in-out
         animation-fill-mode forwards
+      &.type--special
+        border 1px solid brand_color[1]
       form
         display -webkit-flex
         display flex
@@ -718,7 +721,7 @@ ul
       background-size cover
     .list__item-title
       font-size size_h4
-      font-weight bold_font_weight
+      font-weight semibold_font_weight
       margin 0 0 5px 0
     .list__item-footer
       flex 1 0 auto
@@ -737,6 +740,14 @@ ul
       &.is-inactive
         opacity .3
         cursor default
+      &.type--add
+        background brand_color[1]
+        &:before
+          content url(assets/icon_plus-w.svg)
+          display inline-block
+          vertical-align center
+          width 11px
+          margin 0 5px 0 0
     .list__item-info
       margin 15px 0 0 0
       padding 15px 0 0 0
@@ -838,6 +849,59 @@ ul
 .form__item
   padding 5px 0
 
+.form__image
+  margin 0 0 15px 0
+
+.form__image-placement
+  width 100%
+  height 180px
+  background #efefef
+  display flex
+  align-items center
+  justify-content center
+  position relative
+  overflow hidden
+  .text
+    color brand_color[1]
+    font-weight 600
+    position relative
+    z-index 2
+    button()
+    border 1px solid brand_color[1]
+    background transparent
+    color brand_color[1]
+    
+.form__image-placement-preview
+  display block
+  position absolute
+  top 0
+  left 0
+  right 0
+  bottom 0
+  background no-repeat center center
+  background-size cover
+  
+
+.form__image-placement-cover
+  display block
+  position absolute
+  -webkit-filter blur(3px)
+  filter blur(3px)
+  top 0
+  left 0
+  right 0
+  bottom 0
+  background no-repeat center center
+  background-size cover
+  &:before
+    content ''
+    background alpha(#fff,.6)
+    top 0
+    left 0
+    right 0
+    bottom 0
+    position absolute
+    
 .form__footer
   text-align center
   margin 65px 0 0 0
