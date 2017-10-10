@@ -51,7 +51,10 @@
       .form__image#imageChange(style='display:none')
         .form__image-placement
           .form__image-placement-cover(style='background-image:url(images/image.jpg)')
-          .text(onclick='$("#imageAdd").show();$(this).parents(".form__image").hide()') Vaihda kuva
+          .form__image-placement-buttons
+            .text(onclick='$("#imageAdd").show();$(this).parents(".form__image").hide()') Vaihda kuva
+            .text.type--remove(onclick='$("#imageAdd").show();$(this).parents(".form__image").hide()') Poista kuva
+            
 
       .form__text
         .form__text-title Koordinaatit

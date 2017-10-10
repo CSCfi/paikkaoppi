@@ -889,6 +889,24 @@ ul {
   background: transparent;
   color: #f05348;
 }
+.form__image-placement-buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.form__image-placement-buttons .text {
+  margin: 0 0 25px 0;
+}
+.form__image-placement-buttons .text:last-child {
+  margin-bottom: 0;
+}
+.form__image-placement-buttons .text.type--remove {
+  border: none;
+  border-radius: 0;
+  border-bottom: 1px solid #f05348;
+  padding: 0 0 3px 0;
+}
 .form__image-placement-preview {
   display: block;
   position: absolute;
