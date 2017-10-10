@@ -51,12 +51,14 @@ export class AuthService {
         console.log(`CurrentUser: ${user.username}`)
         this.setUser(user)
         this.initialized = true
+        done.next()
         done.complete()
       },
       (err) => {
         console.log(`Not logged in. Removing currentUser`)
         this.setUser(null)
         this.initialized = true
+        done.next()
         done.complete()
       })
       return done.asObservable()
@@ -86,12 +88,12 @@ export class AuthService {
     return user ? user.username : null
   }
 
-  isLoggedIn(): boolean {
+  isLoggedIn(): Observable<boolean> {
     console.log("isLoggedIn()")
     if (this.initialized)
-      return this.getRole() != null
+      return Observable.of(this.getRole() != null)
     else {
-      this.updateCurrentUser().mergeMap( () => {
+      return this.updateCurrentUser().mergeMap( () => {
         return Observable.of(this.getRole() != null)
       })
     }

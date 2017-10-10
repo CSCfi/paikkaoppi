@@ -11,13 +11,15 @@ export class NotLoggedInGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    if (this.authService.isLoggedIn()) {
-      console.log(`NotLoggedInGuard:canActivate FAIL, route: ${next.routeConfig.path} redirect to "/"`);
-      this.router.navigate(['/dashboard']);
-      return false;
-    } else {
-      console.log(`NotLoggedInGuard:canActivate OK, route: ${next.routeConfig.path}`);
-      return true;
-    }
+    return this.authService.isLoggedIn().mergeMap(value => {
+      if (value) {
+        console.log(`NotLoggedInGuard:canActivate FAIL, route: ${next.routeConfig.path} redirect to "/"`)
+        this.router.navigate(['/dashboard'])
+        return Observable.of(false)
+      } else {
+        console.log(`NotLoggedInGuard:canActivate OK, route: ${next.routeConfig.path}`);
+        return Observable.of(true)
+      }
+    })
   }
 }
