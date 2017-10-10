@@ -9,6 +9,7 @@ import { MapComponent } from './map.component'
 import { OskariRpcComponent } from './oskari-rpc.component'
 import { HelpComponent } from './help.component'
 import { GeoService } from './geo.service'
+import { AttachmentService } from '../service/attachment.service'
 import { ResultItemComponent } from './result/result-item.component'
 
 @NgModule({
@@ -16,7 +17,7 @@ import { ResultItemComponent } from './result/result-item.component'
     CommonModule, RouterModule, FormsModule, MessageModule, FileUploadModule
   ],
   declarations: [MapComponent, OskariRpcComponent, HelpComponent, ResultItemComponent],
-  providers: [GeoService],
+  providers: [GeoService, AttachmentService],
   exports: [MapComponent]
 })
 export class MapModule { }

@@ -6,6 +6,7 @@ import { ResultItem, User, PolygonFeatureCollection } from '../../service/model'
 import { Result } from '../../service/model-result'
 import { GeoService, Coordinates } from '../geo.service'
 import { AuthService } from '../../service/auth.service'
+import { AttachmentService } from '../../service/attachment.service'
 
 @Component({
   selector: 'app-result-item',
@@ -30,7 +31,7 @@ export class ResultItemComponent implements OnChanges {
   @Output() saveResultItem = new EventEmitter<ResultItem>()
   @Output() resultItemPopupHidden = new EventEmitter<ResultItem>()
 
-  constructor(private geoService: GeoService, private authService: AuthService) {
+  constructor(private geoService: GeoService, private authService: AuthService, private attachmentService: AttachmentService) {
     this.uploader = new FileUploader({
       url: `${environment.apiUri}/attachment`,
       disableMultipart: false,
@@ -38,9 +39,9 @@ export class ResultItemComponent implements OnChanges {
     })
 
     this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
-      if (this.model.newAttachmentIds === undefined) {
-        this.model.newAttachmentIds = []
-      }
+      this.removePreviousImage()
+      this.model.newAttachmentIds = []
+      this.model.attachments = []
 
       const attachment = JSON.parse(response)
       this.model.newAttachmentIds.push(attachment.id)
@@ -70,16 +71,29 @@ export class ResultItemComponent implements OnChanges {
   }
 
   hasImage(): boolean {
-    const resultItem = this.model as ResultItem
-    console.log(resultItem.attachments !== undefined && resultItem.attachments.length > 0)
-    return resultItem.attachments !== undefined && resultItem.attachments.length > 0
+    return this.hasExistingImage() || this.hasNewImage()
+  }
+
+  private hasExistingImage() {
+    return this.model.attachments !== undefined && this.model.attachments.length > 0
+  }
+
+  private hasNewImage() {
+    return this.model.newAttachmentIds !== undefined && this.model.newAttachmentIds.length > 0
   }
 
   imageUrl(): string {
-    if (!this.hasImage()) return;
-    const resultItem = this.model as ResultItem
-    const id = resultItem.attachments[0].id
+    if (!this.hasImage()) return '';
+
+    const id = this.hasExistingImage() ? this.model.attachments[0].id : this.model.newAttachmentIds[0]
     return `${environment.apiUri}/attachment/${id}/content`
+  }
+
+  removePreviousImage() {
+    if (!this.hasImage()) return;
+
+    const id = this.hasExistingImage() ? this.model.attachments[0].id : this.model.newAttachmentIds[0]
+    this.attachmentService.removeAttachment(id).subscribe((ok) => { console.log(`Existing image ${id} removed`) });
   }
 
   close() {
