@@ -564,7 +564,8 @@ ul
   top 20px
 .map__zoom-in,
 .map__zoom-out,
-.map__center
+.map__center,
+.map__location
   width 40px
   height @width
   background #fff
@@ -583,7 +584,10 @@ ul
 .map__center
   margin-top 20px
   &:before
-    content url(assets/icon_center.svg)  
+    content url(assets/icon_expand.svg)
+.map__location
+  &:before
+    content url(assets/icon_center.svg)
 
 .view__container .map__zoom > *
   visibility hidden
