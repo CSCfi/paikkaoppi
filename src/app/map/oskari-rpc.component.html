@@ -13,9 +13,9 @@
   <div class="map__zoom">
     <div (click)="zoomIn()" class="map__zoom-in" title="Lähennä"></div>
     <div (click)="zoomOut()" class="map__zoom-out" title="Loitonna"></div>
-    <div (click)="zoomToLocation()" class="map__center map__location" title="Keskitä omaan sijaintiin"></div>
+    <div (click)="zoomToLocation()" class="map__center map__location" title="Keskitä omaan sijaintiin" *ngIf="mapTools['centerToLocation']"></div>
     <div (click)="resetMapLocation()" class="map__center" title="Peruuta"></div>
-    <select title="Taustakartta" class="map_center" *ngIf="mapLayers && mapLayers.length > 0" (change)="selectLayer($event.target.value)">
+    <select title="Taustakartta" class="map_center" *ngIf="mapTools['changeLayer'] && mapLayers && mapLayers.length > 0" (change)="selectLayer($event.target.value)">
       <ng-template ngFor let-layer [ngForOf]="mapLayers">
         <option [value]="layer.id" [attr.selected]="selectedLayer == layer ? 'selected' : null">{{layer.name}}</option>
       </ng-template>

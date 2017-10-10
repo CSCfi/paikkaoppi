@@ -14,7 +14,8 @@ export const environment = {
   mapId : '3ccb28fc-2df8-4ad8-b5b2-85d415297882',
   mapTools: {
     markerTool: true, areaTool: true, trackLocation: false,
-    measureLineTool: false, measureAreaTool: false},
+    measureLineTool: false, measureAreaTool: false,
+    centerToLocation: false, changeLayer: false},
   mapHelpVisibleInitially: true,
   apiUri: 'https://d2esrtjkfszxd1.cloudfront.net/api/v1',
 }
