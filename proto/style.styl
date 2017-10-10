@@ -565,7 +565,8 @@ ul
 .map__zoom-in,
 .map__zoom-out,
 .map__center,
-.map__location
+.map__location,
+.map__layers
   width 40px
   height @width
   background #fff
@@ -588,6 +589,9 @@ ul
 .map__location
   &:before
     content url(assets/icon_center.svg)
+.map__layers
+  &:before
+    content url(assets/icon_layers.svg)
 
 .view__container .map__zoom > *
   visibility hidden
