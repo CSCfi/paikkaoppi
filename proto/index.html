@@ -487,7 +487,7 @@
                 <div class="view__wizard-back is-disabled"></div>
                 <div class="view__wizard-step"><a class="link">1. Tehtävän kuvaus</a></div>
                 <div class="view__wizard-step is-selected"><a class="link">2. Tehtävän askeleet</a></div>
-                <div class="view__wizard-step"><a class="link">3. Lisäasetukset</a></div>
+                <div class="view__wizard-step"><a class="link">3. Esikatselu</a></div>
                 <div class="view__wizard-forward"></div>
               </div>
               <div class="form type--basic">
@@ -536,7 +536,12 @@
                     </div>
                     <div id="osio" style="display:none" class="form__item"></div>
                     <div class="form__item type--centered"><a onclick="$(&quot;#osio&quot;).show()" class="button type--form">Lisää uusi askel</a></div>
-                    <div class="form__footer"><a onclick="$(&quot;#tehtava3&quot;).show()" class="button">Jatka</a></div>
+                    <div class="form__footer"><a onclick="$(&quot;#tehtava3&quot;).show();$(&quot;#tehtava2&quot;).hide()" class="button">Jatka</a></div>
+                  </div>
+                </div>
+                <div id="tehtava3" style="display:none" class="view__grid">
+                  <div class="view__grid-item">
+                    <div class="form__footer"><a href="#library-opettaja" class="button">Tallenna</a></div>
                   </div>
                 </div>
               </div>

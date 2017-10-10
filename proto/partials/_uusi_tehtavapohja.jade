@@ -10,7 +10,7 @@
     .view__wizard-step.is-selected
       a.link 2. Tehtävän askeleet
     .view__wizard-step
-      a.link 3. Lisäasetukset
+      a.link 3. Esikatselu
     .view__wizard-forward
   .form.type--basic
     .view__grid#tehtava1
@@ -66,7 +66,14 @@
         .form__item.type--centered
           a.button.type--form(onclick='$("#osio").show()') Lisää uusi askel
         .form__footer
-            a.button(onclick='$("#tehtava3").show()') Jatka
+            a.button(onclick='$("#tehtava3").show();$("#tehtava2").hide()') Jatka
+
+
+    .view__grid#tehtava3(style='display:none')
+      .view__grid-item
+        
+        .form__footer
+            a.button(href='#library-opettaja') Tallenna
 
 
 
