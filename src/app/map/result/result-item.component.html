@@ -35,10 +35,16 @@
         </ng-container>
       </div>
       <ng-container *ngIf="isEditMode">
-        <label for="upload">
-          <span class="glyphicon glyphicon-folder-open" aria-hidden="true">Lisää kuva</span>
-          <input type="file" id="upload" ng2FileSelect [uploader]="uploader" style="display:none"/>
-        </label>
+        <div id="imageAdd" class="form__image">
+          <div class="form__image-placement">
+            <div class="text">
+                <label for="upload">
+                  <span class="glyphicon glyphicon-folder-open" aria-hidden="true">Lisää kuva</span>
+                  <input type="file" id="upload" ng2FileSelect [uploader]="uploader" style="display:none"/>
+                </label>
+            </div>
+          </div>
+        </div>
         <form (ngSubmit)="save()" #resultItemForm="ngForm">
           <div class="form__item" [class.has-error]="name.invalid && name.dirty">
             <label>Nimi</label>
