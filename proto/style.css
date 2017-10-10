@@ -844,6 +844,9 @@ ul {
 .form__item label {
   font-weight: 700;
 }
+.form__row {
+  margin-bottom: 10px;
+}
 .form__image {
   margin: 0 0 15px 0;
 }
