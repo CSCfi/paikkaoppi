@@ -5,7 +5,7 @@ import 'rxjs/add/observable/throw';
 import { environment } from '../../environments/environment'
 import { TaskTemplateService } from './task-template.service'
 import { AuthService } from './auth.service'
-import { User, Role, Roles, Task, TaskTemplate, ResultItem, TaskCodeCreator, StableRandom } from './model'
+import { User, Role, Roles, Task, TaskDashboard, TaskTemplate, ResultItem, TaskCodeCreator, StableRandom } from './model'
 import { Result } from './model-result'
 
 @Injectable()
@@ -19,6 +19,10 @@ export class TaskService {
 
   getTasks(): Observable<Task[]> {
     return this.http.get<Task[]>(`${environment.apiUri}/task`)
+  }
+
+  getTasksForDashboard(): Observable<TaskDashboard[]> {
+    return this.http.get<TaskDashboard[]>(`${environment.apiUri}/task/dashboard`)
   }
 
   getTask(id: number, includeResults: boolean = false, includeAttachments: boolean = false): Observable<Task> {

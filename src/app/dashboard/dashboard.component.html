@@ -30,13 +30,10 @@
               </div>
               <div class="list__item-image"></div>
               <div class="list__item-title">{{t.name}}</div>
-              <div class="list__item-detail">{{t.title}} </div>
+              <div class="list__item-detail">{{t.resultItemCount}} merkintää</div>
             </a>
-            <div class="list__item-code">
-              <div class="code">{{t.code}}</div>
-            </div>
+            <div class="list__item-code"><div class="code">{{t.code}}</div></div>
           </div>
-
         </div>
         <div class="list type--tasks" style="display: block;" *ngIf="unusedCodes?.length > 0">
           <div class="list__item-title" style="color: gray;">Käyttämättömät koodit <span style="color: gray; font-size: 0.8rem;">(näytetään vain protossa)</span></div>

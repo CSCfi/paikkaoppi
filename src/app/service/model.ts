@@ -57,6 +57,13 @@ export interface Task {
     results: Result[]
 }
 
+export interface TaskDashboard {
+    id: number
+    name: string
+    code: string
+    resultItemCount: number
+}
+
 export interface ResultItem {
     id?: number
     resultId: number
