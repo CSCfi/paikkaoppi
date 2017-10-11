@@ -470,13 +470,15 @@ ul {
 }
 .map__zoom {
   position: absolute;
-  z-index: 2;
+  z-index: 202;
   right: 10px;
   top: 20px;
 }
 .map__zoom-in,
 .map__zoom-out,
-.map__center {
+.map__center,
+.map__location,
+.map__layers {
   width: 40px;
   height: 40px;
   background: #fff;
@@ -499,7 +501,17 @@ ul {
   margin-top: 20px;
 }
 .map__center:before {
+  content: url("assets/icon_expand.svg");
+}
+.map__location:before {
   content: url("assets/icon_center.svg");
+}
+.map__layers {
+  width: 42px;
+  padding: 8px 9px 10px;
+}
+.map__layers:before {
+  content: url("assets/icon_layers.svg");
 }
 .view__container .map__zoom > * {
   visibility: hidden;
