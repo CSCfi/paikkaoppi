@@ -15,18 +15,30 @@
     <div (click)="zoomOut()" class="map__zoom-out" title="Loitonna"></div>
     <div (click)="resetMapLocation()" class="map__center" title="Palauta"></div>
     <div (click)="zoomToLocation()" class="map__location" title="Keskitä omaan sijaintiin" *ngIf="mapTools['centerToLocation']"></div>
-    <select title="Taustakartta" class="map_center" *ngIf="mapTools['changeLayer'] && mapLayers && mapLayers.length > 0" (change)="selectLayer($event.target.value)">
-      <ng-template ngFor let-layer [ngForOf]="mapLayers">
-        <option [value]="layer.id" [attr.selected]="selectedLayer == layer ? 'selected' : null">{{layer.name}}</option>
-      </ng-template>
-    </select>
+    <div onclick="this.classList.toggle('is-selected')" class="map__layers" (click)="layerDropdown.hidden=!layerDropdown.hidden"
+      *ngIf="mapTools['changeLayer'] && mapLayers && mapLayers.length > 0">
+      <div class="map__layers-dropdown" hidden #layerDropdown>
+        <div class="map__layers-dropdown-content">
+          <ng-template ngFor let-layer [ngForOf]="mapLayers">
+            <div class="map__layers-dropdown-row" [ngClass]="{'is-selected': selectedLayer == layer}">
+              <div class="link" (click)="selectLayer(layer.id)">{{layer.name}}</div>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
   </div>
   <div class="map__tools">
-    <a *ngIf="mapTools['markerTool']" (click)="toggleMarkerAction()" class="map__tools-dot" [ngClass]="markerAction == true ? 'is-selected' : ''" title="Merkitse piste"></a>
-    <a *ngIf="mapTools['areaTool']" (click)="toggleDrawAreaAction()" class="map__tools-area" [ngClass]="drawAreaAction == true ? 'is-selected' : ''" title="Merkitse alue"></a>
-    <a *ngIf="mapTools['trackLocation']" (click)="toggleTrackLocation()" class="map__tools-dot" [ngClass]="trackLocation == true ? 'is-selected' : ''" title="Seuraa sijaintiasi"></a>
-    <a *ngIf="mapTools['measureLineTool']" (click)="toggleMeasureLine()" class="map__tools-dot" [ngClass]="measureLineAction == true ? 'is-selected' : ''" title="Mittaa etäisyys"></a>
-    <a *ngIf="mapTools['measureAreaTool']" (click)="toggleMeasureArea()" class="map__tools-dot" [ngClass]="measureAreaAction == true ? 'is-selected' : ''" title="Mittaa pinta-ala"></a>
+    <a *ngIf="mapTools['markerTool']" (click)="toggleMarkerAction()" class="map__tools-dot" [ngClass]="markerAction == true ? 'is-selected' : ''"
+      title="Merkitse piste"></a>
+    <a *ngIf="mapTools['areaTool']" (click)="toggleDrawAreaAction()" class="map__tools-area" [ngClass]="drawAreaAction == true ? 'is-selected' : ''"
+      title="Merkitse alue"></a>
+    <a *ngIf="mapTools['trackLocation']" (click)="toggleTrackLocation()" class="map__tools-dot" [ngClass]="trackLocation == true ? 'is-selected' : ''"
+      title="Seuraa sijaintiasi"></a>
+    <a *ngIf="mapTools['measureLineTool']" (click)="toggleMeasureLine()" class="map__tools-dot" [ngClass]="measureLineAction == true ? 'is-selected' : ''"
+      title="Mittaa etäisyys"></a>
+    <a *ngIf="mapTools['measureAreaTool']" (click)="toggleMeasureArea()" class="map__tools-dot" [ngClass]="measureAreaAction == true ? 'is-selected' : ''"
+      title="Mittaa pinta-ala"></a>
     <div class="map__tools-coords" *ngIf="coordinates">N:{{coordinates.lat.asString(3)}} E:{{coordinates.lon.asString(3)}}</div>
   </div>
   <iframe *ngIf="env == 'dev'" id="oskari-map" src="https://kartta.paikkatietoikkuna.fi/published/fi/87e9ad3a-a91f-4888-8262-4fc625102ee1"></iframe>
