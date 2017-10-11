@@ -16,7 +16,9 @@ export class LibraryComponent implements OnInit {
   model: NewTaskModel = new NewTaskModel(null)
 
   constructor(private taskTemplateService: TaskTemplateService,
-    private taskService: TaskService, private router: Router) { }
+    private authService: AuthService,
+    private taskService: TaskService,
+    private router: Router) { }
 
   ngOnInit() {
     this.taskTemplateService.getTaskTemplates().subscribe(
@@ -46,8 +48,10 @@ export class LibraryComponent implements OnInit {
     console.log("onSubmit")
     this.taskService.createTaskFrom(this.selectedTemplate.id, this.model.name).subscribe(
       (data) => {
-        console.log(data)
-        this.router.navigate(["/dashboard", data.id])
+        if (this.authService.isTeacher())
+          this.router.navigate(["/dashboard", data.id])
+        else
+          this.router.navigate(["/map", data.id])
       }
     )
   }
