@@ -117,7 +117,17 @@
       .map__center
       .map__location
 
-      .map__layers
+      .map__layers(onclick='this.classList.toggle("is-selected")')
+        .map__layers-dropdown
+          .map__layers-dropdown-content
+            .map__layers-dropdown-row
+              .link Karttataso 1
+            .map__layers-dropdown-row
+              .link Karttataso 2
+            .map__layers-dropdown-row
+              .link Karttataso 3
+            .map__layers-dropdown-row
+              .link Karttataso 4
 
     .map__tools
       a.map__tools-dot(href='#mark')
