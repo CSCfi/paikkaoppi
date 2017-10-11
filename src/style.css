@@ -547,6 +547,10 @@ ul {
 .map__layers-dropdown-row:last-child {
   border-bottom: none;
 }
+.map__layers-dropdown-row.is-selected {
+  background: #e1854b;
+  color: #fff;
+}
 .view__container .map__zoom > * {
   visibility: hidden;
   transform-style: preserve-3d;
