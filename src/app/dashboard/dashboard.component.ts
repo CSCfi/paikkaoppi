@@ -1,11 +1,11 @@
-import 'rxjs/add/operator/switchMap'
+import 'rxjs/add/operator/switchMap';
 import { Observable } from 'rxjs/Observable'
-import 'rxjs/add/observable/of'
+import 'rxjs/add/observable/of';
 import { Component, OnInit } from '@angular/core'
 import { Router, ParamMap, ActivatedRoute } from '@angular/router'
 import { AuthService } from '../service/auth.service'
 import { TaskService } from '../service/task.service'
-import { Task, User, Role } from '../service/model'
+import { Role, Task, TaskDashboard, User } from '../service/model';
 
 @Component({
   selector: 'app-dashboard',
@@ -15,7 +15,8 @@ import { Task, User, Role } from '../service/model'
 export class DashboardComponent implements OnInit {
   user: User
   role: Role
-  tasks: Task[]
+  //tasks: Task[]
+  tasks: TaskDashboard[]
   taskId?: number
   // For Proto
   unusedCodes: string[]
@@ -37,7 +38,7 @@ export class DashboardComponent implements OnInit {
   }
 
   private loadTasks() {
-    this.taskService.getTasks().subscribe(
+    this.taskService.getTasksForDashboard().subscribe(
       (data) => {
         this.tasks = data
         this.sortTasks()

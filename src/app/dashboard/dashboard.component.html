@@ -5,7 +5,6 @@
   <div class="view__content">
     <div class="view__columns">
       <div class="view__column">
-        <!--<h1 class="title__list">Omat tehtävät</h1>-->
         <div class="list type--tasks">
           <div class="list__item">
             <form (ngSubmit)="addTask()" #newTaskForm="ngForm">
@@ -30,13 +29,10 @@
               </div>
               <div class="list__item-image"></div>
               <div class="list__item-title">{{t.name}}</div>
-              <div class="list__item-detail">{{t.title}} </div>
+              <div class="list__item-detail">{{t.resultItemCount}} merkintää</div>
             </a>
-            <div class="list__item-code">
-              <div class="code">{{t.code}}</div>
-            </div>
+            <div class="list__item-code"><div class="code">{{t.code}}</div></div>
           </div>
-
         </div>
         <div class="list type--tasks" style="display: block;" *ngIf="unusedCodes?.length > 0">
           <div class="list__item-title" style="color: gray;">Käyttämättömät koodit <span style="color: gray; font-size: 0.8rem;">(näytetään vain protossa)</span></div>

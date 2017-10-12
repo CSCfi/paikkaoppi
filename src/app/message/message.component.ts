@@ -15,6 +15,10 @@ export class MessageComponent implements OnInit {
   ngOnInit() {
     this.messageService.messagesAsObservable().subscribe(
       messageAction => {
+        if (messageAction == null) {
+          this.messages = []
+          return
+        }
         switch (messageAction.type) {
           case 'new': {
             this.messages.push(messageAction.message)

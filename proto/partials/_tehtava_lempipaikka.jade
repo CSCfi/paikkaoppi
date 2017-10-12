@@ -115,9 +115,23 @@
       .map__zoom-in
       .map__zoom-out
       .map__center
+      .map__location
+
+      .map__layers(onclick='this.classList.toggle("is-selected")')
+        .map__layers-dropdown
+          .map__layers-dropdown-content
+            .map__layers-dropdown-row
+              .link Karttataso 1
+            .map__layers-dropdown-row.is-selected
+              .link Karttataso 2
+            .map__layers-dropdown-row
+              .link Karttataso 3
+            .map__layers-dropdown-row
+              .link Karttataso 4
 
     .map__tools
       a.map__tools-dot(href='#mark')
+      a.map__tools-area(href='#mark')  
       .map__tools-coords 60°10′15″N, 024°56′15″E
 
     .map__pointers
