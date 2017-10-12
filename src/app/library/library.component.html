@@ -1,3 +1,4 @@
+<app-task-template *ngIf="showNewTaskTemplateComponent" (close)="closeNewTaskTemplateDialog()" (save)="savedNewTaskTemplate()"></app-task-template>
 <div id="library" class="view">
   <div class="view__header"><a routerLink="/dashboard" class="view__header-link type--back"></a>
     <h1 class="view__header-title">Tehtäväkirjasto</h1>
@@ -5,6 +6,13 @@
   <div class="view__content">
     <h1 class="title__list">Valitse tehtäväpohja</h1>
     <div class="list type--tasks">
+      <div class="list__item type--special">
+        <div class="list__item-title">Uusi tehtäväpohja</div>
+        <div class="list__item-description">Rakenna oma tehtäväpohja.</div>
+        <div class="list__item-footer">
+          <a class="list__item-link type--add" (click)="showNewTaskTemplateDialog()">Uusi tehtäväpohja</a>
+        </div>
+      </div>
       <div class="list__item" *ngFor="let t of taskTemplates">
         <div class="list__item-tag">
           <div class="tag" *ngFor="let tag of t.tags">{{tag}}</div>

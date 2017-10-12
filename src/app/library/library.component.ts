@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core'
 import { Router } from '@angular/router'
 import { AuthService } from '../service/auth.service'
+import { TaskTemplateComponent } from '../task-template/task-template.component'
 import { TaskTemplateService } from '../service/task-template.service'
 import { TaskService } from '../service/task.service'
 import { TaskTemplate, User, Role } from '../service/model'
@@ -14,6 +15,7 @@ export class LibraryComponent implements OnInit {
   taskTemplates?: TaskTemplate[] = []
   selectedTemplate?: TaskTemplate
   model: NewTaskModel = new NewTaskModel(null)
+  showNewTaskTemplateComponent = false
 
   constructor(private taskTemplateService: TaskTemplateService,
     private authService: AuthService,
@@ -21,6 +23,10 @@ export class LibraryComponent implements OnInit {
     private router: Router) { }
 
   ngOnInit() {
+    this.loadTaskTemplates()
+  }
+
+  private loadTaskTemplates() {
     this.taskTemplateService.getTaskTemplates().subscribe(
       (data) => {
         this.taskTemplates = data
@@ -36,6 +42,22 @@ export class LibraryComponent implements OnInit {
         this.model = new NewTaskModel(data.name)
       }
       )
+  }
+
+  showNewTaskTemplateDialog() {
+    console.log('showNewTaskTemplateDialog') 
+    this.showNewTaskTemplateComponent = true
+  }
+
+  savedNewTaskTemplate() {
+    console.log('savedNewTaskTemplate') 
+    this.showNewTaskTemplateComponent = false
+    this.loadTaskTemplates()
+  }
+
+  closeNewTaskTemplateDialog() {
+    console.log('closeNewTaskTemplateDialog') 
+    this.showNewTaskTemplateComponent = false
   }
 
   closePopup() {
