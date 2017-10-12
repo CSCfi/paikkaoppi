@@ -10,8 +10,11 @@ export const environment = {
   production: true,
   mapEnv : 'test',
   mapDomain : 'https://kartta.paikkatietoikkuna.fi',
-  mapId : '',
-  mapTools: {markerTool: true, areaTool: true, trackLocation: true},
+  mapId : 'd6524c8e-9e75-45e9-a82c-b9a181bc0206',
+  mapTools: {
+    markerTool: true, areaTool: true, trackLocation: false,
+    measureLineTool: false, measureAreaTool: false,
+    centerToLocation: false, changeLayer: false},
   mapHelpVisibleInitially: false,
-  apiUri: 'http://localhost:8000/api/v1',
+  apiUri: 'https://ec2-52-48-217-144.eu-west-1.compute.amazonaws.com/api/v1',
 }

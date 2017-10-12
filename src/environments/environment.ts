@@ -10,7 +10,7 @@ export const environment = {
   production: false,
   mapEnv : 'dev',
   mapDomain : 'https://kartta.paikkatietoikkuna.fi',
-  mapId : '87e9ad3a-a91f-4888-8262-4fc625102ee1',
+  mapId : '529e552b-b0c5-4f0a-954b-5f9a9339a0a2',
   mapTools: {
     markerTool: true, areaTool: true, trackLocation: true,
     measureLineTool: true, measureAreaTool: true,
