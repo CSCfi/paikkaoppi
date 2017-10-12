@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
 import { Observable } from 'rxjs/Observable'
 
-import { Task, TaskTemplate, User, Role } from '../app/service/model'
+import { Task, TaskDashboard, TaskTemplate, User, Role } from '../app/service/model'
 
 @Component({
   template: ''
@@ -46,6 +46,15 @@ export class TaskServiceMock {
       code: 'code',
       user: TestMethods.getTeacher(),
       results: null
+    }])
+  }
+
+  getTasksForDashboard(): Observable<TaskDashboard[]> {
+    return Observable.of([{
+      id: 1,
+      name: 'Tehtävä 1',
+      code: 'code',
+      resultItemCount: 1
     }])
   }
 
