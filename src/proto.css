@@ -37,3 +37,14 @@
     margin-bottom: 0;
   }
 }
+
+input:required, textarea:required {
+  background-color: rgb(250, 255, 189);
+}
+.has-error > input, .has-error > textarea {
+  background-color: #f05348;
+}
+.has-error > .alert {
+  color: #f05348;
+}
+
