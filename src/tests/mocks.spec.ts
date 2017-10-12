@@ -18,8 +18,12 @@ export class AuthServiceMock {
     return 'teacher'
   }
 
-  isLoggedIn(): boolean {
-    return true
+  isLoggedIn(): Observable<boolean> {
+    return Observable.of(true)
+  }
+
+  login(username: string): Observable<User> {
+    return Observable.of(this.getUser())
   }
 
   backendUsers(): string[] {
