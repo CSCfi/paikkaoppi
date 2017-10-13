@@ -51,7 +51,9 @@
             </div>
           </div>
           <div *ngIf="uploader.isUploading" class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
-          <div>{{errorMessage}}</div>
+          <div [hidden]="errorMessage == null" class="has-error">
+              <div class="alert alert-danger">{{errorMessage}}</div>
+          </div>
         </div>
         <form (ngSubmit)="save()" #resultItemForm="ngForm">
           <div class="form__item" [class.has-error]="name.invalid && name.dirty">
