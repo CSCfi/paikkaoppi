@@ -1,6 +1,8 @@
 import { TestBed, inject } from '@angular/core/testing'
 import { HttpClientModule } from '@angular/common/http'
+import { RouterTestingModule } from '@angular/router/testing'
 
+import { MockComponent } from '../../tests/mocks.spec'
 import { TaskTemplateService } from './task-template.service'
 import { AuthService } from './auth.service'
 
@@ -10,9 +12,15 @@ describe('TaskService', () => {
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [
-        HttpClientModule
+        HttpClientModule,
+        RouterTestingModule.withRoutes([
+          { path: 'map', component: MockComponent }
+        ])
       ],
-      providers: [AuthService, TaskService, TaskTemplateService ]
+      providers: [AuthService, TaskService, TaskTemplateService],
+      declarations: [
+        MockComponent
+      ],
     })
   })
 
