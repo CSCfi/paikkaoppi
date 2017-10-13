@@ -16,6 +16,7 @@ export class LibraryComponent implements OnInit {
   selectedTemplate?: TaskTemplate
   model: NewTaskModel = new NewTaskModel(null)
   showNewTaskTemplateComponent = false
+  role: Role
 
   constructor(private taskTemplateService: TaskTemplateService,
     private authService: AuthService,
@@ -24,6 +25,7 @@ export class LibraryComponent implements OnInit {
 
   ngOnInit() {
     this.loadTaskTemplates()
+    this.role = this.authService.getRole()
   }
 
   private loadTaskTemplates() {

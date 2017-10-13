@@ -40,6 +40,11 @@ export class TaskTemplateComponent implements OnInit {
     this.phase++
   }
 
+  moveToPhase(index: number) {
+    if (index >= this.firstPhase && index <= this.lastPhase)
+      this.phase = index
+  }
+
   addInstruction(): void {
     this.model.instructions.push(this.createNewInstruction())
     console.log('addInstruction', this.model)

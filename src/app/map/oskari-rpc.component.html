@@ -1,15 +1,5 @@
 <div class="map__wrapper">
   <app-message></app-message>
-  <!--
-  <div *ngFor="let message of messages">
-    <div class="map__info" [ngClass]="message.class">
-      <div class="map__info-text">
-        <div class="text">{{ message.description }}</div>
-        <div (click)="closeMessage(message)" class="map__info-close"></div>
-      </div>
-    </div>
-  </div>
-  -->
   <div class="map__zoom">
     <div (click)="zoomIn()" class="map__zoom-in" title="Lähennä"></div>
     <div (click)="zoomOut()" class="map__zoom-out" title="Loitonna"></div>

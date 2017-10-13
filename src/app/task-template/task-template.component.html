@@ -7,10 +7,12 @@
     <div class="view__wizard">
       <div class="view__wizard-back" [ngClass]="{'is-disabled': phase === firstPhase}"></div>
       <div class="view__wizard-step" [ngClass]="{'is-selected': phase === 1}">
-        <a class="link">1. Tehtävän kuvaus</a>
+        <a class="link" *ngIf="phase <= 1">1. Tehtävän kuvaus</a>
+        <a class="link" (click)="moveToPhase(1)" *ngIf="phase > 1">1. Tehtävän kuvaus</a>
       </div>
       <div class="view__wizard-step" [ngClass]="{'is-selected': phase === 2}">
-        <a class="link">2. Tehtävän askeleet</a>
+        <a class="link" *ngIf="phase <= 2">2. Tehtävän askeleet</a>
+        <a class="link" (click)="moveToPhase(2)" *ngIf="phase > 2">2. Tehtävän askeleet</a>
       </div>
       <div class="view__wizard-step" [ngClass]="{'is-selected': phase === 3}">
         <a class="link">3. Esikatselu</a>
@@ -76,6 +78,33 @@
         </div>
         <div class="view__grid" *ngIf="phase === 3">
           <div class="view__grid-item">
+            <div class="form__item">
+              <label for="name">Nimi</label>
+              <div>{{model.name}}</div>
+            </div>
+            <div class="form__item">
+              <label for="name">Lyhyt otsikko</label>
+              <div id="name">{{model.name}}</div>
+            </div>
+            <div class="form__item">
+              <label for="description">Tehtävän kuvaus</label>
+              <div id="description">{{model.name}}</div>
+            </div>
+            <div class="form__item">
+              <label for="info">Ohje opettajalle</label>
+              <div id="info">{{model.name}}</div>
+            </div>
+            <div class="form__item">
+              <label>Tehtävän askeleet</label>
+            </div>
+            <ng-template ngFor let-instruction let-index="index" [ngForOf]="model.instructions">
+              <div class="form__item">
+                <label>{{index+1}}. {{instruction.name}}</label>
+                <ul class="list type--text">
+                  <li class="list__item">{{instruction.description}}</li>
+                </ul>
+              </div>
+            </ng-template>
             <div class="form__footer">
               <button type="submit" class="button" [disabled]="!form.form.valid">Tallenna</button>
               <button class="button type--secondary" (click)="closeDialog()">Sulje</button>
