@@ -1,3 +1,4 @@
+<app-task-template *ngIf="showNewTaskTemplateComponent" (close)="closeNewTaskTemplateDialog()" (save)="savedNewTaskTemplate()"></app-task-template>
 <div id="library" class="view">
   <div class="view__header"><a routerLink="/dashboard" class="view__header-link type--back"></a>
     <h1 class="view__header-title">Tehtäväkirjasto</h1>
@@ -5,13 +6,21 @@
   <div class="view__content">
     <h1 class="title__list">Valitse tehtäväpohja</h1>
     <div class="list type--tasks">
+      <div class="list__item type--special" *ngIf="role === 'teacher'">
+        <div class="list__item-title">Uusi tehtäväpohja</div>
+        <div class="list__item-description">Rakenna oma tehtäväpohja.</div>
+        <div class="list__item-footer">
+          <a class="list__item-link type--add" (click)="showNewTaskTemplateDialog()">Uusi tehtäväpohja</a>
+        </div>
+      </div>
       <div class="list__item" *ngFor="let t of taskTemplates">
-        <div class="list__item-tag">
+        <div class="list__item-tag" *ngIf="role === 'teacher'">
           <div class="tag" *ngFor="let tag of t.tags">{{tag}}</div>
         </div>
         <div class="list__item-title">{{t.name}}</div>
+        <div class="list__item-detail" *ngIf="role === 'teacher'">{{t.title}}</div>
         <div class="list__item-description">{{t.description}}</div>
-        <div class="list__item-info">{{t.info}}.</div>
+        <div class="list__item-info" *ngIf="role === 'teacher'">{{t.info}}</div>
         <div class="list__item-footer"> <a (click)="createTask(t.id)" class="list__item-link">Aloita tehtävä</a></div>
       </div>
     </div>
@@ -27,7 +36,7 @@
         <h1 class="accordion__header">{{selectedTemplate.name}}</h1>
         <div class="form__item" [class.has-error]="name.invalid && name.dirty">
           <label>Nimi</label>
-          <input type="text" required [(ngModel)]="model.name" name="name" #name="ngModel">
+          <input type="text" maxlength="128" required [(ngModel)]="model.name" name="name" #name="ngModel">
           <div [hidden]="name.valid || name.pristine" class="alert alert-danger">Pakollinen tieto</div>
         </div>
         <div class="form__footer">

@@ -1,0 +1,117 @@
+<div class="view">
+  <div class="view__header">
+    <a class="view__header-link type--back" (click)="closeDialog()"></a>
+    <h1 class="view__header-title">Uusi tehtäväpohja</h1>
+  </div>
+  <div class="view__content">
+    <div class="view__wizard">
+      <div class="view__wizard-back" [ngClass]="{'is-disabled': phase === firstPhase}"></div>
+      <div class="view__wizard-step" [ngClass]="{'is-selected': phase === 1}">
+        <a class="link" *ngIf="phase <= 1">1. Tehtävän kuvaus</a>
+        <a class="link" (click)="moveToPhase(1)" *ngIf="phase > 1">1. Tehtävän kuvaus</a>
+      </div>
+      <div class="view__wizard-step" [ngClass]="{'is-selected': phase === 2}">
+        <a class="link" *ngIf="phase <= 2">2. Tehtävän askeleet</a>
+        <a class="link" (click)="moveToPhase(2)" *ngIf="phase > 2">2. Tehtävän askeleet</a>
+      </div>
+      <div class="view__wizard-step" [ngClass]="{'is-selected': phase === 3}">
+        <a class="link">3. Esikatselu</a>
+      </div>
+      <div class="view__wizard-forward" [ngClass]="{'is-disabled': phase === lastPhase}"></div>
+    </div>
+    <form (ngSubmit)="submit()" #form="ngForm">
+      <div class="form type--basic">
+        <div class="view__grid" *ngIf="phase === 1">
+          <div class="view__grid-item">
+            <div class="form__item" [class.has-error]="name.invalid && name.dirty">
+              <label for="name">Nimi</label>
+              <input type="text" maxlength="128" required [(ngModel)]="model.name" name="name" #name="ngModel" />
+              <div [hidden]="name.valid || name.pristine" class="alert alert-danger">Pakollinen tieto</div>
+            </div>
+            <div class="form__item" [class.has-error]="title.invalid && title.dirty">
+              <label for="title">Lyhyt otsikko</label>
+              <input type="text" maxlength="128" required [(ngModel)]="model.title" name="title" #title="ngModel" />
+              <div [hidden]="title.valid || title.pristine" class="alert alert-danger">Pakollinen tieto</div>
+            </div>
+            <div class="form__item" [class.has-error]="description.invalid && description.dirty">
+              <label for="description">Tehtävän kuvaus</label>
+              <textarea required maxlength="4096" [(ngModel)]="model.description" name="description" #description="ngModel"></textarea>
+              <div [hidden]="description.valid || description.pristine" class="alert alert-danger">Pakollinen tieto</div>
+            </div>
+            <div class="form__item" [class.has-error]="info.invalid && info.dirty">
+              <label for="info">Ohje opettajalle</label>
+              <input type="text" maxlength="128" required [(ngModel)]="model.info" name="info" #info="ngModel" />
+              <div [hidden]="info.valid || info.pristine" class="alert alert-danger">Pakollinen tieto</div>
+            </div>
+            <div class="form__footer">
+              <button class="button" [disabled]="!form.form.valid" (click)="next()">Jatka</button>
+              <a class="button type--secondary" (click)="closeDialog()">Sulje</a>
+            </div>
+          </div>
+        </div>
+        <div class="view__grid" *ngIf="phase === 2">
+          <div class="view__grid-item">
+            <div class="form__title">Tehtävän askeleet</div>
+            <div class="form__ingress">Ohje aiheesta tulee tähän.</div>
+            <ng-template ngFor let-instruction let-index="index" [ngForOf]="model.instructions">
+              <div class="form__item">
+                <label class="type--step">{{index+1}}.</label>
+                <a class="button type--secondary" (click)="removeInstruction(instruction)">Poista askel</a>
+                <div class="form__row">
+                  <input type="text" maxlength="128" required placeholder="Askeleen otsikko" class="type--wysiwyg-title" [(ngModel)]="model.instructions[index].name"
+                    name="name-{{index}}">
+                </div>
+                <div class="form__row">
+                  <textarea placeholder="Askeleen ohje" maxlength="4096" required class="type--wysiwyg-text" [(ngModel)]="model.instructions[index].description"
+                    name="description-{{index}}"></textarea>
+                </div>
+              </div>
+            </ng-template>
+            <div class="form__item type--centered">
+              <a class="button type--form" (click)="addInstruction()">Lisää uusi askel</a>
+            </div>
+            <div class="form__footer">
+              <button class="button" (click)="next()" [disabled]="!form.form.valid">Jatka</button>
+              <a class="button type--secondary" (click)="closeDialog()">Sulje</a>
+            </div>
+          </div>
+        </div>
+        <div class="view__grid" *ngIf="phase === 3">
+          <div class="view__grid-item">
+            <div class="form__item">
+              <label for="name">Nimi</label>
+              <div>{{model.name}}</div>
+            </div>
+            <div class="form__item">
+              <label for="title">Lyhyt otsikko</label>
+              <div id="title">{{model.title}}</div>
+            </div>
+            <div class="form__item">
+              <label for="description">Tehtävän kuvaus</label>
+              <div id="description">{{model.description}}</div>
+            </div>
+            <div class="form__item">
+              <label for="info">Ohje opettajalle</label>
+              <div id="info">{{model.info}}</div>
+            </div>
+            <div class="form__item">
+              <label>Tehtävän askeleet</label>
+            </div>
+            <ng-template ngFor let-instruction let-index="index" [ngForOf]="model.instructions">
+              <div class="form__item">
+                <label>{{index+1}}. {{instruction.name}}</label>
+                <ul class="list type--text">
+                  <li class="list__item">{{instruction.description}}</li>
+                </ul>
+              </div>
+            </ng-template>
+            <div class="form__footer">
+              <button type="submit" class="button" [disabled]="!form.form.valid">Tallenna</button>
+              <button class="button type--secondary" (click)="closeDialog()">Sulje</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

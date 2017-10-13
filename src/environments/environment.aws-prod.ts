@@ -15,7 +15,7 @@ export const environment = {
   mapTools: {
     markerTool: true, areaTool: true, trackLocation: false,
     measureLineTool: false, measureAreaTool: false,
-    centerToLocation: false, changeLayer: false},
+    centerToLocation: true, changeLayer: true},
   mapHelpVisibleInitially: true,
   apiUri: 'https://d2isbn35qzuohl.cloudfront.net/api/v1',
 }

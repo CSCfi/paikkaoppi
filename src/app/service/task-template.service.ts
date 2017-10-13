@@ -8,6 +8,10 @@ import { Task, TaskTemplate } from './model'
 export class TaskTemplateService {
   constructor(private http: HttpClient) { }
 
+  createTaskTemplate(taskTemplate: TaskTemplate): Observable<TaskTemplate> {
+    return this.http.post<TaskTemplate>(`${environment.apiUri}/tasktemplate`, taskTemplate)
+  }
+  
   getTaskTemplates(): Observable<TaskTemplate[]> {
     return this.http.get<TaskTemplate[]>(`${environment.apiUri}/tasktemplate`)
   }
