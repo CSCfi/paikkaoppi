@@ -184,14 +184,6 @@ export class OskariRpcComponent implements AfterViewInit {
     return this.result().id
   }
 
-  private findResultItemFromTask(id: number | string) {
-    for (const result of this.task.results) {
-      const resultItem = result.resultItems.find(item => '' + item.id === '' + id)
-      if (resultItem != null) return resultItem
-    }
-    throw new SyntaxError('ResultItem with id ' + id + ' not found')
-  }
-
   private updateToolbarCoordinatesFromResultItem(resultItem: ResultItem) {
     this.coordinates = this.geoService.pointWGS84Coordinates(resultItem)
   }
@@ -238,14 +230,16 @@ export class OskariRpcComponent implements AfterViewInit {
     this.channel.setCursorStyle(['default'], (data) => this.zone.runGuarded(() => { }))
   }
 
-  private openPointPopup(id: string) {
+  private openPointPopup(id: number) {
     const resultId: number = this.resultId()
-    const resultItem: ResultItem = this.geoService.cloneResultItem(this.findResultItemFromTask(id))
-    this.updateToolbarCoordinatesFromResultItem(resultItem)
-    console.log('Open markerId', id, 'ResultId:', resultId, 'ResultItem:', resultItem, 'Coordinates:', this.coordinates)
-    this.showResultItemPopup(resultItem)
+    this.taskService.getResultItem(id).subscribe(
+      (data) => {
+        const resultItem: ResultItem = data
+        this.updateToolbarCoordinatesFromResultItem(resultItem)
+        console.log('Open markerId', id, 'ResultId:', resultId, 'ResultItem:', resultItem, 'Coordinates:', this.coordinates)
+        this.showResultItemPopup(resultItem)
+      })
   }
-
 
   private setOpenPolygonListenerActive() {
     const eventName = 'FeatureEvent'
@@ -269,9 +263,13 @@ export class OskariRpcComponent implements AfterViewInit {
     const layerId: string = feature.layerId
     const id: number = this.polygonService.polygonIdForLayerId(layerId)
     const resultId: number = this.resultId()
-    const resultItem: ResultItem = this.geoService.cloneResultItem(this.findResultItemFromTask(id))
-    console.log('openPolygonPopup: layerId', layerId, 'id', id, 'resultId', resultId, 'resultItem', resultItem)
-    this.showResultItemPopup(resultItem)
+
+    this.taskService.getResultItem(id).subscribe(
+      (data) => {
+        const resultItem: ResultItem = data
+        console.log('openPolygonPopup: layerId', layerId, 'id', id, 'resultId', resultId, 'resultItem', resultItem)
+        this.showResultItemPopup(resultItem)
+      })
   }
 
   clearActionHandlers() {

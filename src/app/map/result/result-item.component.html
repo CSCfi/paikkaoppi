@@ -38,17 +38,20 @@
         <div id="imageAdd" class="form__image">
           <div class="form__image-placement">
             <div *ngIf="hasImage() == true" [ngStyle]="{ 'background-image': 'url(' + imageUrl() + ')' }" class="form__image-placement-cover"></div>
-            <label for="upload">
-              <div class="text">
-                <span class="glyphicon glyphicon-folder-open" aria-hidden="true">
-                  <span *ngIf="hasImage() == false">Lisää kuva</span>
-                  <span *ngIf="hasImage() == true">Vaihda kuva</span>
-                </span>
-                <input type="file" id="upload" ng2FileSelect [uploader]="uploader" style="display:none"/>
-              </div>
+            <label *ngIf="hasImage() == false" class="text" for="upload-add">
+              <span>Lisää kuva</span>
+              <input type="file" id="upload-add" ng2FileSelect [uploader]="uploader" accept=".png, .jpg, .gif" style="display:none"/>
             </label>
+            <div *ngIf="hasImage() == true" class="form__image-placement-buttons">
+              <label for="upload-change" class="text">
+                <span>Vaihda kuva</span>
+                <input type="file" id="upload-change" ng2FileSelect [uploader]="uploader" accept=".png, .jpg, .gif" style="display:none"/>
+              </label>
+              <div class="text type--remove" (click)="removeImage()">Poista kuva</div>
+            </div>
           </div>
           <div *ngIf="uploader.isUploading" class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+          <div>{{errorMessage}}</div>
         </div>
         <form (ngSubmit)="save()" #resultItemForm="ngForm">
           <div class="form__item" [class.has-error]="name.invalid && name.dirty">

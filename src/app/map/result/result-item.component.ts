@@ -1,5 +1,5 @@
 import { Component, OnInit, EventEmitter, Input, Output, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core'
-import { FileUploader } from 'ng2-file-upload';
+import { FileUploader, FileItem } from 'ng2-file-upload';
 
 import { environment } from '../../../environments/environment'
 import { ResultItem, User, PolygonFeatureCollection } from '../../service/model'
@@ -17,6 +17,7 @@ export class ResultItemComponent implements OnChanges {
   @Input() visible = false
   @Input() result: Result
   @Input() model: any
+  errorMessage: string
   isPoint = false
   pointWGS84Coordinates: Coordinates
   isPolygon = false
@@ -31,20 +32,33 @@ export class ResultItemComponent implements OnChanges {
   @Output() saveResultItem = new EventEmitter<ResultItem>()
   @Output() resultItemPopupHidden = new EventEmitter<ResultItem>()
 
-  constructor(private geoService: GeoService, private authService: AuthService, private attachmentService: AttachmentService) {
+  constructor(
+    private geoService: GeoService,
+    private authService: AuthService,
+    private attachmentService: AttachmentService) {
+
     this.uploader = new FileUploader({
       url: `${environment.apiUri}/attachment`,
       disableMultipart: false,
-      autoUpload: true
+      autoUpload: true,
+      allowedMimeType: ['image/png', 'image/jpeg', 'image/gif']
     })
 
-    this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
-      this.removePreviousImage()
-      this.model.newAttachmentIds = []
-      this.model.attachments = []
+    this.uploader.onWhenAddingFileFailed = (item: any, filter: any, options: any) => {
+      this.errorMessage = 'Kuva ei ollut tuettua formaattia. Tuetut tiedostotyypit ovat .gif, .jpg ja .png'
+    }
 
-      const attachment = JSON.parse(response)
-      this.model.newAttachmentIds.push(attachment.id)
+    this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
+      if (status === 200) {
+        this.removeImage()
+        const attachment = JSON.parse(response)
+        this.model.newAttachmentIds.push(attachment.id)
+
+      } else if (status === 415) {
+        this.errorMessage = 'Kuva ei ollut tuettua formaattia. Tuetut tiedostotyypit ovat .gif, .jpg ja .png'
+      } else {
+        this.errorMessage = 'Kuvan lisäys epäonnistui'
+      }
     }
   }
 
@@ -82,6 +96,12 @@ export class ResultItemComponent implements OnChanges {
     return this.model.newAttachmentIds !== undefined && this.model.newAttachmentIds.length > 0
   }
 
+  private getFileExtension(filename) {
+    const lastIndex = filename.lastIndexOf(".")
+    if (lastIndex < 1) return ""
+    return filename.substr(lastIndex + 1)
+  }
+
   imageUrl(): string {
     if (!this.hasImage()) return '';
 
@@ -89,7 +109,14 @@ export class ResultItemComponent implements OnChanges {
     return `${environment.apiUri}/attachment/${id}/content`
   }
 
-  removePreviousImage() {
+  removeImage() {
+    this.errorMessage = null
+    this.removePreviousImage()
+    this.model.newAttachmentIds = []
+    this.model.attachments = []
+  }
+
+  private removePreviousImage() {
     if (!this.hasImage()) return;
 
     const id = this.hasExistingImage() ? this.model.attachments[0].id : this.model.newAttachmentIds[0]
