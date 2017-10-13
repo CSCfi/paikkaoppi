@@ -6,25 +6,25 @@
         <h1 class="popup__header-title" *ngIf="isEditMode && model.isNew">Uusi merkintä</h1>
         <h1 class="popup__header-title" *ngIf="isEditMode && !model.isNew">Päivitä merkintää</h1>
       </div>
-      <div class="form__text" *ngIf="showUser">
-        <div class="form__text-title">Käyttäjä</div>
+      <div class="form__item" *ngIf="showUser">
+        <label>Käyttäjä</label>
         <div class="form__text-value">{{result.user.firstName}} {{result.user.lastName}} {{result.user.email}}</div>
       </div>
-      <div class="form__text">
+      <div class="form__item">
         <ng-container *ngIf="isPoint">
-          <div class="form__text-title">Koordinaatit ETRS-TM35FIN</div>
+            <label>Koordinaatit ETRS-TM35FIN</label>
           <div class="form__text-value">N:{{model.geometry.coordinates[0]}} E:{{model.geometry.coordinates[1]}}</div>
-          <div class="form__text-title">Koordinaatit WGS84</div>
+          <label>Koordinaatit WGS84</label>
           <div class="form__text-value">N:{{pointWGS84Coordinates.lat.asString(3)}} E:{{pointWGS84Coordinates.lon.asString(3)}}</div>
         </ng-container>
         <ng-container *ngIf="isPolygon">
-          <div class="form__text-title">Koordinaatit ETRS-TM35FIN</div>
+          <label>Koordinaatit ETRS-TM35FIN</label>
           <div class="form__text-value">
             <ul>
               <li *ngFor="let c of polygonCoordinates">N:{{c[0]}} E:{{c[1]}}</li>
             </ul>
           </div>
-          <div class="form__text-title">Koordinaatit WGS84</div>
+          <label>Koordinaatit WGS84</label>
           <div class="form__text-value">
             <ul>
               <ng-template ngFor let-c [ngForOf]="polygonWGS84Coordinates">
