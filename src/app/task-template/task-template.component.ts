@@ -1,3 +1,4 @@
+import { TaskTemplateService } from '../service/task-template.service';
 import { Component, EventEmitter, OnInit, Output } from '@angular/core';
 import { Instruction, TaskTemplate } from '../service/model';
 
@@ -14,13 +15,12 @@ export class TaskTemplateComponent implements OnInit {
   firstPhase = 1
   lastPhase = 3
 
-  constructor() { }
+  constructor(private taskTemplateService: TaskTemplateService) { }
 
   ngOnInit() {
     console.log('ngOnInit')
     this.model = this.createNewModel()
-    // TODO: VILI Change this to 1
-    this.phase = 2
+    this.phase = 1
   }
 
   closeDialog() {
@@ -30,7 +30,9 @@ export class TaskTemplateComponent implements OnInit {
 
   submit() {
     console.log('submit', this.model)
-    this.save.next(this.model)
+    this.taskTemplateService.createTaskTemplate(this.model).subscribe(
+      value => this.save.next(value)
+    )
   }
 
   next() {

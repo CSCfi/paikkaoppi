@@ -56,16 +56,12 @@
                 <label class="type--step">{{index+1}}.</label>
                 <a class="button type--secondary" (click)="removeInstruction(instruction)">Poista askel</a>
                 <div class="form__row">
-                  <!--
-                  <input type="text" maxlength="128" required [(ngModel)]="model.instructions[index]" name="name" placeholder="Askeleen otsikko"
-                    class="type--wysiwyg-title">
-                  -->
+                  <input type="text" maxlength="128" required placeholder="Askeleen otsikko" class="type--wysiwyg-title" [(ngModel)]="model.instructions[index].name"
+                    name="name-{{index}}">
                 </div>
                 <div class="form__row">
-                  <!--
-                  <textarea placeholder="Askeleen ohje" maxlength="4096" [(ngModel)]="model.instructions[{{index}}].description" name="description"
-                    required class="type--wysiwyg-text"></textarea>
-                  -->
+                  <textarea placeholder="Askeleen ohje" maxlength="4096" required class="type--wysiwyg-text" [(ngModel)]="model.instructions[index].description"
+                    name="description-{{index}}"></textarea>
                 </div>
               </div>
             </ng-template>
