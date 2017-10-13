@@ -100,7 +100,6 @@ export class ResultItemComponent implements OnChanges {
   }
 
   private initUpload(resultItemId: number) {
-    console.log('initUpload')
     let url = `${environment.apiUri}/attachment`
     if (resultItemId != null) {
       url = `${environment.apiUri}/resultitem/${resultItemId}/attachment`

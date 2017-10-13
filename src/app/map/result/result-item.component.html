@@ -74,7 +74,7 @@
       </ng-container>
       <ng-container *ngIf="!isEditMode">
         <div *ngIf="hasImage() == true" class="form__image-placement">
-          <div [ngStyle]="{ 'background-image': 'url(' + imageUrl() + ')' }" class="form__image-placement-preview"></div>
+          <a *ngIf="hasImage() == true" href="{{imageUrl()}}" target="_blank"><div [ngStyle]="{ 'background-image': 'url(' + imageUrl() + ')' }" class="form__image-placement-preview"></div></a>
         </div>
         <div class="form__item">
           <label>Nimi</label>
