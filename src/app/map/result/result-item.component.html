@@ -52,14 +52,14 @@
           </div>
           <div *ngIf="uploader.isUploading" class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
           <div [hidden]="errorMessage == null" class="has-error">
-              <div class="alert alert-danger">{{errorMessage}}</div>
+              <div class="form__item-error alert alert-danger"><div class="text">{{errorMessage}}</div></div>
           </div>
         </div>
         <form (ngSubmit)="save()" #resultItemForm="ngForm">
           <div class="form__item" [class.has-error]="name.invalid && name.dirty">
             <label>Nimi</label>
             <input type="text" required [(ngModel)]="model.name" name="name" #name="ngModel">
-            <div [hidden]="name.valid || name.pristine" class="alert alert-danger">Pakollinen tieto</div>
+            <div [hidden]="name.valid || name.pristine" class="form__item-error alert alert-danger"><div class="text">Pakollinen tieto</div></div>
           </div>
           <div class="form__item">
             <label>Kuvaus</label>
