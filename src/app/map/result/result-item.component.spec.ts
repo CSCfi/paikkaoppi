@@ -4,12 +4,14 @@ import { RouterTestingModule } from '@angular/router/testing'
 import { FormsModule } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http'
 import { FileUploadModule } from 'ng2-file-upload';
+import { Ng2PicaModule } from 'ng2-pica'
 
 import { AuthService } from '../../service/auth.service'
 import { GeoService } from '../../map/geo.service'
 import { MockComponent, AuthServiceMock } from '../../../tests/mocks.spec'
 import { ResultItemComponent } from './result-item.component'
 import { AttachmentService } from '../../service/attachment.service'
+import { ResizeService } from '../../service/resize.service'
 
 describe('ResultItemComponent', () => {
   let component: ResultItemComponent
@@ -22,6 +24,7 @@ describe('ResultItemComponent', () => {
         FormsModule,
         HttpClientModule,
         FileUploadModule,
+        Ng2PicaModule,
         RouterTestingModule.withRoutes([
           { path: 'map', component: MockComponent }
         ])
@@ -29,7 +32,8 @@ describe('ResultItemComponent', () => {
       providers: [
         { provide: AuthService, useClass: AuthServiceMock },
         GeoService,
-        AttachmentService
+        AttachmentService,
+        ResizeService
       ]
     })
     .compileComponents()
