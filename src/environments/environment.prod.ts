@@ -14,4 +14,5 @@ export const environment = {
   mapTools: {markerTool: true, areaTool: true, trackLocation: true},
   mapHelpVisibleInitially: false,
   apiUri: 'http://localhost:8000/api/v1',
+  loginPageUri: 'http://www.google.fi',
 }

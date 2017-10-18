@@ -16,8 +16,12 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.users = this.authService.backendUsers()
+    // TODO: VILI Check here, that this component can only be shown in local environments, not in client test or prod.
+    // TODO: MARKUS Check here, that this component can only be shown in local environments, not in client test or prod.
     this.authService.isLoggedIn().subscribe(value => {
-      this.router.navigateByUrl("/dashboard")
+      if (value) {
+          this.router.navigateByUrl('/dashboard')
+      }
     })
   }
 
