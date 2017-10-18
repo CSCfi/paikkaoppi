@@ -26,22 +26,22 @@
             <div class="form__item" [class.has-error]="name.invalid && name.dirty">
               <label for="name">Nimi</label>
               <input type="text" maxlength="128" required [(ngModel)]="model.name" name="name" #name="ngModel" />
-              <div [hidden]="name.valid || name.pristine" class="alert alert-danger">Pakollinen tieto</div>
+              <div [hidden]="name.valid || name.pristine" class="form__item-error alert alert-danger"><div class="text">Pakollinen tieto</div></div>
             </div>
             <div class="form__item" [class.has-error]="title.invalid && title.dirty">
               <label for="title">Lyhyt otsikko</label>
               <input type="text" maxlength="128" required [(ngModel)]="model.title" name="title" #title="ngModel" />
-              <div [hidden]="title.valid || title.pristine" class="alert alert-danger">Pakollinen tieto</div>
+              <div [hidden]="title.valid || title.pristine" class="form__item-error alert alert-danger"><div class="text">Pakollinen tieto</div></div>
             </div>
             <div class="form__item" [class.has-error]="description.invalid && description.dirty">
               <label for="description">Tehtävän kuvaus</label>
               <textarea required maxlength="4096" [(ngModel)]="model.description" name="description" #description="ngModel"></textarea>
-              <div [hidden]="description.valid || description.pristine" class="alert alert-danger">Pakollinen tieto</div>
+              <div [hidden]="description.valid || description.pristine" class="form__item-error alert alert-danger"><div class="text">Pakollinen tieto</div></div>
             </div>
             <div class="form__item" [class.has-error]="info.invalid && info.dirty">
               <label for="info">Ohje opettajalle</label>
               <input type="text" maxlength="128" required [(ngModel)]="model.info" name="info" #info="ngModel" />
-              <div [hidden]="info.valid || info.pristine" class="alert alert-danger">Pakollinen tieto</div>
+              <div [hidden]="info.valid || info.pristine" class="form__item-error alert alert-danger"><div class="text">Pakollinen tieto</div></div>
             </div>
             <div class="form__footer">
               <button class="button" [disabled]="!form.form.valid" (click)="next()">Jatka</button>
