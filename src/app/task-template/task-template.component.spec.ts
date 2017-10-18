@@ -1,6 +1,11 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
+import { TaskTemplateService } from '../service/task-template.service';
 import { TaskTemplateComponent } from './task-template.component';
+
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
 
 describe('TaskTemplateComponent', () => {
   let component: TaskTemplateComponent;
@@ -8,7 +13,14 @@ describe('TaskTemplateComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TaskTemplateComponent ]
+      declarations: [ TaskTemplateComponent ],
+      imports: [
+        FormsModule,
+        HttpClientModule
+      ],
+      providers: [
+        TaskTemplateService
+      ]
     })
     .compileComponents();
   }));
