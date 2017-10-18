@@ -114,6 +114,8 @@ export class OskariRpcComponent implements AfterViewInit {
         console.error('Not supported resultItem type')
       }
     } else {
+      // Remove new attachment ids because those are already linked to result item
+      delete event.newAttachmentIds
       console.log('saveResultItem -- Updating resultItem with id ', event.id, event)
       this.taskService.updateResultItem(event.id, event).subscribe(_ => this.reloadTask())
     }

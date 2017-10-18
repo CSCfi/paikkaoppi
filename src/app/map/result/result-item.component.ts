@@ -1,5 +1,6 @@
 import { Component, EventEmitter, Input, Output, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core'
-import { FileUploader, FileItem } from 'ng2-file-upload';
+import { FileUploader, FileItem } from 'ng2-file-upload'
+
 
 import { environment } from '../../../environments/environment'
 import { ResultItem, User, PolygonFeatureCollection } from '../../service/model'
@@ -7,6 +8,7 @@ import { Result } from '../../service/model-result'
 import { GeoService, Coordinates } from '../geo.service'
 import { AuthService } from '../../service/auth.service'
 import { AttachmentService } from '../../service/attachment.service'
+import { ResizeService } from '../../service/resize.service'
 
 @Component({
   selector: 'app-result-item',
@@ -24,6 +26,7 @@ export class ResultItemComponent implements OnChanges {
   polygonCoordinates: number[][]
   polygonWGS84Coordinates: Coordinates[]
   isEditMode = false
+  isResized = false
   showUser = false
 
   uploader: FileUploader
@@ -35,7 +38,8 @@ export class ResultItemComponent implements OnChanges {
   constructor(
     private geoService: GeoService,
     private authService: AuthService,
-    private attachmentService: AttachmentService) { }
+    private attachmentService: AttachmentService,
+    private resizeService: ResizeService) { }
 
   ngOnChanges(changes: SimpleChanges) {
     console.log('ResultItemComponent.ngOnChanges', this.model)
@@ -108,15 +112,32 @@ export class ResultItemComponent implements OnChanges {
     this.uploader = new FileUploader({
       url: url,
       disableMultipart: false,
-      autoUpload: true,
+      autoUpload: false,
       allowedMimeType: ['image/png', 'image/jpeg', 'image/gif']
     })
+
+    this.uploader.onAfterAddingFile = (item: FileItem) => {
+      if (!this.isResized) {
+        this.uploader.removeFromQueue(item)
+
+        this.resizeService.resizeImage(item._file, function(result) {
+          this.isResized = true
+          this.uploader.addToQueue([result], this.uploader.options, null)
+          this.uploader.uploadAll()
+        }.bind(this), function() {
+          this.isResized = false
+          this.errorMessage = 'Kuvan pienennys ennen lähetystä ei onnistunut'
+        }.bind(this))
+      }
+    }
 
     this.uploader.onWhenAddingFileFailed = (item: any, filter: any, options: any) => {
       this.errorMessage = 'Kuva ei ollut tuettua formaattia. Tuetut tiedostotyypit ovat .gif, .jpg ja .png'
     }
 
     this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
+      this.isResized = false
+      
       if (status === 200) {
         this.removeImage()
         const attachment = JSON.parse(response)
@@ -159,3 +180,4 @@ export class ResultItemComponent implements OnChanges {
     this.resultItemPopupHidden.emit(tmpModel)
   }
 }
+
