@@ -511,6 +511,7 @@ ul
   line-height 1
   font-size .9rem
   font-weight bold_font_weight
+  transition background 800ms linear
   &:before
     content url(assets/icon_plus-w.svg)
     display inline-block
@@ -518,6 +519,10 @@ ul
     width 11px
     margin 1px 5px -1px 0
     
+.app.variant--2
+  .view__add
+    background darken(#8F55E7,20)
+
 
 //- MAIN COLUMN LAYOUT
 
@@ -900,6 +905,19 @@ ul
       opacity .4
       &.is-done
         opacity 1
+    .list__item-type
+      position relative
+      left -25px
+      top -25px
+      width 45px
+      height @width
+      border-radius 100%
+      margin-bottom -15px
+      box-shadow 2px 2px 6px alpha(#000,.6)
+      &.type--1
+        background url(assets/bg_inside-s.png)
+        background-size cover
+        
     .list__item-footer
       flex 1 0 auto
       display flex
