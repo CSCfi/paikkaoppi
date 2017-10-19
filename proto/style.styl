@@ -422,6 +422,14 @@ ul
   overflow-x hidden
   overflow-y hidden
   -webkit-overflow-scrolling touch
+
+.app.variant--1
+  .view__header
+    background-position 0 0
+
+.app.variant--2
+  .view__header
+    background-position 100% 0
   
 .view__header
   position absolute
@@ -439,8 +447,10 @@ ul
   margin 0 auto
   // box-shadow 0 2px 12px alpha(#000,.5)
   max-width none
-  background linear-gradient(45deg, #f88043, #f8f7cc)
+  background-image linear-gradient(45deg, #f88043, #f8f7cc 45%, #8F55E7 60%, #7EC3E7 100%)
+  background-size 300% auto
   color #fff
+  transition background-position 800ms linear
   &.type--map
     padding 0 15px
     background transparent

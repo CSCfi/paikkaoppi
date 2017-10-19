@@ -13,7 +13,7 @@
     <script type="text/javascript" src="script.js"></script>
   </head>
   <body>
-    <div class="app">
+    <div class="app variant--1">
       <div class="app__wrapper">
         <div class="app__content">
           <div id="login" class="view">
@@ -227,9 +227,9 @@
                       </div>
                       <div class="profile__item">
                         <div class="profile__image">
-                          <div onclick="$(&quot;#profileImage&quot;).removeClass(&quot;variant--2&quot;).addClass(&quot;variant--1&quot;)" class="profile__image-prev"></div>
+                          <div onclick="$(&quot;#profileImage&quot;).removeClass(&quot;variant--2&quot;).addClass(&quot;variant--1&quot;);$(&quot;.app&quot;).removeClass(&quot;variant--2&quot;).addClass(&quot;variant--1&quot;)" class="profile__image-prev"></div>
                           <div id="profileImage" class="image variant--1"></div>
-                          <div onclick="$(&quot;#profileImage&quot;).removeClass(&quot;variant--1&quot;).addClass(&quot;variant--2&quot;)" class="profile__image-next"></div>
+                          <div onclick="$(&quot;#profileImage&quot;).removeClass(&quot;variant--1&quot;).addClass(&quot;variant--2&quot;);$(&quot;.app&quot;).removeClass(&quot;variant--1&quot;).addClass(&quot;variant--2&quot;)" class="profile__image-next"></div>
                         </div>
                       </div>
                       <div class="profile__item">

@@ -92,9 +92,9 @@
             .profile__header-edit(onclick='$("#profile-view").show();$("#profile-edit").hide()') Tallenna
           .profile__item
             .profile__image
-              .profile__image-prev(onclick='$("#profileImage").removeClass("variant--2").addClass("variant--1")')
+              .profile__image-prev(onclick='$("#profileImage").removeClass("variant--2").addClass("variant--1");$(".app").removeClass("variant--2").addClass("variant--1")')
               #profileImage.image.variant--1
-              .profile__image-next(onclick='$("#profileImage").removeClass("variant--1").addClass("variant--2")')
+              .profile__image-next(onclick='$("#profileImage").removeClass("variant--1").addClass("variant--2");$(".app").removeClass("variant--1").addClass("variant--2")')
           .profile__item
             .title
               input(type='text', value='Olli Oppilas', placeholder='Kirjoita tähän nimesi')

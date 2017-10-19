@@ -327,6 +327,12 @@ ul {
   overflow-y: hidden;
   -webkit-overflow-scrolling: touch;
 }
+.app.variant--1 .view__header {
+  background-position: 0 0;
+}
+.app.variant--2 .view__header {
+  background-position: 100% 0;
+}
 .view__header {
   position: absolute;
   top: 0;
@@ -342,8 +348,10 @@ ul {
   z-index: 3;
   margin: 0 auto;
   max-width: none;
-  background: linear-gradient(45deg, #f88043, #f8f7cc);
+  background-image: linear-gradient(45deg, #f88043, #f8f7cc 45%, #8f55e7 60%, #7ec3e7 100%);
+  background-size: 300% auto;
   color: #fff;
+  transition: background-position 800ms linear;
 }
 .view__header.type--map {
   padding: 0 15px;
