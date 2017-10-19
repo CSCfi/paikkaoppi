@@ -8,7 +8,7 @@ html
     meta(name="apple-mobile-web-app-capable", content="yes")
 
     link(rel="apple-touch-icon", sizes="152x152", href="assets/apple_icon-152.png")
-    link(rel="shortcut icon" href="assets/apple_icon-152.png")
+    link(rel="shortcut icon" href="assets/apple_icon-152.png?v=1")
 
     title Paikkaoppi-proto
 
@@ -24,29 +24,32 @@ html
 
       .app__wrapper
         .app__content
-          .app__header
-            //-
 
           .view#login
             if compileWithDocumentation
               .proto__documentation
                 p Kirjautumisnäkymä. Näytetään staattisena.
 
-            .view__content
-              .form.type--login
-                .app__logo
+            .view__index
+              .view__index-columns
+                
+                .view__index-column
+                  .form.type--login
+                    .app__logo
 
-                .form__ingress
-                  p PaikkaOppi on kouluille maksuton verkkopohjainen oppimisympäristö.
+                    .form__ingress
+                      p 
+                        strong PaikkaOppi.fi on kouluille maksuton verkkopohjainen oppimisympäristö. 
 
-                .form__item
-                  label Käyttäjänimi
-                  input(type='text', value='oppilas')
-                .form__item
-                  label Salasana
-                  input(type='password')
-                .form__footer
-                  a.button(href='#dashboard') Kirjaudu sisään
+                      p PaikkaOppi sisältää työkaluja paikkatietotaitojen perusteiden hallintaan sekä ohjeita paikkatiedon soveltavaan käyttöön eri oppiaineissa ja monialaisissa oppimiskokonaisuuksissa. 
+
+                      p Oppimisympäristön interaktiivinen kartta toimii projektialustana oppilaiden omille ympäristöhavainnoille ja kokemuksille. 
+
+                    .form__footer
+                      a.button(href='#dashboard') Kirjaudu sisään
+                .view__index-column
+                  .image__index
+                    img(src='assets/pirate_scene.png', width='600px')
 
           .view#login-opettaja
             if compileWithDocumentation

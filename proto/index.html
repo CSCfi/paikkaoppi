@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="apple-touch-icon" sizes="152x152" href="assets/apple_icon-152.png">
-    <link rel="shortcut icon" href="assets/apple_icon-152.png">
+    <link rel="shortcut icon" href="assets/apple_icon-152.png?v=1">
     <title>Paikkaoppi-proto</title>
     <link rel="stylesheet" type="text/css" href="style.css">
     <link rel="stylesheet" type="text/css" href="proto.css">
@@ -16,24 +16,23 @@
     <div class="app">
       <div class="app__wrapper">
         <div class="app__content">
-          <div class="app__header">
-          </div>
           <div id="login" class="view">
-            <div class="view__content">
-              <div class="form type--login">
-                <div class="app__logo"></div>
-                <div class="form__ingress">
-                  <p>PaikkaOppi on kouluille maksuton verkkopohjainen oppimisympäristö.</p>
+            <div class="view__index">
+              <div class="view__index-columns">
+                <div class="view__index-column">
+                  <div class="form type--login">
+                    <div class="app__logo"></div>
+                    <div class="form__ingress">
+                      <p> <strong>PaikkaOppi.fi on kouluille maksuton verkkopohjainen oppimisympäristö. </strong></p>
+                      <p>PaikkaOppi sisältää työkaluja paikkatietotaitojen perusteiden hallintaan sekä ohjeita paikkatiedon soveltavaan käyttöön eri oppiaineissa ja monialaisissa oppimiskokonaisuuksissa. </p>
+                      <p>Oppimisympäristön interaktiivinen kartta toimii projektialustana oppilaiden omille ympäristöhavainnoille ja kokemuksille. </p>
+                    </div>
+                    <div class="form__footer"><a href="#dashboard" class="button">Kirjaudu sisään</a></div>
+                  </div>
                 </div>
-                <div class="form__item">
-                  <label>Käyttäjänimi</label>
-                  <input type="text" value="oppilas">
+                <div class="view__index-column">
+                  <div class="image__index"><img src="assets/pirate_scene.png" width="600px"></div>
                 </div>
-                <div class="form__item">
-                  <label>Salasana</label>
-                  <input type="password">
-                </div>
-                <div class="form__footer"><a href="#dashboard" class="button">Kirjaudu sisään</a></div>
               </div>
             </div>
           </div>
@@ -130,39 +129,117 @@
             <div class="view__content">
               <div class="view__columns">
                 <div class="view__column">
+                  <div class="view__filters">
+                    <div class="view__filter">
+                      <div class="view__filter-dropdown">
+                        <div class="view__filter-dropdown-title">Tekijä</div>
+                        <div class="view__filter-dropdown-handle"></div>
+                        <div class="view__filter-dropdown-content">
+                          <div class="view__filter-dropdown-row">Minä</div>
+                          <div class="view__filter-dropdown-row">Opettaja</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="view__filter">
+                      <div class="view__filter-dropdown">
+                        <div class="view__filter-dropdown-title">Tyyppi</div>
+                        <div class="view__filter-dropdown-handle"></div>
+                        <div class="view__filter-dropdown-content">
+                          <div class="view__filter-dropdown-row">Toimi</div>
+                          <div class="view__filter-dropdown-row">Tutki</div>
+                          <div class="view__filter-dropdown-row">Tee</div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                   <div class="list type--tasks">
-                    <div class="list__item">
+                    <div class="list__item type--code">
                       <form>
                         <div class="list__item-title">Lataa tehtävä</div>
                         <div class="list__item-description">Hae tehtävä koodilla.</div>
-                        <div class="list__item-error">
-                          <div class="text">Tehtävää ei löytynyt. Tarkista että koodi on oikein ja yritä uudestaan.</div>
-                        </div>
                         <div class="list__item-footer">
                           <div class="list__item-input">
-                            <input type="text" placeholder="Kirjoita koodi tähän..." class="input--code"><a href="#map-karttaesitys" class="button--continue"> </a>
+                            <input type="text" maxlength="5" class="input--code"><a href="#map-karttaesitys" class="button--continue"> </a>
                           </div>
                         </div>
                       </form>
                     </div><a href="#task-lempipaikkani" class="list__item">
                       <div class="list__item-image"></div>
                       <div class="list__item-title">Lempipaikkani</div>
-                      <div class="list__item-detail">4 merkintää</div></a><a href="#task-suomivisa" class="list__item">
+                      <div class="list__item-marks">
+                        <div class="list__item-mark"></div>
+                        <div class="list__item-mark"></div>
+                        <div class="list__item-mark"></div>
+                        <div class="list__item-mark"></div>
+                      </div></a><a href="#task-suomivisa" class="list__item">
                       <div class="list__item-image"></div>
                       <div class="list__item-title">Suomi-visa</div>
-                      <div class="list__item-detail">2 merkintää</div></a>
+                      <div class="list__item-marks">
+                        <div class="list__item-mark"></div>
+                        <div class="list__item-mark"></div>
+                      </div></a><a href="#task-lempipaikkani" class="list__item">
+                      <div class="list__item-image"></div>
+                      <div class="list__item-title">Oma kartta</div>
+                      <div class="list__item-marks">
+                        <div class="list__item-mark"></div>
+                        <div class="list__item-mark"></div>
+                      </div></a><a href="#task-suomivisa" class="list__item">
+                      <div style="background-image:url(assets/bg_inside.png)" class="list__item-image"></div>
+                      <div class="list__item-title">Talventörröttäjät</div>
+                      <div class="list__item-marks"></div></a><a href="#task-lempipaikkani" class="list__item">
+                      <div class="list__item-image"></div>
+                      <div class="list__item-title">Lempipaikkani 3C</div>
+                      <div class="list__item-marks">
+                        <div class="list__item-mark"></div>
+                        <div class="list__item-mark"></div>
+                      </div></a><a href="#task-suomivisa" class="list__item">
+                      <div class="list__item-image"></div>
+                      <div class="list__item-title">Maantiedon tehtävä 4B</div>
+                      <div class="list__item-marks">
+                        <div class="list__item-mark"></div>
+                      </div></a>
                   </div>
                 </div>
                 <div class="view__column">
                   <div class="profile">
-                    <div class="profile__item">
-                      <div class="profile__image"><img src="assets/monster.svg"></div>
+                    <div id="profile-view">
+                      <div class="profile__header">
+                        <div onclick="$(&quot;#profile-edit&quot;).show();$(&quot;#profile-view&quot;).hide()" class="profile__header-edit">Muokkaa</div>
+                      </div>
+                      <div class="profile__item">
+                        <div class="profile__image">
+                          <div class="image variant--1"></div>
+                        </div>
+                      </div>
+                      <div class="profile__item">
+                        <div class="title">Olli Oppilas</div>
+                      </div>
+                      <div class="profile__item">
+                        <div class="rank">Tason 5 tutkija</div>
+                      </div>
+                      <div class="profile__footer">
+                        <div class="profile__footer-item"><a href="#login">Kirjaudu ulos</a></div>
+                      </div>
                     </div>
-                    <div class="profile__item">
-                      <label>Olli Oppilas</label>
-                    </div>
-                    <div class="profile__footer">
-                      <div class="profile__footer-item"><a href="#login">Kirjaudu ulos</a></div>
+                    <div id="profile-edit" style="display:none">
+                      <div class="profile__header">
+                        <div onclick="$(&quot;#profile-view&quot;).show();$(&quot;#profile-edit&quot;).hide()" class="profile__header-edit">Tallenna</div>
+                      </div>
+                      <div class="profile__item">
+                        <div class="profile__image">
+                          <div onclick="$(&quot;#profileImage&quot;).removeClass(&quot;variant--2&quot;).addClass(&quot;variant--1&quot;)" class="profile__image-prev"></div>
+                          <div id="profileImage" class="image variant--1"></div>
+                          <div onclick="$(&quot;#profileImage&quot;).removeClass(&quot;variant--1&quot;).addClass(&quot;variant--2&quot;)" class="profile__image-next"></div>
+                        </div>
+                      </div>
+                      <div class="profile__item">
+                        <div class="title">
+                          <input type="text" value="Olli Oppilas" placeholder="Kirjoita tähän nimesi">
+                        </div>
+                      </div>
+                      <div class="profile__item">
+                        <div class="rank">Tason 5 tutkija</div>
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -363,8 +440,10 @@
                 </div>
               </div>
             </div>
-            <div class="view__header type--map"><a href="#dashboard" class="view__header-link type--back"></a>
-              <h1 class="view__header-title">Suomi-visa</h1><a href="#task-suomivisa" class="view__header-link type--info">Ohjeet</a>
+            <div class="view__header type--map">
+              <div class="view__header-content"><a href="#dashboard" class="view__header-link type--back"></a>
+                <h1 class="view__header-title">Suomi-visa</h1><a href="#task-suomivisa" class="view__header-link type--info">Ohjeet</a>
+              </div>
             </div>
             <div class="map__wrapper">
               <div class="map__zoom">

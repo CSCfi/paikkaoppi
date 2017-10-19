@@ -6,34 +6,98 @@
 .view__content
   .view__columns
     .view__column
+      .view__filters
+        .view__filter
+          .view__filter-dropdown
+            .view__filter-dropdown-title Tekijä
+            .view__filter-dropdown-handle
+            .view__filter-dropdown-content
+              .view__filter-dropdown-row Minä
+              .view__filter-dropdown-row Opettaja
+        .view__filter
+          .view__filter-dropdown
+            .view__filter-dropdown-title Tyyppi
+            .view__filter-dropdown-handle
+            .view__filter-dropdown-content
+              .view__filter-dropdown-row Toimi
+              .view__filter-dropdown-row Tutki
+              .view__filter-dropdown-row Tee
+
+
       .list.type--tasks
-        .list__item
+        .list__item.type--code
           form
             .list__item-title Lataa tehtävä
             .list__item-description Hae tehtävä koodilla.
-            .list__item-error
-              .text Tehtävää ei löytynyt. Tarkista että koodi on oikein ja yritä uudestaan.
+            //- .list__item-error
+            //-   .text Tehtävää ei löytynyt. Tarkista että koodi on oikein ja yritä uudestaan.
             .list__item-footer
               .list__item-input
-                input.input--code(type='text', placeholder='Kirjoita koodi tähän...')
+                input.input--code(type='text', maxlength='5')
                 a.button--continue(href='#map-karttaesitys') 
 
         a.list__item(href='#task-lempipaikkani')
           .list__item-image
           .list__item-title Lempipaikkani
-          .list__item-detail 4 merkintää
+          .list__item-marks
+            .list__item-mark
+            .list__item-mark
+            .list__item-mark
+            .list__item-mark
         a.list__item(href='#task-suomivisa')
           .list__item-image
           .list__item-title Suomi-visa
-          .list__item-detail 2 merkintää
+          .list__item-marks
+            .list__item-mark
+            .list__item-mark
+        a.list__item(href='#task-lempipaikkani')
+          .list__item-image
+          .list__item-title Oma kartta
+          .list__item-marks
+            .list__item-mark
+            .list__item-mark
+        a.list__item(href='#task-suomivisa')
+          .list__item-image(style='background-image:url(assets/bg_inside.png)')
+          .list__item-title Talventörröttäjät
+          .list__item-marks
+        a.list__item(href='#task-lempipaikkani')
+          .list__item-image
+          .list__item-title Lempipaikkani 3C
+          .list__item-marks
+            .list__item-mark
+            .list__item-mark
+        a.list__item(href='#task-suomivisa')
+          .list__item-image
+          .list__item-title Maantiedon tehtävä 4B
+          .list__item-marks
+            .list__item-mark
 
     .view__column
       .profile
-        .profile__item
-          .profile__image
-            img(src='assets/monster.svg')
-        .profile__item
-          label Olli Oppilas
-        .profile__footer
-          .profile__footer-item
-            a(href='#login') Kirjaudu ulos
+        #profile-view
+          .profile__header
+            .profile__header-edit(onclick='$("#profile-edit").show();$("#profile-view").hide()') Muokkaa
+          .profile__item
+            .profile__image
+              .image.variant--1
+          .profile__item
+            .title Olli Oppilas
+          .profile__item
+            .rank Tason 5 tutkija
+          .profile__footer
+            .profile__footer-item
+              a(href='#login') Kirjaudu ulos
+        #profile-edit(style='display:none')
+          .profile__header
+            .profile__header-edit(onclick='$("#profile-view").show();$("#profile-edit").hide()') Tallenna
+          .profile__item
+            .profile__image
+              .profile__image-prev(onclick='$("#profileImage").removeClass("variant--2").addClass("variant--1")')
+              #profileImage.image.variant--1
+              .profile__image-next(onclick='$("#profileImage").removeClass("variant--1").addClass("variant--2")')
+          .profile__item
+            .title
+              input(type='text', value='Olli Oppilas', placeholder='Kirjoita tähän nimesi')
+          .profile__item
+            .rank Tason 5 tutkija
+
