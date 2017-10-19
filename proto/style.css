@@ -321,11 +321,15 @@ ul {
   z-index: 4;
   margin: 0 auto;
   text-align: left;
-  padding: 25px 25px 0;
+  padding: 25px 0 0;
   bottom: 0;
-  overflow-x: hidden;
-  overflow-y: hidden;
+  overflow: hidden;
   -webkit-overflow-scrolling: touch;
+}
+@media (min-width: 720px) {
+  .view__content {
+    padding: 25px 25px 0;
+  }
 }
 .app.variant--1 .view__header {
   background-position: 0 0;
@@ -444,6 +448,11 @@ ul {
 @media (min-width: 720px) {
   .view__column:nth-child(1) {
     max-width: calc(100vw - 370px);
+  }
+}
+@media (min-width: 720px) {
+  .view__column.type--one {
+    max-width: calc(100vw - 50px);
   }
 }
 .view__column:nth-child(2) {
@@ -847,14 +856,15 @@ ul {
   display: flex;
 }
 .list.type--tasks .list__item-mark {
-  border-radius: 100%;
-  background: rgba(225,133,75,0.3);
-  width: 6px;
-  height: 6px;
+  background: url("assets/icon_star.svg");
+  background-size: contain;
+  width: 9px;
+  height: 9px;
   margin: 0 4px 0 0;
+  opacity: 0.4;
 }
 .list.type--tasks .list__item-mark.is-done {
-  background: #e1854b;
+  opacity: 1;
 }
 .list.type--tasks .list__item-footer {
   flex: 1 0 auto;

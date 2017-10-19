@@ -417,11 +417,12 @@ ul
   z-index 4
   margin 0 auto
   text-align left
-  padding base_padding base_padding 0
+  padding base_padding 0 0
   bottom 0
-  overflow-x hidden
-  overflow-y hidden
+  overflow hidden
   -webkit-overflow-scrolling touch
+  @media (min-width: media_medium)
+    padding base_padding base_padding 0
 
 .app.variant--1
   .view__header
@@ -537,6 +538,9 @@ ul
     flex 1 0 auto
     @media (min-width: media_medium)
       max-width calc(100vw \- 370px)
+  &.type--one
+    @media (min-width: media_medium)
+      max-width calc(100vw \- 50px)
     
   &:nth-child(2)
     margin base_padding 0
@@ -888,13 +892,14 @@ ul
     .list__item-marks
       display flex
     .list__item-mark
-      border-radius 100%
-      background alpha(brand_color[3],.3)
-      width 6px
+      background url(assets/icon_star.svg)
+      background-size contain      
+      width 9px
       height @width
       margin 0 4px 0 0
+      opacity .4
       &.is-done
-        background alpha(brand_color[3],1)
+        opacity 1
     .list__item-footer
       flex 1 0 auto
       display flex
