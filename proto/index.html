@@ -159,10 +159,27 @@
                         <div class="list__item-description">Hae tehtävä koodilla.</div>
                         <div class="list__item-footer">
                           <div class="list__item-input">
-                            <input type="text" maxlength="5" class="input--code"><a href="#map-karttaesitys" class="button--continue"> </a>
+                            <input type="text" maxlength="1" onkeyup="$(&quot;#code2&quot;).focus()" class="input--code">
+                            <input id="code2" type="text" maxlength="1" onkeyup="$(&quot;#code3&quot;).focus()" class="input--code">
+                            <input id="code3" type="text" maxlength="1" onkeyup="$(&quot;#code4&quot;).focus()" class="input--code">
+                            <input id="code4" type="text" maxlength="1" onkeyup="$(&quot;#code5&quot;).focus()" class="input--code">
+                            <input id="code5" type="text" maxlength="1" onkeyup="$(&quot;#newTask&quot;).show();$(this).blur()" class="input--code">
                           </div>
                         </div>
                       </form>
+                    </div>
+                    <div id="newTask" style="display:none" class="list__item">
+                      <div class="list__item-status">
+                        <div class="status">Uusi</div>
+                      </div><a href="#task-suomivisa" class="list__item-image type--2"></a><a href="#task-suomivisa" class="list__item-title">Suomi-visa</a>
+                      <div class="list__item-marks"> 
+                        <div class="list__item-mark"></div>
+                        <div class="list__item-mark"></div>
+                        <div class="list__item-mark"></div>
+                      </div>
+                      <div class="list__item-code">
+                        <div class="code">OAIKSL        </div>
+                      </div>
                     </div><a href="#task-lempipaikkani" class="list__item">
                       <div class="list__item-image type--1"></div>
                       <div class="list__item-title">Lempipaikkani</div>
@@ -521,7 +538,6 @@
                   </div>
                   <div class="list type--tasks">
                     <div class="list__item">
-                      <div class="list__item-type type--1"></div>
                       <div class="list__item-title">Karttaesitys</div>
                       <div class="list__item-description">Kartta ja työkalut oman esityksen luomiseen.</div>
                       <div class="list__item-footer"><a href="#map-karttaesitys" class="list__item-link">Aloita tehtävä</a></div>
@@ -533,14 +549,16 @@
                       <div class="list__item-footer"> <a href="#task-suomivisa-aloita" class="list__item-link">Aloita tehtävä</a></div>
                     </div>
                     <div class="list__item">
+                      <div class="list__item-type type--1"></div>
                       <div class="list__item-title">Lempipaikkani</div>
-                      <div class="list__item-description">Tämä tehtävä ei ole vielä käytössä.</div>
-                      <div class="list__item-footer"> <a href="#task-lempipaikkani-aloita" class="list__item-link is-inactive">Aloita tehtävä</a></div>
+                      <div class="list__item-description">Merkitse kartalle lempipaikkasi.</div>
+                      <div class="list__item-footer"> <a href="#task-lempipaikkani-aloita" class="list__item-link">Aloita tehtävä</a></div>
                     </div>
                     <div class="list__item">
+                      <div class="list__item-type type--2"></div>
                       <div class="list__item-title">Luokkaretki</div>
                       <div class="list__item-description">Tämä tehtävä ei ole vielä käytössä.</div>
-                      <div class="list__item-footer"><a class="list__item-link is-inactive">Aloita tehtävä</a></div>
+                      <div class="list__item-footer"><a class="list__item-link">Aloita tehtävä</a></div>
                     </div>
                   </div>
                 </div>

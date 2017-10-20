@@ -317,18 +317,18 @@ ul {
 }
 .view__content {
   position: absolute;
-  top: 2.4rem;
+  top: 3.8rem;
   z-index: 4;
   margin: 0 auto;
   text-align: left;
-  padding: 25px 0 0;
+  padding: 0;
   bottom: 0;
   overflow: hidden;
   -webkit-overflow-scrolling: touch;
 }
 @media (min-width: 720px) {
   .view__content {
-    padding: 25px 25px 0;
+    padding: 0 25px 0;
   }
 }
 .app.variant--1 .view__header {
@@ -881,6 +881,10 @@ ul {
   box-shadow: 2px 2px 6px rgba(0,0,0,0.6);
 }
 .list.type--tasks .list__item-type.type--1 {
+  background: url("assets/bg_outside-s.png");
+  background-size: cover;
+}
+.list.type--tasks .list__item-type.type--2 {
   background: url("assets/bg_inside-s.png");
   background-size: cover;
 }
@@ -988,14 +992,18 @@ ul {
 }
 .list.type--tasks .list__item-input .input--code {
   border: none;
-  padding: 0 0.45rem;
-  width: 190px;
-  background: repeating-linear-gradient(90deg, rgba(255,255,255,0.7), rgba(255,255,255,0.7) 16.5%, transparent 16.5%, transparent 21%);
+  padding: 2px 0;
+  text-align: center;
+  width: 17%;
+  background: #fff;
+  margin-right: 4%;
   text-transform: uppercase;
   font-weight: 600;
   font-size: 2rem;
   line-height: 1;
-  letter-spacing: 1.35rem;
+}
+.list.type--tasks .list__item-input .input--code:last-child {
+  margin-right: 0;
 }
 .list.type--tasks .list__item-input .button--continue {
   background: linear-gradient(65deg, #f05348, #e1854b);

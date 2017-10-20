@@ -413,16 +413,16 @@ ul
   //- Restricted width wrapper
   // max-width page_max_width
   position absolute
-  top 2.4rem
+  top 3.8rem
   z-index 4
   margin 0 auto
   text-align left
-  padding base_padding 0 0
+  padding 0
   bottom 0
   overflow hidden
   -webkit-overflow-scrolling touch
   @media (min-width: media_medium)
-    padding base_padding base_padding 0
+    padding 0 base_padding 0
 
 .app.variant--1
   .view__header
@@ -915,6 +915,9 @@ ul
       margin-bottom -15px
       box-shadow 2px 2px 6px alpha(#000,.6)
       &.type--1
+        background url(assets/bg_outside-s.png)
+        background-size cover
+      &.type--2
         background url(assets/bg_inside-s.png)
         background-size cover
         
@@ -989,20 +992,17 @@ ul
       align-items center
       .input--code
         border none
-        padding 0 .45rem
-        width 190px
-        background: repeating-linear-gradient(
-          90deg,
-          alpha(#fff,.7),
-          alpha(#fff,.7) 16.5%,
-          transparent 16.5%,
-          transparent 21%
-        );
+        padding 2px 0
+        text-align center
+        width 17%
+        background #fff
+        margin-right 4%
         text-transform uppercase
         font-weight 600
         font-size 2rem
         line-height 1
-        letter-spacing 1.35rem
+        &:last-child
+          margin-right 0
       .button--continue
         background brand_color[0]
         display inline-flex

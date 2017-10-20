@@ -33,8 +33,25 @@
             //-   .text Tehtävää ei löytynyt. Tarkista että koodi on oikein ja yritä uudestaan.
             .list__item-footer
               .list__item-input
-                input.input--code(type='text', maxlength='5')
-                a.button--continue(href='#map-karttaesitys') 
+                input.input--code(type='text', maxlength='1', onkeyup='$("#code2").focus()')
+                input.input--code#code2(type='text', maxlength='1', onkeyup='$("#code3").focus()')
+                input.input--code#code3(type='text', maxlength='1', onkeyup='$("#code4").focus()')
+                input.input--code#code4(type='text', maxlength='1', onkeyup='$("#code5").focus()')
+                input.input--code#code5(type='text', maxlength='1', onkeyup='$("#newTask").show();$(this).blur()')
+                //- a.button--continue(href='#map-karttaesitys') 
+
+        .list__item#newTask(style='display:none')
+          .list__item-status
+            .status Uusi
+          a.list__item-image.type--2(href='#task-suomivisa')
+          a.list__item-title(href='#task-suomivisa') Suomi-visa
+          .list__item-marks  
+            .list__item-mark
+            .list__item-mark
+            .list__item-mark
+          .list__item-code
+            .code OAIKSL        
+
 
         a.list__item(href='#task-lempipaikkani')
           .list__item-image.type--1
