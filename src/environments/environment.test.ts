@@ -16,5 +16,5 @@ export const environment = {
     measureLineTool: false, measureAreaTool: false,
     centerToLocation: false, changeLayer: false},
   mapHelpVisibleInitially: false,
-  apiUri: 'https://ec2-52-48-217-144.eu-west-1.compute.amazonaws.com/api/v1',
+  apiUri: '/api/v1',
 }
