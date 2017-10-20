@@ -471,8 +471,6 @@ ul
           margin 0 20px -5px 0
           &:before  
             content url(assets/icon_arrow-l.svg) 
-      
-    
 
 .view__header-title
   margin 0
@@ -1203,6 +1201,24 @@ ul
   overflow-y auto
 
 .view__profile-show
+  width 35px
+  height @width
+  max-width @width
+  display inline-block
+  margin -7px 0 0 10px
+  border-radius 100%
+  overflow hidden
+  background #fff no-repeat center top
+  background-size 70%
+  flex 0 1 auto
+  box-shadow 2px 2px 8px alpha(#000,.2)
+  // border 2px solid alpha(brand_color[3],.6)
+  &.variant--1
+    background-image url(assets/dude.png)
+    width 97%
+  &.variant--2
+    background-image url(assets/dude-2.png)
+    width 107%
   @media (min-width: media_small)
     display none
 

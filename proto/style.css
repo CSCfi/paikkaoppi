@@ -1221,6 +1221,27 @@ ul {
   color: #fff;
   overflow-y: auto;
 }
+.view__profile-show {
+  width: 35px;
+  height: 35px;
+  max-width: 35px;
+  display: inline-block;
+  margin: -7px 0 0 10px;
+  border-radius: 100%;
+  overflow: hidden;
+  background: #fff no-repeat center top;
+  background-size: 70%;
+  flex: 0 1 auto;
+  box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+}
+.view__profile-show.variant--1 {
+  background-image: url("assets/dude.png");
+  width: 97%;
+}
+.view__profile-show.variant--2 {
+  background-image: url("assets/dude-2.png");
+  width: 107%;
+}
 @media (min-width: 620px) {
   .view__profile-show {
     display: none;
