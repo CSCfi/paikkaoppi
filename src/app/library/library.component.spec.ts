@@ -1,15 +1,14 @@
-import { Component } from '@angular/core'
-import { async, ComponentFixture, TestBed } from '@angular/core/testing'
-import { RouterTestingModule } from '@angular/router/testing'
-import { FormsModule } from '@angular/forms'
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule } from '@angular/common/http';
+import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
 
-import { AuthService } from '../service/auth.service'
-import { TaskService } from '../service/task.service'
-import { TaskTemplateService } from '../service/task-template.service'
-import { MockComponent, AuthServiceMock, TaskServiceMock, TaskTemplateServiceMock } from '../../tests/mocks.spec'
-
-import { LibraryComponent } from './library.component'
+import { AuthServiceMock, MockComponent, TaskServiceMock, TaskTemplateServiceMock } from '../../tests/mocks.spec';
+import { AuthService } from '../service/auth.service';
+import { TaskTemplateService } from '../service/task-template.service';
+import { TaskService } from '../service/task.service';
+import { TaskTemplateComponent } from '../task-template/task-template.component';
+import { LibraryComponent } from './library.component';
 
 describe('LibraryComponent', () => {
   let component: LibraryComponent
@@ -17,7 +16,7 @@ describe('LibraryComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LibraryComponent, MockComponent ],
+      declarations: [ LibraryComponent, MockComponent, TaskTemplateComponent ],
       imports: [
         FormsModule,
         HttpClientModule,
