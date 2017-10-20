@@ -23,8 +23,10 @@ border_radius = 30px
 
 base_padding = 25px
 
-media_medium = 720px
-media_large = 1080px
+
+media_small = 620px
+media_mobile = 940px
+media_large = 1180px
 
 input_border_color = #333
 input_border_radius = 1px
@@ -372,7 +374,7 @@ ul
   right 0
   background #fff
   z-index 1001
-  @media (min-width: media_medium)
+  @media (min-width: media_small)
     left 20vw
     right @left
     width 60vw
@@ -420,7 +422,7 @@ ul
   padding 0
   bottom 0
   -webkit-overflow-scrolling touch
-  @media (min-width: media_medium)
+  @media (min-width: media_small)
     padding 0 base_padding 0
 
 .app.variant--1
@@ -522,7 +524,7 @@ ul
 
 .view__columns
   height 100%
-  @media (min-width: media_medium)
+  @media (min-width: media_small)
     display flex
     align-items stretch
     height 100%
@@ -535,20 +537,20 @@ ul
   &:nth-child(1)
     flex 1 0 auto
     padding base_padding
-    @media (min-width: media_medium)
+    @media (min-width: media_small)
       max-width calc(100vw \- 370px)
   &.type--one
-    @media (min-width: media_medium)
+    @media (min-width: media_small)
       max-width calc(100vw \- 50px)
     
   &:nth-child(2)
     margin base_padding 0
     
-    @media (min-width: media_medium)
+    @media (min-width: media_small)
       min-width 300px
       margin 0 0 0 20px
       height calc(100% \- 25px)
-    @media (max-width: media_medium)
+    @media (max-width: media_small)
       position fixed
       top 0
       left 0
@@ -559,13 +561,13 @@ ul
       transform translate3d(100%,0,0)
       transition transform 300ms linear
       &.is-open
-        @media (max-width: media_medium)
+        @media (max-width: media_small)
           -webkit-transform translate3d(0,0,0)
           transform translate3d(0,0,0)
       
 
 .view__index-columns
-  @media (min-width: media_medium)
+  @media (min-width: media_small)
     display flex
     align-items stretch
     position absolute
@@ -583,12 +585,12 @@ ul
     flex-direction column
     justify-content center
     align-items center
-    @media (min-width: media_medium)
+    @media (min-width: media_small)
       max-width calc(100vw \- 610px)
     
   &:nth-child(2)
     background linear-gradient(45deg, #f88043, #f8f7cc)
-    @media (min-width: media_medium)
+    @media (min-width: media_small)
       min-width 550px
       margin 0 0 0 80px
 
@@ -602,7 +604,7 @@ ul
   flex 1 1 50%
   max-width 50%
   padding-right 25px
-  @media (max-width: media_medium)
+  @media (max-width: media_small)
     flex 1 1 100%
     max-width 100%
 
@@ -754,7 +756,7 @@ ul
   display flex
   align-items center
   text-align left
-  @media (min-width: media_medium)
+  @media (min-width: media_small)
     right auto
     min-width 40%
 
@@ -797,7 +799,7 @@ ul
   margin 0 5px 0 40px
   flex 1 0 auto
   text-align right
-  @media (max-width: media_medium)
+  @media (max-width: media_small)
     display none
   
 .map__pointer
@@ -826,7 +828,7 @@ ul
       flex-direction column
       justify-content flex-end
       box-shadow 1px 1px 6px alpha(#000,.2)
-      @media (min-width: media_medium)
+      @media (min-width: media_mobile)
         flex 1 0 calc(50% \- 15px)
         max-width calc(50% \- 15px)
       @media (min-width: media_large)
@@ -1200,7 +1202,7 @@ ul
   overflow-y auto
 
 .view__profile-show
-  @media (min-width: media_medium)
+  @media (min-width: media_small)
     display none
 
 .profile__image
@@ -1332,7 +1334,7 @@ ul
     vertical-align bottom
     width 20px
     margin 3px 20px -3px 0
-  @media (min-width: media_medium)
+  @media (min-width: media_small)
     display none
  
 .view__wizard-forward
@@ -1344,17 +1346,17 @@ ul
     vertical-align bottom
     width 20px
     margin 3px 20px -3px 0
-  @media (min-width: media_medium)
+  @media (min-width: media_small)
     display none
 
 .view__wizard-step
   margin 0 25px 0 0
   padding 0 0 2px 0
-  @media (max-width: media_medium)
+  @media (max-width: media_small)
     display none
   &.is-selected
     border-bottom 1px solid brand_color[1]
-    @media (max-width: media_medium)
+    @media (max-width: media_small)
       display block
   .link
     link()

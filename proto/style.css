@@ -283,7 +283,7 @@ ul {
   background: #fff;
   z-index: 1001;
 }
-@media (min-width: 720px) {
+@media (min-width: 620px) {
   .popup__content {
     left: 20vw;
     right: 20vw;
@@ -325,7 +325,7 @@ ul {
   bottom: 0;
   -webkit-overflow-scrolling: touch;
 }
-@media (min-width: 720px) {
+@media (min-width: 620px) {
   .view__content {
     padding: 0 25px 0;
   }
@@ -427,7 +427,7 @@ ul {
 .view__columns {
   height: 100%;
 }
-@media (min-width: 720px) {
+@media (min-width: 620px) {
   .view__columns {
     display: flex;
     align-items: stretch;
@@ -444,12 +444,12 @@ ul {
   flex: 1 0 auto;
   padding: 25px;
 }
-@media (min-width: 720px) {
+@media (min-width: 620px) {
   .view__column:nth-child(1) {
     max-width: calc(100vw - 370px);
   }
 }
-@media (min-width: 720px) {
+@media (min-width: 620px) {
   .view__column.type--one {
     max-width: calc(100vw - 50px);
   }
@@ -457,14 +457,14 @@ ul {
 .view__column:nth-child(2) {
   margin: 25px 0;
 }
-@media (min-width: 720px) {
+@media (min-width: 620px) {
   .view__column:nth-child(2) {
     min-width: 300px;
     margin: 0 0 0 20px;
     height: calc(100% - 25px);
   }
 }
-@media (max-width: 720px) {
+@media (max-width: 620px) {
   .view__column:nth-child(2) {
     position: fixed;
     top: 0;
@@ -477,13 +477,13 @@ ul {
     transition: transform 300ms linear;
   }
 }
-@media (max-width: 720px) and (max-width: 720px) {
+@media (max-width: 620px) and (max-width: 620px) {
   .view__column:nth-child(2).is-open {
     -webkit-transform: translate3d(0, 0, 0);
     transform: translate3d(0, 0, 0);
   }
 }
-@media (min-width: 720px) {
+@media (min-width: 620px) {
   .view__index-columns {
     display: flex;
     align-items: stretch;
@@ -505,7 +505,7 @@ ul {
   justify-content: center;
   align-items: center;
 }
-@media (min-width: 720px) {
+@media (min-width: 620px) {
   .view__index-column:nth-child(1) {
     max-width: calc(100vw - 610px);
   }
@@ -513,7 +513,7 @@ ul {
 .view__index-column:nth-child(2) {
   background: linear-gradient(45deg, #f88043, #f8f7cc);
 }
-@media (min-width: 720px) {
+@media (min-width: 620px) {
   .view__index-column:nth-child(2) {
     min-width: 550px;
     margin: 0 0 0 80px;
@@ -528,7 +528,7 @@ ul {
   max-width: 50%;
   padding-right: 25px;
 }
-@media (max-width: 720px) {
+@media (max-width: 620px) {
   .view__grid-item {
     flex: 1 1 100%;
     max-width: 100%;
@@ -692,7 +692,7 @@ ul {
   align-items: center;
   text-align: left;
 }
-@media (min-width: 720px) {
+@media (min-width: 620px) {
   .map__tools {
     right: auto;
     min-width: 40%;
@@ -741,7 +741,7 @@ ul {
   flex: 1 0 auto;
   text-align: right;
 }
-@media (max-width: 720px) {
+@media (max-width: 620px) {
   .map__tools-coords {
     display: none;
   }
@@ -768,13 +768,13 @@ ul {
   justify-content: flex-end;
   box-shadow: 1px 1px 6px rgba(0,0,0,0.2);
 }
-@media (min-width: 720px) {
+@media (min-width: 940px) {
   .list.type--tasks .list__item {
     flex: 1 0 calc(50% - 15px);
     max-width: calc(50% - 15px);
   }
 }
-@media (min-width: 1080px) {
+@media (min-width: 1180px) {
   .list.type--tasks .list__item {
     flex: 1 0 calc(25% - 15px);
     max-width: calc(25% - 15px);
@@ -1220,7 +1220,7 @@ ul {
   color: #fff;
   overflow-y: auto;
 }
-@media (min-width: 720px) {
+@media (min-width: 620px) {
   .view__profile-show {
     display: none;
   }
@@ -1362,7 +1362,7 @@ ul {
   width: 20px;
   margin: 3px 20px -3px 0;
 }
-@media (min-width: 720px) {
+@media (min-width: 620px) {
   .view__wizard-back {
     display: none;
   }
@@ -1377,7 +1377,7 @@ ul {
   width: 20px;
   margin: 3px 20px -3px 0;
 }
-@media (min-width: 720px) {
+@media (min-width: 620px) {
   .view__wizard-forward {
     display: none;
   }
@@ -1386,7 +1386,7 @@ ul {
   margin: 0 25px 0 0;
   padding: 0 0 2px 0;
 }
-@media (max-width: 720px) {
+@media (max-width: 620px) {
   .view__wizard-step {
     display: none;
   }
@@ -1394,7 +1394,7 @@ ul {
 .view__wizard-step.is-selected {
   border-bottom: 1px solid #f05348;
 }
-@media (max-width: 720px) {
+@media (max-width: 620px) {
   .view__wizard-step.is-selected {
     display: block;
   }
