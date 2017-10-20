@@ -1293,9 +1293,35 @@ ul {
   flex: 0 1 auto;
   margin-right: 10px;
   background: #fff;
+  font-size: 2rem;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-shadow: 1px 1px 6px rgba(0,0,0,0.5);
+}
+.profile__medal.type--1 {
+  background: url("assets/bg_outside-s.png");
+  background-size: cover;
+}
+.profile__medal.type--2 {
+  background: url("assets/bg_inside-s.png");
+  background-size: cover;
+}
+.profile__medal.type--3 {
+  background: url("assets/bg_outside-s.png");
+  background-size: cover;
+}
+.profile__medal.type--4 {
+  background: url("assets/bg_inside-s.png");
+  background-size: cover;
+}
+.profile__medal.type--5 {
+  background: url("assets/bg_inside-s.png");
+  background-size: cover;
 }
 .profile__medal.is-empty {
-  background: rgba(255,255,255,0.3);
+  background: rgba(255,255,255,0.2);
 }
 .profile__medals-footer {
   flex: 1 0 auto;
