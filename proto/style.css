@@ -1221,6 +1221,11 @@ ul {
   color: #fff;
   overflow-y: auto;
 }
+@media (min-width: 620px) {
+  .profile__header-back {
+    display: none;
+  }
+}
 .view__profile-show {
   width: 35px;
   height: 35px;
