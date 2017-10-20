@@ -48,10 +48,7 @@
           .list__item-marks  
             .list__item-mark
             .list__item-mark
-            .list__item-mark
-          .list__item-code
-            .code OAIKSL        
-
+            .list__item-mark       
 
         a.list__item(href='#task-lempipaikkani')
           .list__item-image.type--1
@@ -94,21 +91,31 @@
 
 
     .view__column
-      .profile
-        #profile-view
-          .profile__header
-            .profile__header-edit(onclick='$("#profile-edit").show();$("#profile-view").hide()') Muokkaa
-          .profile__item
-            .profile__image
-              .image.variant--1
-          .profile__item
-            .title Olli Oppilas
-          .profile__item
-            .rank Tason 5 tutkija
-          .profile__footer
-            .profile__footer-item
-              a(href='#login') Kirjaudu ulos
-        #profile-edit(style='display:none')
+      .profile#profile-view
+        .profile__header
+          .profile__header-edit(onclick='$("#profile-edit").show();$("#profile-view").hide()') Muokkaa
+        .profile__item
+          .profile__image
+            .image.variant--1
+        .profile__item
+          .title Olli Oppilas
+        .profile__item
+          .rank Tason 5 tutkija
+        .profile__medals
+          .profile__medal.type--1
+          .profile__medal.type--2
+          .profile__medal.type--3
+          .profile__medal.type--4
+          .profile__medal.type--5
+          .profile__medal.type--6.is-empty
+        .profile__medals-footer
+          .link Näytä kaikki saavutukset
+
+        .profile__footer
+          .profile__footer-item
+            a(href='#login') Kirjaudu ulos
+        
+        .profile#profile-edit(style='display:none')
           .profile__header
             .profile__header-edit(onclick='$("#profile-view").show();$("#profile-edit").hide()') Tallenna
           .profile__item

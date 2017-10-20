@@ -1185,6 +1185,9 @@ ul
 
 .profile
   text-align center
+  display flex
+  flex-direction column
+  height 100%
 
 .profile__image
   margin 15px auto 25px
@@ -1248,11 +1251,41 @@ ul
     font-weight 600
 
 .profile__footer
-  margin 50px 0 0 0
+  //  
   
 .profile__footer-item
   font-weight bold_font_weight
   margin 0 0 10px 0
+
+
+.profile__medals
+  display flex
+  flex-wrap wrap
+  margin 25px -10px 25px 0
+  flex 1 0 auto
+  justify-content center
+  align-items flex-start
+.profile__medal
+  width 60px
+  height @width 
+  border-radius 100%
+  flex 0 1 auto
+  margin-right 10px
+  background alpha(#fff,1)
+  &.type--1
+  &.type--2
+  &.type--3
+  &.type--4
+  &.type--5
+  &.type--6
+  &.type--7
+  &.type--8
+    //
+  &.is-empty
+    background alpha(#fff,.3)
+
+.profile__medals-footer
+  flex 1 0 auto
 
 
 .view__wizard
