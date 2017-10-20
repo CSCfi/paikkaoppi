@@ -323,7 +323,6 @@ ul {
   text-align: left;
   padding: 0;
   bottom: 0;
-  overflow: hidden;
   -webkit-overflow-scrolling: touch;
 }
 @media (min-width: 720px) {
@@ -338,10 +337,6 @@ ul {
   background-position: 100% 0;
 }
 .view__header {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
   height: 6.6rem;
   text-align: left;
   padding: 0 25px;
@@ -442,12 +437,12 @@ ul {
 .view__column {
   position: relative;
   background: #fff;
-  padding: 25px;
   height: 100%;
   overflow-y: auto;
 }
 .view__column:nth-child(1) {
   flex: 1 0 auto;
+  padding: 25px;
 }
 @media (min-width: 720px) {
   .view__column:nth-child(1) {
@@ -461,15 +456,31 @@ ul {
 }
 .view__column:nth-child(2) {
   margin: 25px 0;
-  height: calc(100% - 25px);
-  padding: 25px;
-  background: #262626;
-  color: #fff;
 }
 @media (min-width: 720px) {
   .view__column:nth-child(2) {
     min-width: 300px;
     margin: 0 0 0 20px;
+    height: calc(100% - 25px);
+  }
+}
+@media (max-width: 720px) {
+  .view__column:nth-child(2) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    margin: 0;
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+    transition: transform 300ms linear;
+  }
+}
+@media (max-width: 720px) and (max-width: 720px) {
+  .view__column:nth-child(2).is-open {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
   }
 }
 @media (min-width: 720px) {
@@ -1204,6 +1215,15 @@ ul {
   display: flex;
   flex-direction: column;
   height: 100%;
+  padding: 25px;
+  background: #262626;
+  color: #fff;
+  overflow-y: auto;
+}
+@media (min-width: 720px) {
+  .view__profile-show {
+    display: none;
+  }
 }
 .profile__image {
   margin: 15px auto 25px;
@@ -1279,25 +1299,22 @@ ul {
   margin: 0 0 10px 0;
 }
 .profile__medals {
-  display: flex;
-  flex-wrap: wrap;
   margin: 35px -10px 25px 0;
   flex: 1 0 auto;
-  justify-content: center;
-  align-items: flex-start;
+  text-align: center;
 }
 .profile__medal {
   width: 60px;
   height: 60px;
   border-radius: 100%;
   flex: 0 1 auto;
-  margin-right: 10px;
+  margin: 0 10px 5px 0;
   background: #fff;
   font-size: 2rem;
   font-weight: 600;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
+  display: inline-block;
+  overflow: hidden;
+  line-height: 60px;
   text-shadow: 1px 1px 6px rgba(0,0,0,0.5);
 }
 .profile__medal.type--1 {
@@ -1324,7 +1341,7 @@ ul {
   background: rgba(255,255,255,0.2);
 }
 .profile__medals-footer {
-  flex: 1 0 auto;
+  margin: 15px 0 0 0;
 }
 .profile__medals-footer .link {
   color: #f8f7cc;

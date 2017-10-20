@@ -419,7 +419,6 @@ ul
   text-align left
   padding 0
   bottom 0
-  overflow hidden
   -webkit-overflow-scrolling touch
   @media (min-width: media_medium)
     padding 0 base_padding 0
@@ -433,10 +432,6 @@ ul
     background-position 100% 0
   
 .view__header
-  position absolute
-  top 0
-  left 0
-  right 0
   height page_header_height
   text-align left
   padding 0 base_padding
@@ -446,7 +441,6 @@ ul
   position relative
   z-index 3
   margin 0 auto
-  // box-shadow 0 2px 12px alpha(#000,.5)
   max-width none
   background-image linear-gradient(45deg, #f88043, #f8f7cc 45%, #8F55E7 60%, #7EC3E7 100%)
   background-size 300% auto
@@ -536,11 +530,11 @@ ul
 .view__column
   position relative
   background #fff
-  padding base_padding
   height 100%
   overflow-y auto
   &:nth-child(1)
     flex 1 0 auto
+    padding base_padding
     @media (min-width: media_medium)
       max-width calc(100vw \- 370px)
   &.type--one
@@ -549,14 +543,26 @@ ul
     
   &:nth-child(2)
     margin base_padding 0
-    height calc(100% \- 25px)
-    padding base_padding
-    background #262626
-    color #fff
+    
     @media (min-width: media_medium)
       min-width 300px
       margin 0 0 0 20px
-
+      height calc(100% \- 25px)
+    @media (max-width: media_medium)
+      position fixed
+      top 0
+      left 0
+      width 100vw
+      height 100vh
+      margin 0
+      -webkit-transform translate3d(100%,0,0)
+      transform translate3d(100%,0,0)
+      transition transform 300ms linear
+      &.is-open
+        @media (max-width: media_medium)
+          -webkit-transform translate3d(0,0,0)
+          transform translate3d(0,0,0)
+      
 
 .view__index-columns
   @media (min-width: media_medium)
@@ -1188,6 +1194,14 @@ ul
   display flex
   flex-direction column
   height 100%
+  padding base_padding
+  background #262626
+  color #fff
+  overflow-y auto
+
+.view__profile-show
+  @media (min-width: media_medium)
+    display none
 
 .profile__image
   margin 15px auto 25px
@@ -1259,24 +1273,22 @@ ul
 
 
 .profile__medals
-  display flex
-  flex-wrap wrap
   margin 35px -10px 25px 0
   flex 1 0 auto
-  justify-content center
-  align-items flex-start
+  text-align center
+  
 .profile__medal
   width 60px
   height @width 
   border-radius 100%
   flex 0 1 auto
-  margin-right 10px
+  margin 0 10px 5px 0
   background alpha(#fff,1)
   font-size 2rem
   font-weight 600
-  display inline-flex
-  align-items center
-  justify-content center
+  display inline-block
+  overflow hidden
+  line-height @width
   text-shadow 1px 1px 6px alpha(#000,.5)
   &.type--1
     background url(assets/bg_outside-s.png)
@@ -1301,7 +1313,7 @@ ul
     background alpha(#fff,.2)
 
 .profile__medals-footer
-  flex 1 0 auto
+  margin 15px 0 0 0
   .link
     color #f8f7cc
     cursor pointer

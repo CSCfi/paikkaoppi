@@ -124,7 +124,7 @@
           </div>
           <div id="dashboard" class="view">
             <div class="view__header">
-              <h1 class="view__header-title">Omat tehtävät</h1><a href="#library" class="view__add">Uusi tehtävä</a>
+              <h1 class="view__header-title">Omat tehtävät</h1><a href="#library" class="view__add">Uusi tehtävä</a><a onclick="$(&quot;#profile&quot;).addClass(&quot;is-open&quot;)" class="view__profile-show">PR</a>
             </div>
             <div class="view__content">
               <div class="view__columns">
@@ -217,9 +217,10 @@
                     </div>
                   </div>
                 </div>
-                <div class="view__column">
+                <div id="profile" class="view__column">
                   <div id="profile-view" class="profile">
                     <div class="profile__header">
+                      <div onclick="$(&quot;#profile&quot;).removeClass(&quot;is-open&quot;)" class="profile__header-back">Takaisin</div>
                       <div onclick="$(&quot;#profile-edit&quot;).show();$(&quot;#profile-view&quot;).hide()" class="profile__header-edit">Muokkaa</div>
                     </div>
                     <div class="profile__item">
@@ -240,31 +241,28 @@
                       <div class="profile__medal type--4">15</div>
                       <div class="profile__medal type--5">25</div>
                       <div class="profile__medal type--6 is-empty"></div>
-                    </div>
-                    <div class="profile__medals-footer">
-                      <div class="link">Näytä kaikki saavutukset</div>
+                      <div class="profile__medals-footer">
+                        <div class="link">Näytä kaikki saavutukset</div>
+                      </div>
                     </div>
                     <div class="profile__footer">
                       <div class="profile__footer-item"><a href="#login">Kirjaudu ulos</a></div>
                     </div>
-                    <div id="profile-edit" style="display:none" class="profile">
-                      <div class="profile__header">
-                        <div onclick="$(&quot;#profile-view&quot;).show();$(&quot;#profile-edit&quot;).hide()" class="profile__header-edit">Tallenna</div>
+                  </div>
+                  <div id="profile-edit" style="display:none" class="profile is-open">
+                    <div class="profile__header">
+                      <div onclick="$(&quot;#profile-view&quot;).show();$(&quot;#profile-edit&quot;).hide()" class="profile__header-edit">Tallenna</div>
+                    </div>
+                    <div class="profile__item">
+                      <div class="profile__image">
+                        <div onclick="$(&quot;#profileImage&quot;).removeClass(&quot;variant--2&quot;).addClass(&quot;variant--1&quot;);$(&quot;.app&quot;).removeClass(&quot;variant--2&quot;).addClass(&quot;variant--1&quot;)" class="profile__image-prev"></div>
+                        <div id="profileImage" class="image variant--1"></div>
+                        <div onclick="$(&quot;#profileImage&quot;).removeClass(&quot;variant--1&quot;).addClass(&quot;variant--2&quot;);$(&quot;.app&quot;).removeClass(&quot;variant--1&quot;).addClass(&quot;variant--2&quot;)" class="profile__image-next"></div>
                       </div>
-                      <div class="profile__item">
-                        <div class="profile__image">
-                          <div onclick="$(&quot;#profileImage&quot;).removeClass(&quot;variant--2&quot;).addClass(&quot;variant--1&quot;);$(&quot;.app&quot;).removeClass(&quot;variant--2&quot;).addClass(&quot;variant--1&quot;)" class="profile__image-prev"></div>
-                          <div id="profileImage" class="image variant--1"></div>
-                          <div onclick="$(&quot;#profileImage&quot;).removeClass(&quot;variant--1&quot;).addClass(&quot;variant--2&quot;);$(&quot;.app&quot;).removeClass(&quot;variant--1&quot;).addClass(&quot;variant--2&quot;)" class="profile__image-next"></div>
-                        </div>
-                      </div>
-                      <div class="profile__item">
-                        <div class="title">
-                          <input type="text" value="Olli Oppilas" placeholder="Kirjoita tähän nimesi">
-                        </div>
-                      </div>
-                      <div class="profile__item">
-                        <div class="rank">Tason 5 tutkija</div>
+                    </div>
+                    <div class="profile__item">
+                      <div class="title">
+                        <input type="text" value="Olli Oppilas" placeholder="Kirjoita tähän nimesi">
                       </div>
                     </div>
                   </div>
