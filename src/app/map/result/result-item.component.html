@@ -66,9 +66,9 @@
             <textarea [(ngModel)]="model.description" name="description"></textarea>
           </div>
           <div class="form__footer">
-            <button type="submit" class="button" [disabled]="!resultItemForm.form.valid || uploader.isUploading">Tallenna merkintä</button>
-            <button class="button type--secondary" [disabled]="uploader.isUploading" (click)="delete()" *ngIf="model['id'] != null">Poista merkintä</button>
-            <button class="button type--secondary" [disabled]="uploader.isUploading" (click)="close()">Sulje</button>
+            <button type="submit" class="button" [disabled]="!resultItemForm.form.valid || isUploading">Tallenna merkintä</button>
+            <button class="button type--secondary" [disabled]="isUploading" (click)="delete()" *ngIf="model['id'] != null">Poista merkintä</button>
+            <button class="button type--secondary" [disabled]="isUploading" (click)="close()">Sulje</button>
           </div>
         </form>
       </ng-container>
