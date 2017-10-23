@@ -87,18 +87,6 @@ link()
   100%
     transform rotateX(0deg)
 
-@keyframes appear-easy
-  0%
-    visibility hidden
-    transform translateY(0)
-  10%
-    transform translateY(0)
-    visibility visible
-  60%
-    transform translateY(10px)
-  100%
-    transform translateY(0)
-
 @keyframes fade-in
   0%
     opacity 0
@@ -352,37 +340,56 @@ ul
 .popup
   position fixed
   top 0
-  left 0
-  right 0
-  bottom 0
+  left 50%
+  width 400px
+  transform translateX(-50%)
+  padding 0 40px
   z-index 1000
-  background alpha(#000,.4)
-  animation fade-in 200ms ease-in
-    
+  background #282828
+  &:before
+    content ''
+    display block
+    width 100%
+    height 280px
+    position absolute
+    left 0
+    top 0
+    right 0
+    background url(assets/sign_l.svg) no-repeat left top, url(assets/sign_r.svg) no-repeat right top
+    background-size 40px 280px, 40px 280px
+  &:after
+    content ''
+    display block
+    height 42px
+    position absolute
+    right 40px
+    left 40px
+    top 239px
+    background #282828
+   
 .popup__content
   text-align left
-  padding base_padding
-  animation appear-easy 500ms ease-in 200ms
-  transform-style preserve-3d
+  padding 0 45px base_padding
   overflow-x hidden
   overflow-y auto
   -webkit-overflow-scrolling touch
   position absolute
-  top 0 
-  bottom 0
+  top 279px
   left 0
   right 0
-  background #fff
+  background #282828
+  color #fff
   z-index 1001
-  @media (min-width: media_small)
-    left 20vw
-    right @left
-    width 60vw
+  // @media (min-width: media_small)
+  //   left 20vw
+  //   right @left
+  //   width 60vw
+  
     
 
 
 .popup__header
-  padding 0 0 35px 0
+  padding 0 0 25px 0
   display flex
   align-items center
   
@@ -1166,7 +1173,8 @@ ul
   margin 0 auto
 
 .accordion__header
-  margin 0 0 35px 0
+  margin 0 0 15px 0
+  font-size size_h2
 
 .accordion__item
   //
@@ -1181,11 +1189,14 @@ ul
     margin 0 5px 0 0
     
 .accordion__footer
-  margin 40px 0 0 0
+  margin 25px 0 0 0
   text-align center
   -webkit-position sticky
   position sticky
   bottom 0
+  .link
+    color #f8f7cc
+    cursor pointer
 
 
 //- PROFILE
