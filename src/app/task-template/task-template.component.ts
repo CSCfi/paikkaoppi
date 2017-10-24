@@ -1,5 +1,5 @@
 import { TaskTemplateService } from '../service/task-template.service';
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
 import { Instruction, TaskTemplate } from '../service/model';
 
 @Component({
@@ -8,9 +8,9 @@ import { Instruction, TaskTemplate } from '../service/model';
   styleUrls: ['./task-template.component.css']
 })
 export class TaskTemplateComponent implements OnInit {
+  @Input() model: any
   @Output() close = new EventEmitter<void>()
   @Output() save = new EventEmitter<TaskTemplate>()
-  model: any = {}
   phase = 1
   firstPhase = 1
   lastPhase = 3
@@ -19,8 +19,10 @@ export class TaskTemplateComponent implements OnInit {
 
   ngOnInit() {
     console.log('ngOnInit')
-    this.model = this.createNewModel()
     this.phase = 1
+    if (this.model === null) {
+      this.model = this.createNewModel()
+    }
   }
 
   closeDialog() {
@@ -30,9 +32,15 @@ export class TaskTemplateComponent implements OnInit {
 
   submit() {
     console.log('submit', this.model)
-    this.taskTemplateService.createTaskTemplate(this.model).subscribe(
-      value => this.save.next(value)
-    )
+    if (this.model.id !== undefined) {
+      this.taskTemplateService.updateTaskTemplate(this.model).subscribe(
+        value => this.save.next(value)
+      )
+    } else {
+      this.taskTemplateService.createTaskTemplate(this.model).subscribe(
+        value => this.save.next(value)
+      )
+    }
   }
 
   next() {

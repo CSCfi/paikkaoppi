@@ -14,8 +14,9 @@ import { TaskTemplate, User, Role } from '../service/model'
 export class LibraryComponent implements OnInit {
   taskTemplates?: TaskTemplate[] = []
   selectedTemplate?: TaskTemplate
+  selectedTemplateToUpdate?: TaskTemplate
   model: NewTaskModel = new NewTaskModel(null)
-  showNewTaskTemplateComponent = false
+  showTaskTemplateComponent = false
   role: Role
 
   constructor(private taskTemplateService: TaskTemplateService,
@@ -35,6 +36,10 @@ export class LibraryComponent implements OnInit {
       })
   }
 
+  isCreator(template: TaskTemplate) {
+    return this.authService.getUsername() === template.user.username
+  }
+
   createTask(id: number) {
     console.info("Create task from template ", id)
     this.taskTemplateService.getTaskTemplate(id)
@@ -42,24 +47,35 @@ export class LibraryComponent implements OnInit {
       (data) => {
         this.selectedTemplate = data
         this.model = new NewTaskModel(data.name)
-      }
-      )
+      })
   }
 
-  showNewTaskTemplateDialog() {
-    console.log('showNewTaskTemplateDialog') 
-    this.showNewTaskTemplateComponent = true
+  showTaskTemplateDialog(id: number | undefined) {
+    if (id !== undefined) {
+      console.log('showTaskTemplateDialog for template id: ' + id)
+      this.taskTemplateService.getTaskTemplate(id)
+        .subscribe(
+        (data) => {
+          this.selectedTemplateToUpdate = data
+          this.showTaskTemplateComponent = true
+        })
+
+    } else {
+      console.log('showTaskTemplateDialog for new template') 
+      this.selectedTemplateToUpdate = null
+      this.showTaskTemplateComponent = true
+    }
   }
 
-  savedNewTaskTemplate() {
-    console.log('savedNewTaskTemplate') 
-    this.showNewTaskTemplateComponent = false
+  saveTaskTemplate() {
+    console.log('saveTaskTemplate') 
+    this.showTaskTemplateComponent = false
     this.loadTaskTemplates()
   }
 
-  closeNewTaskTemplateDialog() {
-    console.log('closeNewTaskTemplateDialog') 
-    this.showNewTaskTemplateComponent = false
+  closeTaskTemplateDialog() {
+    console.log('closeTaskTemplateDialog') 
+    this.showTaskTemplateComponent = false
   }
 
   closePopup() {
