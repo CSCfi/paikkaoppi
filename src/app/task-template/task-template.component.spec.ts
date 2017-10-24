@@ -7,6 +7,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 
+import { TestMethods } from '../../tests/mocks.spec'
+
 describe('TaskTemplateComponent', () => {
   let component: TaskTemplateComponent;
   let fixture: ComponentFixture<TaskTemplateComponent>;
@@ -28,6 +30,7 @@ describe('TaskTemplateComponent', () => {
   beforeEach(() => {
     fixture = TestBed.createComponent(TaskTemplateComponent);
     component = fixture.componentInstance;
+    component.model = TestMethods.getTaskTemplate()
     fixture.detectChanges();
   });
 

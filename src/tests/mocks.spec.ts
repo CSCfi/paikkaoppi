@@ -10,8 +10,13 @@ export class MockComponent {
 }
 
 export class AuthServiceMock {
+  
   getUser(): User | null {
     return TestMethods.getTeacher()
+  }
+
+  getUsername(): string {
+    return TestMethods.getTeacher().username
   }
 
   getRole(): Role {
@@ -37,6 +42,7 @@ export class AuthServiceMock {
 }
 
 export class TaskServiceMock {
+  
   getTasks(): Observable<Task[]> {
     return Observable.of([{
       id: 1,
@@ -68,6 +74,7 @@ export class TaskServiceMock {
 }
 
 export class TaskTemplateServiceMock {
+  
   getTaskTemplate(): Observable<TaskTemplate> {
     return Observable.of(this.getTemplate(1))
   }
@@ -77,19 +84,12 @@ export class TaskTemplateServiceMock {
   }
 
   private getTemplate(id: number): TaskTemplate {
-    return {
-      id: id,
-      name: 'Tehtäväpohja ' + id,
-      title: 'Tehtäväpohja',
-      description: 'Tehtäväpohja',
-      instructions: null,
-      info: 'Info',
-      tags: ['tag1', 'tag2']
-    }
+    return TestMethods.getTaskTemplateWithId(id)
   }
 }
 
 export class TestMethods {
+  
   static getTeacher(): User {
     return {
       username: 'oppi.opettaja@koulu.fi',
@@ -97,6 +97,23 @@ export class TestMethods {
       firstName: 'Oppi',
       lastName: 'Opettaja',
       role: 'teacher'
+    }
+  }
+
+  static getTaskTemplate(): TaskTemplate {
+    return this.getTaskTemplateWithId(1)
+  }
+
+  static getTaskTemplateWithId(id: number): TaskTemplate {
+    return {
+      id: id,
+      name: "Tehtäväpohja",
+      title: "Tehtäväpohja",
+      description: "Tehtäväpohja",
+      instructions: null,
+      info: "Info",
+      tags: ["tags"],
+      user: TestMethods.getTeacher()
     }
   }
 }
