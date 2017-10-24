@@ -15,6 +15,10 @@ export class TaskTemplateService {
   updateTaskTemplate(taskTemplate: TaskTemplate): Observable<TaskTemplate> {
     return this.http.put<TaskTemplate>(`${environment.apiUri}/tasktemplate/${taskTemplate.id}`, taskTemplate)
   }
+
+  deleteTaskTemplate(taskTemplateId: number): Observable<TaskTemplate> {
+    return this.http.delete<TaskTemplate>(`${environment.apiUri}/tasktemplate/${taskTemplateId}`)
+  }
   
   getTaskTemplates(): Observable<TaskTemplate[]> {
     return this.http.get<TaskTemplate[]>(`${environment.apiUri}/tasktemplate`)
