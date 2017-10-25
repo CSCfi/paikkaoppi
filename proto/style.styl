@@ -100,6 +100,18 @@ link()
     transform translate3d(0,10px,0)
   100%
     transform translate3d(0,-10px,0)
+    
+@keyframes slide
+  0%
+    transform translate3d(-50%,-300%,0)
+  100%
+    transform translate3d(-50%,0,0)
+    
+@keyframes slide-out
+  0%
+    transform translate3d(-50%,0,0)
+  100%
+    transform translate3d(-50%,-300%,0)
 
 
 @import url('//fonts.googleapis.com/css?family='+ replace(' ', '+', font_family) +':'+ font_weights);
@@ -343,13 +355,15 @@ ul
   left 50%
   width 400px
   max-width 90%
-  transform translate3d(-50%,-50vh,0)
-  padding 0 40px
+  transform translate3d(-50%,-300%,0)
+  padding 0
   z-index 1000
-  background #282828
-  transition transform 300ms ease-in-out
-  &.is-open
-    transform translate3d(-50%,-0,0)
+  animation slide 700ms ease-in-out 400ms
+  animation-fill-mode forwards
+  &.is-closed
+    transform translate3d(-50%,0,0)
+    animation slide-out 700ms ease-in-out
+    animation-fill-mode forwards
   &:before
     content ''
     display block
@@ -377,14 +391,14 @@ ul
   overflow-x hidden
   overflow-y auto
   -webkit-overflow-scrolling touch
-  position absolute
+  position relative
   top 279px
-  left 0
-  right 0
   background #282828
   border-radius 0 0 4px 4px
   color #fff
   z-index 1001
+  width 400px
+  max-width 100%
   // @media (min-width: media_small)
   //   left 20vw
   //   right @left

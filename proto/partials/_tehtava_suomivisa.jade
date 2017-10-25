@@ -10,16 +10,16 @@
         .accordion__text
           ul.list.type--text
             li.list__item Mikä on Suomen pohjoisin kylä?
-            li.list__item Entä mikä on Suomen pohjoisin kunta?
+            //- li.list__item Entä mikä on Suomen pohjoisin kunta?
 
-      .accordion__item
-        h2.accordion__title Mitä kaupunkeja on Salpausselkien päällä?
-        .accordion__text
-          ul.list.type--text
-            li.list__item Etsi kartalta Salpausselät ja tutki, mitkä kaupungit on rakennettu kartassa näkyvien reunamuodostumien päälle.
+      //- .accordion__item
+      //-   h2.accordion__title Mitä kaupunkeja on Salpausselkien päällä?
+      //-   .accordion__text
+      //-     ul.list.type--text
+      //-       li.list__item Etsi kartalta Salpausselät ja tutki, mitkä kaupungit on rakennettu kartassa näkyvien reunamuodostumien päälle.
       
       .accordion__footer
-        a.button(href='#map-suomivisa') Aloita tehtävä
+        a.link(onclick='$("#task-suomivisa").removeClass("is-open")') Aloita tehtävä
 
 .popup#task-suomivisa
   if compileWithDocumentation
@@ -42,7 +42,7 @@
       //-       li.list__item Etsi kartalta Salpausselät ja tutki, mitkä kaupungit on rakennettu kartassa näkyvien reunamuodostumien päälle.
       
       .accordion__footer
-        a.link(href='#map-suomivisa') Jatka tehtävää
+        a.link(onclick='$("#task-suomivisa").addClass("is-closed")') Jatka tehtävää
 
 .view__header.type--map
   .view__header-content
