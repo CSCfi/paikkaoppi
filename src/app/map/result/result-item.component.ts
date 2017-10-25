@@ -1,5 +1,6 @@
-import { Component, OnInit, EventEmitter, Input, Output, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core'
-import { FileUploader } from 'ng2-file-upload';
+import { Component, EventEmitter, Input, Output, OnChanges, SimpleChanges, AfterViewInit } from '@angular/core'
+import { FileUploader, FileItem } from 'ng2-file-upload'
+
 
 import { environment } from '../../../environments/environment'
 import { ResultItem, User, PolygonFeatureCollection } from '../../service/model'
@@ -7,6 +8,7 @@ import { Result } from '../../service/model-result'
 import { GeoService, Coordinates } from '../geo.service'
 import { AuthService } from '../../service/auth.service'
 import { AttachmentService } from '../../service/attachment.service'
+import { ResizeService } from '../../service/resize.service'
 
 @Component({
   selector: 'app-result-item',
@@ -17,12 +19,15 @@ export class ResultItemComponent implements OnChanges {
   @Input() visible = false
   @Input() result: Result
   @Input() model: any
+  errorMessage: string
   isPoint = false
   pointWGS84Coordinates: Coordinates
   isPolygon = false
   polygonCoordinates: number[][]
   polygonWGS84Coordinates: Coordinates[]
   isEditMode = false
+  isResized = false
+  isUploading = false
   showUser = false
 
   uploader: FileUploader
@@ -31,22 +36,11 @@ export class ResultItemComponent implements OnChanges {
   @Output() saveResultItem = new EventEmitter<ResultItem>()
   @Output() resultItemPopupHidden = new EventEmitter<ResultItem>()
 
-  constructor(private geoService: GeoService, private authService: AuthService, private attachmentService: AttachmentService) {
-    this.uploader = new FileUploader({
-      url: `${environment.apiUri}/attachment`,
-      disableMultipart: false,
-      autoUpload: true
-    })
-
-    this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
-      this.removePreviousImage()
-      this.model.newAttachmentIds = []
-      this.model.attachments = []
-
-      const attachment = JSON.parse(response)
-      this.model.newAttachmentIds.push(attachment.id)
-    }
-  }
+  constructor(
+    private geoService: GeoService,
+    private authService: AuthService,
+    private attachmentService: AttachmentService,
+    private resizeService: ResizeService) { }
 
   ngOnChanges(changes: SimpleChanges) {
     console.log('ResultItemComponent.ngOnChanges', this.model)
@@ -61,6 +55,7 @@ export class ResultItemComponent implements OnChanges {
       console.log(this.polygonWGS84Coordinates)
     }
     if (this.model != null && this.model['id'] == null) {
+      this.initUpload(null)
       this.isEditMode = true
     }
     if (this.result != null && this.authService.getUsername() !== this.result.user.username) {
@@ -82,6 +77,12 @@ export class ResultItemComponent implements OnChanges {
     return this.model.newAttachmentIds !== undefined && this.model.newAttachmentIds.length > 0
   }
 
+  private getFileExtension(filename) {
+    const lastIndex = filename.lastIndexOf(".")
+    if (lastIndex < 1) return ""
+    return filename.substr(lastIndex + 1)
+  }
+
   imageUrl(): string {
     if (!this.hasImage()) return '';
 
@@ -89,11 +90,69 @@ export class ResultItemComponent implements OnChanges {
     return `${environment.apiUri}/attachment/${id}/content`
   }
 
-  removePreviousImage() {
+  removeImage() {
+    this.errorMessage = null
+    this.removePreviousImage()
+    this.model.newAttachmentIds = []
+    this.model.attachments = []
+  }
+
+  private removePreviousImage() {
     if (!this.hasImage()) return;
 
     const id = this.hasExistingImage() ? this.model.attachments[0].id : this.model.newAttachmentIds[0]
     this.attachmentService.removeAttachment(id).subscribe((ok) => { console.log(`Existing image ${id} removed`) });
+  }
+
+  private initUpload(resultItemId: number) {
+    let url = `${environment.apiUri}/attachment`
+    if (resultItemId != null) {
+      url = `${environment.apiUri}/resultitem/${resultItemId}/attachment`
+    }
+    
+    this.uploader = new FileUploader({
+      url: url,
+      disableMultipart: false,
+      autoUpload: false,
+      allowedMimeType: ['image/png', 'image/jpeg', 'image/gif']
+    })
+
+    this.uploader.onAfterAddingFile = (item: FileItem) => {
+      if (!this.isResized) {
+        this.isUploading = true
+        this.uploader.removeFromQueue(item)
+
+        this.resizeService.resizeImage(item._file, function(result) {
+          this.isResized = true
+          this.uploader.addToQueue([result], this.uploader.options, null)
+          this.uploader.uploadAll()
+        }.bind(this), function() {
+          this.isResized = false
+          this.isUploading = false
+          this.errorMessage = 'Kuvan pienennys ennen lähetystä ei onnistunut'
+        }.bind(this))
+      }
+    }
+
+    this.uploader.onWhenAddingFileFailed = (item: any, filter: any, options: any) => {
+      this.errorMessage = 'Kuva ei ollut tuettua formaattia. Tuetut tiedostotyypit ovat .gif, .jpg ja .png'
+    }
+
+    this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
+      this.isResized = false
+      this.isUploading = false
+      
+      if (status === 200) {
+        this.removeImage()
+        const attachment = JSON.parse(response)
+        this.model.newAttachmentIds.push(attachment.id)
+
+      } else if (status === 415) {
+        this.errorMessage = 'Kuva ei ollut tuettua formaattia. Tuetut tiedostotyypit ovat .gif, .jpg ja .png'
+      } else {
+        this.errorMessage = 'Kuvan lisäys epäonnistui'
+      }
+    }
   }
 
   close() {
@@ -115,6 +174,7 @@ export class ResultItemComponent implements OnChanges {
 
   edit() {
     this.isEditMode = true
+    this.initUpload(this.model.id ? this.model.id : null)
   }
 
   private hide() {
@@ -124,3 +184,4 @@ export class ResultItemComponent implements OnChanges {
     this.resultItemPopupHidden.emit(tmpModel)
   }
 }
+

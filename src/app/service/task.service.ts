@@ -49,6 +49,10 @@ export class TaskService {
       .switchMap(data => this.getTask(data.taskId, true, true))
   }
 
+  getResultItem(resultItemId: number): Observable<ResultItem> {
+    return this.http.get<ResultItem>(`${environment.apiUri}/resultitem/${resultItemId}`)
+  }
+
   saveResultItem(resultId: number, resultItem: ResultItem): Observable<ResultItem> {
     return this.http.post<ResultItem>(`${environment.apiUri}/result/${resultId}/resultitem`, resultItem)
   }

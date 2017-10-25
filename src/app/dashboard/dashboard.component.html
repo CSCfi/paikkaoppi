@@ -1,6 +1,7 @@
 <div class="view">
   <div class="view__header">
-    <h1 class="view__header-title">Omat tehtävät</h1><a routerLink="/library" class="view__add">Uusi tehtävä</a>
+    <h1 class="view__header-title">Omat tehtävät</h1>
+    <a routerLink="/library" class="view__add">Uusi tehtävä</a>
   </div>
   <div class="view__content">
     <div class="view__columns">
@@ -31,11 +32,15 @@
               <div class="list__item-title">{{t.name}}</div>
               <div class="list__item-detail">{{t.resultItemCount}} merkintää</div>
             </a>
-            <div class="list__item-code"><div class="code">{{t.code}}</div></div>
+            <div class="list__item-code" *ngIf="role === 'teacher'">
+              <div class="code">{{t.code}}</div>
+            </div>
           </div>
         </div>
         <div class="list type--tasks" style="display: block;" *ngIf="unusedCodes?.length > 0">
-          <div class="list__item-title" style="color: gray;">Käyttämättömät koodit <span style="color: gray; font-size: 0.8rem;">(näytetään vain protossa)</span></div>
+          <div class="list__item-title" style="color: gray;">Käyttämättömät koodit
+            <span style="color: gray; font-size: 0.8rem;">(näytetään vain protossa)</span>
+          </div>
           <code>
             <ng-container *ngFor="let code of unusedCodes">{{code}}<br/></ng-container>
           </code>
@@ -44,13 +49,17 @@
       <div class="view__column">
         <div class="profile">
           <div class="profile__item">
-            <div class="profile__image"><img src="assets/monster.svg"></div>
+            <div class="profile__image">
+              <img src="assets/monster.svg">
+            </div>
           </div>
           <div class="profile__item">
             <label>{{user.username}}</label>
           </div>
           <div class="profile__footer">
-            <div class="profile__footer-item"><a (click)="logout()">Kirjaudu ulos</a></div>
+            <div class="profile__footer-item">
+              <a (click)="logout()">Kirjaudu ulos</a>
+            </div>
           </div>
         </div>
       </div>
