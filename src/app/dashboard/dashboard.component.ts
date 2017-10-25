@@ -20,7 +20,8 @@ export class DashboardComponent implements OnInit {
   taskId?: number
   // For Proto
   unusedCodes: string[]
-  model: NewTaskModel = new NewTaskModel(null)
+  codeLength = 5
+  model: NewTaskModel = new NewTaskModel(new Array(this.codeLength))
   formError: string
 
   constructor(private authService: AuthService, private router: Router,
@@ -61,21 +62,27 @@ export class DashboardComponent implements OnInit {
   }
 
   codeChanged() {
+    console.log('codeChanged', this.model.getFullCode())
     this.formError = null
+    if (this.model.getFullCode().length === 5) {
+      this.addTask()
+    }
   }
 
   addTask() {
-    console.log('addTask():', this.model.code)
+    const code = this.model.getFullCode()
+    console.log('addTask():', code)
     this.formError = null
-    this.taskService.addTaskWithCode(this.model.code)
+    this.taskService.addTaskWithCode(code)
       .subscribe(
       (data) => {
-        this.model = new NewTaskModel(null)
+        this.model = new NewTaskModel(new Array(this.codeLength))
         this.router.navigate(['/dashboard', data.id])
       },
       (err) => {
         this.formError = 'not found'
-        console.info('Failed to add task with code:', this.model.code, '. Reason was:', err)
+        this.model = new NewTaskModel(new Array(this.codeLength))
+        console.info('Failed to add task with code:', code, '. Reason was:', err)
       })
   }
 
@@ -89,9 +96,13 @@ export class DashboardComponent implements OnInit {
   }
 }
 export class NewTaskModel {
-  code: string
+  code: string[]
 
-  constructor(code: string) {
+  constructor(code: string[]) {
     this.code = code
+  }
+
+  getFullCode(): string {
+    return this.code.join('').replace(/\s/g, '').toUpperCase()
   }
 }

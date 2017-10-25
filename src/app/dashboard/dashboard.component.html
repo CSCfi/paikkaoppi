@@ -5,20 +5,46 @@
   </div>
   <div class="view__content">
     <div class="view__columns">
-      <div class="view__column">
+      <div class="view__column">          
+<!--
+        <div class="view__filters">
+          <div class="view__filter">
+            <div class="view__filter-dropdown">
+              <div class="view__filter-dropdown-title">Tekijä</div>
+              <div class="view__filter-dropdown-handle"></div>
+              <div class="view__filter-dropdown-content">
+                <div class="view__filter-dropdown-row">Minä</div>
+                <div class="view__filter-dropdown-row">Opettaja</div>
+              </div>
+            </div>
+          </div>
+          <div class="view__filter">
+            <div class="view__filter-dropdown">
+              <div class="view__filter-dropdown-title">Tyyppi</div>
+              <div class="view__filter-dropdown-handle"></div>
+              <div class="view__filter-dropdown-content">
+                <div class="view__filter-dropdown-row">Toimi</div>
+                <div class="view__filter-dropdown-row">Tutki</div>
+                <div class="view__filter-dropdown-row">Tee</div>
+              </div>
+            </div>
+          </div>
+        </div>
+-->
         <div class="list type--tasks">
-          <div class="list__item">
+          <div class="list__item type--code">
             <form (ngSubmit)="addTask()" #newTaskForm="ngForm">
-              <div class="list__item-title">Lataa tehtävä</div>
-              <div class="list__item-description">Hae tehtävä koodilla.</div>
+              <div class="list__item-title">Lataa tehtävä koodilla.</div>
               <div class="list__item-error" *ngIf="formError == 'not found'">
                 <div class="text">Tehtävää ei löytynyt. Tarkista että koodi on oikein ja yritä uudestaan.</div>
               </div>
               <div class="list__item-footer">
                 <div class="list__item-input">
-                  <input type="text" class="input--code" required [(ngModel)]="model.code" name="code" #code="ngModel" placeholder="Kirjoita koodi tähän..."
-                    (change)="codeChanged()">
-                  <button type="submit" class="button--continue" [disabled]="!newTaskForm.form.valid"></button>
+                  <input type="text" class="input--code" maxlength="1" required [(ngModel)]="model.code[0]" id="code0" name="code" #code0="ngModel" pattern="[A-Za-z0-9]{1}" onkeydown="this.value=null" onkeyup="if(this.value.trim().length>0)document.getElementById('code1').focus()">
+                  <input type="text" class="input--code" maxlength="1" required [(ngModel)]="model.code[1]" id="code1" name="code" #code1="ngModel" pattern="[A-Za-z0-9]{1}" onkeydown="this.value=null" onkeyup="if(this.value.trim().length>0)document.getElementById('code2').focus()">
+                  <input type="text" class="input--code" maxlength="1" required [(ngModel)]="model.code[2]" id="code2" name="code" #code2="ngModel" pattern="[A-Za-z0-9]{1}" onkeydown="this.value=null" onkeyup="if(this.value.trim().length>0)document.getElementById('code3').focus()">
+                  <input type="text" class="input--code" maxlength="1" required [(ngModel)]="model.code[3]" id="code3" name="code" #code3="ngModel" pattern="[A-Za-z0-9]{1}" onkeydown="this.value=null" onkeyup="if(this.value.trim().length>0)document.getElementById('code4').focus()">
+                  <input type="text" class="input--code" maxlength="1" required [(ngModel)]="model.code[4]" id="code4" name="code" #code4="ngModel" pattern="[A-Za-z0-9]{1}" onkeydown="this.value=null" onkeyup="if(this.value.trim().length>0)document.getElementById('code0').focus()" (change)="codeChanged()">
                 </div>
               </div>
             </form>
@@ -28,9 +54,16 @@
               <div class="list__item-status" *ngIf="t.id == taskId">
                 <div class="status">Uusi</div>
               </div>
-              <div class="list__item-image"></div>
+              <div class="list__item-image type--2"></div>
               <div class="list__item-title">{{t.name}}</div>
               <div class="list__item-detail">{{t.resultItemCount}} merkintää</div>
+              <!--
+              <div class="list__item-marks"> 
+                <div class="list__item-mark"></div>
+                <div class="list__item-mark"></div>
+                <div class="list__item-mark"></div>
+              </div>
+              -->
             </a>
             <div class="list__item-code" *ngIf="role === 'teacher'">
               <div class="code">{{t.code}}</div>
@@ -47,18 +80,34 @@
         </div>
       </div>
       <div class="view__column">
-        <div class="profile">
-          <div class="profile__item">
-            <div class="profile__image">
-              <img src="assets/monster.svg">
+        <div class="view__column">
+          <div class="profile">
+            <div class="profile__item">
+              <div class="profile__image">
+                <div class="image variant--1"></div>
+              </div>
             </div>
-          </div>
-          <div class="profile__item">
-            <label>{{user.username}}</label>
-          </div>
-          <div class="profile__footer">
-            <div class="profile__footer-item">
-              <a (click)="logout()">Kirjaudu ulos</a>
+            <div class="profile__item">
+              <label>{{user.username}}</label>
+            </div>
+            <div class="profile__item">
+              <div class="rank">Tason 5 tutkija</div>
+            </div>
+            <div class="profile__medals">
+              <div class="profile__medal type--1">5</div>
+              <div class="profile__medal type--2">5</div>
+              <div class="profile__medal type--3">10</div>
+              <div class="profile__medal type--4">15</div>
+              <div class="profile__medal type--5">25</div>
+              <div class="profile__medal type--6 is-empty"></div>
+              <div class="profile__medals-footer">
+                <div class="link">Näytä kaikki saavutukset</div>
+              </div>
+            </div>
+            <div class="profile__footer">
+              <div class="profile__footer-item">
+                <a (click)="logout()">Kirjaudu ulos</a>
+              </div>
             </div>
           </div>
         </div>
