@@ -338,14 +338,18 @@ ul
 //- POPUP
 
 .popup
-  position fixed
+  position absolute
   top 0
   left 50%
   width 400px
-  transform translateX(-50%)
+  max-width 90%
+  transform translate3d(-50%,-50vh,0)
   padding 0 40px
   z-index 1000
   background #282828
+  transition transform 300ms ease-in-out
+  &.is-open
+    transform translate3d(-50%,-0,0)
   &:before
     content ''
     display block
@@ -378,6 +382,7 @@ ul
   left 0
   right 0
   background #282828
+  border-radius 0 0 4px 4px
   color #fff
   z-index 1001
   // @media (min-width: media_small)
@@ -1191,8 +1196,6 @@ ul
 .accordion__footer
   margin 25px 0 0 0
   text-align center
-  -webkit-position sticky
-  position sticky
   bottom 0
   .link
     color #f8f7cc
