@@ -28,8 +28,8 @@
       .list.type--tasks
         .list__item.type--code
           form
-            .list__item-title Lataa tehtävä
-            .list__item-description Hae tehtävä koodilla.
+            .list__item-title Lataa tehtävä koodilla.
+            //- .list__item-description Hae tehtävä koodilla.
             //- .list__item-error
             //-   .text Tehtävää ei löytynyt. Tarkista että koodi on oikein ja yritä uudestaan.
             .list__item-footer
@@ -53,39 +53,45 @@
 
         a.list__item(href='#task-lempipaikkani')
           .list__item-image.type--1
-          .list__item-title Lempipaikkani
-          .list__item-marks
-            .list__item-mark.is-done
-            .list__item-mark.is-done
-            .list__item-mark.is-done
-            .list__item-mark.is-done
+          .list__item-content
+            .list__item-title Lempipaikkani
+            .list__item-marks
+              .list__item-mark.is-done
+              .list__item-mark.is-done
+              .list__item-mark.is-done
+              .list__item-mark.is-done
         a.list__item(href='#task-suomivisa')
           .list__item-image.type--2
-          .list__item-title Suomi-visa
-          .list__item-marks
-            .list__item-mark.is-done
-            .list__item-mark
+          .list__item-content
+            .list__item-title Suomi-visa
+            .list__item-marks
+              .list__item-mark.is-done
+              .list__item-mark
         a.list__item(href='#task-lempipaikkani')
           .list__item-image.type--1
-          .list__item-title Oma kartta
-          .list__item-marks
-            .list__item-mark.is-done
-            .list__item-mark
+          .list__item-content
+            .list__item-title Oma kartta
+            .list__item-marks
+              .list__item-mark.is-done
+              .list__item-mark
         a.list__item(href='#task-suomivisa')
           .list__item-image.type--2
-          .list__item-title Talventörröttäjät
-          .list__item-marks
+          .list__item-content 
+            .list__item-title Talventörröttäjät
+            .list__item-marks
         a.list__item(href='#task-lempipaikkani')
           .list__item-image.type--1
-          .list__item-title Lempipaikkani 3C
-          .list__item-marks
-            .list__item-mark.is-done
-            .list__item-mark.is-done
+          .list__item-content  
+            .list__item-title Lempipaikkani 3C
+            .list__item-marks
+              .list__item-mark.is-done
+              .list__item-mark.is-done
         a.list__item(href='#task-suomivisa')
           .list__item-image.type--2
-          .list__item-title Maantiedon tehtävä 4B
-          .list__item-marks
-            .list__item-mark
+          .list__item-content  
+            .list__item-title Maantiedon tehtävä 4B
+            .list__item-marks
+              .list__item-mark
 
         .list__footer
           .link Näytä valmiit tehtävät (12)
