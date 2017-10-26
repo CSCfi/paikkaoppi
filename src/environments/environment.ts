@@ -15,6 +15,6 @@ export const environment = {
     markerTool: true, areaTool: true, trackLocation: true,
     measureLineTool: true, measureAreaTool: true,
     centerToLocation: true, changeLayer: true},
-  mapHelpVisibleInitially: false,
+  mapHelpVisibleInitially: true,
   apiUri: 'http://localhost:8000/api/v1',
 }
