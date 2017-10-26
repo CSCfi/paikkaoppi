@@ -1,36 +1,63 @@
-<app-task-template *ngIf="showTaskTemplateComponent" (close)="closeTaskTemplateDialog()" (save)="saveTaskTemplate()" [model]="selectedTemplate"></app-task-template>
 <app-delete-task-template *ngIf="showDeleteTaskTemplateComponent" (close)="closeTaskTemplateDialog()" (delete)="deleteTaskTemplate()" [model]="selectedTemplate"></app-delete-task-template>
 <div id="library" class="view">
   <div class="view__header"><a routerLink="/dashboard" class="view__header-link type--back"></a>
     <h1 class="view__header-title">Tehtäväkirjasto</h1>
   </div>
   <div class="view__content">
-    <h1 class="title__list">Valitse tehtäväpohja</h1>
-    <div class="list type--tasks">
-      <div class="list__item type--special" *ngIf="role === 'teacher'">
-        <div class="list__item-title">Uusi tehtäväpohja</div>
-        <div class="list__item-description">Rakenna oma tehtäväpohja.</div>
-        <div class="list__item-footer">
-          <a class="list__item-link type--add" (click)="showTaskTemplateDialog()">Uusi tehtäväpohja</a>
+    <div class="view__columns">
+      <div class="view__column type--one">
+        <!--
+        <div class="view__filters">
+          <div class="view__filter">
+            <div class="view__filter-dropdown">
+              <div class="view__filter-dropdown-title">Tekijä</div>
+              <div class="view__filter-dropdown-handle"></div>
+              <div class="view__filter-dropdown-content">
+                <div class="view__filter-dropdown-row">Minä</div>
+                <div class="view__filter-dropdown-row">Opettaja</div>
+              </div>
+            </div>
+          </div>
+          <div class="view__filter">
+            <div class="view__filter-dropdown">
+              <div class="view__filter-dropdown-title">Tyyppi</div>
+              <div class="view__filter-dropdown-handle"></div>
+              <div class="view__filter-dropdown-content">
+                <div class="view__filter-dropdown-row">Toimi</div>
+                <div class="view__filter-dropdown-row">Tutki</div>
+                <div class="view__filter-dropdown-row">Tee</div>
+              </div>
+            </div>
+          </div>
         </div>
-      </div>
-      <div class="list__item" *ngFor="let t of taskTemplates">
-        <div class="list__item-tag" *ngIf="role === 'teacher'">
-          <div class="tag" *ngFor="let tag of t.tags">{{tag}}</div>
+      -->
+      <div class="list type--tasks">
+        <div class="list__item type--special" *ngIf="role === 'teacher'">
+          <div class="list__item-title">Uusi tehtäväpohja</div>
+          <div class="list__item-description">Rakenna oma tehtäväpohja.</div>
+          <div class="list__item-footer">
+            <a routerLink="/task-template" class="list__item-link type--add">Uusi tehtäväpohja</a>
+          </div>
         </div>
-        <div class="list__item-title">{{t.name}}</div>
-        <div class="list__item-detail" *ngIf="role === 'teacher'">{{t.title}}</div>
-        <div class="list__item-description">{{t.description}}</div>
-        <div class="list__item-info" *ngIf="role === 'teacher'">{{t.info}}</div>
-        <div class="list__item-footer">
-          <a *ngIf="isCreator(t)" (click)="showDeleteTaskTemplateDialog(t.id)" class="list__item-link">Poista tehtäväpohja</a>
-          <a *ngIf="isCreator(t)" (click)="showTaskTemplateDialog(t.id)" class="list__item-link">Muokkaa tehtäväpohjaa</a>
-          <a (click)="createTask(t.id)" class="list__item-link">Aloita tehtävä</a>
+        <div class="list__item" *ngFor="let t of taskTemplates">
+          <div class="list__item-tag" *ngIf="role === 'teacher'">
+            <div class="tag" *ngFor="let tag of t.tags">{{tag}}</div>
+          </div>
+          <div class="list__item-title">{{t.name}}</div>
+          <div class="list__item-detail" *ngIf="role === 'teacher'">{{t.title}}</div>
+          <div class="list__item-description">{{t.description}}</div>
+          <div class="list__item-info" *ngIf="role === 'teacher'">{{t.info}}</div>
+          <div class="list__item-footer">
+            <a *ngIf="isCreator(t)" (click)="showDeleteTaskTemplateDialog(t.id)" class="list__item-link">Poista tehtäväpohja</a>
+            <a *ngIf="isCreator(t)" [routerLink]="['/task-template', t.id]" class="list__item-link">Muokkaa tehtäväpohjaa</a>
+            <a (click)="createTask(t.id)" class="list__item-link">Aloita tehtävä</a>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </div>
+
 <div class="popup" *ngIf="selectedTemplateForTask">
   <div class="popup__content">
     <form (ngSubmit)="onSubmit()" #taskForm="ngForm">

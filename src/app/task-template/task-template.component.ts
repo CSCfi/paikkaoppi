@@ -1,5 +1,7 @@
+import { Observable } from 'rxjs/Rx';
+import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { TaskTemplateService } from '../service/task-template.service';
-import { Component, EventEmitter, OnInit, Input, Output } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Instruction, TaskTemplate } from '../service/model';
 
 @Component({
@@ -8,37 +10,48 @@ import { Instruction, TaskTemplate } from '../service/model';
   styleUrls: ['./task-template.component.css']
 })
 export class TaskTemplateComponent implements OnInit {
-  @Input() model: any
-  @Output() close = new EventEmitter<void>()
-  @Output() save = new EventEmitter<TaskTemplate>()
+  model: any
   phase = 1
   firstPhase = 1
   lastPhase = 3
 
-  constructor(private taskTemplateService: TaskTemplateService) { }
+  constructor(private taskTemplateService: TaskTemplateService,
+    private route: ActivatedRoute, private router: Router) { }
 
   ngOnInit() {
     console.log('ngOnInit')
     this.phase = 1
-    if (this.model === null) {
-      this.model = this.createNewModel()
-    }
+
+    this.route.paramMap.switchMap((params: ParamMap) => {
+      if (params.has('id')) {
+        return this.taskTemplateService.getTaskTemplate(+params.get('id'))
+      } else {
+        return Observable.of(this.createNewModel())
+      }
+    }).subscribe(taskTemplate => {
+        this.model = taskTemplate
+      },
+      err => {
+        console.error('Failed get taskTemplate')
+        console.error(err)
+        this.router.navigate(['/library'])
+      })
   }
 
   closeDialog() {
     console.log('closeDialog', this.model)
-    this.close.next()
+    this.router.navigate(['/library'])
   }
 
   submit() {
     console.log('submit', this.model)
     if (this.model.id !== undefined) {
       this.taskTemplateService.updateTaskTemplate(this.model).subscribe(
-        value => this.save.next(value)
+        value => this.router.navigate(['/library'])
       )
     } else {
       this.taskTemplateService.createTaskTemplate(this.model).subscribe(
-        value => this.save.next(value)
+        value => this.router.navigate(['/library'])
       )
     }
   }

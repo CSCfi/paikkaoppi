@@ -1,14 +1,15 @@
-<div class="view">
-  <div class="view__header">
-    <a class="view__header-link type--back" (click)="closeDialog()"></a>
-    <h1 class="view__header-title">Tehtäväpohjan poisto</h1>
-  </div>
-  <div class="view__content">
-    <form (ngSubmit)="submit()" #form="ngForm">
-      <h2>Haluatko varmasti poistaa valitun tehtäväpohjan?</h2>
-      <div class="form__footer">
-        <button type="submit" class="button">Poista</button>
-        <a class="button type--secondary" (click)="closeDialog()">Peruuta</a>
+<div class="popup">
+  <div class="popup__content">
+    <form (ngSubmit)="submit()">
+      <div class="form type--basic">
+        <div class="popup__header"><a (click)="closeDialog()" class="popup__header-link type--back"></a>
+          <h1 class="popup__header-title">Tehtäväpohjan poisto</h1>
+        </div>
+        <h1 class="accordion__header">{{model.name}}</h1>
+        <div class="form__footer">
+          <button type="submit" class="button">Poista</button>
+          <a class="button type--secondary" (click)="closeDialog()">Peruuta</a>
+        </div>
       </div>
     </form>
   </div>

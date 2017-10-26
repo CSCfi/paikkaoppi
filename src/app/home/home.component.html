@@ -1,16 +1,22 @@
 <div id="login" class="view">
-  <div class="proto__documentation">
-    <p>Kirjautumisnäkymä. Näytetään staattisena.</p>
-  </div>
-  <div class="view__content">
-    <div class="form type--login">
-      <div class="app__logo"></div>
-      <div class="form__ingress">
-        <p>PaikkaOppi on kouluille maksuton verkkopohjainen oppimisympäristö.</p>
+  <div class="view__index">
+    <div class="view__index-columns">
+      <div class="view__index-column">
+        <div class="form type--login">
+          <div class="app__logo"></div>
+          <div class="form__ingress">
+            <p> <strong>PaikkaOppi.fi on kouluille maksuton verkkopohjainen oppimisympäristö. </strong></p>
+            <p>PaikkaOppi sisältää työkaluja paikkatietotaitojen perusteiden hallintaan sekä ohjeita paikkatiedon soveltavaan käyttöön eri oppiaineissa ja monialaisissa oppimiskokonaisuuksissa. </p>
+            <p>Oppimisympäristön interaktiivinen kartta toimii projektialustana oppilaiden omille ympäristöhavainnoille ja kokemuksille. </p>
+          </div>
+          <ng-container *ngFor="let u of users">
+              <div><a (click)='loginUser(u)' class="button">Kirjaudu sisään: {{u}}</a></div>
+            </ng-container>
+        </div>
       </div>
-      <ng-container *ngFor="let u of users">
-        <div><a (click)='loginUser(u)' class="button">Kirjaudu sisään: {{u}}</a></div>
-      </ng-container>
+      <div class="view__index-column">
+        <div class="image__index"><img src="assets/pirate_scene.png" width="600px"></div>
+      </div>
     </div>
   </div>
 </div>

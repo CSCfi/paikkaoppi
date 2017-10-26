@@ -16,7 +16,6 @@ export class LibraryComponent implements OnInit {
   selectedTemplateForTask?: TaskTemplate
   selectedTemplate?: TaskTemplate
   model: NewTaskModel = new NewTaskModel(null)
-  showTaskTemplateComponent = false
   showDeleteTaskTemplateComponent = false
   role: Role
 
@@ -51,23 +50,6 @@ export class LibraryComponent implements OnInit {
       })
   }
 
-  showTaskTemplateDialog(id: number | undefined) {
-    if (id !== undefined) {
-      console.log('showTaskTemplateDialog for template id: ' + id)
-      this.taskTemplateService.getTaskTemplate(id)
-        .subscribe(
-        (data) => {
-          this.selectedTemplate = data
-          this.showTaskTemplateComponent = true
-        })
-
-    } else {
-      console.log('showTaskTemplateDialog for new template') 
-      this.selectedTemplate = null
-      this.showTaskTemplateComponent = true
-    }
-  }
-
   showDeleteTaskTemplateDialog(id: number) {
     console.log('showDeleteTaskTemplateDialog for template id: ' + id)
     this.taskTemplateService.getTaskTemplate(id)
@@ -78,23 +60,10 @@ export class LibraryComponent implements OnInit {
       })
   }
 
-  saveTaskTemplate() {
-    console.log('saveTaskTemplate') 
-    this.showTaskTemplateComponent = false
-    this.loadTaskTemplates()
-  }
-
   deleteTaskTemplate() {
     console.log('deleteTaskTemplate') 
     this.showDeleteTaskTemplateComponent = false
     this.loadTaskTemplates()
-  }
-
-  closeTaskTemplateDialog() {
-    console.log('closeTaskTemplateDialog') 
-    this.showTaskTemplateComponent = false
-    this.showDeleteTaskTemplateComponent = false
-    this.selectedTemplate = null
   }
 
   closePopup() {

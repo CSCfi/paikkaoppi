@@ -19,7 +19,7 @@
       </div>
       <div class="view__wizard-forward" [ngClass]="{'is-disabled': phase === lastPhase}"></div>
     </div>
-    <form (ngSubmit)="submit()" #form="ngForm">
+    <form (ngSubmit)="submit()" #form="ngForm" *ngIf="model != null">
       <div class="form type--basic">
         <div class="view__grid" *ngIf="phase === 1">
           <div class="view__grid-item">
