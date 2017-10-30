@@ -15,7 +15,10 @@ export class HomeComponent implements OnInit {
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
-    this.users = this.authService.backendUsers()
+    if (environment.production === false) {
+      this.users = this.authService.backendUsers()
+    }
+    
     this.authService.isLoggedIn().subscribe(value => {
       this.router.navigateByUrl("/dashboard")
     })
