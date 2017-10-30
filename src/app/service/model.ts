@@ -11,7 +11,6 @@ export class Roles {
 
 export interface User {
   username: string,
-  email: string,
   firstName: string,
   lastName: string,
   role: Role,
