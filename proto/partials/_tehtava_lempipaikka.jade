@@ -5,7 +5,6 @@
 
   .popup__content
     .accordion
-      h1.accordion__header Lempipaikkani
       .accordion__item
         h2.accordion__title Merkitse kartalle oma lempipaikkasi
         .accordion__text
@@ -15,7 +14,7 @@
             li.list__item Merkitse kartalle valitsemasi paikka ja kerro miksi se on sinulle tärkeä.
       
       .accordion__footer
-        a.button(href='#map-lempipaikkani', onclick='$(".view__container").addClass("is-loaded")') Aloita tehtävä
+        a.link(href='#map-lempipaikkani', onclick='$(".view__container").addClass("is-loaded")') Aloita tehtävä
 
 .popup#task-lempipaikkani
   if compileWithDocumentation
@@ -24,7 +23,6 @@
 
   .popup__content
     .accordion
-      h1.accordion__header Lempipaikkani
       .accordion__item
         h2.accordion__title Merkitse kartalle oma lempipaikkasi
         .accordion__text
@@ -34,7 +32,7 @@
             li.list__item Merkitse kartalle valitsemasi paikka ja kerro miksi se on sinulle tärkeä.
       
       .accordion__footer
-        a.button(href='#map-lempipaikkani', onclick='$(".view__container").addClass("is-loaded")') Jatka tehtävää
+        a.link(href='#map-lempipaikkani', onclick='$(".view__container").addClass("is-loaded")') Jatka tehtävää
 
 .popup#mark
   .popup__content
