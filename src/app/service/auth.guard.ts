@@ -17,12 +17,8 @@ export class AuthGuard implements CanActivate {
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
     return this.authService.isLoggedIn().mergeMap(value => {
       if (value === false) {
-        console.info(`Not logged in. 'Trying to get to '${next.url}', but routing back to '${this.loginPageUri}'`)
-        if (environment.production === false) {
-          this.router.navigate(['/'])
-        } else {
-          window.location.href = this.loginPageUri;
-        }
+        console.info(`Not logged in. 'Trying to get to '${next.url}', but redirecting to '${this.loginPageUri}'`)
+        window.location.href = this.loginPageUri;
       }
       return Observable.of(value)
     })
