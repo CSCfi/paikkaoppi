@@ -14,4 +14,5 @@ export const environment = {
   mapTools: {markerTool: true, areaTool: true, trackLocation: true},
   mapHelpVisibleInitially: false,
   apiUri: 'http://localhost:8000/api/v1',
+  logoutUri: '/Shibboleth.sso/Logout?return=https://mpass-proxy-test.csc.fi/idp/profile/Logout',
 }
