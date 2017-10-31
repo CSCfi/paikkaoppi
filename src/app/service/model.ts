@@ -11,10 +11,12 @@ export class Roles {
 
 export interface User {
   username: string,
-  email: string,
   firstName: string,
   lastName: string,
-  role: Role
+  role: Role,
+  municipality: string,
+  school: string,
+  schoolClass: string
 }
 
 /**
@@ -32,6 +34,7 @@ export interface TaskTemplate {
     instructions: Instruction[]
     info: string
     tags: string[]
+    user: User
 }
 
 export interface Instruction {

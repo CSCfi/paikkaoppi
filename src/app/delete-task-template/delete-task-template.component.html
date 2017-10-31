@@ -1,0 +1,15 @@
+<div class="view">
+  <div class="view__header">
+    <a class="view__header-link type--back" (click)="closeDialog()"></a>
+    <h1 class="view__header-title">Tehtäväpohjan poisto</h1>
+  </div>
+  <div class="view__content">
+    <form (ngSubmit)="submit()" #form="ngForm">
+      <h2>Haluatko varmasti poistaa valitun tehtäväpohjan?</h2>
+      <div class="form__footer">
+        <button type="submit" class="button">Poista</button>
+        <a class="button type--secondary" (click)="closeDialog()">Peruuta</a>
+      </div>
+    </form>
+  </div>
+</div>

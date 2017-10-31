@@ -15,4 +15,5 @@ export const environment = {
   mapHelpVisibleInitially: false,
   apiUri: 'http://localhost:8000/api/v1',
   loginPageUri: 'http://www.google.fi',
+  logoutUri: '/Shibboleth.sso/Logout?return=https://mpass-proxy-test.csc.fi/idp/profile/Logout',
 }

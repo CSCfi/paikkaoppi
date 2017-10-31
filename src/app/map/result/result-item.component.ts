@@ -27,6 +27,7 @@ export class ResultItemComponent implements OnChanges {
   polygonWGS84Coordinates: Coordinates[]
   isEditMode = false
   isResized = false
+  isUploading = false
   showUser = false
 
   uploader: FileUploader
@@ -118,6 +119,7 @@ export class ResultItemComponent implements OnChanges {
 
     this.uploader.onAfterAddingFile = (item: FileItem) => {
       if (!this.isResized) {
+        this.isUploading = true
         this.uploader.removeFromQueue(item)
 
         this.resizeService.resizeImage(item._file, function(result) {
@@ -126,6 +128,7 @@ export class ResultItemComponent implements OnChanges {
           this.uploader.uploadAll()
         }.bind(this), function() {
           this.isResized = false
+          this.isUploading = false
           this.errorMessage = 'Kuvan pienennys ennen lähetystä ei onnistunut'
         }.bind(this))
       }
@@ -137,6 +140,7 @@ export class ResultItemComponent implements OnChanges {
 
     this.uploader.onCompleteItem = (item: any, response: any, status: any, headers: any) => {
       this.isResized = false
+      this.isUploading = false
       
       if (status === 200) {
         this.removeImage()

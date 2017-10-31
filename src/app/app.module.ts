@@ -19,6 +19,7 @@ import { TaskService } from './service/task.service'
 import { TaskTemplateService } from './service/task-template.service'
 import { MessageModule } from './message/message.module'
 import { TaskTemplateComponent } from './task-template/task-template.component'
+import { DeleteTaskTemplateComponent } from './delete-task-template/delete-task-template.component'
 
 @NgModule({
   declarations: [
@@ -27,6 +28,7 @@ import { TaskTemplateComponent } from './task-template/task-template.component'
     DashboardComponent,
     LibraryComponent,
     TaskTemplateComponent,
+    DeleteTaskTemplateComponent,
   ],
   imports: [
     AppRoutingModule, BrowserModule, FormsModule, HttpClientModule, MapModule, MessageModule

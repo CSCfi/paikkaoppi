@@ -1,14 +1,15 @@
-import { HttpClientModule } from '@angular/common/http';
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
-import { RouterTestingModule } from '@angular/router/testing';
+import { HttpClientModule } from '@angular/common/http'
+import { async, ComponentFixture, TestBed } from '@angular/core/testing'
+import { FormsModule } from '@angular/forms'
+import { RouterTestingModule } from '@angular/router/testing'
 
-import { AuthServiceMock, MockComponent, TaskServiceMock, TaskTemplateServiceMock } from '../../tests/mocks.spec';
-import { AuthService } from '../service/auth.service';
-import { TaskTemplateService } from '../service/task-template.service';
-import { TaskService } from '../service/task.service';
-import { TaskTemplateComponent } from '../task-template/task-template.component';
-import { LibraryComponent } from './library.component';
+import { AuthServiceMock, MockComponent, TaskServiceMock, TaskTemplateServiceMock } from '../../tests/mocks.spec'
+import { AuthService } from '../service/auth.service'
+import { TaskTemplateService } from '../service/task-template.service'
+import { TaskService } from '../service/task.service'
+import { TaskTemplateComponent } from '../task-template/task-template.component'
+import { DeleteTaskTemplateComponent } from '../delete-task-template/delete-task-template.component'
+import { LibraryComponent } from './library.component'
 
 describe('LibraryComponent', () => {
   let component: LibraryComponent
@@ -16,7 +17,7 @@ describe('LibraryComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LibraryComponent, MockComponent, TaskTemplateComponent ],
+      declarations: [ LibraryComponent, MockComponent, TaskTemplateComponent, DeleteTaskTemplateComponent ],
       imports: [
         FormsModule,
         HttpClientModule,

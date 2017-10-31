@@ -19,4 +19,5 @@ export const environment = {
   mapHelpVisibleInitially: true,
   apiUri: 'https://d2esrtjkfszxd1.cloudfront.net/api/v1',
   loginPageUri: '/assets/login.html',
+  logoutUri: 'http://d2esrtjkfszxd1.cloudfront.net/api/v1/auth/logout',
 }

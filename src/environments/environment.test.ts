@@ -10,12 +10,13 @@ export const environment = {
   production: true,
   mapEnv : 'test',
   mapDomain : 'https://kartta.paikkatietoikkuna.fi',
-  mapId : 'd6524c8e-9e75-45e9-a82c-b9a181bc0206',
+  mapId : '3756c8ff-3145-455d-a19d-5004ce0e9f90',
   mapTools: {
     markerTool: true, areaTool: true, trackLocation: false,
     measureLineTool: false, measureAreaTool: false,
     centerToLocation: false, changeLayer: false},
   mapHelpVisibleInitially: false,
-  apiUri: 'https://ec2-52-48-217-144.eu-west-1.compute.amazonaws.com/api/v1',
+  apiUri: '/api/v1',
   loginPageUri: 'http://www.google.fi',
+  logoutUri: '/Shibboleth.sso/Logout?return=https://mpass-proxy-test.csc.fi/idp/profile/Logout',
 }
