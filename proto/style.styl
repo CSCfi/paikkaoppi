@@ -351,14 +351,15 @@ ul
 
 .popup
   position absolute
-  top 0
+  top -100px
   left 50%
   width 400px
   max-width 90%
   transform translate3d(-50%,-300%,0)
+  backgroud-visibility hidden
   padding 0
   z-index 1000
-  animation slide 700ms ease-in-out 400ms
+  animation slide 500ms ease-out
   animation-fill-mode forwards
   transition top 200ms linear
   @media (max-width: media_medium)
@@ -367,10 +368,10 @@ ul
     width 60vw
     transform translate3d(0,-300%,0)
   @media (max-height: 739px)
-    top -100px
+    top -200px
   &.is-closed
     transform translate3d(-50%,0,0)
-    animation slide-out 700ms ease-in-out
+    animation slide-out 500ms ease-in
     animation-fill-mode forwards
   &:before
     content ''
@@ -1207,6 +1208,10 @@ ul
   bottom 0
   display flex
   flex-direction column
+  .link
+    color #f8f7cc
+    cursor pointer
+    font-weight 700
 
 
 //- ACCORDION

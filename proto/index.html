@@ -351,10 +351,10 @@
                 </div>
               </div>
             </div>
-            <div id="mark-view" class="popup">
+            <div id="mark-view" class="popup is-closed">
               <div class="popup__content">
                 <div class="form type--basic">
-                  <div class="popup__header"><a href="#map-lempipaikkani" class="popup__header-link type--back"></a>
+                  <div class="popup__header">
                     <h1 class="popup__header-title">Kallen lempipaikka</h1>
                   </div>
                   <div class="form__image">
@@ -374,7 +374,9 @@
                     <label>Kuvaus</label>
                     <div class="form__value">Pieni kivi puron vieressä.</div>
                   </div>
-                  <div class="form__footer"><a href="#map-lempipaikkani" class="button">Muokkaa merkintää</a><a href="#map-lempipaikkani" class="button type--secondary">Poista merkintä</a></div>
+                  <div class="form__footer"><a onclick="$(&quot;#mark-view&quot;).addClass(&quot;is-closed&quot;)" class="link">Sulje</a>
+                    
+                  </div>
                 </div>
               </div>
             </div>
@@ -412,7 +414,7 @@
                 <div class="map__tools"><a href="#mark" class="map__tools-dot"></a><a href="#mark" class="map__tools-area"> </a>
                   <div class="map__tools-coords">60°10′15″N, 024°56′15″E</div>
                 </div>
-                <div class="map__pointers"><a style="top:300px;left:190px;" href="#mark-view" class="map__pointer"></a></div>
+                <div class="map__pointers"><a style="top:300px;left:190px;" onclick="$(&quot;#mark-view&quot;).removeClass(&quot;is-closed&quot;)" class="map__pointer"></a></div>
                 <div class="placeholder__map"></div>
               </div>
             </div>

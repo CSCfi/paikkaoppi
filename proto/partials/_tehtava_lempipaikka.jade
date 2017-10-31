@@ -68,12 +68,12 @@
         a.button(href='#map-lempipaikkani') Tallenna merkintä
 
 
-.popup#mark-view
+.popup#mark-view.is-closed
   .popup__content
     .form.type--basic
 
       .popup__header
-        a.popup__header-link.type--back(href='#map-lempipaikkani')
+        //- a.popup__header-link.type--back(href='#map-lempipaikkani')
         h1.popup__header-title Kallen lempipaikka
 
       .form__image
@@ -92,8 +92,10 @@
         .form__value Pieni kivi puron vieressä.
       .form__footer
         
-        a.button(href='#map-lempipaikkani') Muokkaa merkintää
-        a.button.type--secondary(href='#map-lempipaikkani') Poista merkintä
+        a.link(onclick='$("#mark-view").addClass("is-closed")') Sulje
+
+        //- a.button(href='#map-lempipaikkani') Muokkaa merkintää
+        //- a.button.type--secondary(href='#map-lempipaikkani') Poista merkintä
 
 
 .view__container
@@ -134,7 +136,7 @@
       .map__tools-coords 60°10′15″N, 024°56′15″E
 
     .map__pointers
-      a.map__pointer(style='top:300px;left:190px;', href='#mark-view')
+      a.map__pointer(style='top:300px;left:190px;', onclick='$("#mark-view").removeClass("is-closed")')
 
 
     .placeholder__map
