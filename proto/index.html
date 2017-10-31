@@ -5,9 +5,10 @@
     <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <link rel="apple-touch-icon" sizes="152x152" href="assets/apple_icon-152.png">
-    <link rel="shortcut icon" href="assets/apple_icon-152.png?v=1">
+    <link rel="shortcut icon" href="assets/apple_icon-152.png">
     <title>Paikkaoppi-proto</title>
     <link rel="stylesheet" type="text/css" href="style.css">
+    <link rel="stylesheet" type="text/css" href="proto.css">
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.0.0-rc1/jquery.slim.min.js"></script>
     <script type="text/javascript" src="script.js"></script>
   </head>
@@ -293,7 +294,7 @@
                       </ul>
                     </div>
                   </div>
-                  <div class="accordion__footer"><a href="#map-lempipaikkani" onclick="$(&quot;.view__container&quot;).addClass(&quot;is-loaded&quot;)" class="link">Aloita tehtävä</a></div>
+                  <div class="accordion__footer"><a onclick="$(&quot;.view__container&quot;).addClass(&quot;is-loaded&quot;);$(&quot;#task-lempipaikkani-aloita&quot;).addClass(&quot;is-closed&quot;)" class="link">Aloita tehtävä</a></div>
                 </div>
               </div>
             </div>
@@ -310,7 +311,7 @@
                       </ul>
                     </div>
                   </div>
-                  <div class="accordion__footer"><a href="#map-lempipaikkani" onclick="$(&quot;.view__container&quot;).addClass(&quot;is-loaded&quot;)" class="link">Jatka tehtävää</a></div>
+                  <div class="accordion__footer"><a onclick="$(&quot;.view__container&quot;).addClass(&quot;is-loaded&quot;);$(&quot;#task-lempipaikkani&quot;).addClass(&quot;is-closed&quot;)" class="link">Jatka tehtävää</a></div>
                 </div>
               </div>
             </div>
@@ -384,12 +385,6 @@
                 </div>
               </div>
               <div class="map__wrapper">
-                <div class="map__info type--error">
-                  <div class="map__info-text"> 
-                    <div class="text">Jokin meni vikaan, yritä uudestaan</div>
-                    <div class="map__info-close"></div>
-                  </div>
-                </div>
                 <div class="map__zoom">
                   <div class="map__zoom-in"></div>
                   <div class="map__zoom-out"></div>

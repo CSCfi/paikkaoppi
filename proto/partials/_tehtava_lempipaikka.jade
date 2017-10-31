@@ -14,7 +14,7 @@
             li.list__item Merkitse kartalle valitsemasi paikka ja kerro miksi se on sinulle tärkeä.
       
       .accordion__footer
-        a.link(href='#map-lempipaikkani', onclick='$(".view__container").addClass("is-loaded")') Aloita tehtävä
+        a.link(onclick='$(".view__container").addClass("is-loaded");$("#task-lempipaikkani-aloita").addClass("is-closed")') Aloita tehtävä
 
 .popup#task-lempipaikkani
   if compileWithDocumentation
@@ -32,7 +32,7 @@
             li.list__item Merkitse kartalle valitsemasi paikka ja kerro miksi se on sinulle tärkeä.
       
       .accordion__footer
-        a.link(href='#map-lempipaikkani', onclick='$(".view__container").addClass("is-loaded")') Jatka tehtävää
+        a.link(onclick='$(".view__container").addClass("is-loaded");$("#task-lempipaikkani").addClass("is-closed")') Jatka tehtävää
 
 .popup#mark
   .popup__content
@@ -105,10 +105,10 @@
 
   .map__wrapper
 
-    .map__info.type--error
-      .map__info-text 
-        .text Jokin meni vikaan, yritä uudestaan
-        .map__info-close
+    //- .map__info.type--error
+    //-   .map__info-text 
+    //-     .text Jokin meni vikaan, yritä uudestaan
+    //-     .map__info-close
           
     .map__zoom
       .map__zoom-in

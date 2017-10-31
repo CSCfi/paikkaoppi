@@ -268,6 +268,7 @@ ul {
   z-index: 1000;
   animation: slide 700ms ease-in-out 400ms;
   animation-fill-mode: forwards;
+  transition: top 200ms linear;
 }
 @media (max-width: media_medium) {
   .popup {
