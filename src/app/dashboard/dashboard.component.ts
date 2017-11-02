@@ -81,11 +81,7 @@ export class DashboardComponent implements OnInit {
 
   logout() {
     console.log('dashboard.logout()')
-    this.authService.logout().subscribe(
-      (_) => { },
-      (err) => console.error('Dashboard.logout error', err),
-      () => this.router.navigateByUrl('/home')
-    )
+    this.authService.logout()
   }
 }
 export class NewTaskModel {

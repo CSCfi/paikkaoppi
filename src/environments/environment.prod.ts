@@ -15,5 +15,5 @@ export const environment = {
   mapHelpVisibleInitially: false,
   apiUri: 'http://localhost:8000/api/v1',
   loginPageUri: 'https://paikkaoppi.csc.fi',
-  logoutUri: '/Shibboleth.sso/Logout?return=https://mpass-proxy-test.csc.fi/idp/profile/Logout',
+  logoutUri: '/Shibboleth.sso/Logout?return=https://mpass-proxy-test.csc.fi/idp/profile/Logout?return=https://paikkaoppi.csc.fi',
 }
