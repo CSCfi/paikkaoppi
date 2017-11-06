@@ -46,6 +46,8 @@
                 label Ohje opettajalle
                 textarea
 
+              .form__title Oppiaine
+
               .form__item
                 label Vuosiluokka
                 .select__wrapper
@@ -70,6 +72,26 @@
                         option Valitse oppiaine
                         option Suomen kieli
                         option Ruotsin kieli
+
+              .form__title Opetussuunnitelman mukaiset tavoitteet
+
+              .form__columns
+                .form__column
+                  .form__item
+                    label Tavoite
+                    .select__wrapper
+                      select
+                        option Valitse tavoite
+                        option T1 oppii hahmottamaan tekstiä...
+                        option T2 kehittää taitoaan tutkia, tuottaa...
+                .form__column
+                  .form__item
+                    label Sisältöalue
+                    .select__wrapper
+                      select
+                        option Valitse sisältöalue
+                        option S1 oman viestijäkuvan kehittyminen...
+                        option S2 tekstin käsite ja tekstilajit; kertovat...
 
               .form__footer
                 a.button(onclick='$("#tehtava2").show();$("#tehtava1").hide()') Jatka

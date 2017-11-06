@@ -1157,8 +1157,10 @@ ul {
 }
 .form__title {
   font-weight: 700;
-  margin: 15px 0 10px 0;
+  margin: 25px 0 20px 0;
   text-align: center;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+  padding-bottom: 5px;
 }
 .form__title:first-of-type {
   margin-top: 0;
