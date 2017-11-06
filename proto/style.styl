@@ -457,6 +457,7 @@ ul
   text-align left
   padding 0
   bottom 0
+  width 100%
   -webkit-overflow-scrolling touch
   @media (min-width: media_small)
     padding 0 base_padding 0
@@ -563,6 +564,7 @@ ul
     display flex
     align-items stretch
     height 100%
+    justify-content center
   
 .view__column
   position relative
@@ -574,13 +576,9 @@ ul
     padding base_padding
     @media (min-width: media_small)
       max-width calc(100vw \- 370px)
-  &.type--one
-    @media (min-width: media_small)
-      max-width calc(100vw \- 50px)
     
   &:nth-child(2)
     margin base_padding 0
-    
     @media (min-width: media_small)
       min-width 300px
       margin 0 0 0 20px
@@ -632,16 +630,10 @@ ul
 //- GRID LAYOUT
 
 .view__grid
-  display flex
-  justify-content center
+  //
   
 .view__grid-item
-  flex 1 1 50%
-  max-width 50%
-  padding-right 25px
-  @media (max-width: media_small)
-    flex 1 1 100%
-    max-width 100%
+  //
 
 //- Wrapper for view animation, gets is-loaded when the view appears
 
@@ -848,7 +840,7 @@ ul
 
 .list
   &.type--basic
-    //-
+    width 100%
   &.type--tasks
     display flex
     flex-wrap wrap
@@ -1113,8 +1105,10 @@ ul
 
 .form__title
   font-weight bold_font_weight
-  margin 0 0 10px 0
+  margin 15px 0 10px 0
   text-align center
+  &:first-of-type
+    margin-top 0
     
 .form__ingress
   text-align center
@@ -1202,9 +1196,7 @@ ul
     
 .form__footer
   text-align center
-  margin 65px 0 0 0
-  -webkit-position sticky
-  position sticky
+  margin 15px 0 0 0
   bottom 0
   display flex
   flex-direction column
@@ -1401,20 +1393,49 @@ ul
     color #f8f7cc
     cursor pointer
 
+.view__wizard-wrapper
+  height 100%
+  width 100%
+  display flex
+  flex-direction column
+  align-items center
+  @media (min-width: media_small)
+    display flex
+    align-items stretch
+    height 100%
+    justify-content center
+
+.view__wizard-content
+  position relative
+  background #fff
+  height 100%
+  padding base_padding
+  max-width 740px
+  width 100%
+  overflow-y auto
+  margin 0 auto
+  -webkit-overflow-scrolling touch
+
 .view__wizard
   display flex
   justify-content center
-  margin 0 -25px 35px 0
+  padding 15px
+  margin 0
+  background #262626
+  position relative
+  width 100%
+  max-width 740px
+  margin 0 auto
 
 .view__wizard-back
   &.is-disabled
     visibility hidden
   &:before
-    content url(assets/icon_arrow-l.svg)
+    content url(assets/icon_arrow-l-w.svg)
     display inline-block
     vertical-align bottom
     width 20px
-    margin 3px 20px -3px 0
+    margin 2px 20px -2px 0
   @media (min-width: media_small)
     display none
  
@@ -1422,26 +1443,30 @@ ul
   &.is-disabled
     opacity .5
   &:before
-    content url(assets/icon_arrow-r.svg)
+    content url(assets/icon_arrow-r-w.svg)
     display inline-block
     vertical-align bottom
     width 20px
-    margin 3px 20px -3px 0
+    margin 2px 20px -2px 0
   @media (min-width: media_small)
     display none
 
 .view__wizard-step
-  margin 0 25px 0 0
+  margin 0 15px 0 0
   padding 0 0 2px 0
   @media (max-width: media_small)
     display none
   &.is-selected
-    border-bottom 1px solid brand_color[1]
+    border-bottom 1px solid alpha(#fff, .8)
     @media (max-width: media_small)
       display block
+      border-bottom none
   .link
     link()
     font-weight bold_font_weight
+    color #fff
+    display inline-block
+    margin 1px 0 -1px 0
 
 .image__index
   position absolute

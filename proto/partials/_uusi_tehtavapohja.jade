@@ -3,109 +3,113 @@
   h1.view__header-title Uusi tehtäväpohja
 
 .view__content
-  .view__wizard
-    .view__wizard-back.is-disabled
-    .view__wizard-step
-      a.link 1. Tehtävän kuvaus
-    .view__wizard-step.is-selected
-      a.link 2. Tehtävän askeleet
-    .view__wizard-step
-      a.link 3. Esikatselu
-    .view__wizard-forward
-  .form.type--basic
-    .view__grid#tehtava1
-      .view__grid-item
-        
+  .view__wizard-wrapper
+    .view__wizard
+      .view__wizard-back.is-disabled
+      .view__wizard-step
+        a.link 1. Tehtävän kuvaus
+      .view__wizard-step.is-selected
+        a.link 2. Tehtävän askeleet
+      .view__wizard-step
+        a.link 3. Esikatselu
+      .view__wizard-forward 
 
-          //- .form__image#imageAdd1
-          //-   .form__image-placement
-          //-     .text(onclick='$("#imageChange1").show();$(this).parents(".form__image").hide()') Lisää kuva
+    .view__wizard-content
 
-          //- .form__image#imageChange1(style='display:none')
-          //-   .form__image-placement
-          //-     .form__image-placement-cover(style='background-image:url(images/image.jpg)')
-          //-     .text(onclick='$("#imageAdd1").show();$(this).parents(".form__image").hide()') Vaihda kuva
+      .form.type--basic
+        .view__grid#tehtava1
+          .view__grid-item
+            
 
-          .form__item
-            label Nimi
-            input(type='text')
-          
-          .form__item
-            label Lyhyt otsikko
-            input(type='text')
+              //- .form__image#imageAdd1
+              //-   .form__image-placement
+              //-     .text(onclick='$("#imageChange1").show();$(this).parents(".form__image").hide()') Lisää kuva
 
-          .form__item
-            label Tehtävän kuvaus
-            textarea
+              //- .form__image#imageChange1(style='display:none')
+              //-   .form__image-placement
+              //-     .form__image-placement-cover(style='background-image:url(images/image.jpg)')
+              //-     .text(onclick='$("#imageAdd1").show();$(this).parents(".form__image").hide()') Vaihda kuva
 
-          .form__item
-            label Ohje opettajalle
-            textarea
+              .form__item
+                label Nimi
+                input(type='text')
+              
+              .form__item
+                label Lyhyt otsikko
+                input(type='text')
 
-          .form__footer
-            a.button(onclick='$("#tehtava2").show();$("#tehtava1").hide()') Jatka
+              .form__item
+                label Tehtävän kuvaus
+                textarea
 
-          
-    .view__grid#tehtava2(style='display:none')
-      .view__grid-item
-        .form__title Tehtävän askeleet
-        .form__ingress Ohje aiheesta tulee tähän.
-        .form__item
-          label.type--step 1.
-          .form__row
-            input.type--wysiwyg-title(type='text', placeholder='Askeleen otsikko')
-          .form__row
-            textarea.type--wysiwyg-text(placeholder='Askeleen ohje')
-        .form__item#osio(style='display:none')
-          label.type--step 2.
-          .form__row
-            input.type--wysiwyg-title(type='text', placeholder='Askeleen otsikko')
-          .form__row
-            textarea.type--wysiwyg-text(placeholder='Askeleen ohje')
-        .form__item#osio(style='display:none')
-        .form__item.type--centered
-          a.button.type--form(onclick='$("#osio").show()') Lisää uusi askel
-        .form__footer
-            a.button(onclick='$("#tehtava3").show();$("#tehtava2").hide()') Jatka
+              .form__item
+                label Ohje opettajalle
+                textarea
 
+              .form__footer
+                a.button(onclick='$("#tehtava2").show();$("#tehtava1").hide()') Jatka
 
-    .view__grid#tehtava3(style='display:none')
-      .view__grid-item
-        .form__title Tehtävän tiedot
-
-        .form__item
-          label Nimi
-          .form__value Etsi talventörröttäjiä
-        
-        .form__item
-          label Lyhyt otsikko
-          .form__value Liiku luonnossa ja etsi talventörröttäjiä
-
-        .form__item
-          label Tehtävän kuvaus
-          .form__value Kerätkää ryhmissä kuvia erilaisista talventörröttäjistä. Lisätkää kuvat merkintöinä kartalle.
-
-        .form__item
-          label Ohje opettajalle
-          .form__value Tehtävä sopii alakoululaisille.
+              
+        .view__grid#tehtava2(style='display:none')
+          .view__grid-item
+            .form__title Tehtävän askeleet
+            .form__ingress Ohje aiheesta tulee tähän.
+            .form__item
+              label.type--step 1.
+              .form__row
+                input.type--wysiwyg-title(type='text', placeholder='Askeleen otsikko')
+              .form__row
+                textarea.type--wysiwyg-text(placeholder='Askeleen ohje')
+            .form__item#osio(style='display:none')
+              label.type--step 2.
+              .form__row
+                input.type--wysiwyg-title(type='text', placeholder='Askeleen otsikko')
+              .form__row
+                textarea.type--wysiwyg-text(placeholder='Askeleen ohje')
+            .form__item#osio(style='display:none')
+            .form__item.type--centered
+              a.button.type--form(onclick='$("#osio").show()') Lisää uusi askel
+            .form__footer
+                a.button(onclick='$("#tehtava3").show();$("#tehtava2").hide()') Jatka
 
 
-        .form__title Tehtävän ohje
+        .view__grid#tehtava3(style='display:none')
+          .view__grid-item
+            .form__title Tehtävän tiedot
 
-        .form__item
-          label.type--step 1. Etsi talventörröttäjiä
-          .form__row
-            .form__value Muodostakaa 3-5 hengen ryhmiä.
+            .form__item
+              label Nimi
+              .form__value Etsi talventörröttäjiä
+            
+            .form__item
+              label Lyhyt otsikko
+              .form__value Liiku luonnossa ja etsi talventörröttäjiä
 
-        .form__item
-          label.type--step 2. Etsi talventörröttäjiä
-          .form__row
-            .form__value Liikkukaa lähialueilla etsimässä erilaisia talventörröttäjiä.
+            .form__item
+              label Tehtävän kuvaus
+              .form__value Kerätkää ryhmissä kuvia erilaisista talventörröttäjistä. Lisätkää kuvat merkintöinä kartalle.
 
-        .form__footer
-            a.button(href='#library-opettaja') Julkaise tehtävä
-
-
+            .form__item
+              label Ohje opettajalle
+              .form__value Tehtävä sopii alakoululaisille.
 
 
-                  
+            .form__title Tehtävän ohje
+
+            .form__item
+              label.type--step 1. Etsi talventörröttäjiä
+              .form__row
+                .form__value Muodostakaa 3-5 hengen ryhmiä.
+
+            .form__item
+              label.type--step 2. Etsi talventörröttäjiä
+              .form__row
+                .form__value Liikkukaa lähialueilla etsimässä erilaisia talventörröttäjiä.
+
+            .form__footer
+                a.button(href='#library-opettaja') Julkaise tehtävä
+
+
+
+
+                        

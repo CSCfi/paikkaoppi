@@ -627,95 +627,99 @@
               <h1 class="view__header-title">Uusi tehtäväpohja</h1>
             </div>
             <div class="view__content">
-              <div class="view__wizard">
-                <div class="view__wizard-back is-disabled"></div>
-                <div class="view__wizard-step"><a class="link">1. Tehtävän kuvaus</a></div>
-                <div class="view__wizard-step is-selected"><a class="link">2. Tehtävän askeleet</a></div>
-                <div class="view__wizard-step"><a class="link">3. Esikatselu</a></div>
-                <div class="view__wizard-forward"></div>
-              </div>
-              <div class="form type--basic">
-                <div id="tehtava1" class="view__grid">
-                  <div class="view__grid-item">
-                    <div class="form__item">
-                      <label>Nimi</label>
-                      <input type="text">
-                    </div>
-                    <div class="form__item">
-                      <label>Lyhyt otsikko</label>
-                      <input type="text">
-                    </div>
-                    <div class="form__item">
-                      <label>Tehtävän kuvaus</label>
-                      <textarea></textarea>
-                    </div>
-                    <div class="form__item">
-                      <label>Ohje opettajalle</label>
-                      <textarea></textarea>
-                    </div>
-                    <div class="form__footer"><a onclick="$(&quot;#tehtava2&quot;).show();$(&quot;#tehtava1&quot;).hide()" class="button">Jatka</a></div>
-                  </div>
+              <div class="view__wizard-wrapper">
+                <div class="view__wizard">
+                  <div class="view__wizard-back is-disabled"></div>
+                  <div class="view__wizard-step"><a class="link">1. Tehtävän kuvaus</a></div>
+                  <div class="view__wizard-step is-selected"><a class="link">2. Tehtävän askeleet</a></div>
+                  <div class="view__wizard-step"><a class="link">3. Esikatselu</a></div>
+                  <div class="view__wizard-forward"> </div>
                 </div>
-                <div id="tehtava2" style="display:none" class="view__grid">
-                  <div class="view__grid-item">
-                    <div class="form__title">Tehtävän askeleet</div>
-                    <div class="form__ingress">Ohje aiheesta tulee tähän.</div>
-                    <div class="form__item">
-                      <label class="type--step">1.</label>
-                      <div class="form__row">
-                        <input type="text" placeholder="Askeleen otsikko" class="type--wysiwyg-title">
-                      </div>
-                      <div class="form__row">
-                        <textarea placeholder="Askeleen ohje" class="type--wysiwyg-text"></textarea>
-                      </div>
-                    </div>
-                    <div id="osio" style="display:none" class="form__item">
-                      <label class="type--step">2.</label>
-                      <div class="form__row">
-                        <input type="text" placeholder="Askeleen otsikko" class="type--wysiwyg-title">
-                      </div>
-                      <div class="form__row">
-                        <textarea placeholder="Askeleen ohje" class="type--wysiwyg-text"></textarea>
-                      </div>
-                    </div>
-                    <div id="osio" style="display:none" class="form__item"></div>
-                    <div class="form__item type--centered"><a onclick="$(&quot;#osio&quot;).show()" class="button type--form">Lisää uusi askel</a></div>
-                    <div class="form__footer"><a onclick="$(&quot;#tehtava3&quot;).show();$(&quot;#tehtava2&quot;).hide()" class="button">Jatka</a></div>
-                  </div>
-                </div>
-                <div id="tehtava3" style="display:none" class="view__grid">
-                  <div class="view__grid-item">
-                    <div class="form__title">Tehtävän tiedot</div>
-                    <div class="form__item">
-                      <label>Nimi</label>
-                      <div class="form__value">Etsi talventörröttäjiä</div>
-                    </div>
-                    <div class="form__item">
-                      <label>Lyhyt otsikko</label>
-                      <div class="form__value">Liiku luonnossa ja etsi talventörröttäjiä</div>
-                    </div>
-                    <div class="form__item">
-                      <label>Tehtävän kuvaus</label>
-                      <div class="form__value">Kerätkää ryhmissä kuvia erilaisista talventörröttäjistä. Lisätkää kuvat merkintöinä kartalle.</div>
-                    </div>
-                    <div class="form__item">
-                      <label>Ohje opettajalle</label>
-                      <div class="form__value">Tehtävä sopii alakoululaisille.</div>
-                    </div>
-                    <div class="form__title">Tehtävän ohje</div>
-                    <div class="form__item">
-                      <label class="type--step">1. Etsi talventörröttäjiä</label>
-                      <div class="form__row">
-                        <div class="form__value">Muodostakaa 3-5 hengen ryhmiä.</div>
+                <div class="view__wizard-content">
+                  <div class="form type--basic">
+                    <div id="tehtava1" class="view__grid">
+                      <div class="view__grid-item">
+                        <div class="form__item">
+                          <label>Nimi</label>
+                          <input type="text">
+                        </div>
+                        <div class="form__item">
+                          <label>Lyhyt otsikko</label>
+                          <input type="text">
+                        </div>
+                        <div class="form__item">
+                          <label>Tehtävän kuvaus</label>
+                          <textarea></textarea>
+                        </div>
+                        <div class="form__item">
+                          <label>Ohje opettajalle</label>
+                          <textarea></textarea>
+                        </div>
+                        <div class="form__footer"><a onclick="$(&quot;#tehtava2&quot;).show();$(&quot;#tehtava1&quot;).hide()" class="button">Jatka</a></div>
                       </div>
                     </div>
-                    <div class="form__item">
-                      <label class="type--step">2. Etsi talventörröttäjiä</label>
-                      <div class="form__row">
-                        <div class="form__value">Liikkukaa lähialueilla etsimässä erilaisia talventörröttäjiä.</div>
+                    <div id="tehtava2" style="display:none" class="view__grid">
+                      <div class="view__grid-item">
+                        <div class="form__title">Tehtävän askeleet</div>
+                        <div class="form__ingress">Ohje aiheesta tulee tähän.</div>
+                        <div class="form__item">
+                          <label class="type--step">1.</label>
+                          <div class="form__row">
+                            <input type="text" placeholder="Askeleen otsikko" class="type--wysiwyg-title">
+                          </div>
+                          <div class="form__row">
+                            <textarea placeholder="Askeleen ohje" class="type--wysiwyg-text"></textarea>
+                          </div>
+                        </div>
+                        <div id="osio" style="display:none" class="form__item">
+                          <label class="type--step">2.</label>
+                          <div class="form__row">
+                            <input type="text" placeholder="Askeleen otsikko" class="type--wysiwyg-title">
+                          </div>
+                          <div class="form__row">
+                            <textarea placeholder="Askeleen ohje" class="type--wysiwyg-text"></textarea>
+                          </div>
+                        </div>
+                        <div id="osio" style="display:none" class="form__item"></div>
+                        <div class="form__item type--centered"><a onclick="$(&quot;#osio&quot;).show()" class="button type--form">Lisää uusi askel</a></div>
+                        <div class="form__footer"><a onclick="$(&quot;#tehtava3&quot;).show();$(&quot;#tehtava2&quot;).hide()" class="button">Jatka</a></div>
                       </div>
                     </div>
-                    <div class="form__footer"><a href="#library-opettaja" class="button">Julkaise tehtävä</a></div>
+                    <div id="tehtava3" style="display:none" class="view__grid">
+                      <div class="view__grid-item">
+                        <div class="form__title">Tehtävän tiedot</div>
+                        <div class="form__item">
+                          <label>Nimi</label>
+                          <div class="form__value">Etsi talventörröttäjiä</div>
+                        </div>
+                        <div class="form__item">
+                          <label>Lyhyt otsikko</label>
+                          <div class="form__value">Liiku luonnossa ja etsi talventörröttäjiä</div>
+                        </div>
+                        <div class="form__item">
+                          <label>Tehtävän kuvaus</label>
+                          <div class="form__value">Kerätkää ryhmissä kuvia erilaisista talventörröttäjistä. Lisätkää kuvat merkintöinä kartalle.</div>
+                        </div>
+                        <div class="form__item">
+                          <label>Ohje opettajalle</label>
+                          <div class="form__value">Tehtävä sopii alakoululaisille.</div>
+                        </div>
+                        <div class="form__title">Tehtävän ohje</div>
+                        <div class="form__item">
+                          <label class="type--step">1. Etsi talventörröttäjiä</label>
+                          <div class="form__row">
+                            <div class="form__value">Muodostakaa 3-5 hengen ryhmiä.</div>
+                          </div>
+                        </div>
+                        <div class="form__item">
+                          <label class="type--step">2. Etsi talventörröttäjiä</label>
+                          <div class="form__row">
+                            <div class="form__value">Liikkukaa lähialueilla etsimässä erilaisia talventörröttäjiä.</div>
+                          </div>
+                        </div>
+                        <div class="form__footer"><a href="#library-opettaja" class="button">Julkaise tehtävä</a></div>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
