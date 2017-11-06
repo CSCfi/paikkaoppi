@@ -32,15 +32,10 @@ export class AuthService {
       })
   }
 
-  logout(): Observable<void> {
+  logout() {
     console.log('AuthService.logout()')
-    return this.http.get<void>(`${environment.apiUri}/auth/logout`).switchMap(
-      _ => {
-        console.log('LogoutResult')
-        this.localStorageLogout()
-        return Observable.empty()
-      }
-    )
+    this.localStorageLogout()
+    window.location.href = environment.logoutUri
   }
 
   private updateCurrentUser(): Observable<void> {

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 import { AuthService } from '../service/auth.service'
-import { environment } from '../../environments/environment'
 
 @Component({
   selector: 'app-home',
@@ -11,13 +10,14 @@ import { environment } from '../../environments/environment'
 })
 export class HomeComponent implements OnInit {
   users: string[] = []
-  environment = environment
   constructor(private authService: AuthService, private router: Router) { }
 
   ngOnInit() {
     this.users = this.authService.backendUsers()
     this.authService.isLoggedIn().subscribe(value => {
-      this.router.navigateByUrl("/dashboard")
+      if (value) {
+          this.router.navigateByUrl('/dashboard')
+      }
     })
   }
 

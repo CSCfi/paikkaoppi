@@ -93,10 +93,12 @@ export class TestMethods {
   static getTeacher(): User {
     return {
       username: 'oppi.opettaja@koulu.fi',
-      email: 'oppi.opettaja@koulu.fi',
       firstName: 'Oppi',
       lastName: 'Opettaja',
-      role: 'teacher'
+      role: 'teacher',
+      municipality: 'KuntaYksi',
+      school: 'DemolaTestSchool',
+      schoolClass: '9A'
     }
   }
 

@@ -18,4 +18,6 @@ export const environment = {
     centerToLocation: true, changeLayer: true},
   mapHelpVisibleInitially: true,
   apiUri: 'https://d2isbn35qzuohl.cloudfront.net/api/v1',
+  loginPageUri: '/assets/login.html',
+  logoutUri: 'http://d2isbn35qzuohl.cloudfront.net/api/v1/auth/logout',
 }
