@@ -191,6 +191,7 @@ input {
   transform: translateZ(0);
   width: 100%;
   display: block;
+  max-width: 340px;
 }
 .select__wrapper select {
   background: transparent;
