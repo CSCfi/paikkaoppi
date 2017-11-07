@@ -83,6 +83,28 @@ export interface Attachment {
     sizeInBytes: number
 }
 
+export interface Grade {
+    id: number
+    name: string
+}
+
+export interface Subject {
+    id: number
+    name: string
+    parent: Subject
+    childs: Subject[]
+}
+
+export interface Target {
+    id: number
+    name: string
+}
+
+export interface ContentArea {
+    id: number
+    name: string
+}
+
 export type Geometry = Point | PolygonFeatureCollection
 export type Point = GeoJSON.Point
 export type FeatureCollection = GeoJSON.FeatureCollection<GeoJSON.GeometryObject>

@@ -4,114 +4,198 @@
     <h1 class="view__header-title">Uusi tehtäväpohja</h1>
   </div>
   <div class="view__content">
-    <div class="view__wizard">
-      <div class="view__wizard-back" [ngClass]="{'is-disabled': phase === firstPhase}"></div>
-      <div class="view__wizard-step" [ngClass]="{'is-selected': phase === 1}">
-        <a class="link" *ngIf="phase <= 1">1. Tehtävän kuvaus</a>
-        <a class="link" (click)="moveToPhase(1)" *ngIf="phase > 1">1. Tehtävän kuvaus</a>
+    <div class="view__wizard-wrapper">
+      <div class="view__wizard">
+        <div class="view__wizard-back" [ngClass]="{'is-disabled': phase === firstPhase}"></div>
+        <div class="view__wizard-step" [ngClass]="{'is-selected': phase === 1}">
+          <a class="link" *ngIf="phase <= 1">1. Tehtävän kuvaus</a>
+          <a class="link" (click)="moveToPhase(1)" *ngIf="phase > 1">1. Tehtävän kuvaus</a>
+        </div>
+        <div class="view__wizard-step" [ngClass]="{'is-selected': phase === 2}">
+          <a class="link" *ngIf="phase <= 2">2. Tehtävän askeleet</a>
+          <a class="link" (click)="moveToPhase(2)" *ngIf="phase > 2">2. Tehtävän askeleet</a>
+        </div>
+        <div class="view__wizard-step" [ngClass]="{'is-selected': phase === 3}">
+          <a class="link">3. Esikatselu</a>
+        </div>
+        <div class="view__wizard-forward" [ngClass]="{'is-disabled': phase === lastPhase}"></div>
       </div>
-      <div class="view__wizard-step" [ngClass]="{'is-selected': phase === 2}">
-        <a class="link" *ngIf="phase <= 2">2. Tehtävän askeleet</a>
-        <a class="link" (click)="moveToPhase(2)" *ngIf="phase > 2">2. Tehtävän askeleet</a>
-      </div>
-      <div class="view__wizard-step" [ngClass]="{'is-selected': phase === 3}">
-        <a class="link">3. Esikatselu</a>
-      </div>
-      <div class="view__wizard-forward" [ngClass]="{'is-disabled': phase === lastPhase}"></div>
+      <div class="view__wizard-content">
+      <form (ngSubmit)="submit()" #form="ngForm" *ngIf="model != null">
+        <div class="form type--basic">
+          <div class="view__grid" *ngIf="phase === 1">
+            <div class="view__grid-item">
+              <div class="form__item" [class.has-error]="name.invalid && name.dirty">
+                <label for="name">Nimi</label>
+                <input type="text" maxlength="128" required [(ngModel)]="model.name" name="name" #name="ngModel" />
+                <div [hidden]="name.valid || name.pristine" class="form__item-error alert alert-danger"><div class="text">Pakollinen tieto</div></div>
+              </div>
+              <div class="form__item" [class.has-error]="title.invalid && title.dirty">
+                <label for="title">Lyhyt otsikko</label>
+                <input type="text" maxlength="128" required [(ngModel)]="model.title" name="title" #title="ngModel" />
+                <div [hidden]="title.valid || title.pristine" class="form__item-error alert alert-danger"><div class="text">Pakollinen tieto</div></div>
+              </div>
+              <div class="form__item" [class.has-error]="description.invalid && description.dirty">
+                <label for="description">Tehtävän kuvaus</label>
+                <textarea required maxlength="4096" [(ngModel)]="model.description" name="description" #description="ngModel"></textarea>
+                <div [hidden]="description.valid || description.pristine" class="form__item-error alert alert-danger"><div class="text">Pakollinen tieto</div></div>
+              </div>
+              <div class="form__item" [class.has-error]="info.invalid && info.dirty">
+                <label for="info">Ohje opettajalle</label>
+                <input type="text" maxlength="128" required [(ngModel)]="model.info" name="info" #info="ngModel" />
+                <div [hidden]="info.valid || info.pristine" class="form__item-error alert alert-danger"><div class="text">Pakollinen tieto</div></div>
+              </div>
+              <div class="form__title">Oppiaine</div>
+              <div class="form__item">
+                <label>Vuosiluokka</label>
+                <div class="select__wrapper">
+                  <select #grade (change)="selectGrade(grade.value)">
+                      <option value="">Valitse vuosiluokka</option>  
+                      <option *ngFor="let grade of ops.grades" [value]="grade.id">
+                          {{grade.name}}
+                      </option>
+                  </select>
+                </div>
+              </div>
+              <div *ngIf="ops.firstSubjects != null" class="form__columns">
+                <div class="form__column">
+                  <div class="form__item">
+                    <label>Oppiaine</label>
+                    <div class="select__wrapper">
+                      <select #subject (change)="selectFirstSubject(subject.value)">
+                          <option value="">Valitse oppiaine</option>  
+                          <option *ngFor="let subject of ops.firstSubjects" [value]="subject.id">
+                              {{subject.name}}
+                          </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="ops.secondSubjects != null && ops.secondSubjects.length > 0" class="form__column">
+                  <div class="form__item">
+                    <label>Oppiaineen tarkenne</label>
+                    <div class="select__wrapper">
+                      <select #secondsubject (change)="selectSecondSubject(secondsubject.value)">
+                          <option value="">Valitse oppiaine</option>  
+                          <option *ngFor="let subject of ops.secondSubjects" [value]="subject.id">
+                              {{subject.name}}
+                          </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="ops.thirdSubjects != null && ops.thirdSubjects.length > 0" class="form__column">
+                    <div class="form__item">
+                      <label>Oppiaineen tarkenne</label>
+                      <div class="select__wrapper">
+                        <select #thirdsubject (change)="selectThirdSubject(thirdsubject.value)">
+                            <option value="">Valitse oppiaine</option>  
+                            <option *ngFor="let subject of ops.thirdsubjects" [value]="subject.id">
+                                {{subject.name}}
+                            </option>
+                        </select>
+                      </div>
+                    </div>
+                  </div>
+              </div>
+              <div *ngIf="selectedOps.subject != null" class="form__title">Opetussuunnitelman mukaiset tavoitteet</div>
+              <div *ngIf="selectedOps.subject != null" class="form__columns">
+                <div class="form__column">
+                  <div class="form__item">
+                    <label>Tavoite</label>
+                    <div class="select__wrapper">
+                      <select #target (change)="selectTarget(target.value)">
+                          <option value="">Valitse tavoite</option>  
+                          <option *ngFor="let target of ops.targets" [value]="target.id">
+                              {{ target.name | limitTo : 55 }}
+                          </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="form__column">
+                  <div class="form__item">
+                    <label>Sisältöalue</label>
+                    <div class="select__wrapper">
+                      <select #target (change)="selectContentArea(target.value)">
+                          <option value="">Valitse sisältöalue</option>  
+                          <option *ngFor="let contentArea of ops.contentAreas" [value]="contentArea.id">
+                              {{ contentArea.name | limitTo : 55 }}
+                          </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="form__footer">
+                <button class="button" [disabled]="!form.form.valid" (click)="next()">Jatka</button>
+                <a class="button type--secondary" (click)="closeDialog()">Peruuta</a>
+              </div>
+            </div>
+          </div>
+          <div class="view__grid" *ngIf="phase === 2">
+            <div class="view__grid-item">
+              <div class="form__title">Tehtävän askeleet</div>
+              <div class="form__ingress">Ohje aiheesta tulee tähän.</div>
+              <ng-template ngFor let-instruction let-index="index" [ngForOf]="model.instructions">
+                <div class="form__item">
+                  <label class="type--step">{{index+1}}.</label>
+                  <a class="button type--secondary" (click)="removeInstruction(instruction)">Poista askel</a>
+                  <div class="form__row">
+                    <input type="text" maxlength="128" required placeholder="Askeleen otsikko" class="type--wysiwyg-title" [(ngModel)]="model.instructions[index].name"
+                      name="name-{{index}}">
+                  </div>
+                  <div class="form__row">
+                    <textarea placeholder="Askeleen ohje" maxlength="4096" required class="type--wysiwyg-text" [(ngModel)]="model.instructions[index].description"
+                      name="description-{{index}}"></textarea>
+                  </div>
+                </div>
+              </ng-template>
+              <div class="form__item type--centered">
+                <a class="button type--form" (click)="addInstruction()">Lisää uusi askel</a>
+              </div>
+              <div class="form__footer">
+                <button class="button" (click)="next()" [disabled]="!form.form.valid">Jatka</button>
+                <a class="button type--secondary" (click)="closeDialog()">Sulje</a>
+              </div>
+            </div>
+          </div>
+          <div class="view__grid" *ngIf="phase === 3">
+            <div class="view__grid-item">
+              <div class="form__title">Tehtävän tiedot</div>
+              <div class="form__item">
+                <label for="name">Nimi</label>
+                <div>{{model.name}}</div>
+              </div>
+              <div class="form__item">
+                <label for="title">Lyhyt otsikko</label>
+                <div id="title">{{model.title}}</div>
+              </div>
+              <div class="form__item">
+                <label for="description">Tehtävän kuvaus</label>
+                <div id="description">{{model.description}}</div>
+              </div>
+              <div class="form__item">
+                <label for="info">Ohje opettajalle</label>
+                <div id="info">{{model.info}}</div>
+              </div>
+              <div class="form__title">Tehtävän ohje</div>
+              <ng-template ngFor let-instruction let-index="index" [ngForOf]="model.instructions">
+                <div class="form__item">
+                  <label>{{index+1}}. {{instruction.name}}</label>
+                  <ul class="list type--text">
+                    <li class="list__item">{{instruction.description}}</li>
+                  </ul>
+                </div>
+              </ng-template>
+              <div class="form__footer">
+                <button type="submit" class="button" [disabled]="!form.form.valid">Julkaise tehtävä</button>
+                <button class="button type--secondary" (click)="closeDialog()">Peruuta</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
     </div>
-    <form (ngSubmit)="submit()" #form="ngForm" *ngIf="model != null">
-      <div class="form type--basic">
-        <div class="view__grid" *ngIf="phase === 1">
-          <div class="view__grid-item">
-            <div class="form__item" [class.has-error]="name.invalid && name.dirty">
-              <label for="name">Nimi</label>
-              <input type="text" maxlength="128" required [(ngModel)]="model.name" name="name" #name="ngModel" />
-              <div [hidden]="name.valid || name.pristine" class="form__item-error alert alert-danger"><div class="text">Pakollinen tieto</div></div>
-            </div>
-            <div class="form__item" [class.has-error]="title.invalid && title.dirty">
-              <label for="title">Lyhyt otsikko</label>
-              <input type="text" maxlength="128" required [(ngModel)]="model.title" name="title" #title="ngModel" />
-              <div [hidden]="title.valid || title.pristine" class="form__item-error alert alert-danger"><div class="text">Pakollinen tieto</div></div>
-            </div>
-            <div class="form__item" [class.has-error]="description.invalid && description.dirty">
-              <label for="description">Tehtävän kuvaus</label>
-              <textarea required maxlength="4096" [(ngModel)]="model.description" name="description" #description="ngModel"></textarea>
-              <div [hidden]="description.valid || description.pristine" class="form__item-error alert alert-danger"><div class="text">Pakollinen tieto</div></div>
-            </div>
-            <div class="form__item" [class.has-error]="info.invalid && info.dirty">
-              <label for="info">Ohje opettajalle</label>
-              <input type="text" maxlength="128" required [(ngModel)]="model.info" name="info" #info="ngModel" />
-              <div [hidden]="info.valid || info.pristine" class="form__item-error alert alert-danger"><div class="text">Pakollinen tieto</div></div>
-            </div>
-            <div class="form__footer">
-              <button class="button" [disabled]="!form.form.valid" (click)="next()">Jatka</button>
-              <a class="button type--secondary" (click)="closeDialog()">Sulje</a>
-            </div>
-          </div>
-        </div>
-        <div class="view__grid" *ngIf="phase === 2">
-          <div class="view__grid-item">
-            <div class="form__title">Tehtävän askeleet</div>
-            <div class="form__ingress">Ohje aiheesta tulee tähän.</div>
-            <ng-template ngFor let-instruction let-index="index" [ngForOf]="model.instructions">
-              <div class="form__item">
-                <label class="type--step">{{index+1}}.</label>
-                <a class="button type--secondary" (click)="removeInstruction(instruction)">Poista askel</a>
-                <div class="form__row">
-                  <input type="text" maxlength="128" required placeholder="Askeleen otsikko" class="type--wysiwyg-title" [(ngModel)]="model.instructions[index].name"
-                    name="name-{{index}}">
-                </div>
-                <div class="form__row">
-                  <textarea placeholder="Askeleen ohje" maxlength="4096" required class="type--wysiwyg-text" [(ngModel)]="model.instructions[index].description"
-                    name="description-{{index}}"></textarea>
-                </div>
-              </div>
-            </ng-template>
-            <div class="form__item type--centered">
-              <a class="button type--form" (click)="addInstruction()">Lisää uusi askel</a>
-            </div>
-            <div class="form__footer">
-              <button class="button" (click)="next()" [disabled]="!form.form.valid">Jatka</button>
-              <a class="button type--secondary" (click)="closeDialog()">Sulje</a>
-            </div>
-          </div>
-        </div>
-        <div class="view__grid" *ngIf="phase === 3">
-          <div class="view__grid-item">
-            <div class="form__item">
-              <label for="name">Nimi</label>
-              <div>{{model.name}}</div>
-            </div>
-            <div class="form__item">
-              <label for="title">Lyhyt otsikko</label>
-              <div id="title">{{model.title}}</div>
-            </div>
-            <div class="form__item">
-              <label for="description">Tehtävän kuvaus</label>
-              <div id="description">{{model.description}}</div>
-            </div>
-            <div class="form__item">
-              <label for="info">Ohje opettajalle</label>
-              <div id="info">{{model.info}}</div>
-            </div>
-            <div class="form__item">
-              <label>Tehtävän askeleet</label>
-            </div>
-            <ng-template ngFor let-instruction let-index="index" [ngForOf]="model.instructions">
-              <div class="form__item">
-                <label>{{index+1}}. {{instruction.name}}</label>
-                <ul class="list type--text">
-                  <li class="list__item">{{instruction.description}}</li>
-                </ul>
-              </div>
-            </ng-template>
-            <div class="form__footer">
-              <button type="submit" class="button" [disabled]="!form.form.valid">Tallenna</button>
-              <button class="button type--secondary" (click)="closeDialog()">Sulje</button>
-            </div>
-          </div>
-        </div>
-      </div>
-    </form>
   </div>
 </div>

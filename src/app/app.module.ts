@@ -17,12 +17,15 @@ import { AuthGuard } from './service/auth.guard'
 import { NotLoggedInGuard } from './service/not-logged-in.guard'
 import { TaskService } from './service/task.service'
 import { TaskTemplateService } from './service/task-template.service'
+import { OpsService } from './service/ops.service'
+import { TruncatePipe } from './pipe/truncate.pipe'
 import { MessageModule } from './message/message.module'
 import { TaskTemplateComponent } from './task-template/task-template.component'
 import { DeleteTaskTemplateComponent } from './delete-task-template/delete-task-template.component'
 
 @NgModule({
   declarations: [
+    TruncatePipe,
     AppComponent,
     HomeComponent,
     DashboardComponent,
@@ -33,7 +36,7 @@ import { DeleteTaskTemplateComponent } from './delete-task-template/delete-task-
   imports: [
     AppRoutingModule, BrowserModule, FormsModule, HttpClientModule, MapModule, MessageModule
   ],
-  providers: [AuthService, TaskService, TaskTemplateService, AuthGuard, NotLoggedInGuard],
+  providers: [AuthService, TaskService, TaskTemplateService, OpsService, AuthGuard, NotLoggedInGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
