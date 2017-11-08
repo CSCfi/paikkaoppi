@@ -52,6 +52,8 @@ export class TaskTemplateComponent implements OnInit {
   }
 
   submit() {
+    this.setOpsToModel()
+    
     console.log('submit', this.model)
     if (this.model.id !== undefined) {
       this.taskTemplateService.updateTaskTemplate(this.model).subscribe(
@@ -85,11 +87,12 @@ export class TaskTemplateComponent implements OnInit {
   }
 
   selectGrade(gradeId: number | any): void {
+    this.selectedOps = {}
+    this.ops.firstSubjects = []
+    this.ops.secondSubjects = []
+    this.ops.thirdSubjects = []
+    
     if (gradeId == null || gradeId === '') {
-      this.selectedOps = {}
-      this.ops.firstSubjects = []
-      this.ops.secondSubjects = []
-      this.ops.thirdSubjects = []
       return
     }
     
@@ -109,7 +112,7 @@ export class TaskTemplateComponent implements OnInit {
     this.opsService.getSubject(subjectId).subscribe(
       value => {
         this.ops.secondSubjects = value.childs
-        this.selectedOps.subject = subjectId
+        this.selectedOps.firstSubject = subjectId
         this.initTargetsAndContentAreas(subjectId)
       }
     )
@@ -146,6 +149,21 @@ export class TaskTemplateComponent implements OnInit {
 
   selectContentArea(contentAreaId: number): void {
     this.selectedOps.contentArea = contentAreaId
+  }
+
+  private setOpsToModel() {
+    const subjectIds = []
+    if (this.selectedOps.firstSubject != null) subjectIds.push(this.selectedOps.firstSubject)
+    if (this.selectedOps.secondSubject != null) subjectIds.push(this.selectedOps.secondSubject)
+    if (this.selectedOps.thirdSubject != null) subjectIds.push(this.selectedOps.thirdSubject)
+    
+    this.model.ops = {
+      gradeIds: [this.selectedOps.grade],
+      subjectIds: subjectIds,
+      targetIds: [this.selectedOps.target],
+      contentAreaIds: [this.selectedOps.contentArea],
+      //wideKnowledgeIds: [this.selectedOps.wideKnowledge],
+    }
   }
 
   private initTargetsAndContentAreas(subjectId: number) {

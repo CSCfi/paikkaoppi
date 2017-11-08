@@ -57,7 +57,7 @@
                   </select>
                 </div>
               </div>
-              <div *ngIf="ops.firstSubjects != null" class="form__columns">
+              <div *ngIf="ops.firstSubjects != null && ops.firstSubjects.length > 0" class="form__columns">
                 <div class="form__column">
                   <div class="form__item">
                     <label>Oppiaine</label>
@@ -98,16 +98,16 @@
                     </div>
                   </div>
               </div>
-              <div *ngIf="selectedOps.subject != null" class="form__title">Opetussuunnitelman mukaiset tavoitteet</div>
-              <div *ngIf="selectedOps.subject != null" class="form__columns">
+              <div *ngIf="selectedOps.firstSubject != null" class="form__title">Opetussuunnitelman mukaiset tavoitteet</div>
+              <div *ngIf="selectedOps.firstSubject != null" class="form__columns">
                 <div class="form__column">
                   <div class="form__item">
                     <label>Tavoite</label>
                     <div class="select__wrapper">
                       <select #target (change)="selectTarget(target.value)">
                           <option value="">Valitse tavoite</option>  
-                          <option *ngFor="let target of ops.targets" [value]="target.id">
-                              {{ target.name | limitTo : 55 }}
+                          <option *ngFor="let target of ops.targets" [value]="target.id" title="{{ target.name }}">
+                              {{ target.name | limitTo : 60 }}
                           </option>
                       </select>
                     </div>
@@ -117,10 +117,10 @@
                   <div class="form__item">
                     <label>Sisältöalue</label>
                     <div class="select__wrapper">
-                      <select #target (change)="selectContentArea(target.value)">
+                      <select #contentArea (change)="selectContentArea(contentArea.value)">
                           <option value="">Valitse sisältöalue</option>  
-                          <option *ngFor="let contentArea of ops.contentAreas" [value]="contentArea.id">
-                              {{ contentArea.name | limitTo : 55 }}
+                          <option *ngFor="let contentArea of ops.contentAreas" [value]="contentArea.id" title="{{ contentArea.name }}">
+                              {{ contentArea.name | limitTo : 60 }}
                           </option>
                       </select>
                     </div>
@@ -128,6 +128,9 @@
                 </div>
               </div>
               <div class="form__footer">
+                <div>
+                  Lisätietoa luokituksista <a href="https://eperusteet.opintopolku.fi" target="_blank">ePerusteet -palvelusta</a>.
+                </div>
                 <button class="button" [disabled]="!form.form.valid" (click)="next()">Jatka</button>
                 <a class="button type--secondary" (click)="closeDialog()">Peruuta</a>
               </div>
