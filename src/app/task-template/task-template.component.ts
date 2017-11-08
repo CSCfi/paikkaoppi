@@ -3,7 +3,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { TaskTemplateService } from '../service/task-template.service';
 import { OpsService } from '../service/ops.service';
 import { Component, OnInit } from '@angular/core';
-import { Instruction, TaskTemplate } from '../service/model';
+import { Grade, Instruction, Subject, Target, ContentArea, TaskTemplate } from '../service/model';
 
 @Component({
   selector: 'app-task-template',
@@ -13,7 +13,7 @@ import { Instruction, TaskTemplate } from '../service/model';
 export class TaskTemplateComponent implements OnInit {
   model: any
   ops: any = {}
-  selectedOps: any = {}
+  selectedOps: any = this.initOps()
   phase = 1
   firstPhase = 1
   lastPhase = 3
@@ -27,7 +27,6 @@ export class TaskTemplateComponent implements OnInit {
   ngOnInit() {
     console.log('ngOnInit')
     this.phase = 1
-
     this.initGrades()
 
     this.route.paramMap.switchMap((params: ParamMap) => {
@@ -86,104 +85,139 @@ export class TaskTemplateComponent implements OnInit {
     console.log('removeInstruction', this.model)
   }
 
-  selectGrade(gradeId: number | any): void {
-    this.selectedOps = {}
+  selectGrade(grade: Grade): void {
+    this.selectedOps = this.initOps()
     this.ops.firstSubjects = []
     this.ops.secondSubjects = []
     this.ops.thirdSubjects = []
     
-    if (gradeId == null || gradeId === '') {
+    if (grade == null) {
       return
     }
     
-    this.opsService.getSubjects(gradeId).subscribe(
+    this.opsService.getSubjects(grade.id).subscribe(
       value => {
         this.ops.firstSubjects = value.filter(subject => subject.parent == null)
-        this.selectedOps.grade = gradeId
+        this.selectedOps.grade = grade
       }
     )
   }
 
-  selectFirstSubject(subjectId: number): void {
-    if (this.initSubjects("first", subjectId)) {
+  selectFirstSubject(subject: Subject): void {
+    if (this.initSubjects("first", subject)) {
       return
     }
     
-    this.opsService.getSubject(subjectId).subscribe(
+    this.opsService.getSubject(subject.id).subscribe(
       value => {
         this.ops.secondSubjects = value.childs
-        this.selectedOps.firstSubject = subjectId
-        this.initTargetsAndContentAreas(subjectId)
+        this.selectedOps.firstSubject = subject
+        this.initTargetsAndContentAreas(subject.id)
       }
     )
   }
 
-  selectSecondSubject(subjectId: number): void {
-    if (this.initSubjects("second", subjectId)) {
-      this.selectFirstSubject(this.selectedOps.firstSubject.id)
+  selectSecondSubject(subject: Subject): void {
+    if (this.initSubjects("second", subject)) {
+      this.selectFirstSubject(this.selectedOps.firstSubject)
       return
     }
 
-    this.opsService.getSubject(subjectId).subscribe(
+    this.opsService.getSubject(subject.id).subscribe(
       value => {
         this.ops.thirdSubjects = value.childs
-        this.selectedOps.secondSubject = subjectId
-        this.initTargetsAndContentAreas(subjectId)
+        this.selectedOps.secondSubject = subject
+        this.initTargetsAndContentAreas(subject.id)
       }
     )
   }
 
-  selectThirdSubject(subjectId: number): void {
-    if (this.initSubjects("third", subjectId)) {
-      this.selectSecondSubject(this.selectedOps.secondSubject.id)
+  selectThirdSubject(subject: Subject): void {
+    if (this.initSubjects("third", subject)) {
+      this.selectSecondSubject(this.selectedOps.secondSubject)
       return
     }
 
-    this.selectedOps.thirdSubject = subjectId
-    this.initTargetsAndContentAreas(subjectId)
+    this.selectedOps.thirdSubject = subject
+    this.initTargetsAndContentAreas(subject.id)
   }
 
-  selectTarget(targetId: number): void {
-    this.selectedOps.target = targetId
+  selectTarget(target: Target): void {
+    this.selectedOps.target = target
   }
 
-  selectContentArea(contentAreaId: number): void {
-    this.selectedOps.contentArea = contentAreaId
+  selectContentArea(contentArea: ContentArea): void {
+    this.selectedOps.contentArea = contentArea
+  }
+
+  removeGrade(gradeId: number): void {
+    this.model.ops.grades = this.model.ops.grades.filter(grade => grade.id !== gradeId)
+  }
+
+  removeSubject(subjectId: number): void {
+    this.model.ops.subjects = this.model.ops.subjects.filter(subject => subject.id !== subjectId)
+  }
+
+  removeTarget(targetId: number): void {
+    this.model.ops.targets = this.model.ops.targets.filter(target => target.id !== targetId)
+  }
+
+  removeContentArea(contentAreaId: number): void {
+    this.model.ops.contentAreas = this.model.ops.contentAreas.filter(contentArea => contentArea.id !== contentAreaId)
+  }
+
+  removeWideKnowledge(wideKnowledgeId: number): void {
+    this.model.ops.wideKnowledges = this.model.ops.wideKnowledges.filter(wideKnowledge => wideKnowledge.id !== wideKnowledgeId)
+  }
+
+  private isNull(value: any) {
+    return value === undefined || value == null || value === 'null' || value === ''
+  }
+
+  private initOps() {
+    return {
+      grade: null,
+      firstSubject: null,
+      secondSubject: null,
+      thirdSubject: null,
+      target: null,
+      contentArea: null,
+    }
   }
 
   private setOpsToModel() {
-    const subjectIds = []
-    if (this.selectedOps.firstSubject != null) subjectIds.push(this.selectedOps.firstSubject)
-    if (this.selectedOps.secondSubject != null) subjectIds.push(this.selectedOps.secondSubject)
-    if (this.selectedOps.thirdSubject != null) subjectIds.push(this.selectedOps.thirdSubject)
-    
-    this.model.ops = {
-      gradeIds: [this.selectedOps.grade],
-      subjectIds: subjectIds,
-      targetIds: [this.selectedOps.target],
-      contentAreaIds: [this.selectedOps.contentArea],
-      //wideKnowledgeIds: [this.selectedOps.wideKnowledge],
+    this.addIfNotExists(this.selectedOps.grade, this.model.ops.grades)
+    this.addIfNotExists(this.selectedOps.firstSubject, this.model.ops.subjects)
+    this.addIfNotExists(this.selectedOps.secondSubject, this.model.ops.subjects)
+    this.addIfNotExists(this.selectedOps.thirdSubject, this.model.ops.subjects)
+    this.addIfNotExists(this.selectedOps.target, this.model.ops.targets)
+    this.addIfNotExists(this.selectedOps.contentArea, this.model.ops.contentAreas)
+  }
+
+  private addIfNotExists(obj: any, list: any) {
+    if (obj != null && !list.some(it => it.id === obj.id)) {
+      list.push(obj)
     }
   }
 
   private initTargetsAndContentAreas(subjectId: number) {
-    const gradeId = this.selectedOps.grade
+    const grade = this.selectedOps.grade
     
-    this.opsService.getTargets(gradeId, subjectId).subscribe(
+    this.opsService.getTargets(grade.id, subjectId).subscribe(
       targets => {
         this.ops.targets = targets
       }
     )
 
-    this.opsService.getContentAreas(gradeId, subjectId).subscribe(
+    this.opsService.getContentAreas(grade.id, subjectId).subscribe(
       contentAreas => {
         this.ops.contentAreas = contentAreas
       }
     )
   }
 
-  private initSubjects(level: string, subjectId: number | any): boolean {
-    if (subjectId == null || subjectId === '') {
+  private initSubjects(level: string, subject: Subject): boolean {
+    if (subject == null) {
       this.initSubjectsIfNoneSelected(level)
       return true
     

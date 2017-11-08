@@ -45,13 +45,27 @@
                 <input type="text" maxlength="128" required [(ngModel)]="model.info" name="info" #info="ngModel" />
                 <div [hidden]="info.valid || info.pristine" class="form__item-error alert alert-danger"><div class="text">Pakollinen tieto</div></div>
               </div>
+              <div *ngIf="model.ops != null" class="form__item">
+                <div *ngFor="let grade of model.ops.grades" class="tag" title="{{ grade.name }}">
+                  {{ grade.name }} <a (click)="removeGrade(grade.id)">x</a>
+                </div>
+                <div *ngFor="let subject of model.ops.subjects" class="tag" title="{{ subject.name }}">
+                  {{ subject.name }} <a (click)="removeSubject(subject.id)">x</a>
+                </div>
+                <div *ngFor="let target of model.ops.targets" class="tag" title="{{ target.name }}">
+                  {{ target.name | limitTo: 40 }} <a (click)="removeTarget(target.id)">x</a>
+                </div>
+                <div *ngFor="let contentArea of model.ops.contentAreas" class="tag" title="{{ contentArea.name }}">
+                  {{ contentArea.name | limitTo: 40 }} <a (click)="removeContentArea(contentArea.id)">x</a>
+                </div>
+              </div>
               <div class="form__title">Oppiaine</div>
               <div class="form__item">
                 <label>Vuosiluokka</label>
                 <div class="select__wrapper">
-                  <select #grade (change)="selectGrade(grade.value)">
-                      <option value="">Valitse vuosiluokka</option>  
-                      <option *ngFor="let grade of ops.grades" [value]="grade.id">
+                  <select (ngModelChange)="selectGrade($event)" [(ngModel)]="selectedOps.grade" name="grade">
+                      <option [value]="null">Valitse vuosiluokka</option>    
+                      <option *ngFor="let grade of ops.grades" [ngValue]="grade">
                           {{grade.name}}
                       </option>
                   </select>
@@ -62,9 +76,9 @@
                   <div class="form__item">
                     <label>Oppiaine</label>
                     <div class="select__wrapper">
-                      <select #subject (change)="selectFirstSubject(subject.value)">
-                          <option value="">Valitse oppiaine</option>  
-                          <option *ngFor="let subject of ops.firstSubjects" [value]="subject.id">
+                      <select (ngModelChange)="selectFirstSubject($event)" [(ngModel)]="selectedOps.firstSubject" name="firstSubject">
+                          <option [value]="null">Valitse oppiaine</option>
+                          <option *ngFor="let subject of ops.firstSubjects" [ngValue]="subject">
                               {{subject.name}}
                           </option>
                       </select>
@@ -75,9 +89,9 @@
                   <div class="form__item">
                     <label>Oppiaineen tarkenne</label>
                     <div class="select__wrapper">
-                      <select #secondsubject (change)="selectSecondSubject(secondsubject.value)">
-                          <option value="">Valitse oppiaine</option>  
-                          <option *ngFor="let subject of ops.secondSubjects" [value]="subject.id">
+                      <select (ngModelChange)="selectSecondSubject($event)" [(ngModel)]="selectedOps.secondSubject" name="secondSubject">
+                          <option [value]="null">Valitse oppiaine</option>  
+                          <option *ngFor="let subject of ops.secondSubjects" [ngValue]="subject">
                               {{subject.name}}
                           </option>
                       </select>
@@ -86,11 +100,11 @@
                 </div>
                 <div *ngIf="ops.thirdSubjects != null && ops.thirdSubjects.length > 0" class="form__column">
                     <div class="form__item">
-                      <label>Oppiaineen tarkenne</label>
+                      <label>Kurssi</label>
                       <div class="select__wrapper">
-                        <select #thirdsubject (change)="selectThirdSubject(thirdsubject.value)">
-                            <option value="">Valitse oppiaine</option>  
-                            <option *ngFor="let subject of ops.thirdsubjects" [value]="subject.id">
+                        <select (ngModelChange)="selectThirdSubject($event)" [(ngModel)]="selectedOps.thirdSubject" name="thirdSubject">
+                            <option [value]="null">Valitse kurssi</option>  
+                            <option *ngFor="let subject of ops.thirdsubjects" [ngValue]="subject">
                                 {{subject.name}}
                             </option>
                         </select>
@@ -104,9 +118,9 @@
                   <div class="form__item">
                     <label>Tavoite</label>
                     <div class="select__wrapper">
-                      <select #target (change)="selectTarget(target.value)">
-                          <option value="">Valitse tavoite</option>  
-                          <option *ngFor="let target of ops.targets" [value]="target.id" title="{{ target.name }}">
+                      <select (ngModelChange)="selectTarget($event)" [(ngModel)]="selectedOps.target" name="target">
+                          <option [value]="null">Valitse tavoite</option>  
+                          <option *ngFor="let target of ops.targets" [ngValue]="target" title="{{ target.name }}">
                               {{ target.name | limitTo : 60 }}
                           </option>
                       </select>
@@ -117,9 +131,9 @@
                   <div class="form__item">
                     <label>Sisältöalue</label>
                     <div class="select__wrapper">
-                      <select #contentArea (change)="selectContentArea(contentArea.value)">
-                          <option value="">Valitse sisältöalue</option>  
-                          <option *ngFor="let contentArea of ops.contentAreas" [value]="contentArea.id" title="{{ contentArea.name }}">
+                      <select (ngModelChange)="selectContentArea($event)" [(ngModel)]="selectedOps.contentArea" name="contentArea">
+                          <option [value]="null">Valitse sisältöalue</option>  
+                          <option *ngFor="let contentArea of ops.contentAreas" [ngValue]="contentArea" title="{{ contentArea.name }}">
                               {{ contentArea.name | limitTo : 60 }}
                           </option>
                       </select>

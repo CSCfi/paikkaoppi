@@ -1,0 +1,9 @@
+.form__item .tag {
+  background: #e8e8e8;
+  display: inline-block;
+  line-height: 1.1;
+  padding: 2px 5px;
+  border-radius: 30px;
+  font-size: 0.82rem;
+  font-weight: 700;
+}
