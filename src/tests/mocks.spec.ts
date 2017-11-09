@@ -1,7 +1,7 @@
 import { Component } from '@angular/core'
 import { Observable } from 'rxjs/Observable'
 
-import { Task, TaskDashboard, TaskTemplate, User, Role } from '../app/service/model'
+import { Grade, Role, Task, TaskDashboard, TaskTemplate, User } from '../app/service/model';
 
 @Component({
   template: ''
@@ -88,6 +88,13 @@ export class TaskTemplateServiceMock {
   }
 }
 
+export class OpsServiceMock {
+  
+  getGrades(): Observable<Grade[]> {
+    return Observable.of([TestMethods.getGradeWithId(1), TestMethods.getGradeWithId(1)])
+  }
+}
+
 export class TestMethods {
   
   static getTeacher(): User {
@@ -116,6 +123,13 @@ export class TestMethods {
       info: "Info",
       tags: ["tags"],
       user: TestMethods.getTeacher()
+    }
+  }
+
+  static getGradeWithId(id: number): Grade {
+    return {
+      id: id,
+      name: "Vuosiluokat " + id
     }
   }
 }

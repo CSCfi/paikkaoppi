@@ -7,6 +7,7 @@ import { AuthServiceMock, MockComponent, TaskServiceMock, TaskTemplateServiceMoc
 import { AuthService } from '../service/auth.service'
 import { TaskTemplateService } from '../service/task-template.service'
 import { TaskService } from '../service/task.service'
+import { TruncatePipe } from '../pipe/truncate.pipe'
 import { TaskTemplateComponent } from '../task-template/task-template.component'
 import { DeleteTaskTemplateComponent } from '../delete-task-template/delete-task-template.component'
 import { LibraryComponent } from './library.component'
@@ -17,7 +18,7 @@ describe('LibraryComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ LibraryComponent, MockComponent, TaskTemplateComponent, DeleteTaskTemplateComponent ],
+      declarations: [ TruncatePipe, LibraryComponent, MockComponent, TaskTemplateComponent, DeleteTaskTemplateComponent ],
       imports: [
         FormsModule,
         HttpClientModule,
