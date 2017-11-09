@@ -13,7 +13,7 @@ import { Grade, Instruction, Subject, Target, ContentArea, TaskTemplate } from '
 export class TaskTemplateComponent implements OnInit {
   model: any
   ops: any = {}
-  selectedOps: any = this.initOps()
+  selectedOps: any
   phase = 1
   firstPhase = 1
   lastPhase = 3
@@ -27,6 +27,7 @@ export class TaskTemplateComponent implements OnInit {
   ngOnInit() {
     console.log('ngOnInit')
     this.phase = 1
+    this.initOps()
     this.initGrades()
 
     this.route.paramMap.switchMap((params: ParamMap) => {
@@ -86,11 +87,11 @@ export class TaskTemplateComponent implements OnInit {
   }
 
   selectGrade(grade: Grade): void {
-    this.selectedOps = this.initOps()
+    this.initOps()
     this.ops.firstSubjects = []
     this.ops.secondSubjects = []
     this.ops.thirdSubjects = []
-    
+
     if (grade == null) {
       return
     }
@@ -170,12 +171,17 @@ export class TaskTemplateComponent implements OnInit {
     this.model.ops.wideKnowledges = this.model.ops.wideKnowledges.filter(wideKnowledge => wideKnowledge.id !== wideKnowledgeId)
   }
 
+  addNewOps(): void {
+    this.setOpsToModel()
+    this.initOps()
+  }
+
   private isNull(value: any) {
     return value === undefined || value == null || value === 'null' || value === ''
   }
 
   private initOps() {
-    return {
+    this.selectedOps = {
       grade: null,
       firstSubject: null,
       secondSubject: null,
@@ -186,12 +192,23 @@ export class TaskTemplateComponent implements OnInit {
   }
 
   private setOpsToModel() {
+    if (this.model.ops === undefined) {
+      this.model.ops = {
+        grades: [],
+        subjects: [],
+        targets: [],
+        contentAreas: [],
+        wideKnowledges: [],
+      }
+    }
+    
     this.addIfNotExists(this.selectedOps.grade, this.model.ops.grades)
     this.addIfNotExists(this.selectedOps.firstSubject, this.model.ops.subjects)
     this.addIfNotExists(this.selectedOps.secondSubject, this.model.ops.subjects)
     this.addIfNotExists(this.selectedOps.thirdSubject, this.model.ops.subjects)
     this.addIfNotExists(this.selectedOps.target, this.model.ops.targets)
     this.addIfNotExists(this.selectedOps.contentArea, this.model.ops.contentAreas)
+    //this.addIfNotExists(this.selectedOps.wideKnowledge, this.model.ops.wideKnowledges)
   }
 
   private addIfNotExists(obj: any, list: any) {
