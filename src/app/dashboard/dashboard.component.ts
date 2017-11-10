@@ -1,3 +1,4 @@
+import { forEach } from '@angular/router/src/utils/collection';
 import 'rxjs/add/operator/switchMap';
 import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/observable/of';
@@ -60,11 +61,62 @@ export class DashboardComponent implements OnInit {
     if (task != null)
       this.tasks = [task].concat(this.tasks.filter(t => t.id !== this.taskId))
   }
+  
+  setKeyIfOk(index: number, key: string) {
+    this.formError = null
+    
+    if (this.handleSpecialKey(index, key)) {
+      return
+    }
+    
+    if (this.isSupportedKey(key)) {
+      this.model.code[index] = key
+
+      if (index < 4) {
+        document.getElementById('code' + (index + 1)).focus()
+      }
+
+      this.codeChanged()
+    
+    } else {
+      this.model.code[index] = ""
+    }
+  }
+
+  private isSupportedKey(key: string) {
+    return key.length === 1 && !key.match(/[^0-9a-z]/i)
+  }
+
+  private handleSpecialKey(index: number, key: string) {
+    if (key === 'ArrowLeft' || key === 'Backspace') {
+      if (index > 0) {
+        document.getElementById('code' + (index - 1)).focus()
+      }
+      return true
+    
+    } else if (key === 'ArrowRight') {
+      if (index < 4) {
+        document.getElementById('code' + (index + 1)).focus()
+      }
+      return true
+    
+    } else if (key === 'Shift') {
+      return true
+    
+    } else if (key === 'Escape') {
+      for (let i = 0; i < this.model.code.length; i++) {
+        this.model.code[i] = ""
+      }
+      document.getElementById('code0').focus()
+    }
+
+    return false
+  }
 
   codeChanged() {
-    console.log('codeChanged', this.model.getFullCode())
     this.formError = null
     if (this.model.getFullCode().length === 5) {
+      console.log('codeChanged', this.model.getFullCode())
       this.addTask()
     }
   }
@@ -81,7 +133,6 @@ export class DashboardComponent implements OnInit {
       },
       (err) => {
         this.formError = 'not found'
-        this.model = new NewTaskModel(new Array(this.codeLength))
         console.info('Failed to add task with code:', code, '. Reason was:', err)
       })
   }

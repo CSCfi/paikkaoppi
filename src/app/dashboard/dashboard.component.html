@@ -40,11 +40,11 @@
               </div>
               <div class="list__item-footer">
                 <div class="list__item-input">
-                  <input type="text" class="input--code" maxlength="1" required [(ngModel)]="model.code[0]" id="code0" name="code" #code0="ngModel" pattern="[A-Za-z0-9]{1}" onkeydown="this.value=null" onkeyup="if(this.value.trim().length>0)document.getElementById('code1').focus()">
-                  <input type="text" class="input--code" maxlength="1" required [(ngModel)]="model.code[1]" id="code1" name="code" #code1="ngModel" pattern="[A-Za-z0-9]{1}" onkeydown="this.value=null" onkeyup="if(this.value.trim().length>0)document.getElementById('code2').focus()">
-                  <input type="text" class="input--code" maxlength="1" required [(ngModel)]="model.code[2]" id="code2" name="code" #code2="ngModel" pattern="[A-Za-z0-9]{1}" onkeydown="this.value=null" onkeyup="if(this.value.trim().length>0)document.getElementById('code3').focus()">
-                  <input type="text" class="input--code" maxlength="1" required [(ngModel)]="model.code[3]" id="code3" name="code" #code3="ngModel" pattern="[A-Za-z0-9]{1}" onkeydown="this.value=null" onkeyup="if(this.value.trim().length>0)document.getElementById('code4').focus()">
-                  <input type="text" class="input--code" maxlength="1" required [(ngModel)]="model.code[4]" id="code4" name="code" #code4="ngModel" pattern="[A-Za-z0-9]{1}" onkeydown="this.value=null" onkeyup="if(this.value.trim().length>0)document.getElementById('code0').focus()" (change)="codeChanged()">
+                  <input type="text" class="input--code" maxlength="1" required [(ngModel)]="model.code[0]" id="code0" name="code0" #code0="ngModel" (keyup)="setKeyIfOk(0, $event.key)">
+                  <input type="text" class="input--code" maxlength="1" required [(ngModel)]="model.code[1]" id="code1" name="code1" #code1="ngModel" (keyup)="setKeyIfOk(1, $event.key)">
+                  <input type="text" class="input--code" maxlength="1" required [(ngModel)]="model.code[2]" id="code2" name="code2" #code2="ngModel" (keyup)="setKeyIfOk(2, $event.key)">
+                  <input type="text" class="input--code" maxlength="1" required [(ngModel)]="model.code[3]" id="code3" name="code3" #code3="ngModel" (keyup)="setKeyIfOk(3, $event.key)">
+                  <input type="text" class="input--code" maxlength="1" required [(ngModel)]="model.code[4]" id="code4" name="code4" #code4="ngModel" (keyup)="setKeyIfOk(4, $event.key)">
                 </div>
               </div>
             </form>
