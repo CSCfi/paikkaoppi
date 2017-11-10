@@ -57,6 +57,9 @@
             <div class="list__item-content">
               <div class="list__item-title">{{t.name}}</div>
               <div class="list__item-detail">{{t.resultItemCount}} merkintää</div>
+              <div class="list__item-code" *ngIf="role === 'teacher'">
+                <div class="code">{{t.code}}</div>
+              </div>
               <!--
               <div class="list__item-marks"> 
                 <div class="list__item-mark"></div>
@@ -64,9 +67,6 @@
                 <div class="list__item-mark"></div>
               </div>
               -->
-            </div>
-            <div class="list__item-code" *ngIf="role === 'teacher'">
-              <div class="code">{{t.code}}</div>
             </div>
           </a>
         </div>
