@@ -59,7 +59,7 @@ export class DashboardComponent implements OnInit {
     return this.profileService.getProfile(user)
   }
 
-  private getProfileClass(): string {
+  getProfileClass(): string {
     return 'variant--' + this.getProfile(this.user);
   }
 

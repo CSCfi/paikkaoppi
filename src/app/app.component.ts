@@ -15,7 +15,7 @@ export class AppComponent {
     private authService: AuthService) {
   }
 
-  private getProfileClass(): string {
+  getProfileClass(): string {
     return 'variant--' + this.profileService.getProfile(this.authService.getUser());
   }
 
