@@ -12,12 +12,15 @@ import { MapModule } from './map/map.module'
 import { AppRoutingModule } from './app-routing.module'
 import { HomeComponent } from './home/home.component'
 
-import { AuthService } from './service/auth.service'
 import { AuthGuard } from './service/auth.guard'
 import { NotLoggedInGuard } from './service/not-logged-in.guard'
+
+import { AuthService } from './service/auth.service'
 import { TaskService } from './service/task.service'
 import { TaskTemplateService } from './service/task-template.service'
 import { OpsService } from './service/ops.service'
+import { ProfileService } from './service/profile.service'
+
 import { TruncatePipe } from './pipe/truncate.pipe'
 import { MessageModule } from './message/message.module'
 import { TaskTemplateComponent } from './task-template/task-template.component'
@@ -36,7 +39,7 @@ import { DeleteTaskTemplateComponent } from './delete-task-template/delete-task-
   imports: [
     AppRoutingModule, BrowserModule, FormsModule, HttpClientModule, MapModule, MessageModule
   ],
-  providers: [AuthService, TaskService, TaskTemplateService, OpsService, AuthGuard, NotLoggedInGuard],
+  providers: [AuthService, TaskService, TaskTemplateService, OpsService, ProfileService, AuthGuard, NotLoggedInGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

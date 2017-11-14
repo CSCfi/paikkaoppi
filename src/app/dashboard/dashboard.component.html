@@ -80,10 +80,11 @@
         </div>
       </div>
       <div id="profile" class="view__column">
-        <div id="profile-view" class="profile">
+        <div *ngIf="profileEdit == false" id="profile-view" class="profile">
+          <div (click)="profileEdit = true" class="profile__header">Muokkaa</div>
           <div class="profile__item">
             <div class="profile__image">
-              <div class="image variant--1"></div>
+              <div class="image {{getProfileClass()}}"></div>
             </div>
           </div>
           <div class="profile__item">
@@ -114,6 +115,19 @@
           <div class="profile__footer">
             <div class="profile__footer-item">
               <a (click)="logout()">Kirjaudu ulos</a>
+            </div>
+          </div>
+        </div>
+        <div *ngIf="profileEdit == true" id="profile-edit" class="profile is-open">
+          <div class="profile__header">
+            <div (click)="profileEdit = false" class="profile__header">Takaisin</div>
+            <div (click)="saveProfile()" class="profile__header-edit">Tallenna</div>
+          </div>
+          <div class="profile__item">
+            <div class="profile__image">
+              <div (click)="changeProfile(1)" class="profile__image-prev"></div>
+              <div id="profileImage" class="image {{getProfileClass()}}"></div>
+              <div (click)="changeProfile(2)" class="profile__image-next"></div>
             </div>
           </div>
         </div>

@@ -1,4 +1,7 @@
-import { Component} from '@angular/core';
+import { Component } from '@angular/core';
+
+import { ProfileService } from './service/profile.service'
+import { AuthService } from './service/auth.service'
 import { DashboardComponent } from './dashboard/dashboard.component';
 
 @Component({
@@ -7,6 +10,13 @@ import { DashboardComponent } from './dashboard/dashboard.component';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  constructor() {
+  constructor(
+    private profileService: ProfileService,
+    private authService: AuthService) {
   }
+
+  private getProfileClass(): string {
+    return 'variant--' + this.profileService.getProfile(this.authService.getUser());
+  }
+
 }

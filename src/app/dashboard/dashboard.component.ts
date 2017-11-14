@@ -6,6 +6,7 @@ import { Component, OnInit } from '@angular/core'
 import { Router, ParamMap, ActivatedRoute } from '@angular/router'
 import { AuthService } from '../service/auth.service'
 import { TaskService } from '../service/task.service'
+import { ProfileService } from '../service/profile.service'
 import { Role, Task, TaskDashboard, User } from '../service/model';
 
 @Component({
@@ -24,9 +25,14 @@ export class DashboardComponent implements OnInit {
   codeLength = 5
   model: NewTaskModel = new NewTaskModel(new Array(this.codeLength))
   formError: string
-
-  constructor(private authService: AuthService, private router: Router,
-    private route: ActivatedRoute, private taskService: TaskService) { }
+  profileEdit = false
+  
+  constructor(
+    private authService: AuthService,
+    private router: Router,
+    private route: ActivatedRoute,
+    private taskService: TaskService,
+    private profileService: ProfileService) { }
 
   ngOnInit() {
     this.user = this.authService.getUser()
@@ -37,6 +43,24 @@ export class DashboardComponent implements OnInit {
         this.taskId = id
         this.loadTasks()
       })
+  }
+
+  changeProfile(profile: number) {
+    this.profileService.setProfile(profile)
+  }
+
+  saveProfile() {
+    this.profileService.updateProfile().subscribe(
+      value => this.profileEdit = false
+    )
+  }
+
+  private getProfile(user: User): number {
+    return this.profileService.getProfile(user)
+  }
+
+  private getProfileClass(): string {
+    return 'variant--' + this.getProfile(this.user);
   }
 
   private loadTasks() {
@@ -61,7 +85,7 @@ export class DashboardComponent implements OnInit {
     if (task != null)
       this.tasks = [task].concat(this.tasks.filter(t => t.id !== this.taskId))
   }
-  
+
   setKeyIfOk(index: number, key: string) {
     this.formError = null
     
@@ -142,6 +166,7 @@ export class DashboardComponent implements OnInit {
     this.authService.logout()
   }
 }
+
 export class NewTaskModel {
   code: string[]
 

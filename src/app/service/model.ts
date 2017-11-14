@@ -16,7 +16,8 @@ export interface User {
   role: Role,
   municipality: string,
   school: string,
-  schoolClass: string
+  schoolClass: string,
+  profile: number
 }
 
 /**
