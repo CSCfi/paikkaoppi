@@ -105,7 +105,8 @@ export class TestMethods {
       role: 'teacher',
       municipality: 'KuntaYksi',
       school: 'DemolaTestSchool',
-      schoolClass: '9A'
+      schoolClass: '9A',
+      profile: 1
     }
   }
 
