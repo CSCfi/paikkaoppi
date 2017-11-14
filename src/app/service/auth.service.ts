@@ -35,7 +35,14 @@ export class AuthService {
   logout() {
     console.log('AuthService.logout()')
     this.localStorageLogout()
-    window.location.href = environment.logoutUri
+
+    if (environment.production === true) {
+      window.location.href = environment.logoutUri
+    } else {
+      this.http.get<User>(environment.logoutUri).subscribe(value =>
+        this.router.navigate(['/'])
+      )
+    }
   }
 
   private updateCurrentUser(): Observable<void> {
