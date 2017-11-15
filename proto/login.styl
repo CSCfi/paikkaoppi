@@ -1,0 +1,38 @@
+@require 'styl/*'
+
+.view__index-columns
+  @media (min-width: media_small)
+    display flex
+    align-items stretch
+    position absolute
+    top 0
+    left 0
+    right 0
+    bottom 0
+.view__index-column 
+  position relative
+  
+  &:nth-child(1)
+    flex 1 0 auto
+    padding base_padding
+    display flex
+    flex-direction column
+    justify-content center
+    align-items center
+    @media (min-width: media_small)
+      max-width calc(100vw \- 610px)
+    
+  &:nth-child(2)
+    background linear-gradient(45deg, #f88043, #f8f7cc)
+    @media (min-width: media_small)
+      min-width 550px
+      margin 0 0 0 80px
+      
+
+
+.image__index
+  position absolute
+  margin-top 20vh
+  margin-left -100px
+  animation float 6s ease-in-out infinite
+  
