@@ -24,7 +24,8 @@ import { ProfileService } from './service/profile.service'
 import { TruncatePipe } from './pipe/truncate.pipe'
 import { MessageModule } from './message/message.module'
 import { TaskTemplateComponent } from './task-template/task-template.component'
-import { DeleteTaskTemplateComponent } from './delete-task-template/delete-task-template.component'
+import { DeleteTaskTemplateComponent } from './delete-task-template/delete-task-template.component';
+import { CodeComponent } from './code/code.component'
 
 @NgModule({
   declarations: [
@@ -35,6 +36,7 @@ import { DeleteTaskTemplateComponent } from './delete-task-template/delete-task-
     LibraryComponent,
     TaskTemplateComponent,
     DeleteTaskTemplateComponent,
+    CodeComponent,
   ],
   imports: [
     AppRoutingModule, BrowserModule, FormsModule, HttpClientModule, MapModule, MessageModule
