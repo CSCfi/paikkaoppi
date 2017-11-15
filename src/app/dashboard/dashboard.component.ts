@@ -26,6 +26,7 @@ export class DashboardComponent implements OnInit {
   model: NewTaskModel = new NewTaskModel(new Array(this.codeLength))
   formError: string
   profileEdit = false
+  codePasted = false
   
   constructor(
     private authService: AuthService,
@@ -87,11 +88,11 @@ export class DashboardComponent implements OnInit {
   }
 
   setKeyIfOk(index: number, key: string) {
-    this.formError = null
-    
     if (this.handleSpecialKey(index, key)) {
       return
     }
+
+    this.formError = null
     
     if (this.isSupportedKey(key)) {
       this.model.code[index] = key
@@ -105,6 +106,34 @@ export class DashboardComponent implements OnInit {
     } else {
       this.model.code[index] = ""
     }
+  }
+
+  handlePaste(e: any) {
+    const content = e.clipboardData.getData('text/plain');
+    if (this.isSupportedCode(content)) {
+      for (let i = 0; i < content.length; i++) {
+        this.model.code[i] = content.charAt(i)
+      }
+      console.log('code pasted:', content)
+      this.codeChanged()
+    }
+
+    this.codePasted = true
+    e.preventDefault()
+  }
+
+  private isSupportedCode(code: string) {
+    if (code == null || code === '' || code.length !== 5) {
+      return false
+    }
+
+    for (let i = 0; i < code.length; i++) {
+      if (!this.isSupportedKey(code.charAt(i))) {
+        return false
+      }
+    }
+
+    return true
   }
 
   private isSupportedKey(key: string) {
@@ -124,7 +153,7 @@ export class DashboardComponent implements OnInit {
       }
       return true
     
-    } else if (key === 'Shift') {
+    } else if (key === 'Shift' || key === 'Control' || key === 'Meta' || key === 'Tab') {
       return true
     
     } else if (key === 'Escape') {
@@ -132,8 +161,13 @@ export class DashboardComponent implements OnInit {
         this.model.code[i] = ""
       }
       document.getElementById('code0').focus()
+      return true
+    
+    } else if (this.codePasted) {
+      this.codePasted = false
+      return true
     }
-
+    
     return false
   }
 
