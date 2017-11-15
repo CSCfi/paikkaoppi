@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'
 import { HttpClient } from '@angular/common/http'
 import { Observable } from 'rxjs/Observable'
 import { environment } from '../../environments/environment'
-import { Grade, Subject, Target, ContentArea } from './model'
+import { Grade, Subject, Target, ContentArea, WideKnowledge } from './model'
 
 @Injectable()
 export class OpsService {
@@ -10,6 +10,10 @@ export class OpsService {
 
   getGrades(): Observable<Grade[]> {
     return this.http.get<Grade[]>(`${environment.apiUri}/ops/grades`)
+  }
+
+  getWideKnowledges(gradeId: number): Observable<WideKnowledge[]> {
+    return this.http.get<WideKnowledge[]>(`${environment.apiUri}/ops/grades/${gradeId}/wideknowledges`)
   }
 
   getSubjects(gradeId: number): Observable<Subject[]> {
@@ -27,4 +31,5 @@ export class OpsService {
   getContentAreas(gradeId: number, subjectId: number): Observable<ContentArea[]> {
     return this.http.get<ContentArea[]>(`${environment.apiUri}/ops/grades/${gradeId}/subjects/${subjectId}/contentareas`)
   }
+  
 }

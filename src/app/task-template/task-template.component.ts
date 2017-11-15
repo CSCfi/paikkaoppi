@@ -3,7 +3,7 @@ import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { TaskTemplateService } from '../service/task-template.service';
 import { OpsService } from '../service/ops.service';
 import { Component, OnInit } from '@angular/core';
-import { Grade, Instruction, Subject, Target, ContentArea, TaskTemplate } from '../service/model';
+import { Grade, Instruction, Subject, Target, ContentArea, TaskTemplate, WideKnowledge } from '../service/model';
 
 @Component({
   selector: 'app-task-template',
@@ -91,6 +91,7 @@ export class TaskTemplateComponent implements OnInit {
     this.ops.firstSubjects = []
     this.ops.secondSubjects = []
     this.ops.thirdSubjects = []
+    this.ops.wideKnowledges = []
 
     if (grade == null) {
       return
@@ -102,6 +103,16 @@ export class TaskTemplateComponent implements OnInit {
         this.selectedOps.grade = grade
       }
     )
+
+    this.opsService.getWideKnowledges(grade.id).subscribe(
+      value => {
+        this.ops.wideKnowledges = value
+      }
+    )
+  }
+
+  selectWideKnowledge(wideKnowledge: WideKnowledge): void {
+    this.selectedOps.wideKnowledge = wideKnowledge
   }
 
   selectFirstSubject(subject: Subject): void {
@@ -173,7 +184,6 @@ export class TaskTemplateComponent implements OnInit {
 
   addNewOps(): void {
     this.setOpsToModel()
-    this.initOps()
   }
 
   private isNull(value: any) {
@@ -188,6 +198,7 @@ export class TaskTemplateComponent implements OnInit {
       thirdSubject: null,
       target: null,
       contentArea: null,
+      wideKnowledge: null
     }
   }
 
@@ -208,7 +219,10 @@ export class TaskTemplateComponent implements OnInit {
     this.addIfNotExists(this.selectedOps.thirdSubject, this.model.ops.subjects)
     this.addIfNotExists(this.selectedOps.target, this.model.ops.targets)
     this.addIfNotExists(this.selectedOps.contentArea, this.model.ops.contentAreas)
-    //this.addIfNotExists(this.selectedOps.wideKnowledge, this.model.ops.wideKnowledges)
+    this.addIfNotExists(this.selectedOps.wideKnowledge, this.model.ops.wideKnowledges)
+
+    console.log(this.selectedOps.wideKnowledge)
+    console.log(this.model.ops.wideKnowledges)
   }
 
   private addIfNotExists(obj: any, list: any) {

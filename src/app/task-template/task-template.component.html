@@ -58,17 +58,37 @@
                 <div *ngFor="let contentArea of model.ops.contentAreas" class="tag" title="{{ contentArea.name }}">
                   {{ contentArea.name | limitTo: 40 }} <a (click)="removeContentArea(contentArea.id)">x</a>
                 </div>
+                <div *ngFor="let wideKnowledge of model.ops.wideKnowledges" class="tag" title="{{ wideKnowledge.name }}">
+                  {{ wideKnowledge.name | limitTo: 40 }} <a (click)="removeWideKnowledge(wideKnowledge.id)">x</a>
+                </div>
               </div>
               <div class="form__title">Oppiaine</div>
-              <div class="form__item">
-                <label>Vuosiluokka</label>
-                <div class="select__wrapper">
-                  <select (ngModelChange)="selectGrade($event)" [(ngModel)]="selectedOps.grade" name="grade">
-                      <option [ngValue]="null">Valitse vuosiluokka</option>    
-                      <option *ngFor="let grade of ops.grades" [ngValue]="grade">
-                          {{grade.name}}
-                      </option>
-                  </select>
+              <div class="form__columns">
+                <div class="form__column">
+                  <div class="form__item">
+                    <label>Vuosiluokka</label>
+                    <div class="select__wrapper">
+                      <select (ngModelChange)="selectGrade($event)" [(ngModel)]="selectedOps.grade" name="grade">
+                        <option [ngValue]="null">Valitse vuosiluokka</option>    
+                        <option *ngFor="let grade of ops.grades" [ngValue]="grade">
+                            {{grade.name}}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div *ngIf="ops.wideKnowledges != null && ops.wideKnowledges.length > 0" class="form__column">
+                  <div class="form__item">
+                    <label>Laaja-alainen osaaminen</label>
+                    <div class="select__wrapper">
+                      <select (ngModelChange)="selectWideKnowledge($event)" [(ngModel)]="selectedOps.wideKnowledge" name="wideKnowledge">
+                        <option [ngValue]="null">Valitse laaja-alainen osaaminen</option>    
+                        <option *ngFor="let wideKnowledge of ops.wideKnowledges" [ngValue]="wideKnowledge">
+                            {{wideKnowledge.name}}
+                        </option>
+                      </select>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div *ngIf="ops.firstSubjects != null && ops.firstSubjects.length > 0" class="form__columns">
@@ -77,10 +97,10 @@
                     <label>Oppiaine</label>
                     <div class="select__wrapper">
                       <select (ngModelChange)="selectFirstSubject($event)" [(ngModel)]="selectedOps.firstSubject" name="firstSubject">
-                          <option [ngValue]="null">Valitse oppiaine</option>
-                          <option *ngFor="let subject of ops.firstSubjects" [ngValue]="subject">
-                              {{subject.name}}
-                          </option>
+                        <option [ngValue]="null">Valitse oppiaine</option>
+                        <option *ngFor="let subject of ops.firstSubjects" [ngValue]="subject">
+                            {{subject.name}}
+                        </option>
                       </select>
                     </div>
                   </div>
@@ -90,10 +110,10 @@
                     <label>Oppiaineen tarkenne</label>
                     <div class="select__wrapper">
                       <select (ngModelChange)="selectSecondSubject($event)" [(ngModel)]="selectedOps.secondSubject" name="secondSubject">
-                          <option [ngValue]="null">Valitse oppiaine</option>  
-                          <option *ngFor="let subject of ops.secondSubjects" [ngValue]="subject">
-                              {{subject.name}}
-                          </option>
+                        <option [ngValue]="null">Valitse oppiaine</option>  
+                        <option *ngFor="let subject of ops.secondSubjects" [ngValue]="subject">
+                            {{subject.name}}
+                        </option>
                       </select>
                     </div>
                   </div>
@@ -103,10 +123,10 @@
                       <label>Kurssi</label>
                       <div class="select__wrapper">
                         <select (ngModelChange)="selectThirdSubject($event)" [(ngModel)]="selectedOps.thirdSubject" name="thirdSubject">
-                            <option [ngValue]="null">Valitse kurssi</option>  
-                            <option *ngFor="let subject of ops.thirdsubjects" [ngValue]="subject">
-                                {{subject.name}}
-                            </option>
+                          <option [ngValue]="null">Valitse kurssi</option>  
+                          <option *ngFor="let subject of ops.thirdsubjects" [ngValue]="subject">
+                              {{subject.name}}
+                          </option>
                         </select>
                       </div>
                     </div>
@@ -119,10 +139,10 @@
                     <label>Tavoite</label>
                     <div class="select__wrapper">
                       <select (ngModelChange)="selectTarget($event)" [(ngModel)]="selectedOps.target" name="target">
-                          <option [ngValue]="null">Valitse tavoite</option>  
-                          <option *ngFor="let target of ops.targets" [ngValue]="target" title="{{ target.name }}">
-                              {{ target.name | limitTo : 60 }}
-                          </option>
+                        <option [ngValue]="null">Valitse tavoite</option>  
+                        <option *ngFor="let target of ops.targets" [ngValue]="target" title="{{ target.name }}">
+                            {{ target.name | limitTo : 60 }}
+                        </option>
                       </select>
                     </div>
                   </div>
@@ -132,10 +152,10 @@
                     <label>Sisältöalue</label>
                     <div class="select__wrapper">
                       <select (ngModelChange)="selectContentArea($event)" [(ngModel)]="selectedOps.contentArea" name="contentArea">
-                          <option [ngValue]="null">Valitse sisältöalue</option>  
-                          <option *ngFor="let contentArea of ops.contentAreas" [ngValue]="contentArea" title="{{ contentArea.name }}">
-                              {{ contentArea.name | limitTo : 60 }}
-                          </option>
+                        <option [ngValue]="null">Valitse sisältöalue</option>  
+                        <option *ngFor="let contentArea of ops.contentAreas" [ngValue]="contentArea" title="{{ contentArea.name }}">
+                            {{ contentArea.name | limitTo : 60 }}
+                        </option>
                       </select>
                     </div>
                   </div>
