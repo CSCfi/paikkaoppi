@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http'
 import { AuthService } from '../service/auth.service'
 import { TaskService } from '../service/task.service'
 import { ProfileService } from '../service/profile.service'
+import { CodeComponent } from '../code/code.component'
 import { MockComponent, AuthServiceMock, TaskServiceMock } from '../../tests/mocks.spec'
 
 import { DashboardComponent } from './dashboard.component'
@@ -18,7 +19,7 @@ describe('DashboardComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DashboardComponent, MockComponent ],
+      declarations: [ DashboardComponent, CodeComponent, MockComponent ],
       imports: [
         FormsModule,
         HttpClientModule,

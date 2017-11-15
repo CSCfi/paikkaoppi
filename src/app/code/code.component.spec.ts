@@ -1,4 +1,10 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing'
+import { FormsModule } from '@angular/forms'
+import { HttpClientModule } from '@angular/common/http'
+
+import { TaskService } from '../service/task.service'
+import { MockComponent, TaskServiceMock } from '../../tests/mocks.spec'
 
 import { CodeComponent } from './code.component';
 
@@ -8,10 +14,18 @@ describe('CodeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CodeComponent ]
+      declarations: [ CodeComponent ],
+      imports: [
+        FormsModule,
+        HttpClientModule,
+        RouterTestingModule
+      ],
+      providers: [
+        { provide: TaskService, useClass: TaskServiceMock }
+      ]
     })
-    .compileComponents();
-  }));
+    .compileComponents()
+  }))
 
   beforeEach(() => {
     fixture = TestBed.createComponent(CodeComponent);
