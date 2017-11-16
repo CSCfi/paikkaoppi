@@ -107,10 +107,10 @@
                 </div>
                 <div *ngIf="ops.secondSubjects != null && ops.secondSubjects.length > 0" class="form__column">
                   <div class="form__item">
-                    <label>Oppiaineen tarkenne</label>
+                    <label>{{ secondSubjectTitle }}</label>
                     <div class="select__wrapper">
                       <select (ngModelChange)="selectSecondSubject($event)" [(ngModel)]="selectedOps.secondSubject" name="secondSubject">
-                        <option [ngValue]="null">Valitse oppiaine</option>  
+                        <option [ngValue]="null">{{ secondSubjectSelectTitle }}</option>  
                         <option *ngFor="let subject of ops.secondSubjects" [ngValue]="subject">
                             {{subject.name}}
                         </option>
@@ -118,19 +118,21 @@
                     </div>
                   </div>
                 </div>
-                <div *ngIf="ops.thirdSubjects != null && ops.thirdSubjects.length > 0" class="form__column">
-                    <div class="form__item">
-                      <label>Kurssi</label>
-                      <div class="select__wrapper">
-                        <select (ngModelChange)="selectThirdSubject($event)" [(ngModel)]="selectedOps.thirdSubject" name="thirdSubject">
-                          <option [ngValue]="null">Valitse kurssi</option>  
-                          <option *ngFor="let subject of ops.thirdsubjects" [ngValue]="subject">
-                              {{subject.name}}
-                          </option>
-                        </select>
-                      </div>
+              </div>
+              <div *ngIf="ops.thirdSubjects != null && ops.thirdSubjects.length > 0" class="form__columns">
+                <div class="form__column">
+                  <div class="form__item">
+                    <label>Kurssi</label>
+                    <div class="select__wrapper">
+                      <select (ngModelChange)="selectThirdSubject($event)" [(ngModel)]="selectedOps.thirdSubject" name="thirdSubject">
+                        <option [ngValue]="null">Valitse kurssi</option>  
+                        <option *ngFor="let subject of ops.thirdSubjects" [ngValue]="subject">
+                            {{subject.name}}
+                        </option>
+                      </select>
                     </div>
                   </div>
+                </div>
               </div>
               <div *ngIf="selectedOps.firstSubject != null" class="form__title">Opetussuunnitelman mukaiset tavoitteet</div>
               <div *ngIf="selectedOps.firstSubject != null" class="form__columns">

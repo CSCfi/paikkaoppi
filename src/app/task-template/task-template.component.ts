@@ -17,6 +17,8 @@ export class TaskTemplateComponent implements OnInit {
   phase = 1
   firstPhase = 1
   lastPhase = 3
+  secondSubjectTitle = 'Oppiaineen tarkenne'
+  secondSubjectSelectTitle = 'Valitse oppiaine'
 
   constructor(
     private taskTemplateService: TaskTemplateService,
@@ -109,6 +111,11 @@ export class TaskTemplateComponent implements OnInit {
         this.ops.wideKnowledges = value
       }
     )
+
+    if (grade.name === 'Lukio') {
+      this.secondSubjectTitle = 'Oppiaineen tarkenne / kurssi'
+      this.secondSubjectSelectTitle = 'Valitse oppiaine / kurssi'
+    }
   }
 
   selectWideKnowledge(wideKnowledge: WideKnowledge): void {
