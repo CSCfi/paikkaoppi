@@ -93,6 +93,8 @@ export class TaskTemplateComponent implements OnInit {
     this.ops.firstSubjects = []
     this.ops.secondSubjects = []
     this.ops.thirdSubjects = []
+    this.ops.targets = []
+    this.ops.contentAreas = []
     this.ops.wideKnowledges = []
 
     if (grade == null) {
