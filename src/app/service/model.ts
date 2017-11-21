@@ -3,6 +3,7 @@ import { MapAction } from '../map/oskari-rpc.component'
 import { Result } from './model-result'
 
 export type Role = "teacher" | "student"
+export type TaskType = "INVESTIGATE" | "ACT" | "PUZZLE"
 
 export class Roles {
   static teacherRole: Role = "teacher"

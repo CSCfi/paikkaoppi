@@ -20,6 +20,7 @@ import { TaskService } from './service/task.service'
 import { TaskTemplateService } from './service/task-template.service'
 import { OpsService } from './service/ops.service'
 import { ProfileService } from './service/profile.service'
+import { ConversionService } from './service/conversion.service'
 
 import { TruncatePipe } from './pipe/truncate.pipe'
 import { MessageModule } from './message/message.module'
@@ -41,7 +42,7 @@ import { CodeComponent } from './code/code.component'
   imports: [
     AppRoutingModule, BrowserModule, FormsModule, HttpClientModule, MapModule, MessageModule
   ],
-  providers: [AuthService, TaskService, TaskTemplateService, OpsService, ProfileService, AuthGuard, NotLoggedInGuard],
+  providers: [AuthService, TaskService, TaskTemplateService, OpsService, ProfileService, ConversionService, AuthGuard, NotLoggedInGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

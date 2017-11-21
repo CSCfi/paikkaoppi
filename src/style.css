@@ -930,6 +930,9 @@ ul {
 .list.type--tasks .list__item-image.type--2 {
   background-image: url("assets/bg_outside.png");
 }
+.list.type--tasks .list__item-image.type--3 {
+  background-image: url("assets/bg_outside.png");
+}
 @media (max-width: 940px) {
   .list.type--tasks .list__item-image {
     max-width: 80px;
@@ -967,11 +970,15 @@ ul {
   box-shadow: 2px 2px 6px rgba(0,0,0,0.6);
 }
 .list.type--tasks .list__item-type.type--1 {
-  background: url("assets/bg_outside-s.png");
+  background: url("assets/bg_inside-s.png");
   background-size: cover;
 }
 .list.type--tasks .list__item-type.type--2 {
-  background: url("assets/bg_inside-s.png");
+  background: url("assets/bg_outside-s.png");
+  background-size: cover;
+}
+.list.type--tasks .list__item-type.type--3 {
+  background: url("assets/bg_outside-s.png");
   background-size: cover;
 }
 .list.type--tasks .list__item-footer {

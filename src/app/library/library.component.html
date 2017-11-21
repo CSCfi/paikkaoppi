@@ -40,6 +40,7 @@
           </div>
         </div>
         <div class="list__item" *ngFor="let t of taskTemplates">
+          <div class="list__item-type {{getTaskTypeClass(t.type)}}"></div>
           <div class="list__item-tag" *ngIf="role === 'teacher' && t.ops != null">
             <div class="tag" *ngFor="let subject of t.ops.subjects">{{subject.name}}</div>
           </div>

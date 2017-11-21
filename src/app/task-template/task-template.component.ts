@@ -305,6 +305,7 @@ export class TaskTemplateComponent implements OnInit {
   private createNewModel(): any {
     return {
       name: null,
+      type: 'INVESTIGATE',
       title: null,
       description: null,
       instructions: [this.createNewInstruction()],

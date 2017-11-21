@@ -37,7 +37,7 @@
             <div class="list__item-status" *ngIf="t.id == taskId">
               <div class="status">Uusi</div>
             </div>
-            <div class="list__item-image type--2"></div>
+            <div class="list__item-image {{getTaskTypeClass(t.type)}}"></div>
             <div class="list__item-content">
               <div class="list__item-title">{{t.name}}</div>
               <div class="list__item-detail">{{t.resultItemCount}} merkintää</div>

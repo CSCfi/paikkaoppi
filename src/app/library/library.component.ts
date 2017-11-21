@@ -4,7 +4,8 @@ import { AuthService } from '../service/auth.service'
 import { TaskTemplateComponent } from '../task-template/task-template.component'
 import { TaskTemplateService } from '../service/task-template.service'
 import { TaskService } from '../service/task.service'
-import { TaskTemplate, User, Role } from '../service/model'
+import { ConversionService } from '../service/conversion.service'
+import { TaskTemplate, User, Role, TaskType } from '../service/model'
 
 @Component({
   selector: 'app-library',
@@ -22,6 +23,7 @@ export class LibraryComponent implements OnInit {
   constructor(private taskTemplateService: TaskTemplateService,
     private authService: AuthService,
     private taskService: TaskService,
+    private conversionService: ConversionService,
     private router: Router) { }
 
   ngOnInit() {
@@ -34,6 +36,10 @@ export class LibraryComponent implements OnInit {
       (data) => {
         this.taskTemplates = data
       })
+  }
+
+  getTaskTypeClass(type: TaskType) {
+    return 'type--' + this.conversionService.taskTypeToOrderNumber(type)
   }
 
   isCreator(template: TaskTemplate) {

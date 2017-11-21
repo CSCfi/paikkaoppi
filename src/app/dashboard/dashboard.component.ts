@@ -7,7 +7,8 @@ import { Router, ParamMap, ActivatedRoute } from '@angular/router'
 import { AuthService } from '../service/auth.service'
 import { TaskService } from '../service/task.service'
 import { ProfileService } from '../service/profile.service'
-import { Role, Task, TaskDashboard, User } from '../service/model';
+import { ConversionService } from '../service/conversion.service'
+import { Role, Task, TaskDashboard, User, TaskType } from '../service/model';
 
 @Component({
   selector: 'app-dashboard',
@@ -29,7 +30,8 @@ export class DashboardComponent implements OnInit {
     private router: Router,
     private route: ActivatedRoute,
     private taskService: TaskService,
-    private profileService: ProfileService) { }
+    private profileService: ProfileService,
+    private conversionService: ConversionService) { }
 
   ngOnInit() {
     this.user = this.authService.getUser()
@@ -42,6 +44,10 @@ export class DashboardComponent implements OnInit {
         this.taskId = id
         this.loadTasks()
       })
+  }
+
+  getTaskTypeClass(type: TaskType) {
+    return 'type--' + this.conversionService.taskTypeToOrderNumber(type)
   }
 
   changeProfile(profile: number) {

@@ -45,6 +45,16 @@
                 <input type="text" maxlength="128" required [(ngModel)]="model.info" name="info" #info="ngModel" />
                 <div [hidden]="info.valid || info.pristine" class="form__item-error alert alert-danger"><div class="text">Pakollinen tieto</div></div>
               </div>
+              <div class="form__item">
+                <label for="type">Tehtävän tyyppi</label><br/>
+                <div class="select__wrapper">
+                  <select [(ngModel)]="model.type" name="type">
+                    <option value="INVESTIGATE">Tutki</option>
+                    <option value="ACT">Toimi</option>
+                    <option value="PUZZLE">Pähkinä</option>
+                  </select>
+                </div>
+              </div>
               <div *ngIf="model.ops != null" class="form__item">
                 <div *ngFor="let grade of model.ops.grades" class="tag" title="{{ grade.name }}">
                   {{ grade.name }} <a (click)="removeGrade(grade.id)">x</a>
