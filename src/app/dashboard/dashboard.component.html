@@ -109,9 +109,9 @@
           </div>
           <div class="profile__item">
             <div class="profile__image">
-              <div (click)="changeProfile(1)" class="profile__image-prev"></div>
+              <div *ngIf="getProfile() == 2" (click)="changeProfile(1)" class="profile__image-prev"></div>
               <div id="profileImage" class="image {{getProfileClass()}}"></div>
-              <div (click)="changeProfile(2)" class="profile__image-next"></div>
+              <div *ngIf="getProfile() == 1" (click)="changeProfile(2)" class="profile__image-next"></div>
             </div>
           </div>
         </div>
