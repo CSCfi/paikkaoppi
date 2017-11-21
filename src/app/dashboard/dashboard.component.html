@@ -104,7 +104,7 @@
         </div>
         <div *ngIf="profileEdit == true" id="profile-edit" class="profile is-open">
           <div class="profile__header">
-            <div (click)="profileEdit = false" class="profile__header">Takaisin</div>
+            <div (click)="resetChangeProfile()" class="profile__header">Takaisin</div>
             <div (click)="saveProfile()" class="profile__header-edit">Tallenna</div>
           </div>
           <div class="profile__item">
