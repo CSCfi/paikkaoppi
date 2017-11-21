@@ -40,8 +40,8 @@
           </div>
         </div>
         <div class="list__item" *ngFor="let t of taskTemplates">
-          <div class="list__item-tag" *ngIf="role === 'teacher'">
-            <div class="tag" *ngFor="let tag of t.tags">{{tag}}</div>
+          <div class="list__item-tag" *ngIf="role === 'teacher' && t.ops != null">
+            <div class="tag" *ngFor="let subject of t.ops.subjects">{{subject.name}}</div>
           </div>
           <div class="list__item-title">{{t.name}}</div>
           <div class="list__item-detail" *ngIf="role === 'teacher'">{{t.title}}</div>
