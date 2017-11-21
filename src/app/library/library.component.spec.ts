@@ -7,6 +7,7 @@ import { AuthServiceMock, MockComponent, TaskServiceMock, TaskTemplateServiceMoc
 import { AuthService } from '../service/auth.service'
 import { TaskTemplateService } from '../service/task-template.service'
 import { TaskService } from '../service/task.service'
+import { ConversionService } from '../service/conversion.service'
 import { TruncatePipe } from '../pipe/truncate.pipe'
 import { TaskTemplateComponent } from '../task-template/task-template.component'
 import { DeleteTaskTemplateComponent } from '../delete-task-template/delete-task-template.component'
@@ -29,7 +30,8 @@ describe('LibraryComponent', () => {
       providers: [
         { provide: AuthService, useClass: AuthServiceMock },
         { provide: TaskService, useClass: TaskServiceMock },
-        { provide: TaskTemplateService, useClass: TaskTemplateServiceMock }
+        { provide: TaskTemplateService, useClass: TaskTemplateServiceMock },
+        ConversionService
       ]
     })
     .compileComponents()

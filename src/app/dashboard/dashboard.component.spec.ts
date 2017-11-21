@@ -8,6 +8,7 @@ import { HttpClientModule } from '@angular/common/http'
 import { AuthService } from '../service/auth.service'
 import { TaskService } from '../service/task.service'
 import { ProfileService } from '../service/profile.service'
+import { ConversionService } from '../service/conversion.service'
 import { CodeComponent } from '../code/code.component'
 import { MockComponent, AuthServiceMock, TaskServiceMock } from '../../tests/mocks.spec'
 
@@ -30,7 +31,8 @@ describe('DashboardComponent', () => {
       providers: [
         { provide: AuthService, useClass: AuthServiceMock },
         { provide: TaskService, useClass: TaskServiceMock },
-        ProfileService
+        ProfileService,
+        ConversionService
       ]
     })
     .compileComponents()
