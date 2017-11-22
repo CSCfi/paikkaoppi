@@ -15,8 +15,6 @@ export class NotLoggedInGuard implements CanActivate {
   canActivate(
     next: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): Observable<boolean> | Promise<boolean> | boolean {
-    
-      console.log("env: " + environment.production)
       
     console.log('NotLoggedInGuard.canActivate')
     return this.authService.isLoggedIn().mergeMap(value => {

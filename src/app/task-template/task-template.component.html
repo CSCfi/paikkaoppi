@@ -180,7 +180,7 @@
                   <br/>
                   Lisätietoa luokituksista <a href="https://eperusteet.opintopolku.fi" target="_blank">ePerusteet -palvelusta</a>.
                 </div>
-                <button class="button" [disabled]="!form.form.valid" (click)="next()">Jatka</button>
+                <button class="button" [disabled]="!form.form.valid" (click)="next(true)">Jatka</button>
                 <a class="button type--secondary" (click)="closeDialog()">Peruuta</a>
               </div>
             </div>
@@ -207,7 +207,7 @@
                 <a class="button type--form" (click)="addInstruction()">Lisää uusi askel</a>
               </div>
               <div class="form__footer">
-                <button class="button" (click)="next()" [disabled]="!form.form.valid">Jatka</button>
+                <button class="button" (click)="next(false)" [disabled]="!form.form.valid">Jatka</button>
                 <a class="button type--secondary" (click)="closeDialog()">Sulje</a>
               </div>
             </div>
@@ -231,6 +231,14 @@
                 <label for="info">Ohje opettajalle</label>
                 <div id="info">{{model.info}}</div>
               </div>
+              <div class="form__item">
+                <label for="info">Tehtävän tyyppi</label>
+                <div id="type">
+                  <span *ngIf="model.type == 'INVESTIGATE'">Tutki</span>
+                  <span *ngIf="model.type == 'ACT'">Toimi</span>
+                  <span *ngIf="model.type == 'PUZZLE'">Pähkinä</span>
+                </div>
+              </div>
               <div class="form__title">Tehtävän ohje</div>
               <ng-template ngFor let-instruction let-index="index" [ngForOf]="model.instructions">
                 <div class="form__item">
@@ -243,34 +251,19 @@
               <div class="form__title">Luokittelut</div>
               <div *ngIf="model.ops != null" class="form__item">
                 <div *ngFor="let grade of model.ops.grades" class="tag" title="{{ grade.name }}">
-                  {{ grade.name }}
-                </div>
-                <div *ngIf="selectedOps.grade != null" class="tag" title="{{ selectedOps.grade.name }}">
-                  {{ selectedOps.grade.name }}
+                  {{ grade.name }} <a (click)="removeGrade(grade.id)">x</a>
                 </div>
                 <div *ngFor="let subject of model.ops.subjects" class="tag" title="{{ subject.name }}">
-                  {{ subject.name }}
-                </div>
-                <div *ngIf="selectedOps.firstSubject != null" class="tag" title="{{ selectedOps.firstSubject.name }}">
-                  {{ selectedOps.firstSubject.name }}
-                </div>
-                <div *ngIf="selectedOps.secondSubject != null" class="tag" title="{{ selectedOps.secondSubject.name }}">
-                  {{ selectedOps.secondSubject.name }}
-                </div>
-                <div *ngIf="selectedOps.thirdSubject != null" class="tag" title="{{ selectedOps.thirdSubject.name }}">
-                  {{ selectedOps.thirdSubject.name }}
+                  {{ subject.name }} <a (click)="removeSubject(subject.id)">x</a>
                 </div>
                 <div *ngFor="let target of model.ops.targets" class="tag" title="{{ target.name }}">
-                  {{ target.name | limitTo: 40 }}
-                </div>
-                <div *ngIf="selectedOps.target != null" class="tag" title="{{ selectedOps.target.name }}">
-                  {{ selectedOps.target.name | limitTo: 40 }}
+                  {{ target.name | limitTo: 40 }} <a (click)="removeTarget(target.id)">x</a>
                 </div>
                 <div *ngFor="let contentArea of model.ops.contentAreas" class="tag" title="{{ contentArea.name }}">
-                  {{ contentArea.name | limitTo: 40 }}
+                  {{ contentArea.name | limitTo: 40 }} <a (click)="removeContentArea(contentArea.id)">x</a>
                 </div>
-                <div *ngIf="selectedOps.contentArea != null" class="tag" title="{{ selectedOps.contentArea.name }}">
-                  {{ selectedOps.contentArea.name | limitTo: 40 }}
+                <div *ngFor="let wideKnowledge of model.ops.wideKnowledges" class="tag" title="{{ wideKnowledge.name }}">
+                  {{ wideKnowledge.name | limitTo: 40 }} <a (click)="removeWideKnowledge(wideKnowledge.id)">x</a>
                 </div>
               </div>
               <div class="form__footer">

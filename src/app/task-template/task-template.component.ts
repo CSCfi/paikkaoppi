@@ -56,7 +56,6 @@ export class TaskTemplateComponent implements OnInit {
   submit() {
     this.setOpsToModel()
     
-    console.log('submit', this.model)
     if (this.model.id !== undefined) {
       this.taskTemplateService.updateTaskTemplate(this.model).subscribe(
         value => this.router.navigate(['/library'])
@@ -68,8 +67,9 @@ export class TaskTemplateComponent implements OnInit {
     }
   }
 
-  next() {
+  next(updateOps: boolean) {
     console.log('next', this.model)
+    if (updateOps) this.setOpsToModel()
     this.phase++
   }
 
@@ -229,9 +229,6 @@ export class TaskTemplateComponent implements OnInit {
     this.addIfNotExists(this.selectedOps.target, this.model.ops.targets)
     this.addIfNotExists(this.selectedOps.contentArea, this.model.ops.contentAreas)
     this.addIfNotExists(this.selectedOps.wideKnowledge, this.model.ops.wideKnowledges)
-
-    console.log(this.selectedOps.wideKnowledge)
-    console.log(this.model.ops.wideKnowledges)
   }
 
   private addIfNotExists(obj: any, list: any) {
