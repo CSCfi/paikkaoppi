@@ -7,7 +7,7 @@
 // mapDomain is the browser https address of this paikkaoppi web site
 // mapId is the id of the 'julkaistu kartta' in website: https://kartta.paikkatietoikkuna.fi
 export const environment = {
-  production: true,
+  production: false,
   mapEnv : 'aws-test',
   //mapDomain : 'https://d9ecs9v95rpj5.cloudfront.net',
   mapDomain : 'https://kartta.paikkatietoikkuna.fi',
@@ -19,5 +19,5 @@ export const environment = {
   mapHelpVisibleInitially: true,
   apiUri: 'https://d2esrtjkfszxd1.cloudfront.net/api/v1',
   loginPageUri: '/assets/login.html',
-  logoutUri: 'http://d2esrtjkfszxd1.cloudfront.net/api/v1/auth/logout',
+  logoutUri: 'https://d2esrtjkfszxd1.cloudfront.net/api/v1/auth/logout',
 }
