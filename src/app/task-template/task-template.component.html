@@ -30,20 +30,10 @@
                 <input type="text" maxlength="128" required [(ngModel)]="model.name" name="name" #name="ngModel" />
                 <div [hidden]="name.valid || name.pristine" class="form__item-error alert alert-danger"><div class="text">Pakollinen tieto</div></div>
               </div>
-              <div class="form__item" [class.has-error]="title.invalid && title.dirty">
-                <label for="title">Lyhyt otsikko</label>
-                <input type="text" maxlength="128" required [(ngModel)]="model.title" name="title" #title="ngModel" />
-                <div [hidden]="title.valid || title.pristine" class="form__item-error alert alert-danger"><div class="text">Pakollinen tieto</div></div>
-              </div>
               <div class="form__item" [class.has-error]="description.invalid && description.dirty">
                 <label for="description">Tehtävän kuvaus</label>
                 <textarea required maxlength="4096" [(ngModel)]="model.description" name="description" #description="ngModel"></textarea>
                 <div [hidden]="description.valid || description.pristine" class="form__item-error alert alert-danger"><div class="text">Pakollinen tieto</div></div>
-              </div>
-              <div class="form__item" [class.has-error]="info.invalid && info.dirty">
-                <label for="info">Ohje opettajalle</label>
-                <input type="text" maxlength="128" required [(ngModel)]="model.info" name="info" #info="ngModel" />
-                <div [hidden]="info.valid || info.pristine" class="form__item-error alert alert-danger"><div class="text">Pakollinen tieto</div></div>
               </div>
               <div class="form__item">
                 <label for="type">Tehtävän tyyppi</label><br/>
@@ -220,16 +210,8 @@
                 <div>{{model.name}}</div>
               </div>
               <div class="form__item">
-                <label for="title">Lyhyt otsikko</label>
-                <div id="title">{{model.title}}</div>
-              </div>
-              <div class="form__item">
                 <label for="description">Tehtävän kuvaus</label>
                 <div id="description">{{model.description}}</div>
-              </div>
-              <div class="form__item">
-                <label for="info">Ohje opettajalle</label>
-                <div id="info">{{model.info}}</div>
               </div>
               <div class="form__item">
                 <label for="info">Tehtävän tyyppi</label>

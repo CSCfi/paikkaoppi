@@ -626,7 +626,7 @@ ul {
 }
 .map__zoom {
   position: absolute;
-  z-index: 202;
+  z-index: 204;
   right: 10px;
   top: 20px;
 }
@@ -652,6 +652,10 @@ ul {
 }
 .map__zoom-out:before {
   content: url("assets/icon_minus.svg");
+}
+.map__zoom-disabled {
+  cursor: default;
+  background:rgba(220,220,220,0.5);
 }
 .map__center {
   margin-top: 20px;
@@ -1042,6 +1046,7 @@ ul {
   padding: 15px 0 0 0;
   border-top: 1px solid rgba(194,28,16,0.3);
   font-size: 0.88rem;
+  width: 100%;
 }
 .list.type--tasks .list__item-tag {
   margin: 0 0 10px 0;

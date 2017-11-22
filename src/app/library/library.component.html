@@ -41,13 +41,13 @@
         </div>
         <div class="list__item" *ngFor="let t of taskTemplates">
           <div class="list__item-type {{getTaskTypeClass(t.type)}}"></div>
-          <div class="list__item-tag" *ngIf="role === 'teacher' && t.ops != null">
-            <div class="tag" *ngFor="let subject of t.ops.subjects">{{subject.name}}</div>
-          </div>
           <div class="list__item-title">{{t.name}}</div>
-          <div class="list__item-detail" *ngIf="role === 'teacher'">{{t.title}}</div>
           <div class="list__item-description">{{t.description}}</div>
-          <div class="list__item-info" *ngIf="role === 'teacher'">{{t.info}}</div>
+          <div class="list__item-info" *ngIf="role === 'teacher'">
+            <div class="list__item-tag" *ngIf="t.ops != null">
+              <div class="tag" *ngFor="let subject of t.ops.subjects">{{subject.name}}</div>
+            </div>
+          </div>
           <div class="list__item-footer">
             <a *ngIf="isCreator(t)" (click)="showDeleteTaskTemplateDialog(t.id)" class="list__item-link">Poista tehtäväpohja</a>
             <a *ngIf="isCreator(t)" [routerLink]="['/task-template', t.id]" class="list__item-link">Muokkaa tehtäväpohjaa</a>

@@ -29,6 +29,9 @@ export class OskariRpcComponent implements AfterViewInit {
   mapLayers: MapLayer[] = []
   selectedLayer?: MapLayer = null
   actionMessages: Map<MapAction, Message> = new Map
+  zoomLevel = 0
+  minZoomLevel = 0
+  maxZoomLevel = 13
 
   env = environment.mapEnv
   domain = environment.mapDomain
@@ -282,14 +285,18 @@ export class OskariRpcComponent implements AfterViewInit {
   }
 
   zoomIn() {
+    if (this.zoomLevel >= this.maxZoomLevel) return
     this.channel.zoomIn((data) => this.zone.runGuarded(() => {
       console.log('Zoom level after: ', data)
+      this.zoomLevel = data
     }))
   }
 
   zoomOut() {
+    if (this.zoomLevel <= this.minZoomLevel) return
     this.channel.zoomOut((data) => this.zone.runGuarded(() => {
       console.log('Zoom level after: ', data)
+      this.zoomLevel = data
     }))
   }
 
