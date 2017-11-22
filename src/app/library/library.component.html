@@ -45,7 +45,11 @@
           <div class="list__item-description">{{t.description}}</div>
           <div class="list__item-info" *ngIf="role === 'teacher'">
             <div class="list__item-tag" *ngIf="t.ops != null">
+              <div class="tag" *ngFor="let grade of t.ops.grades">{{grade.name}}</div>
               <div class="tag" *ngFor="let subject of t.ops.subjects">{{subject.name}}</div>
+              <div class="tag" *ngFor="let target of t.ops.targets" title="{{target.name}}">{{target.name | limitTo: 35 }}</div>
+              <div class="tag" *ngFor="let contentArea of t.ops.contentAreas" title="{{contentArea.name}}">{{contentArea.name | limitTo: 35}}</div>
+              <div class="tag" *ngFor="let wideKnowledge of t.ops.wideKnowledges" title="{{wideKnowledge.name}}">{{wideKnowledge.name | limitTo: 35}}</div>
             </div>
           </div>
           <div class="list__item-footer">
