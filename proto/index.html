@@ -231,7 +231,8 @@
                 </div>
                 <div id="profile" class="view__column">
                   <div id="profile-view" class="profile">
-                    <div onclick="$(&quot;#profile&quot;).removeClass(&quot;is-open&quot;)" class="profile__header">Takaisin
+                    <div class="profile__header">
+                      <div onclick="$(&quot;#profile&quot;).removeClass(&quot;is-open&quot;)" class="profile__header-back">Takaisin</div>
                       <div onclick="$(&quot;#profile-edit&quot;).show();$(&quot;#profile-view&quot;).hide()" class="profile__header-edit">Muokkaa</div>
                     </div>
                     <div class="profile__item">
@@ -319,8 +320,11 @@
             <div id="mark" class="popup">
               <div class="popup__content">
                 <div class="form type--basic">
-                  <div class="popup__header"><a href="#map-lempipaikkani" class="popup__header-link type--back"></a>
-                    <h1 class="popup__header-title">Uusi merkintä</h1>
+                  
+                  <div class="form__text">
+                    <div class="form__text-title">Koordinaatit</div>
+                    <div class="form__text-value">N:7066835 E:442519 <em>ETRS-TM35FIN</em></div>
+                    <div class="form__text-value">N:63°43'28,087' E:25°50'10,352' <em>WGS84</em></div>
                   </div>
                   <div id="imageAdd" class="form__image">
                     <div class="form__image-placement">
@@ -336,10 +340,6 @@
                       </div>
                     </div>
                   </div>
-                  <div class="form__text">
-                    <div class="form__text-title">Koordinaatit</div>
-                    <div class="form__text-value">60°10′15″N, 024°56′15″E</div>
-                  </div>
                   <div class="form__item">
                     <label>Nimi</label>
                     <input type="text">
@@ -348,7 +348,9 @@
                     <label>Kuvaus</label>
                     <textarea></textarea>
                   </div>
-                  <div class="form__footer"><a href="#map-lempipaikkani" class="button">Tallenna merkintä</a></div>
+                  <div class="form__footer">
+                    <div class="form__footer-links"><a href="#map-lempipaikkani" class="link type--secondary">Peruuta</a><a href="#map-lempipaikkani" class="link">Tallenna</a></div>
+                  </div>
                 </div>
               </div>
             </div>

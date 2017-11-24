@@ -38,9 +38,18 @@
   .popup__content
     .form.type--basic
 
-      .popup__header
-        a.popup__header-link.type--back(href='#map-lempipaikkani')
-        h1.popup__header-title Uusi merkintä
+      //- .popup__header
+      //-   a.popup__header-link.type--back(href='#map-lempipaikkani')
+      //-   h1.popup__header-title Uusi merkintä
+    
+
+      .form__text
+        .form__text-title Koordinaatit
+        .form__text-value N:7066835 E:442519 
+          em ETRS-TM35FIN
+        .form__text-value N:63°43'28,087' E:25°50'10,352' 
+          em WGS84
+
 
       .form__image#imageAdd
         .form__image-placement
@@ -52,11 +61,7 @@
           .form__image-placement-buttons
             .text(onclick='$("#imageAdd").show();$(this).parents(".form__image").hide()') Vaihda kuva
             .text.type--remove(onclick='$("#imageAdd").show();$(this).parents(".form__image").hide()') Poista kuva
-            
-
-      .form__text
-        .form__text-title Koordinaatit
-        .form__text-value 60°10′15″N, 024°56′15″E
+        
 
       .form__item
         label Nimi
@@ -65,7 +70,10 @@
         label Kuvaus
         textarea
       .form__footer
-        a.button(href='#map-lempipaikkani') Tallenna merkintä
+        .form__footer-links
+          a.link.type--secondary(href='#map-lempipaikkani') Peruuta
+          a.link(href='#map-lempipaikkani') Tallenna
+        
 
 
 .popup#mark-view.is-closed
