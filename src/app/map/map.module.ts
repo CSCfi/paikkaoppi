@@ -9,6 +9,7 @@ import { MessageModule } from '../message/message.module'
 import { MapComponent } from './map.component'
 import { OskariRpcComponent } from './oskari-rpc.component'
 import { HelpComponent } from './help.component'
+import { DecimalPipe } from '../pipe/decimal.pipe'
 import { GeoService } from './geo.service'
 import { AttachmentService } from '../service/attachment.service'
 import { ResizeService } from '../service/resize.service'
@@ -18,7 +19,7 @@ import { ResultItemComponent } from './result/result-item.component'
   imports: [
     CommonModule, RouterModule, FormsModule, MessageModule, FileUploadModule, Ng2PicaModule
   ],
-  declarations: [MapComponent, OskariRpcComponent, HelpComponent, ResultItemComponent],
+  declarations: [MapComponent, OskariRpcComponent, HelpComponent, ResultItemComponent, DecimalPipe],
   providers: [GeoService, AttachmentService, ResizeService],
   exports: [MapComponent]
 })

@@ -67,9 +67,6 @@
   <div class="popup__content">
     <form (ngSubmit)="onSubmit()" #taskForm="ngForm">
       <div class="form type--basic">
-        <div class="popup__header"><a (click)="closePopup()" class="popup__header-link type--back"></a>
-          <h1 class="popup__header-title">Uusi tehtävä</h1>
-        </div>
         <h1 class="accordion__header">{{selectedTemplateForTask.name}}</h1>
         <div class="form__item" [class.has-error]="name.invalid && name.dirty">
           <label>Nimi</label>
@@ -77,7 +74,10 @@
           <div [hidden]="name.valid || name.pristine" class="form__item-error alert alert-danger"><div class="text">Pakollinen tieto</div></div>
         </div>
         <div class="form__footer">
-          <button type="submit" class="button" [disabled]="!taskForm.form.valid">Tallenna tehtävä</button>
+          <div class="form__footer-links">
+            <a (click)="closePopup()" class="link type--secondary">Peruuta</a>
+            <button type="submit" class="link" [disabled]="!taskForm.form.valid">Tallenna</button>
+          </div>
         </div>
       </div>
     </form>

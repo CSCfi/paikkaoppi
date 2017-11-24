@@ -1,36 +1,31 @@
 <div class="popup" *ngIf="visible === true">
   <div class="popup__content">
     <div class="form type--basic">
-      <div class="popup__header"><a (click)="close()" class="popup__header-link type--back"></a>
-        <h1 class="popup__header-title" *ngIf="!isEditMode">Merkintä</h1>
-        <h1 class="popup__header-title" *ngIf="isEditMode && model.isNew">Uusi merkintä</h1>
-        <h1 class="popup__header-title" *ngIf="isEditMode && !model.isNew">Päivitä merkintää</h1>
-      </div>
-      <div class="form__item" *ngIf="showUser">
-        <label>Käyttäjä</label>
+      <div class="form__text" *ngIf="showUser">
+        <div class="form__text-title">Käyttäjä</div>
         <div class="form__text-value">{{result.user.firstName}} {{result.user.lastName}} {{result.user.email}}</div>
       </div>
-      <div class="form__item">
+      <div class="form__text">
         <ng-container *ngIf="isPoint">
-            <label>Koordinaatit ETRS-TM35FIN</label>
-          <div class="form__text-value">N:{{model.geometry.coordinates[0]}} E:{{model.geometry.coordinates[1]}}</div>
-          <label>Koordinaatit WGS84</label>
-          <div class="form__text-value">N:{{pointWGS84Coordinates.lat.asString(3)}} E:{{pointWGS84Coordinates.lon.asString(3)}}</div>
+          <div class="form__text-title">Koordinaatit</div>
+          <div class="form__text-value">N:{{model.geometry.coordinates[0] | decimal: 2}} E:{{model.geometry.coordinates[1] | decimal: 2}} <em>ETRS-TM35FIN</em></div>
+          <div class="form__text-value">N:{{pointWGS84Coordinates.lat.asString(3)}} E:{{pointWGS84Coordinates.lon.asString(3)}} <em>WGS84</em></div>
         </ng-container>
         <ng-container *ngIf="isPolygon">
-          <label>Koordinaatit ETRS-TM35FIN</label>
+          <div class="form__text-title">Koordinaatit</div>
           <div class="form__text-value">
             <ul>
               <li *ngFor="let c of polygonCoordinates">N:{{c[0]}} E:{{c[1]}}</li>
             </ul>
+            <em>ETRS-TM35FIN</em>
           </div>
-          <label>Koordinaatit WGS84</label>
           <div class="form__text-value">
             <ul>
               <ng-template ngFor let-c [ngForOf]="polygonWGS84Coordinates">
                 <li>N:{{c.lat.asString(3)}} E:{{c.lon.asString(3)}}</li>
               </ng-template>
             </ul>
+            <em>WGS84</em>
           </div>
         </ng-container>
       </div>
@@ -66,9 +61,11 @@
             <textarea [(ngModel)]="model.description" name="description"></textarea>
           </div>
           <div class="form__footer">
-            <button type="submit" class="button" [disabled]="!resultItemForm.form.valid || isUploading">Tallenna merkintä</button>
-            <button class="button type--secondary" [disabled]="isUploading" (click)="delete()" *ngIf="model['id'] != null">Poista merkintä</button>
-            <button class="button type--secondary" [disabled]="isUploading" (click)="close()">Sulje</button>
+            <div class="form__footer-links">
+              <button [disabled]="isUploading" (click)="close()" class="link type--secondary">Peruuta</button>
+              <button [disabled]="isUploading" (click)="delete()" class="link" *ngIf="model['id'] != null">Poista</button>
+              <button type="submit" [disabled]="!resultItemForm.form.valid || isUploading" class="link">Tallenna</button>
+            </div>
           </div>
         </form>
       </ng-container>
@@ -85,11 +82,15 @@
           <div class="form__value">{{model.description}}</div>
         </div>
         <div class="form__footer" *ngIf="!showUser">
-          <button class="button" (click)="edit()">Muokkaa merkintää</button>
-          <button class="button type--secondary" (click)="close()">Sulje</button>
+          <div class="form__footer-links">
+            <button (click)="close()" class="link type--secondary">Peruuta</button>
+            <button (click)="edit()" class="link">Muokkaa</button>
+          </div>
         </div>
         <div class="form__footer" *ngIf="showUser">
-          <button class="button" (click)="close()">Sulje</button>
+          <div class="form__footer-links">
+            <button (click)="close()" class="link type--secondary">Peruuta</button>
+          </div>
         </div>
       </ng-container>
     </div>

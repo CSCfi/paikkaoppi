@@ -78,7 +78,7 @@ textarea:disabled {
 }
 textarea {
   width: 100%;
-  height: 140px;
+  height: 120px;
   resize: vertical;
 }
 .button {
@@ -337,7 +337,7 @@ ul {
 }
 .popup__content {
   text-align: left;
-  padding: 0 45px 25px;
+  padding: 0 25px 25px;
   overflow-x: hidden;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
@@ -1198,9 +1198,22 @@ ul {
 .form__image {
   margin: 0 0 15px 0;
 }
+.form__text {
+  margin: 0 0 10px 0;
+}
+.form__text-title {
+  font-weight: 700;
+}
+.form__text-value em {
+  font-style: normal;
+  font-weight: 700;
+  color: #f8f7cc;
+  font-size: 0.86rem;
+  float: right;
+}
 .form__image-placement {
   width: 100%;
-  height: 180px;
+  height: 130px;
   background: #efefef;
   display: flex;
   align-items: center;
@@ -1297,6 +1310,17 @@ ul {
   color: #f8f7cc;
   cursor: pointer;
   font-weight: 700;
+  font-size: 1.1rem;
+  background: none;
+  border: none;
+}
+.form__footer .link.type--secondary {
+  font-weight: 500;
+  font-size: 1rem;
+  float: left;
+}
+.form__footer-links {
+  text-align: right;
 }
 .accordion {
   counter-reset: accordion__item;
@@ -1338,10 +1362,18 @@ ul {
   color: #fff;
   overflow-y: auto;
 }
-@media (min-width: 620px) {
-  .profile__header-back {
-    display: none;
-  }
+.profile__header-edit {
+  color: #f8f7cc;
+  cursor: pointer;
+  font-weight: 600;
+  cursor: pointer;
+}
+.profile__header-back {
+  color: #f8f7cc;
+  cursor: pointer;
+  font-weight: 600;
+  cursor: pointer;
+  margin-bottom: 15px;
 }
 .view__profile-show {
   width: 35px;
@@ -1491,6 +1523,7 @@ ul {
 .profile__medals-footer .link {
   color: #f8f7cc;
   cursor: pointer;
+  font-weight: 600;
 }
 .view__wizard-wrapper {
   height: 100%;

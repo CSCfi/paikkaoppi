@@ -2,6 +2,7 @@
   <div class="view__header">
     <h1 class="view__header-title">Omat tehtävät</h1>
     <a routerLink="/library" class="view__add">Uusi tehtävä</a>
+    <a (click)="isProfileOpen = true" class="view__profile-show {{getProfileClass()}}"></a>
   </div>
   <div class="view__content">
     <div class="view__columns">
@@ -63,8 +64,9 @@
           </code>
         </div>
       </div>
-      <div id="profile" class="view__column">
+      <div id="profile" class="view__column" [ngClass]="isProfileOpen ? 'is-open' : ''">
         <div *ngIf="profileEdit == false" id="profile-view" class="profile">
+          <div *ngIf="isProfileOpen == true" (click)="isProfileOpen = false" class="profile__header-back">Takaisin</div>
           <div (click)="profileEdit = true" class="profile__header">Muokkaa</div>
           <div class="profile__item">
             <div class="profile__image">
@@ -104,7 +106,6 @@
         </div>
         <div *ngIf="profileEdit == true" id="profile-edit" class="profile is-open">
           <div class="profile__header">
-            <div (click)="resetChangeProfile()" class="profile__header">Takaisin</div>
             <div (click)="saveProfile()" class="profile__header-edit">Tallenna</div>
           </div>
           <div class="profile__item">

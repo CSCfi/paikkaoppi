@@ -20,7 +20,6 @@ export class DashboardComponent implements OnInit {
   role: Role
   tasks: TaskDashboard[]
   taskId?: number
-  originalProfile: number
   profileEdit = false
   // For Proto
   unusedCodes: string[]
@@ -36,8 +35,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit() {
     this.user = this.authService.getUser()
     this.role = this.authService.getRole()
-    this.originalProfile = this.profileService.getProfile(this.user)
-
+    
     this.route.paramMap
       .switchMap((params: ParamMap) => Observable.of(params.has('id') ? +params.get('id') : null))
       .subscribe(id => {
@@ -54,15 +52,9 @@ export class DashboardComponent implements OnInit {
     this.profileService.setProfile(profile)
   }
 
-  resetChangeProfile() {
-    this.changeProfile(this.originalProfile)
-    this.profileEdit = false
-  }
-
   saveProfile() {
     this.profileService.updateProfile().subscribe(
       value => {
-        this.originalProfile = value.profile
         this.profileEdit = false
       }
     )
