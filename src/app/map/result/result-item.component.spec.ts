@@ -6,6 +6,7 @@ import { HttpClientModule } from '@angular/common/http'
 import { FileUploadModule } from 'ng2-file-upload';
 import { Ng2PicaModule } from 'ng2-pica'
 
+import { DecimalPipe } from '../../pipe/decimal.pipe'
 import { AuthService } from '../../service/auth.service'
 import { GeoService } from '../../map/geo.service'
 import { MockComponent, AuthServiceMock } from '../../../tests/mocks.spec'
@@ -19,7 +20,7 @@ describe('ResultItemComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ResultItemComponent, MockComponent ],
+      declarations: [ ResultItemComponent, MockComponent, DecimalPipe ],
       imports: [
         FormsModule,
         HttpClientModule,

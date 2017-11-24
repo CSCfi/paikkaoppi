@@ -21,6 +21,7 @@ export class DashboardComponent implements OnInit {
   tasks: TaskDashboard[]
   taskId?: number
   profileEdit = false
+  isProfileOpen = false
   // For Proto
   unusedCodes: string[]
   
