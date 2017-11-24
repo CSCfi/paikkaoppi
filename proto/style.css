@@ -712,10 +712,6 @@ ul {
 }
 .popup__content {
   text-align: left;
-  padding: 0 25px 25px;
-  overflow-x: hidden;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
   position: relative;
   top: 279px;
   background: #282828;
@@ -723,12 +719,26 @@ ul {
   color: #fff;
   z-index: 1001;
   width: 400px;
+  overflow: hidden;
   max-width: 100%;
-  max-height: calc(100vh - 279px);
+  height: 100%;
+  max-height: calc(100vh - 209px);
 }
 @media (max-height: 739px) {
   .popup__content {
-    max-height: calc(100vh - 209px);
+    max-height: calc(100vh - 89px);
+  }
+}
+.popup__scroll {
+  overflow-x: hidden;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  padding: 0 25px 50px;
+  max-height: calc(100vh - 189px);
+}
+@media (max-height: 739px) {
+  .popup__scroll {
+    max-height: calc(100vh - 119px);
   }
 }
 .popup__header {
@@ -751,6 +761,32 @@ ul {
   margin: 0;
   font-size: 1.1rem;
   flex: 1;
+}
+.popup__footer {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  padding: 20px 25px 25px;
+  max-height: 60px;
+  background: linear-gradient(rgba(40,40,40,0), #282828 25%, #282828);
+}
+.popup__footer .link {
+  color: #f8f7cc;
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
+.popup__footer .link.type--secondary {
+  font-weight: 500;
+  font-size: 1rem;
+  float: left;
+}
+.popup__footer-links {
+  text-align: right;
 }
 .view {
   text-align: center;
