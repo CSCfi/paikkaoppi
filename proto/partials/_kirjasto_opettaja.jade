@@ -2,9 +2,9 @@
   .popup__content
     .form.type--basic
 
-      .popup__header
-        a.popup__header-link.type--back(href='#library-opettaja')
-        h1.popup__header-title Uusi tehtävä
+      //- .popup__header
+        //- a.popup__header-link.type--back(href='#library-opettaja')
+        //- h1.popup__header-title Uusi tehtävä
 
       h1.accordion__header Suomi-visa
 
@@ -12,15 +12,13 @@
         label Nimi
         input(type='text', value='Suomi-visa')
       .form__footer
-        a.button(href='#dashboard-opettaja') Tallenna tehtävä
-
-  .view__header
-    a.view__header-link.type--back(href='#dashboard-opettaja')
-    h1.view__header-title Tehtäväkirjasto            
+        .form__footer-links
+          a.link.type--secondary(href='#dashboard-opettaja') Peruuta
+          a.link(href='#dashboard-opettaja') Tallenna
 
 
 .view__header
-  a.view__header-link.type--back(href='#dashboard')
+  a.view__header-link.type--back(href='#dashboard-opettaja')
   h1.view__header-title Tehtäväkirjasto  
 
 .view__content

@@ -398,6 +398,15 @@ ul {
   color: #f8f7cc;
   cursor: pointer;
   font-weight: 700;
+  font-size: 1.1rem;
+}
+.form__footer .link.type--secondary {
+  font-weight: 500;
+  font-size: 1rem;
+  float: left;
+}
+.form__footer-links {
+  text-align: right;
 }
 @-moz-keyframes appear {
   0% {
