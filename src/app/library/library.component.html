@@ -32,13 +32,22 @@
         </div>
       -->
       <div class="list type--library">
-        <div class="list__item type--special" *ngIf="role === 'teacher'">
+        <!--<div class="list__item" *ngIf="role === 'student'">
+          <div class="list__item-content">
+            <div class="list__item-title">Karttaesitys</div>
+            <div class="list__item-description">Kartta ja työkalut oman esityksen luomiseen.</div>
+          </div>
+          <div class="list__item-footer">
+            <a routerLink="/own-task-template" class="list__item-link">Aloita tehtävä</a>
+          </div>
+        </div>-->
+        <div class="list__item" *ngIf="role === 'teacher'">
           <div class="list__item-content">
             <div class="list__item-title">Uusi tehtäväpohja</div>
             <div class="list__item-description">Rakenna oma tehtäväpohja.</div>
           </div>
           <div class="list__item-footer">
-            <a routerLink="/task-template" class="list__item-link type--add">Uusi tehtäväpohja</a>
+            <a routerLink="/task-template" class="list__item-link">Uusi tehtäväpohja</a>
           </div>
         </div>
         <div class="list__item" *ngFor="let t of taskTemplates">
@@ -69,8 +78,8 @@
 
 <div class="popup" *ngIf="selectedTemplateForTask">
   <div class="popup__content">
-    <div class="popup__scroll">
-      <form (ngSubmit)="onSubmit()" #taskForm="ngForm">
+    <form (ngSubmit)="onSubmit()" #taskForm="ngForm">
+      <div class="popup__scroll">
         <div class="form type--basic">
           <h1 class="accordion__header">{{selectedTemplateForTask.name}}</h1>
           <div class="form__item" [class.has-error]="name.invalid && name.dirty">
@@ -78,14 +87,14 @@
             <input type="text" maxlength="128" required [(ngModel)]="model.name" name="name" #name="ngModel">
             <div [hidden]="name.valid || name.pristine" class="form__item-error alert alert-danger"><div class="text">Pakollinen tieto</div></div>
           </div>
-          <div class="form__footer">
-            <div class="form__footer-links">
-              <a (click)="closePopup()" class="link type--secondary">Peruuta</a>
-              <button type="submit" class="link" [disabled]="!taskForm.form.valid">Tallenna</button>
-            </div>
-          </div>
         </div>
-      </form>
-    </div>
+      </div>
+      <div class="popup__footer">
+        <div class="popup__footer-links">
+          <a (click)="closePopup()" class="link type--secondary">Peruuta</a>
+          <button type="submit" class="link" [disabled]="!taskForm.form.valid">Tallenna</button>
+        </div>
+      </div>
+    </form>
   </div>
 </div>

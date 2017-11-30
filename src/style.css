@@ -1491,6 +1491,7 @@ ul {
 .view__profile-show.variant--2 {
   background-image: url("assets/dude-2.png");
   width: 107%;
+  background-size: 115%;
 }
 @media (min-width: 620px) {
   .view__profile-show {
