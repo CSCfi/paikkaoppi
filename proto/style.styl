@@ -1101,7 +1101,11 @@
 .view__filter
   margin 0 30px 0 0
 .view__filter-dropdown
-  //
+  position relative
+  z-index 20
+  &.is-open 
+    .view__filter-dropdown-content
+      display block
 .view__filter-dropdown-title
   font-size size_h3
   font-weight 600
@@ -1109,6 +1113,15 @@
   //
 .view__filter-dropdown-content
   display none
+  position absolute
+  background #fff
+  min-width 180px
+  padding 5px 0
+  margin 5px 0 0 0
 .view__filter-dropdown-row
-  //
+  padding 5px 10px
+  &.is-selected
+    background brand_color[3]
+    color #fff
+    
 
