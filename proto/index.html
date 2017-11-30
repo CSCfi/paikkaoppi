@@ -319,38 +319,40 @@
             </div>
             <div id="mark" class="popup">
               <div class="popup__content">
-                <div class="form type--basic">
-                  
-                  <div class="form__text">
-                    <div class="form__text-title">Koordinaatit</div>
-                    <div class="form__text-value">N:7066835 E:442519 <em>ETRS-TM35FIN</em></div>
-                    <div class="form__text-value">N:63°43'28,087' E:25°50'10,352' <em>WGS84</em></div>
-                  </div>
-                  <div id="imageAdd" class="form__image">
-                    <div class="form__image-placement">
-                      <div onclick="$(&quot;#imageChange&quot;).show();$(this).parents(&quot;.form__image&quot;).hide()" class="text">Lisää kuva</div>
+                <div class="popup__scroll">
+                  <div class="form type--basic">
+                    
+                    <div class="form__text">
+                      <div class="form__text-title">Koordinaatit</div>
+                      <div class="form__text-value">N:7066835 E:442519 <em>ETRS-TM35FIN</em></div>
+                      <div class="form__text-value">N:63°43'28,087' E:25°50'10,352' <em>WGS84</em></div>
                     </div>
-                  </div>
-                  <div id="imageChange" style="display:none" class="form__image">
-                    <div class="form__image-placement">
-                      <div style="background-image:url(images/image.jpg)" class="form__image-placement-cover"></div>
-                      <div class="form__image-placement-buttons">
-                        <div onclick="$(&quot;#imageAdd&quot;).show();$(this).parents(&quot;.form__image&quot;).hide()" class="text">Vaihda kuva</div>
-                        <div onclick="$(&quot;#imageAdd&quot;).show();$(this).parents(&quot;.form__image&quot;).hide()" class="text type--remove">Poista kuva</div>
+                    <div id="imageAdd" class="form__image">
+                      <div class="form__image-placement">
+                        <div onclick="$(&quot;#imageChange&quot;).show();$(this).parents(&quot;.form__image&quot;).hide()" class="text">Lisää kuva</div>
                       </div>
                     </div>
+                    <div id="imageChange" style="display:none" class="form__image">
+                      <div class="form__image-placement">
+                        <div style="background-image:url(images/image.jpg)" class="form__image-placement-cover"></div>
+                        <div class="form__image-placement-buttons">
+                          <div onclick="$(&quot;#imageAdd&quot;).show();$(this).parents(&quot;.form__image&quot;).hide()" class="text">Vaihda kuva</div>
+                          <div onclick="$(&quot;#imageAdd&quot;).show();$(this).parents(&quot;.form__image&quot;).hide()" class="text type--remove">Poista kuva</div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="form__item">
+                      <label>Nimi</label>
+                      <input type="text">
+                    </div>
+                    <div class="form__item">
+                      <label>Kuvaus</label>
+                      <textarea></textarea>
+                    </div>
                   </div>
-                  <div class="form__item">
-                    <label>Nimi</label>
-                    <input type="text">
-                  </div>
-                  <div class="form__item">
-                    <label>Kuvaus</label>
-                    <textarea></textarea>
-                  </div>
-                  <div class="form__footer">
-                    <div class="form__footer-links"><a href="#map-lempipaikkani" class="link type--secondary">Peruuta</a><a href="#map-lempipaikkani" class="link">Tallenna</a></div>
-                  </div>
+                </div>
+                <div class="popup__footer">
+                  <div class="popup__footer-links"><a href="#map-lempipaikkani" class="link type--secondary">Peruuta</a><a href="#map-lempipaikkani" class="link">Tallenna</a></div>
                 </div>
               </div>
             </div>
@@ -425,34 +427,38 @@
           <div id="map-suomivisa" class="view">
             <div id="task-suomivisa-aloita" class="popup">
               <div class="popup__content">
-                <div class="accordion">
-                  <h1 class="accordion__header">Suomi-visa</h1>
-                  <div class="accordion__item">
-                    <h2 class="accordion__title">Mikä pohjoisen kunta ja kylä?</h2>
-                    <div class="accordion__text">
-                      <ul class="list type--text">
-                        <li class="list__item">Mikä on Suomen pohjoisin kylä?</li>
-                      </ul>
+                <div class="popup__scroll">
+                  <div class="accordion">
+                    <h1 class="accordion__header">Suomi-visa</h1>
+                    <div class="accordion__item">
+                      <h2 class="accordion__title">Mikä pohjoisen kunta ja kylä?</h2>
+                      <div class="accordion__text">
+                        <ul class="list type--text">
+                          <li class="list__item">Mikä on Suomen pohjoisin kylä?</li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
-                  <div class="accordion__footer"><a onclick="$(&quot;#task-suomivisa&quot;).removeClass(&quot;is-open&quot;)" class="link">Aloita tehtävä</a></div>
                 </div>
+                <div class="popup__footer"><a onclick="$(&quot;#task-suomivisa&quot;).removeClass(&quot;is-open&quot;)" class="link">Aloita tehtävä</a></div>
               </div>
             </div>
             <div id="task-suomivisa" class="popup">
               <div class="popup__content">
-                <div class="accordion">
-                  <h1 class="accordion__header">Suomi-visa</h1>
-                  <div class="accordion__item">
-                    <h2 class="accordion__title">Mikä pohjoisen kunta ja kylä?</h2>
-                    <div class="accordion__text">
-                      <ul class="list type--text">
-                        <li class="list__item">Mikä on Suomen pohjoisin kylä?</li>
-                      </ul>
+                <div class="popup__scroll">
+                  <div class="accordion">
+                    <h1 class="accordion__header">Suomi-visa</h1>
+                    <div class="accordion__item">
+                      <h2 class="accordion__title">Mikä pohjoisen kunta ja kylä?</h2>
+                      <div class="accordion__text">
+                        <ul class="list type--text">
+                          <li class="list__item">Mikä on Suomen pohjoisin kylä?</li>
+                        </ul>
+                      </div>
                     </div>
                   </div>
-                  <div class="accordion__footer"><a onclick="$(&quot;#task-suomivisa&quot;).addClass(&quot;is-closed&quot;)" class="link">Jatka tehtävää</a></div>
                 </div>
+                <div class="popup__footer"><a onclick="$(&quot;#task-suomivisa&quot;).addClass(&quot;is-closed&quot;)" class="link">Jatka tehtävää</a></div>
               </div>
             </div>
             <div class="view__header type--map">
@@ -561,14 +567,16 @@
           <div id="library-opettaja" class="view">
             <div id="create-task" class="popup">
               <div class="popup__content">
-                <div class="form type--basic">
-                  <h1 class="accordion__header">Suomi-visa</h1>
-                  <div class="form__item">
-                    <label>Nimi</label>
-                    <input type="text" value="Suomi-visa">
+                <div class="popup__scroll">
+                  <div class="form type--basic">
+                    <h1 class="accordion__header">Suomi-visa</h1>
+                    <div class="form__item">
+                      <label>Nimi</label>
+                      <input type="text" value="Suomi-visa">
+                    </div>
                   </div>
-                  <div class="form__footer">
-                    <div class="form__footer-links"><a href="#dashboard-opettaja" class="link type--secondary">Peruuta</a><a href="#dashboard-opettaja" class="link">Tallenna</a></div>
+                  <div class="popup__footer">
+                    <div class="popup__footer-links"><a href="#dashboard-opettaja" class="link type--secondary">Peruuta</a><a href="#dashboard-opettaja" class="link">Tallenna</a></div>
                   </div>
                 </div>
               </div>

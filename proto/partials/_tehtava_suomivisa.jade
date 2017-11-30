@@ -3,46 +3,34 @@
     .proto__documentation
       //-
   .popup__content
-    .accordion
-      h1.accordion__header Suomi-visa
-      .accordion__item
-        h2.accordion__title Mikä pohjoisen kunta ja kylä?
-        .accordion__text
-          ul.list.type--text
-            li.list__item Mikä on Suomen pohjoisin kylä?
-            //- li.list__item Entä mikä on Suomen pohjoisin kunta?
+    .popup__scroll
+      .accordion
+        h1.accordion__header Suomi-visa
+        .accordion__item
+          h2.accordion__title Mikä pohjoisen kunta ja kylä?
+          .accordion__text
+            ul.list.type--text
+              li.list__item Mikä on Suomen pohjoisin kylä?
 
-      //- .accordion__item
-      //-   h2.accordion__title Mitä kaupunkeja on Salpausselkien päällä?
-      //-   .accordion__text
-      //-     ul.list.type--text
-      //-       li.list__item Etsi kartalta Salpausselät ja tutki, mitkä kaupungit on rakennettu kartassa näkyvien reunamuodostumien päälle.
-      
-      .accordion__footer
-        a.link(onclick='$("#task-suomivisa").removeClass("is-open")') Aloita tehtävä
+    .popup__footer
+      a.link(onclick='$("#task-suomivisa").removeClass("is-open")') Aloita tehtävä
 
 .popup#task-suomivisa
   if compileWithDocumentation
     .proto__documentation
       //-
   .popup__content
-    .accordion
-      h1.accordion__header Suomi-visa
-      .accordion__item
-        h2.accordion__title Mikä pohjoisen kunta ja kylä?
-        .accordion__text
-          ul.list.type--text
-            li.list__item Mikä on Suomen pohjoisin kylä?
-            //- li.list__item Entä mikä on Suomen pohjoisin kunta?
-
-      //- .accordion__item
-      //-   h2.accordion__title Mitä kaupunkeja on Salpausselkien päällä?
-      //-   .accordion__text
-      //-     ul.list.type--text
-      //-       li.list__item Etsi kartalta Salpausselät ja tutki, mitkä kaupungit on rakennettu kartassa näkyvien reunamuodostumien päälle.
-      
-      .accordion__footer
-        a.link(onclick='$("#task-suomivisa").addClass("is-closed")') Jatka tehtävää
+    .popup__scroll
+      .accordion
+        h1.accordion__header Suomi-visa
+        .accordion__item
+          h2.accordion__title Mikä pohjoisen kunta ja kylä?
+          .accordion__text
+            ul.list.type--text
+              li.list__item Mikä on Suomen pohjoisin kylä?
+             
+    .popup__footer
+      a.link(onclick='$("#task-suomivisa").addClass("is-closed")') Jatka tehtävää
 
 .view__header.type--map
   .view__header-content
