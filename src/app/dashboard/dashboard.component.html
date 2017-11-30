@@ -34,6 +34,11 @@
 -->
         <div class="list type--tasks">
           <app-code class="list__item type--code"></app-code>
+          <div *ngIf="tasks == null || tasks.length == 0" class="list__item type--empty">
+            <div class="text">
+              <p>Aloita lataamalla tehtävä koodilla tai lisäämällä uusi tehtävä tehtäväkirjastosta.</p>
+            </div>
+          </div>
           <a [routerLink]="['/map', t.id]" class="list__item" *ngFor="let t of tasks" [ngClass]="{'is-new': t.id == taskId}">
             <div class="list__item-status" *ngIf="t.id == taskId">
               <div class="status">Uusi</div>
