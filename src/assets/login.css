@@ -243,6 +243,13 @@ ul {
   padding: 0;
   margin: 0;
 }
+.app__logo {
+  background: url("/assets/poppi_logo.svg");
+  background-size: cover;
+  width: 76px;
+  height: 100px;
+  margin: 0 auto 50px;
+}
 .form.type--login {
   max-width: 600px;
   margin: 0 auto;
