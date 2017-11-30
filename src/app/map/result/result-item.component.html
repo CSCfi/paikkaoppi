@@ -14,9 +14,9 @@
         <ng-container *ngIf="isPolygon">
           <div class="form__text-title">Koordinaatit</div>
           <div class="form__text-value">
-            <ul>
-              <li *ngFor="let c of polygonCoordinates">N:{{c[0]}} E:{{c[1]}}</li>
-            </ul>
+            <div class="form__text-values">
+              <span *ngFor="let c of polygonCoordinates">N:{{c[0] | decimal: 2}} E:{{c[1] | decimal: 2}}<br/></span>
+            </div>
             <em>ETRS-TM35FIN</em>
           </div>
           <div class="form__text-value">

@@ -1204,6 +1204,10 @@ ul {
 .form__text-title {
   font-weight: 700;
 }
+.form__text-values {
+  width: 200px;
+  float: left;
+}
 .form__text-value em {
   font-style: normal;
   font-weight: 700;
