@@ -1186,6 +1186,45 @@ ul {
   flex-wrap: wrap;
   margin: 0 -15px 0 0;
 }
+.list.type--tasks .list__item-dropdown,
+.list.type--library .list__item-dropdown {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+}
+.list.type--tasks .list__item-dropdown.is-open .list__item-dropdown-content,
+.list.type--library .list__item-dropdown.is-open .list__item-dropdown-content {
+  display: block;
+}
+.list.type--tasks .list__item-dropdown-handle,
+.list.type--library .list__item-dropdown-handle {
+  background: url("assets/icon_menu.svg") no-repeat center center;
+  background-size: contain;
+  width: 16px;
+  height: 16px;
+}
+.list.type--tasks .list__item-dropdown-content,
+.list.type--library .list__item-dropdown-content {
+  display: none;
+  position: absolute;
+  right: 0;
+  margin-top: 10px;
+  background: #fff;
+}
+.list.type--tasks .list__item-dropdown-row,
+.list.type--library .list__item-dropdown-row {
+  padding: 5px 10px;
+}
+.list.type--tasks .list__item-dropdown-row.is-selected,
+.list.type--library .list__item-dropdown-row.is-selected {
+  background: #e1854b;
+  color: #fff;
+}
+.list.type--tasks .list__item-dropdown-row:hover,
+.list.type--library .list__item-dropdown-row:hover {
+  background: #e1854b;
+  color: #fff;
+}
 .list.type--tasks .list__item,
 .list.type--library .list__item {
   position: relative;
@@ -1927,6 +1966,10 @@ ul {
   padding: 5px 10px;
 }
 .view__filter-dropdown-row.is-selected {
+  background: #e1854b;
+  color: #fff;
+}
+.view__filter-dropdown-row:hover {
   background: #e1854b;
   color: #fff;
 }
