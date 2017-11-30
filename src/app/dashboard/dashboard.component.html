@@ -34,7 +34,7 @@
 -->
         <div class="list type--tasks">
           <app-code class="list__item type--code"></app-code>
-          <div *ngIf="tasks == null || tasks.length == 0" class="list__item type--empty">
+          <div *ngIf="tasks?.length == 0" class="list__item type--empty">
             <div class="text">
               <p>Aloita lataamalla tehtävä koodilla tai lisäämällä uusi tehtävä tehtäväkirjastosta.</p>
             </div>

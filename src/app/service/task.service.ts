@@ -41,7 +41,10 @@ export class TaskService {
   }
 
   getUnusedCodes(): Observable<string[]> {
-    return this.http.get<string[]>(`${environment.apiUri}/task/unusedcodes`)
+    if (environment.production === false)
+      return this.http.get<string[]>(`${environment.apiUri}/task/unusedcodes`)
+    else
+      return Observable.of(null)
   }
 
   addTaskWithCode(code: string): Observable<Task> {
