@@ -545,6 +545,32 @@
     display flex
     flex-wrap wrap
     margin 0 -15px 0 0
+    .list__item-dropdown
+      position absolute
+      top 10px
+      right 10px
+      &.is-open
+        .list__item-dropdown-content
+          display block
+    .list__item-dropdown-handle
+      background url(assets/icon_menu.svg) no-repeat center center
+      background-size contain
+      width 16px
+      height @width
+    .list__item-dropdown-content
+      display none
+      position absolute
+      right 0
+      margin-top 10px
+      background #fff
+    .list__item-dropdown-row
+      padding 5px 10px
+      &.is-selected
+        background brand_color[3]
+        color #fff
+      &:hover
+        background brand_color[3]
+        color #fff
     .list__item
       position relative
       flex 1 0 calc(100% \- 15px)
@@ -1125,6 +1151,9 @@
 .view__filter-dropdown-row
   padding 5px 10px
   &.is-selected
+    background brand_color[3]
+    color #fff
+  &:hover
     background brand_color[3]
     color #fff
     
