@@ -9,12 +9,12 @@
     .view__column
       .view__filters
         .view__filter
-          .view__filter-dropdown
-            .view__filter-dropdown-title Tekijä
+          .view__filter-dropdown.is-open
+            .view__filter-dropdown-title Tekijä: Minä
             .view__filter-dropdown-handle
             .view__filter-dropdown-content
-              .view__filter-dropdown-row Minä
-              .view__filter-dropdown-row Opettaja
+              .view__filter-dropdown-row.is-selected Minä
+              .view__filter-dropdown-row Oili Opettaja
         .view__filter
           .view__filter-dropdown
             .view__filter-dropdown-title Tyyppi
@@ -23,9 +23,17 @@
               .view__filter-dropdown-row Toimi
               .view__filter-dropdown-row Tutki
               .view__filter-dropdown-row Tee
-
+        .view__filter
+          .view__filter-dropdown
+            .view__filter-dropdown-title Oppiaine
+            .view__filter-dropdown-handle
+            .view__filter-dropdown-content
+              .view__filter-dropdown-row Toimi
+              .view__filter-dropdown-row Tutki
+              .view__filter-dropdown-row Tee
 
       .list.type--tasks
+
         .list__item.type--code
           form
             .list__item-title Lataa tehtävä koodilla.
@@ -40,6 +48,10 @@
                 input.input--code#code4(type='text', maxlength='1', onkeyup='$("#code5").focus()')
                 input.input--code#code5(type='text', maxlength='1', onkeyup='$("#newTask").show();$(this).blur()')
                 //- a.button--continue(href='#map-karttaesitys') 
+
+        .list__item.type--empty
+          .text
+            p Aloita lataamalla tehtävä koodilla tai lisäämällä uusi tehtävä tehtäväkirjastosta.
 
         .list__item#newTask(style='display:none')
           .list__item-status
