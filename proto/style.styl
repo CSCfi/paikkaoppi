@@ -540,7 +540,8 @@
 .list
   &.type--basic
     width 100%
-  &.type--tasks
+  &.type--tasks,
+  &.type--library
     display flex
     flex-wrap wrap
     margin 0 -15px 0 0
@@ -653,9 +654,9 @@
       &.is-done
         opacity 1
     .list__item-type
-      position relative
-      left -25px
-      top -25px
+      position absolute
+      left -15px
+      top -15px
       width 45px
       height @width
       border-radius 100%
@@ -681,10 +682,10 @@
       font-size .86rem
       margin -5px 0 0 0
     .list__item-link
-      button()
+      link()
       display block
       padding 10px 15px
-      margin 15px 0 5px 0
+      margin 15px auto 5px
       &.is-inactive
         opacity .3
         cursor default
@@ -771,6 +772,14 @@
           height @width
             
           
+  &.type--library
+    .list__item
+      padding-top 35px
+    .list__item-content
+      padding 0 15px
+      max-width 100%
+    .list__item-footer
+      min-width 100%
 
   &.type--tasks-list
     .list__item
