@@ -1909,6 +1909,10 @@ ul {
 .view__filter-dropdown-title {
   font-size: 1.21rem;
   font-weight: 600;
+  cursor: pointer;
+}
+.view__filter-dropdown-title:hover {
+  color: #f05348;
 }
 .view__filter-dropdown-content {
   display: none;
