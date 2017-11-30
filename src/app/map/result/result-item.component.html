@@ -1,98 +1,100 @@
 <div class="popup" *ngIf="visible === true">
   <div class="popup__content">
-    <div class="form type--basic">
-      <div class="form__text" *ngIf="showUser">
-        <div class="form__text-title">Käyttäjä</div>
-        <div class="form__text-value">{{result.user.firstName}} {{result.user.lastName}} {{result.user.email}}</div>
-      </div>
-      <div class="form__text">
-        <ng-container *ngIf="isPoint">
-          <div class="form__text-title">Koordinaatit</div>
-          <div class="form__text-value">N:{{model.geometry.coordinates[0] | decimal: 2}} E:{{model.geometry.coordinates[1] | decimal: 2}} <em>ETRS-TM35FIN</em></div>
-          <div class="form__text-value">N:{{pointWGS84Coordinates.lat.asString(3)}} E:{{pointWGS84Coordinates.lon.asString(3)}} <em>WGS84</em></div>
-        </ng-container>
-        <ng-container *ngIf="isPolygon">
-          <div class="form__text-title">Koordinaatit</div>
-          <div class="form__text-value">
-            <div class="form__text-values">
-              <span *ngFor="let c of polygonCoordinates">N:{{c[0] | decimal: 2}} E:{{c[1] | decimal: 2}}<br/></span>
-            </div>
-            <em>ETRS-TM35FIN</em>
-          </div>
-          <div class="form__text-value">
-            <ul>
-              <ng-template ngFor let-c [ngForOf]="polygonWGS84Coordinates">
-                <li>N:{{c.lat.asString(3)}} E:{{c.lon.asString(3)}}</li>
-              </ng-template>
-            </ul>
-            <em>WGS84</em>
-          </div>
-        </ng-container>
-      </div>
-      <ng-container *ngIf="isEditMode">
-        <div id="imageAdd" class="form__image">
-          <div class="form__image-placement">
-            <div *ngIf="hasImage() == true" [ngStyle]="{ 'background-image': 'url(' + imageUrl() + ')' }" class="form__image-placement-cover"></div>
-            <label *ngIf="hasImage() == false" class="text" for="upload-add">
-              <span>Lisää kuva</span>
-              <input type="file" id="upload-add" ng2FileSelect [uploader]="uploader" accept=".png, .jpg, .gif" style="display:none"/>
-            </label>
-            <div *ngIf="hasImage() == true" class="form__image-placement-buttons">
-              <label for="upload-change" class="text">
-                <span>Vaihda kuva</span>
-                <input type="file" id="upload-change" ng2FileSelect [uploader]="uploader" accept=".png, .jpg, .gif" style="display:none"/>
-              </label>
-              <div class="text type--remove" (click)="removeImage()">Poista kuva</div>
-            </div>
-          </div>
-          <div *ngIf="uploader.isUploading" class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
-          <div [hidden]="errorMessage == null" class="has-error">
-              <div class="form__item-error alert alert-danger"><div class="text">{{errorMessage}}</div></div>
-          </div>
+    <div class="popup__scroll">
+      <div class="form type--basic">
+        <div class="form__text" *ngIf="showUser">
+          <div class="form__text-title">Käyttäjä</div>
+          <div class="form__text-value">{{result.user.firstName}} {{result.user.lastName}} {{result.user.email}}</div>
         </div>
-        <form (ngSubmit)="save()" #resultItemForm="ngForm">
-          <div class="form__item" [class.has-error]="name.invalid && name.dirty">
+        <div class="form__text">
+          <ng-container *ngIf="isPoint">
+            <div class="form__text-title">Koordinaatit</div>
+            <div class="form__text-value">N:{{model.geometry.coordinates[0] | decimal: 2}} E:{{model.geometry.coordinates[1] | decimal: 2}} <em>ETRS-TM35FIN</em></div>
+            <div class="form__text-value">N:{{pointWGS84Coordinates.lat.asString(3)}} E:{{pointWGS84Coordinates.lon.asString(3)}} <em>WGS84</em></div>
+          </ng-container>
+          <ng-container *ngIf="isPolygon">
+            <div class="form__text-title">Koordinaatit</div>
+            <div class="form__text-value">
+              <div class="form__text-values">
+                <span *ngFor="let c of polygonCoordinates">N:{{c[0] | decimal: 2}} E:{{c[1] | decimal: 2}}<br/></span>
+              </div>
+              <em>ETRS-TM35FIN</em>
+            </div>
+            <div class="form__text-value">
+              <ul>
+                <ng-template ngFor let-c [ngForOf]="polygonWGS84Coordinates">
+                  <li>N:{{c.lat.asString(3)}} E:{{c.lon.asString(3)}}</li>
+                </ng-template>
+              </ul>
+              <em>WGS84</em>
+            </div>
+          </ng-container>
+        </div>
+        <ng-container *ngIf="isEditMode">
+          <div id="imageAdd" class="form__image">
+            <div class="form__image-placement">
+              <div *ngIf="hasImage() == true" [ngStyle]="{ 'background-image': 'url(' + imageUrl() + ')' }" class="form__image-placement-cover"></div>
+              <label *ngIf="hasImage() == false" class="text" for="upload-add">
+                <span>Lisää kuva</span>
+                <input type="file" id="upload-add" ng2FileSelect [uploader]="uploader" accept=".png, .jpg, .gif" style="display:none"/>
+              </label>
+              <div *ngIf="hasImage() == true" class="form__image-placement-buttons">
+                <label for="upload-change" class="text">
+                  <span>Vaihda kuva</span>
+                  <input type="file" id="upload-change" ng2FileSelect [uploader]="uploader" accept=".png, .jpg, .gif" style="display:none"/>
+                </label>
+                <div class="text type--remove" (click)="removeImage()">Poista kuva</div>
+              </div>
+            </div>
+            <div *ngIf="uploader.isUploading" class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
+            <div [hidden]="errorMessage == null" class="has-error">
+                <div class="form__item-error alert alert-danger"><div class="text">{{errorMessage}}</div></div>
+            </div>
+          </div>
+          <form (ngSubmit)="save()" #resultItemForm="ngForm">
+            <div class="form__item" [class.has-error]="name.invalid && name.dirty">
+              <label>Nimi</label>
+              <input type="text" required [(ngModel)]="model.name" name="name" #name="ngModel">
+              <div [hidden]="name.valid || name.pristine" class="form__item-error alert alert-danger"><div class="text">Pakollinen tieto</div></div>
+            </div>
+            <div class="form__item">
+              <label>Kuvaus</label>
+              <textarea [(ngModel)]="model.description" name="description"></textarea>
+            </div>
+            <div class="popup__footer">
+              <div class="popup__footer-links">
+                <button [disabled]="isUploading" (click)="close()" class="link type--secondary">Peruuta</button>
+                <button [disabled]="isUploading" (click)="delete()" class="link" *ngIf="model['id'] != null">Poista</button>
+                <button type="submit" [disabled]="!resultItemForm.form.valid || isUploading" class="link">Tallenna</button>
+              </div>
+            </div>
+          </form>
+        </ng-container>
+        <ng-container *ngIf="!isEditMode">
+          <div *ngIf="hasImage() == true" class="form__image-placement">
+            <a *ngIf="hasImage() == true" href="{{imageUrl()}}" target="_blank"><div [ngStyle]="{ 'background-image': 'url(' + imageUrl() + ')' }" class="form__image-placement-preview"></div></a>
+          </div>
+          <div class="form__item">
             <label>Nimi</label>
-            <input type="text" required [(ngModel)]="model.name" name="name" #name="ngModel">
-            <div [hidden]="name.valid || name.pristine" class="form__item-error alert alert-danger"><div class="text">Pakollinen tieto</div></div>
+            <div class="form__value">{{model.name}}</div>
           </div>
           <div class="form__item">
             <label>Kuvaus</label>
-            <textarea [(ngModel)]="model.description" name="description"></textarea>
+            <div class="form__value">{{model.description}}</div>
           </div>
-          <div class="form__footer">
-            <div class="form__footer-links">
-              <button [disabled]="isUploading" (click)="close()" class="link type--secondary">Peruuta</button>
-              <button [disabled]="isUploading" (click)="delete()" class="link" *ngIf="model['id'] != null">Poista</button>
-              <button type="submit" [disabled]="!resultItemForm.form.valid || isUploading" class="link">Tallenna</button>
+          <div class="popup__footer" *ngIf="!showUser">
+            <div class="popup__footer-links">
+              <button (click)="close()" class="link type--secondary">Peruuta</button>
+              <button (click)="edit()" class="link">Muokkaa</button>
             </div>
           </div>
-        </form>
-      </ng-container>
-      <ng-container *ngIf="!isEditMode">
-        <div *ngIf="hasImage() == true" class="form__image-placement">
-          <a *ngIf="hasImage() == true" href="{{imageUrl()}}" target="_blank"><div [ngStyle]="{ 'background-image': 'url(' + imageUrl() + ')' }" class="form__image-placement-preview"></div></a>
-        </div>
-        <div class="form__item">
-          <label>Nimi</label>
-          <div class="form__value">{{model.name}}</div>
-        </div>
-        <div class="form__item">
-          <label>Kuvaus</label>
-          <div class="form__value">{{model.description}}</div>
-        </div>
-        <div class="form__footer" *ngIf="!showUser">
-          <div class="form__footer-links">
-            <button (click)="close()" class="link type--secondary">Peruuta</button>
-            <button (click)="edit()" class="link">Muokkaa</button>
+          <div class="popup__footer" *ngIf="showUser">
+            <div class="popup__footer-links">
+              <button (click)="close()" class="link type--secondary">Peruuta</button>
+            </div>
           </div>
-        </div>
-        <div class="form__footer" *ngIf="showUser">
-          <div class="form__footer-links">
-            <button (click)="close()" class="link type--secondary">Peruuta</button>
-          </div>
-        </div>
-      </ng-container>
+        </ng-container>
+      </div>
     </div>
   </div>
 </div>

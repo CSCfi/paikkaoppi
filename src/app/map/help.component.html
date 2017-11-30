@@ -1,18 +1,24 @@
 <div class="popup" *ngIf="visible">
   <div class="popup__content">
-    <div class="accordion">
-      <h1 class="accordion__header">{{task?.name}}</h1>
-      <div class="accordion__item">
-        <ng-container *ngFor="let i of task?.instructions">
-          <h2 class="accordion__title">{{i.name}}</h2>
-          <div class="accordion__text">
-            <ul class="list type--text">
-              <li class="list__item">{{i.description}}</li>
-            </ul>
-          </div>
-        </ng-container>
+    <div class="popup__scroll">
+      <div class="accordion">
+        <h1 class="accordion__header">{{task?.name}}</h1>
+        <div class="accordion__item">
+          <ng-container *ngFor="let i of task?.instructions">
+            <h2 class="accordion__title">{{i.name}}</h2>
+            <div class="accordion__text">
+              <ul class="list type--text">
+                <li class="list__item">{{i.description}}</li>
+              </ul>
+            </div>
+          </ng-container>
+        </div>
       </div>
-      <div class="accordion__footer"><a class="link" (click)="close()">Jatka tehtävää</a></div>
+    </div>
+    <div class="popup__footer">
+      <div class="popup__footer-links">
+        <a class="link" (click)="close()">Jatka tehtävää</a>
+      </div>
     </div>
   </div>
 </div>
