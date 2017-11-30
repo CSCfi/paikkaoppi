@@ -1547,6 +1547,7 @@ ul {
 }
 .list.type--library .list__item {
   padding-top: 35px;
+  min-width: calc(50% - 15px);
 }
 .list.type--library .list__item-content {
   padding: 0 15px;
