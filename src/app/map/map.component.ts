@@ -17,6 +17,7 @@ import { Result } from '../service/model-result'
 })
 export class MapComponent implements OnInit {
   isHelpVisible: boolean = environment.mapHelpVisibleInitially
+  isMarkerVisible = false
   task: Task
   @Input() helpClosed: () => boolean
 

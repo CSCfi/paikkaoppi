@@ -1,4 +1,4 @@
-<div class="map__wrapper">
+<div class="map__wrapper" [ngClass]="{ 'is-loaded': !resultItemPopupVisible }">
   <app-message></app-message>
   <div class="map__zoom">
     <div (click)="zoomIn()" class="map__zoom-in" [ngClass]="(this.zoomLevel >= this.maxZoomLevel) ? 'map__zoom-disabled' : ''" title="Lähennä"></div>

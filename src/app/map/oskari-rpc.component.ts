@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, NgZone } from '@angular/core'
+import { AfterViewInit, Component, Input, Output, NgZone, EventEmitter } from '@angular/core'
 import OskariRPC from 'oskari-rpc'
 import { Observable } from 'rxjs/Rx'
 import 'rxjs/add/observable/interval';
@@ -22,6 +22,10 @@ import { OskariLocationService } from './oskari-location.service'
 })
 export class OskariRpcComponent implements AfterViewInit {
   @Input() task: Task | null
+
+  @Output() markerOpened = new EventEmitter<void>()
+  @Output() markerClosed = new EventEmitter<void>()
+
   resultItemPopupVisible = false
   resultItemPopupResult: Result
   resultItemPopupResultItem: any
@@ -153,12 +157,14 @@ export class OskariRpcComponent implements AfterViewInit {
   resultItemPopupHidden(resultItem: ResultItem) {
     this.resultItemPopupVisible = false
     this.updateToolbarCoordinatesFromResultItem(resultItem)
+    this.markerClosed.next()
   }
 
   showResultItemPopup(resultItem: ResultItem) {
     this.resultItemPopupResultItem = resultItem
     this.resultItemPopupResult = this.task.results.find(r => r.id === resultItem.resultId)
     this.resultItemPopupVisible = true
+    this.markerOpened.next()
   }
 
   private addNewPointToMap(lat, lon) {
