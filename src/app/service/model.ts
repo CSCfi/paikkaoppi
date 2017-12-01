@@ -31,6 +31,7 @@ export interface User {
 export interface TaskTemplate {
     id: number
     name: string
+    type: string
     title: string
     description: string
     instructions: Instruction[]

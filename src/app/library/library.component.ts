@@ -13,17 +13,16 @@ import { TaskTemplate, User, Role, TaskType } from '../service/model'
   styleUrls: ['./library.component.css']
 })
 export class LibraryComponent implements OnInit {
+  allTaskTemplates?: TaskTemplate[] = []
   taskTemplates?: TaskTemplate[] = []
   selectedTemplateForTask?: TaskTemplate
   selectedTemplate?: TaskTemplate
   selectedDropdown?: number
   selectedFilter?: string
-  cFilter = {
-    creator: 'Kaikki',
-    type: 'Kaikki'
-  }
+  cFilter = this.initFilter()
   model: NewTaskModel = new NewTaskModel(null)
   showDeleteTaskTemplateComponent = false
+  username: string
   role: Role
   
   constructor(private taskTemplateService: TaskTemplateService,
@@ -35,13 +34,23 @@ export class LibraryComponent implements OnInit {
   ngOnInit() {
     this.loadTaskTemplates()
     this.role = this.authService.getRole()
+    this.username = this.authService.getUsername()
   }
 
   private loadTaskTemplates() {
     this.taskTemplateService.getTaskTemplates().subscribe(
       (data) => {
-        this.taskTemplates = data
+        this.allTaskTemplates = data
+        this.initFilter()
+        this.setVisibleTaskTemplates()
       })
+  }
+
+  private initFilter() {
+    return {
+      creator: 'Kaikki',
+      type: 'Kaikki'
+    }
   }
 
   getTaskTypeClass(type: TaskType) {
@@ -69,6 +78,20 @@ export class LibraryComponent implements OnInit {
       this.cFilter.creator = value
     else if (type === 'type')
       this.cFilter.type = value
+
+    this.setVisibleTaskTemplates()
+  }
+
+  private setVisibleTaskTemplates() {
+    if (this.cFilter.creator === 'Kaikki' && this.cFilter.type === 'Kaikki') {
+      this.taskTemplates = this.allTaskTemplates
+    } else if (this.cFilter.type === 'Kaikki') {
+      this.taskTemplates = this.allTaskTemplates.filter(t => t.user.username === this.username)
+    } else if (this.cFilter.creator === 'Kaikki') {
+      this.taskTemplates = this.allTaskTemplates.filter(t => t.type === this.cFilter.type)
+    } else {
+      this.taskTemplates = this.allTaskTemplates.filter(t => t.type === this.cFilter.type).filter(t => t.user.username === this.username)
+    }
   }
 
   isCreator(template: TaskTemplate) {
