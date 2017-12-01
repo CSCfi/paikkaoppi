@@ -16,10 +16,16 @@ export class LibraryComponent implements OnInit {
   taskTemplates?: TaskTemplate[] = []
   selectedTemplateForTask?: TaskTemplate
   selectedTemplate?: TaskTemplate
+  selectedDropdown?: number
+  selectedFilter?: string
+  cFilter = {
+    creator: 'Kaikki',
+    type: 'Kaikki'
+  }
   model: NewTaskModel = new NewTaskModel(null)
   showDeleteTaskTemplateComponent = false
   role: Role
-
+  
   constructor(private taskTemplateService: TaskTemplateService,
     private authService: AuthService,
     private taskService: TaskService,
@@ -40,6 +46,29 @@ export class LibraryComponent implements OnInit {
 
   getTaskTypeClass(type: TaskType) {
     return 'type--' + this.conversionService.taskTypeToOrderNumber(type)
+  }
+
+  toggleFilter(filter: string) {
+    this.selectedFilter = this.selectedFilter === filter ? null : filter
+  }
+
+  isFilterOpen(filter: string) {
+    return this.selectedFilter === filter
+  }
+
+  toggleDropdown(index: number) {
+    this.selectedDropdown = this.selectedDropdown === index ? null : index
+  }
+
+  isDropdownOpen(index: number) {
+    return this.selectedDropdown === index
+  }
+
+  filter(type: string, value: string) {
+    if (type === 'creator')
+      this.cFilter.creator = value
+    else if (type === 'type')
+      this.cFilter.type = value
   }
 
   isCreator(template: TaskTemplate) {
@@ -70,6 +99,11 @@ export class LibraryComponent implements OnInit {
     console.log('deleteTaskTemplate') 
     this.showDeleteTaskTemplateComponent = false
     this.loadTaskTemplates()
+  }
+
+  closeTaskTemplateDialog() {
+    console.log("closeTaskTemplateDialog")
+    this.showDeleteTaskTemplateComponent = false
   }
 
   closePopup() {

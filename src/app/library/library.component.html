@@ -8,23 +8,24 @@
       <div class="view__column type--one">
         <div class="view__filters">
           <div class="view__filter">
-            <div class="view__filter-dropdown is-open">
-              <div class="view__filter-dropdown-title">Tekijä: Minä</div>
+            <div (click)="toggleFilter('creator')" class="view__filter-dropdown" [ngClass]="isFilterOpen('creator') ? 'is-open' : ''">
+              <div class="view__filter-dropdown-title">Tekijä: {{ cFilter.creator }}</div>
               <div class="view__filter-dropdown-handle"></div>
               <div class="view__filter-dropdown-content">
-                <div class="view__filter-dropdown-row is-selected">Minä</div>
-                <div class="view__filter-dropdown-row">Oili Opettaja</div>
+                <div (click)="filter('creator', 'Kaikki')" class="view__filter-dropdown-row" [ngClass]="cFilter.creator === 'Kaikki' ? 'is-selected' : ''">Kaikki</div>
+                <div (click)="filter('creator', 'Minä')" class="view__filter-dropdown-row" [ngClass]="cFilter.creator === 'Minä' ? 'is-selected' : ''">Minä</div>
               </div>
             </div>
           </div>
           <div class="view__filter">
-            <div class="view__filter-dropdown">
-              <div class="view__filter-dropdown-title">Tyyppi</div>
+            <div (click)="toggleFilter('type')" class="view__filter-dropdown" [ngClass]="isFilterOpen('type') ? 'is-open' : ''">
+              <div class="view__filter-dropdown-title">Tyyppi: {{ cFilter.type }}</div>
               <div class="view__filter-dropdown-handle"></div>
               <div class="view__filter-dropdown-content">
-                <div class="view__filter-dropdown-row">Toimi</div>
-                <div class="view__filter-dropdown-row">Tutki</div>
-                <div class="view__filter-dropdown-row">Tee</div>
+                <div (click)="filter('type', 'Kaikki')" class="view__filter-dropdown-row" [ngClass]="cFilter.type === 'Kaikki' ? 'is-selected' : ''">Kaikki</div>
+                <div (click)="filter('type', 'Tutki')" class="view__filter-dropdown-row" [ngClass]="cFilter.type === 'Tutki' ? 'is-selected' : ''">Tutki</div>
+                <div (click)="filter('type', 'Toimi')" class="view__filter-dropdown-row" [ngClass]="cFilter.type === 'Toimi' ? 'is-selected' : ''">Toimi</div>
+                <div (click)="filter('type', 'Pähkinä')" class="view__filter-dropdown-row" [ngClass]="cFilter.type === 'Pähkinä' ? 'is-selected' : ''">Pähkinä</div>
               </div>
             </div>
           </div>
@@ -48,7 +49,14 @@
             <a routerLink="/task-template" class="list__item-link">Uusi tehtäväpohja</a>
           </div>
         </div>
-        <div class="list__item" *ngFor="let t of taskTemplates">
+        <div class="list__item" *ngFor="let t of taskTemplates; let i = index">
+          <div *ngIf="isCreator(t)" (click)="toggleDropdown(i)" class="list__item-dropdown" [ngClass]="isDropdownOpen(i) ? 'is-open' : ''">
+            <div class="list__item-dropdown-handle"></div>
+            <div class="list__item-dropdown-content">
+              <div class="list__item-dropdown-row" [routerLink]="['/task-template', t.id]">Muokkaa</div>
+              <div class="list__item-dropdown-row" (click)="showDeleteTaskTemplateDialog(t.id)">Poista</div>
+            </div>
+          </div>
           <div class="list__item-type {{getTaskTypeClass(t.type)}}"></div>
           <div class="list__item-content">
             <div class="list__item-title">{{t.name}}</div>
@@ -64,8 +72,6 @@
             </div>
           </div>
           <div class="list__item-footer">
-            <a *ngIf="isCreator(t)" (click)="showDeleteTaskTemplateDialog(t.id)" class="list__item-link">Poista tehtäväpohja</a>
-            <a *ngIf="isCreator(t)" [routerLink]="['/task-template', t.id]" class="list__item-link">Muokkaa tehtäväpohjaa</a>
             <a (click)="createTask(t.id)" class="list__item-link">Aloita tehtävä</a>
           </div>
         </div>

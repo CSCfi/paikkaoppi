@@ -15,7 +15,6 @@ export class DeleteTaskTemplateComponent {
   constructor(private taskTemplateService: TaskTemplateService) { }
 
   closeDialog() {
-    console.log('closeDialog', this.model)
     this.close.next()
   }
 

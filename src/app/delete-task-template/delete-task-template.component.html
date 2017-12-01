@@ -1,18 +1,20 @@
 <div class="popup">
   <div class="popup__content">
-    <div class="popup__scroll">
-      <form (ngSubmit)="submit()">
+    <form (ngSubmit)="submit()">
+      <div class="popup__scroll">
         <div class="form type--basic">
-          <div class="popup__header"><a (click)="closeDialog()" class="popup__header-link type--back"></a>
+          <div class="popup__header">
             <h1 class="popup__header-title">Tehtäväpohjan poisto</h1>
           </div>
           <h1 class="accordion__header">{{model.name}}</h1>
-          <div class="form__footer">
-            <button type="submit" class="button">Poista</button>
-            <a class="button type--secondary" (click)="closeDialog()">Peruuta</a>
-          </div>
         </div>
-      </form>
-    </div>
+      </div>
+      <div class="popup__footer">
+        <div class="popup__footer-links">
+          <a (click)="closeDialog()" class="link type--secondary">Peruuta</a>
+          <button type="submit" class="link">Poista</button>
+        </div>
+      </div>
+    </form>
   </div>
 </div>
