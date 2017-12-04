@@ -88,10 +88,16 @@ export class LibraryComponent implements OnInit {
     } else if (this.cFilter.type === 'Kaikki') {
       this.taskTemplates = this.allTaskTemplates.filter(t => t.user.username === this.username)
     } else if (this.cFilter.creator === 'Kaikki') {
-      this.taskTemplates = this.allTaskTemplates.filter(t => t.type === this.cFilter.type)
+      this.taskTemplates = this.allTaskTemplates.filter(t => t.type === this.getType(this.cFilter.type))
     } else {
-      this.taskTemplates = this.allTaskTemplates.filter(t => t.type === this.cFilter.type).filter(t => t.user.username === this.username)
+      this.taskTemplates = this.allTaskTemplates.filter(t => t.type === this.getType(this.cFilter.type)).filter(t => t.user.username === this.username)
     }
+  }
+
+  private getType(type: string): string {
+    if (type === 'Tutki') return 'INVESTIGATE'
+    else if (type === 'Toimi') return 'ACT'
+    else return 'PUZZLE'
   }
 
   isCreator(template: TaskTemplate) {
