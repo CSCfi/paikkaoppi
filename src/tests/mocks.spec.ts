@@ -118,6 +118,7 @@ export class TestMethods {
     return {
       id: id,
       name: "Tehtäväpohja",
+      type: "ACT",
       title: "Tehtäväpohja",
       description: "Tehtäväpohja",
       instructions: null,
