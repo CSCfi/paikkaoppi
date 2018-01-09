@@ -124,6 +124,7 @@ export class TestMethods {
       instructions: null,
       info: "Info",
       tags: ["tags"],
+      ops: null,
       user: TestMethods.getTeacher()
     }
   }
