@@ -40,7 +40,7 @@ export class CodeComponent {
   }
 
   handlePaste(e: any) {
-    const content = e.clipboardData.getData('text/plain');
+    const content = e.clipboardData.getData('text/plain').trim()
     if (this.isSupportedCode(content)) {
       for (let i = 0; i < content.length; i++) {
         this.model.code[i] = content.charAt(i)

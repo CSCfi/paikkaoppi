@@ -21,11 +21,9 @@
               <em>ETRS-TM35FIN</em>
             </div>
             <div class="form__text-value">
-              <ul>
-                <ng-template ngFor let-c [ngForOf]="polygonWGS84Coordinates">
-                  <li>N:{{c.lat.asString(3)}} E:{{c.lon.asString(3)}}</li>
-                </ng-template>
-              </ul>
+              <div class="form__text-values">
+                <span *ngFor="let c of polygonWGS84Coordinates">N:{{c.lat.asString(3)}} E:{{c.lon.asString(3)}}<br/></span>
+              </div>
               <em>WGS84</em>
             </div>
           </ng-container>
@@ -71,6 +69,7 @@
           </form>
         </ng-container>
         <ng-container *ngIf="!isEditMode">
+          <div class="clear-left"></div>
           <div *ngIf="hasImage() == true" class="form__image-placement">
             <a *ngIf="hasImage() == true" href="{{imageUrl()}}" target="_blank"><div [ngStyle]="{ 'background-image': 'url(' + imageUrl() + ')' }" class="form__image-placement-preview"></div></a>
           </div>

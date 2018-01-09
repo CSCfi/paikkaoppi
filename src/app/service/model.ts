@@ -37,6 +37,7 @@ export interface TaskTemplate {
     instructions: Instruction[]
     info: string
     tags: string[]
+    ops: any
     user: User
 }
 

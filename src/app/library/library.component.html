@@ -37,7 +37,7 @@
             <div class="list__item-description">Kartta ja työkalut oman esityksen luomiseen.</div>
           </div>
           <div class="list__item-footer">
-            <a routerLink="/own-task-template" class="list__item-link">Aloita tehtävä</a>
+            <a routerLink="/own-task-template" class="list__item-link">Luo tehtävä</a>
           </div>
         </div>-->
         <div class="list__item" *ngIf="role === 'teacher'">
@@ -62,7 +62,7 @@
             <div class="list__item-title">{{t.name}}</div>
             <div class="list__item-description">{{t.description}}</div>
           </div>
-          <div class="list__item-info" *ngIf="role === 'teacher'">
+          <div class="list__item-info">
             <div class="list__item-tag" *ngIf="t.ops != null">
               <div class="tag" *ngFor="let grade of t.ops.grades">{{grade.name}}</div><div
                 class="tag" *ngFor="let subject of t.ops.subjects">{{subject.name}}</div><div
@@ -72,7 +72,7 @@
             </div>
           </div>
           <div class="list__item-footer">
-            <a (click)="createTask(t.id)" class="list__item-link">Aloita tehtävä</a>
+            <a (click)="createTask(t.id)" class="list__item-link">Luo tehtävä</a>
           </div>
         </div>
       </div>

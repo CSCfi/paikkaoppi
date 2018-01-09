@@ -182,6 +182,9 @@ input {
   display: block;
   margin: 0;
 }
+.clear-left {
+  clear: left;
+}
 .select__wrapper {
   position: relative;
   border: 1px solid #333;
@@ -863,6 +866,7 @@ ul {
 .list.type--tasks .list__item-dropdown.is-open .list__item-dropdown-content,
 .list.type--library .list__item-dropdown.is-open .list__item-dropdown-content {
   display: block;
+  box-shadow: 1px 1px 6px rgba(0,0,0,0.2);
 }
 .list.type--tasks .list__item-dropdown-handle,
 .list.type--library .list__item-dropdown-handle {
@@ -1039,15 +1043,15 @@ ul {
 }
 .list.type--tasks .list__item-image.type--1,
 .list.type--library .list__item-image.type--1 {
-  background-image: url("assets/bg_inside.png");
+  background-image: url("assets/bg_investigate.png");
 }
 .list.type--tasks .list__item-image.type--2,
 .list.type--library .list__item-image.type--2 {
-  background-image: url("assets/bg_outside.png");
+  background-image: url("assets/bg_act.png");
 }
 .list.type--tasks .list__item-image.type--3,
 .list.type--library .list__item-image.type--3 {
-  background-image: url("assets/bg_outside.png");
+  background-image: url("assets/bg_puzzle.png");
 }
 @media (max-width: 940px) {
   .list.type--tasks .list__item-image,
@@ -1093,17 +1097,17 @@ ul {
 }
 .list.type--tasks .list__item-type.type--1,
 .list.type--library .list__item-type.type--1 {
-  background: url("assets/bg_inside-s.png");
+  background: url("assets/bg_investigate-s.png");
   background-size: cover;
 }
 .list.type--tasks .list__item-type.type--2,
 .list.type--library .list__item-type.type--2 {
-  background: url("assets/bg_outside-s.png");
+  background: url("assets/bg_act-s.png");
   background-size: cover;
 }
 .list.type--tasks .list__item-type.type--3,
 .list.type--library .list__item-type.type--3 {
-  background: url("assets/bg_outside-s.png");
+  background: url("assets/bg_puzzle-s.png");
   background-size: cover;
 }
 .list.type--tasks .list__item-footer,
@@ -1351,8 +1355,9 @@ ul {
   font-weight: 700;
 }
 .form__text-values {
-  width: 200px;
+  width: 240px;
   float: left;
+  margin-bottom: 6px;
 }
 .form__text-value em {
   font-style: normal;
@@ -1646,23 +1651,23 @@ ul {
   text-shadow: 1px 1px 6px rgba(0,0,0,0.5);
 }
 .profile__medal.type--1 {
-  background: url("assets/bg_outside-s.png");
+  background: url("assets/bg_act-s.png");
   background-size: cover;
 }
 .profile__medal.type--2 {
-  background: url("assets/bg_inside-s.png");
+  background: url("assets/bg_investigate-s.png");
   background-size: cover;
 }
 .profile__medal.type--3 {
-  background: url("assets/bg_outside-s.png");
+  background: url("assets/bg_puzzle-s.png");
   background-size: cover;
 }
 .profile__medal.type--4 {
-  background: url("assets/bg_inside-s.png");
+  background: url("assets/bg_investigate-s.png");
   background-size: cover;
 }
 .profile__medal.type--5 {
-  background: url("assets/bg_inside-s.png");
+  background: url("assets/bg_investigate-s.png");
   background-size: cover;
 }
 .profile__medal.is-empty {
@@ -1808,6 +1813,7 @@ ul {
 }
 .view__filter-dropdown.is-open .view__filter-dropdown-content {
   display: block;
+  box-shadow: 1px 1px 6px rgba(0,0,0,0.2);
 }
 .view__filter-dropdown-title {
   font-size: 1.21rem;
@@ -1822,7 +1828,7 @@ ul {
   position: absolute;
   background: #fff;
   min-width: 180px;
-  padding: 5px 0;
+  padding: 0;
   margin: 5px 0 0 0;
 }
 .view__filter-dropdown-row {
