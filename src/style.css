@@ -465,6 +465,7 @@ ul {
   background: transparent;
   top: 8px;
   display: block;
+  height: auto;
   z-index: 203;
 }
 .view__header.type--map .view__header-content {
@@ -633,7 +634,7 @@ ul {
 }
 .map__info {
   position: absolute;
-  top: 15px;
+  top: 75px;
   left: 0;
   right: 0;
   text-align: center;
@@ -654,6 +655,7 @@ ul {
   transform-style: preserve-3d;
   animation: appear 1s ease-in-out;
   animation-fill-mode: forwards;
+  z-index: 205;
 }
 .map__info-close {
   cursor: pointer;
@@ -803,7 +805,10 @@ ul {
   animation-fill-mode: forwards;
 }
 .map__tools-dot,
-.map__tools-area {
+.map__tools-area,
+.map__tools-track-location,
+.map__tools-measure-line,
+.map__tools-measure-area {
   width: 40px;
   height: 40px;
   padding: 10px;
@@ -818,7 +823,10 @@ ul {
   margin: 0 5px 0 0;
 }
 .map__tools-dot.is-selected,
-.map__tools-area.is-selected {
+.map__tools-area.is-selected,
+.map__tools-track-location.is-selected,
+.map__tools-measure-line.is-selected,
+.map__tools-measure-area.is-selected {
   background: #e1854b;
   box-shadow: inset 2px 2px 10px rgba(240,83,72,0.3);
 }
@@ -827,6 +835,15 @@ ul {
 }
 .map__tools-area:before {
   content: url("assets/icon_area.svg");
+}
+.map__tools-track-location:before {
+  content: url("assets/icon_location.png");
+}
+.map__tools-measure-line:before {
+  content: url("assets/icon_measure_line.png");
+}
+.map__tools-measure-area:before {
+  content: url("assets/icon_measure_area.png");
 }
 .map__tools-coords {
   display: inline-block;

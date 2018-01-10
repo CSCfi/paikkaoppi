@@ -47,7 +47,7 @@
             <div class="list__item-content">
               <div class="list__item-title">{{t.name}}</div>
               <div class="list__item-detail">{{t.resultItemCount}} kohdetta</div>
-              <div class="list__item-code" *ngIf="role === 'teacher'">
+              <div class="list__item-code" *ngIf="t.creator === user.username || role === 'teacher'">
                 <div class="code">{{t.code}}</div>
               </div>
               <!--

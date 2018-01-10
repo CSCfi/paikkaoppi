@@ -12,9 +12,9 @@ export const environment = {
   mapDomain : 'https://kartta.paikkatietoikkuna.fi',
   mapId : '3756c8ff-3145-455d-a19d-5004ce0e9f90',
   mapTools: {
-    markerTool: true, areaTool: true, trackLocation: false,
-    measureLineTool: false, measureAreaTool: false,
-    centerToLocation: false, changeLayer: false},
+    markerTool: true, areaTool: true, trackLocation: true,
+    measureLineTool: true, measureAreaTool: true,
+    centerToLocation: true, changeLayer: true},
   mapHelpVisibleInitially: false,
   apiUri: '/api/v1',
   loginPageUri: 'https://paikkaoppidev.csc.fi',

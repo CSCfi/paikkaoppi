@@ -68,6 +68,7 @@ export interface TaskDashboard {
     id: number
     name: string
     code: string
+    creator: string
     resultItemCount: number
 }
 

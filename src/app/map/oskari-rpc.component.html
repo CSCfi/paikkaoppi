@@ -23,11 +23,11 @@
       title="Merkitse piste"></a>
     <a *ngIf="mapTools['areaTool']" (click)="toggleDrawAreaAction()" class="map__tools-area" [ngClass]="drawAreaAction == true ? 'is-selected' : ''"
       title="Merkitse alue"></a>
-    <a *ngIf="mapTools['trackLocation']" (click)="toggleTrackLocation()" class="map__tools-dot" [ngClass]="trackLocation == true ? 'is-selected' : ''"
+    <a *ngIf="mapTools['trackLocation']" (click)="toggleTrackLocation()" class="map__tools-track-location" [ngClass]="trackLocation == true ? 'is-selected' : ''"
       title="Seuraa sijaintiasi"></a>
-    <a *ngIf="mapTools['measureLineTool']" (click)="toggleMeasureLine()" class="map__tools-dot" [ngClass]="measureLineAction == true ? 'is-selected' : ''"
+    <a *ngIf="mapTools['measureLineTool']" (click)="toggleMeasureLine()" class="map__tools-measure-line" [ngClass]="measureLineAction == true ? 'is-selected' : ''"
       title="Mittaa etäisyys"></a>
-    <a *ngIf="mapTools['measureAreaTool']" (click)="toggleMeasureArea()" class="map__tools-dot" [ngClass]="measureAreaAction == true ? 'is-selected' : ''"
+    <a *ngIf="mapTools['measureAreaTool']" (click)="toggleMeasureArea()" class="map__tools-measure-area" [ngClass]="measureAreaAction == true ? 'is-selected' : ''"
       title="Mittaa pinta-ala"></a>
     <div class="map__tools-coords" *ngIf="coordinates">N:{{coordinates.lat.asString(3)}} E:{{coordinates.lon.asString(3)}}</div>
   </div>
