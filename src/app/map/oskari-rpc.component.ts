@@ -324,7 +324,7 @@ export class OskariRpcComponent implements AfterViewInit {
 
   checkRpcVersion() {
     console.info('checkRpcVersion: isReady:', this.channel.isReady())
-    const expectedOskariVersion = '1.43.0'
+    const expectedOskariVersion = '1.44.3'
     this.channel.isSupported(expectedOskariVersion, (blnSupported) => this.zone.runGuarded(() => {
       if (blnSupported) {
         console.info('Client is supported and Oskari version is ' + expectedOskariVersion)
