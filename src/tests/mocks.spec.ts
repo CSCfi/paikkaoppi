@@ -64,6 +64,7 @@ export class TaskServiceMock {
       id: 1,
       name: 'Tehtävä 1',
       code: 'code',
+      creator: 'oppi.opettaja@koulu.fi',
       resultItemCount: 1
     }])
   }
