@@ -614,6 +614,7 @@ ul {
 @media (min-width: 620px) {
   .view__index-column:nth-child(1) {
     max-width: calc(100vw - 610px);
+    min-width: 440px;
   }
 }
 .view__index-column:nth-child(2) {
