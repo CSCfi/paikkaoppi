@@ -1,5 +1,5 @@
 import { Observable, Subscription } from 'rxjs/Rx';
-import { Injectable } from '@angular/core'
+import { Injectable, NgZone } from '@angular/core'
 import { GeoService } from './geo.service'
 import { ResultItem } from '../service/model'
 
@@ -9,6 +9,7 @@ import { ResultItem } from '../service/model'
  * @Injectable()
  */
 export class OskariLocationService {
+  private zone: any
   private geoService: GeoService
   private channel: any
   private trackUserLocation = false
@@ -18,7 +19,11 @@ export class OskariLocationService {
   private trackSubscription?: Subscription = null
   private currentUserLocation?: number[] = null
 
-  constructor(geoService: GeoService, channel: any) {
+  constructor(
+      zone: NgZone,
+      geoService: GeoService,
+      channel: any) {
+    this.zone = zone;
     this.geoService = geoService
     this.channel = channel
   }
@@ -70,6 +75,12 @@ export class OskariLocationService {
     const userLocationEventFn = function (event) {
       this.showLocationOnMap(event.lat, event.lon)
       this.channel.unregisterEventHandler(this.userLocationEventName, userLocationEventFn)
+
+      this.channel.zoomTo([13], (data) => this.zone.runGuarded(() => {
+        console.log('Zoom level after: ', data)
+        this.zoomLevel = data
+      }))
+
     }.bind(this)
 
     this.channel.handleEvent(this.userLocationEventName, userLocationEventFn)

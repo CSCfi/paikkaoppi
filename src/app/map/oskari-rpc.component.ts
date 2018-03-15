@@ -72,7 +72,7 @@ export class OskariRpcComponent implements AfterViewInit {
         () => {
           this.pointService = new OskariPointService(this.geoService, this.channel)
           this.polygonService = new OskariPolygonService(this.geoService, this.channel)
-          this.locationService = new OskariLocationService(this.geoService, this.channel)
+          this.locationService = new OskariLocationService(this.zone, this.geoService, this.channel)
           this.checkRpcVersion()
           this.resetMapLocation()
           this.loadLayers()
@@ -309,6 +309,7 @@ export class OskariRpcComponent implements AfterViewInit {
   zoomToLocation() {
     console.log('zoomToLocation')
     this.locationService.zoomToLocation()
+    this.zoomLevel = 13
   }
 
   resetMapLocation() {
