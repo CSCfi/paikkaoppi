@@ -10,10 +10,13 @@ export const environment = {
   production: true,
   mapEnv : 'prod',
   mapDomain : 'https://kartta.paikkatietoikkuna.fi',
-  mapId : '',
-  mapTools: {markerTool: true, areaTool: true, trackLocation: true},
+  mapId : '3756c8ff-3145-455d-a19d-5004ce0e9f90',
+  mapTools: {
+    markerTool: true, areaTool: true, trackLocation: true,
+    measureLineTool: true, measureAreaTool: true,
+    centerToLocation: true, changeLayer: true},
   mapHelpVisibleInitially: false,
-  apiUri: 'http://localhost:8000/api/v1',
+  apiUri: '/api/v1',
   loginPageUri: 'https://paikkaoppi.csc.fi',
-  logoutUri: '/Shibboleth.sso/Logout?return=https://mpass-proxy-test.csc.fi/idp/profile/Logout?return=https://paikkaoppi.csc.fi',
+  logoutUri: '/Shibboleth.sso/Logout?return=https://mpass-proxy.csc.fi/idp/profile/Logout?return=https://paikkaoppi.csc.fi',
 }
