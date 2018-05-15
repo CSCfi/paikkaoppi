@@ -4,6 +4,7 @@ import { Result } from './model-result'
 
 export type Role = "teacher" | "student"
 export type TaskType = "INVESTIGATE" | "ACT" | "PUZZLE"
+export type Visibility = "OPEN" | "RESTRICTED"
 
 export class Roles {
   static teacherRole: Role = "teacher"
@@ -32,6 +33,7 @@ export interface TaskTemplate {
     id: number
     name: string
     type: string
+    visibility: Visibility
     title: string
     description: string
     instructions: Instruction[]
@@ -54,6 +56,7 @@ export interface Task {
     id: number
     taskTemplateId: number
     name: string
+    visibility: Visibility
     title: string
     description: string
     instructions: Instruction[]
@@ -76,6 +79,7 @@ export interface ResultItem {
     id?: number
     resultId: number
     geometry: Geometry
+    visibility?: Visibility
     name?: string
     description?: string
     attachments?: Attachment[]

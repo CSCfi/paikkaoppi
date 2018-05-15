@@ -58,7 +58,9 @@ export class ResultItemComponent implements OnChanges {
       this.initUpload(null)
       this.isEditMode = true
     }
-    if (this.result != null && this.authService.getUsername() !== this.result.user.username) {
+    if (this.result != null && this.authService.isTeacher()) {
+      this.showUser = false
+    } else if (this.result != null && this.authService.getUsername() !== this.result.user.username) {
       this.showUser = true
     } else {
       this.showUser = false

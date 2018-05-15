@@ -1,4 +1,4 @@
-import { AfterViewInit, Component, Input, Output, NgZone, EventEmitter } from '@angular/core'
+import { AfterViewInit, Component, Input, Output, NgZone, EventEmitter, OnInit } from '@angular/core'
 import OskariRPC from 'oskari-rpc'
 import { Observable } from 'rxjs/Rx'
 import 'rxjs/add/observable/interval';
@@ -20,9 +20,8 @@ import { OskariLocationService } from './oskari-location.service'
   templateUrl: './oskari-rpc.component.html',
   styleUrls: ['./oskari-rpc.component.css']
 })
-export class OskariRpcComponent implements AfterViewInit {
+export class OskariRpcComponent implements AfterViewInit, OnInit {
   @Input() task: Task | null
-
   @Output() markerOpened = new EventEmitter<void>()
   @Output() markerClosed = new EventEmitter<void>()
 
@@ -48,6 +47,7 @@ export class OskariRpcComponent implements AfterViewInit {
   trackLocation = false
   measureLineAction = false
   measureAreaAction = false
+  showAllResultItems = false
 
   actionHandlers: Map<string, any> = new Map<string, any>()
 
@@ -61,6 +61,13 @@ export class OskariRpcComponent implements AfterViewInit {
     private taskService: TaskService,
     private authService: AuthService,
     private messageService: MessageService) {
+  }
+
+
+  ngOnInit() {
+    if (this.authService.isTeacher()) {
+      this.showAllResultItems = !this.showAllResultItems
+    }
   }
 
   ngAfterViewInit() {
@@ -85,12 +92,19 @@ export class OskariRpcComponent implements AfterViewInit {
   }
 
   private drawTaskResultsToMap(task: Task) {
+    const currentUsername = this.authService.getUsername()
+    
     for (const result of task.results) {
+      const showResultItem = this.showResultItem(result, currentUsername)
       for (const resultItem of result.resultItems) {
-        if (this.geoService.isPoint(resultItem)) {
+        if (this.geoService.isPoint(resultItem) && showResultItem) {
           this.pointService.addPointToMap(resultItem)
-        } else if (this.geoService.isPolygon(resultItem)) {
+        } else if (this.geoService.isPolygon(resultItem) && showResultItem) {
           this.polygonService.addPolygonToMap(resultItem)
+        } else if (this.geoService.isPoint(resultItem) && !showResultItem) {
+          this.pointService.removePointFromMap(resultItem)
+        } else if (this.geoService.isPolygon(resultItem) && !showResultItem) {
+          this.polygonService.removePolygonFromMap(resultItem)
         } else {
           console.error('Skipping drawing ResultItem, since not supported yet!', resultItem)
         }
@@ -98,6 +112,19 @@ export class OskariRpcComponent implements AfterViewInit {
     }
   }
 
+  toggleAllTaskResults() {
+    this.showAllResultItems = !this.showAllResultItems
+    this.drawTaskResultsToMap(this.task)
+  }
+
+  private showResultItem (result: Result, currentUsername: String) {
+    if (this.showAllResultItems) {
+      return true
+    } else {
+      return currentUsername == result.user.username
+    }
+  }
+  
   saveResultItem(event: any) {
     const resultId = this.resultId()
     const resultItem = event as ResultItem
@@ -171,8 +198,9 @@ export class OskariRpcComponent implements AfterViewInit {
     const eventName = 'AfterAddMarkerEvent'
     const afterAddMarkerEventFunction = function (data) {
       const resultItem: any = this.geoService.pointResultItem(this.resultId(), lat, lon)
-      resultItem['isNew'] = true
-      resultItem['markerId'] = data.id
+      resultItem.isNew = true
+      resultItem.markerId = data.id
+      resultItem.visibility = this.task.visibility;
       console.log(eventName, data, resultItem)
       this.showResultItemPopup(resultItem)
       this.channel.unregisterEventHandler(eventName, afterAddMarkerEventFunction)
