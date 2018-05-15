@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core'
 import * as GeoJSON from 'geojson'
 import proj4 from 'proj4'
-import { ResultItem, Geometry, Point, FeatureCollection, PolygonFeatureCollection } from '../service/model'
+import { ResultItem, Geometry, Point, FeatureCollection, PolygonFeatureCollection, Visibility } from '../service/model'
 import { EPSG3067, EPSG4326, MARKER_OPTIONS, LOCATION_OPTIONS, geometryTypePoint, geometryTypePolygon,
   geometryTypeFeatureCollection } from './config'
 
@@ -28,6 +28,7 @@ export class GeoService {
       id: resultItem.id,
       resultId: resultItem.resultId,
       geometry: resultItem.geometry,
+      visibility: resultItem.visibility,
       name: resultItem.name,
       description: resultItem.description,
       attachments: resultItem.attachments
@@ -37,14 +38,14 @@ export class GeoService {
   pointResultItem(resultId: number, lat: number, lon: number): ResultItem {
     return {
       resultId: resultId,
-      geometry: this.point(lat, lon),
+      geometry: this.point(lat, lon)
     }
   }
 
   polygonResultItem(resultId: number, geojson: PolygonFeatureCollection): ResultItem {
     return {
       resultId: resultId,
-      geometry: geojson as PolygonFeatureCollection,
+      geometry: geojson as PolygonFeatureCollection
     }
   }
 

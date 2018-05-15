@@ -678,6 +678,7 @@ ul {
 .map__zoom-out,
 .map__center,
 .map__location,
+.map__showall,
 .map__layers {
   width: 40px;
   height: 40px;
@@ -697,7 +698,8 @@ ul {
 .map__zoom-out:before {
   content: url("assets/icon_minus.svg");
 }
-.map__zoom-disabled {
+.map__zoom-disabled,
+.map__showall-disabled {
   cursor: default;
   background:rgba(220,220,220,0.5);
 }
@@ -709,6 +711,9 @@ ul {
 }
 .map__location:before {
   content: url("assets/icon_center.svg");
+}
+.map__showall:before {
+  content: url("assets/icon_locations.png");
 }
 .map__layers {
   width: 42px;
@@ -768,7 +773,8 @@ ul {
 .map__zoom-in {
   animation-delay: 900ms;
 }
-.map__zoom-out {
+.map__zoom-out,
+.map__showall{
   animation-delay: 1200ms;
 }
 .map__center {

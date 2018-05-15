@@ -3,6 +3,7 @@
   <div class="map__zoom">
     <div (click)="zoomIn()" class="map__zoom-in" [ngClass]="(this.zoomLevel >= this.maxZoomLevel) ? 'map__zoom-disabled' : ''" title="Lähennä"></div>
     <div (click)="zoomOut()" class="map__zoom-out" [ngClass]="(this.zoomLevel <= this.minZoomLevel) ? 'map__zoom-disabled' : ''" title="Loitonna"></div>
+    <div (click)="toggleAllTaskResults()" class="map__showall" [ngClass]="showAllResultItems == false ? 'map__showall-disabled' : ''" title="Näytä kaikki pisteet"></div>
     <div (click)="resetMapLocation()" class="map__center" title="Palauta"></div>
     <div (click)="zoomToLocation()" class="map__location" title="Keskitä omaan sijaintiin" *ngIf="mapTools['centerToLocation']"></div>
     <div onclick="this.classList.toggle('is-selected')" class="map__layers" (click)="layerDropdown.hidden=!layerDropdown.hidden"

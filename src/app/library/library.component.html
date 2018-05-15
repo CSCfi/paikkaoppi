@@ -29,6 +29,16 @@
               </div>
             </div>
           </div>
+          <div class="view__filter">
+            <div (click)="toggleFilter('visibility')" class="view__filter-dropdown" [ngClass]="isFilterOpen('visibility') ? 'is-open' : ''">
+              <div class="view__filter-dropdown-title">Tyyppi: {{ cFilter.visibility }}</div>
+              <div class="view__filter-dropdown-handle"></div>
+              <div class="view__filter-dropdown-content">
+                <div (click)="filter('visibility', 'Avoin')" class="view__filter-dropdown-row" [ngClass]="cFilter.visibility === 'Avoin' ? 'is-selected' : ''">Avoin</div>
+                <div (click)="filter('visibility', 'Suljettu')" class="view__filter-dropdown-row" [ngClass]="cFilter.visibility === 'Suljettu' ? 'is-selected' : ''">Suljettu</div>
+              </div>
+            </div>
+          </div>
         </div>
       <div class="list type--library">
         <!--<div class="list__item" *ngIf="role === 'student'">

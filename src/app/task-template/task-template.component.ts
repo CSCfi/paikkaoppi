@@ -54,6 +54,7 @@ export class TaskTemplateComponent implements OnInit {
   }
 
   submit() {
+
     this.setOpsToModel()
     
     if (this.model.id !== undefined) {
@@ -303,6 +304,7 @@ export class TaskTemplateComponent implements OnInit {
     return {
       name: null,
       type: 'INVESTIGATE',
+      visibility: 'RESTRICTED',
       title: null,
       description: null,
       instructions: [this.createNewInstruction()],

@@ -35,14 +35,31 @@
                 <textarea required maxlength="4096" [(ngModel)]="model.description" name="description" #description="ngModel"></textarea>
                 <div [hidden]="description.valid || description.pristine" class="form__item-error alert alert-danger"><div class="text">Pakollinen tieto</div></div>
               </div>
-              <div class="form__item">
-                <label for="type">Tehtävän tyyppi</label><br/>
-                <div class="select__wrapper">
-                  <select [(ngModel)]="model.type" name="type">
-                    <option value="INVESTIGATE">Tutki</option>
-                    <option value="ACT">Toimi</option>
-                    <option value="PUZZLE">Pähkinä</option>
-                  </select>
+              <div class="form__columns">
+                <div class="form__column">
+                  <div class="form__item">
+                    <label for="type">Tehtävän tyyppi</label>
+                    <br/>
+                    <div class="select__wrapper">
+                      <select [(ngModel)]="model.type" name="type">
+                        <option value="INVESTIGATE">Tutki</option>
+                        <option value="ACT">Toimi</option>
+                        <option value="PUZZLE">Pähkinä</option>
+                      </select>
+                    </div>
+                  </div>
+                </div>
+                <div class="form__column">
+                  <div class="form__item">
+                    <label for="visibility">Tehtävän näkyvyys</label>
+                    <br/>
+                    <div class="select__wrapper">
+                      <select [(ngModel)]="model.visibility" name="visibility">
+                        <option value="OPEN">Avoin</option>
+                        <option value="RESTRICTED">Suljettu</option>
+                      </select>
+                    </div>
+                  </div>
                 </div>
               </div>
               <div *ngIf="model.ops != null" class="form__item">
@@ -219,6 +236,13 @@
                   <span *ngIf="model.type == 'INVESTIGATE'">Tutki</span>
                   <span *ngIf="model.type == 'ACT'">Toimi</span>
                   <span *ngIf="model.type == 'PUZZLE'">Pähkinä</span>
+                </div>
+              </div>
+              <div class="form__item">
+                <label for="info">Tehtävän näkyvyys</label>
+                <div id="type">
+                  <span *ngIf="model.visibility == 'OPEN'">Avoin</span>
+                  <span *ngIf="model.visibility == 'RESTRICTED'">Suljettu</span>
                 </div>
               </div>
               <div class="form__title">Tehtävän ohje</div>
