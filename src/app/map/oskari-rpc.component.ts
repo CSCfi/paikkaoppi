@@ -7,13 +7,14 @@ import { environment } from '../../environments/environment'
 import { AuthService } from '../service/auth.service'
 import { MessageService, Message, MessageSeverity, MessageAction, MessageActionType } from '../message/message.service';
 
-import { PolygonFeatureCollection, ResultItem, Task } from '../service/model'
+import { PolygonFeatureCollection, ResultItem, Task, LineString, FeatureCollection} from '../service/model'
 import { Result } from '../service/model-result'
 import { TaskService } from '../service/task.service'
 import { Coordinates, GeoService } from './geo.service'
 import { OskariPointService } from './oskari-point.service'
 import { OskariPolygonService } from './oskari-polygon.service'
 import { OskariLocationService } from './oskari-location.service'
+import { OskariLineStringService } from './oskari-linestring.service'
 
 @Component({
   selector: 'app-oskari-rpc',
@@ -43,6 +44,7 @@ export class OskariRpcComponent implements AfterViewInit, OnInit {
 
   // These booleans are for setting correct state for the tool button in html
   markerAction = false
+  drawLineStringAction = false
   drawAreaAction = false
   trackLocation = false
   measureLineAction = false
@@ -53,6 +55,7 @@ export class OskariRpcComponent implements AfterViewInit, OnInit {
 
   pointService: OskariPointService
   polygonService: OskariPolygonService
+  lineService: OskariLineStringService
   locationService: OskariLocationService
 
   constructor(
@@ -62,8 +65,6 @@ export class OskariRpcComponent implements AfterViewInit, OnInit {
     private authService: AuthService,
     private messageService: MessageService) {
   }
-
-
   ngOnInit() {
     if (this.authService.isTeacher()) {
       this.showAllResultItems = !this.showAllResultItems
@@ -80,6 +81,7 @@ export class OskariRpcComponent implements AfterViewInit, OnInit {
           this.pointService = new OskariPointService(this.geoService, this.channel)
           this.polygonService = new OskariPolygonService(this.geoService, this.channel)
           this.locationService = new OskariLocationService(this.zone, this.geoService, this.channel)
+          this.lineService = new OskariLineStringService(this.geoService, this.channel)
           this.checkRpcVersion()
           this.resetMapLocation()
           this.loadLayers()
@@ -101,10 +103,14 @@ export class OskariRpcComponent implements AfterViewInit, OnInit {
           this.pointService.addPointToMap(resultItem)
         } else if (this.geoService.isPolygon(resultItem) && showResultItem) {
           this.polygonService.addPolygonToMap(resultItem)
+        } else if (this.geoService.isLineString(resultItem) && showResultItem) {
+          this.lineService.addLineToMap(resultItem)
         } else if (this.geoService.isPoint(resultItem) && !showResultItem) {
           this.pointService.removePointFromMap(resultItem)
         } else if (this.geoService.isPolygon(resultItem) && !showResultItem) {
           this.polygonService.removePolygonFromMap(resultItem)
+        } else if (this.geoService.isLineString(resultItem) && !showResultItem) {
+          this.lineService.removeLineFromMap(resultItem)
         } else {
           console.error('Skipping drawing ResultItem, since not supported yet!', resultItem)
         }
@@ -144,6 +150,13 @@ export class OskariRpcComponent implements AfterViewInit, OnInit {
           this.reloadTask()
           this.polygonService.replaceDrawingWithPolygonOnMap(item)
         })
+      } else if (this.geoService.isLineString(resultItem)) {
+        console.log('saveResultItem -- Saving new resultItem to db to resultId', resultId, event)
+        this.taskService.saveResultItem(resultId,resultItem).subscribe(item => {
+          console.log('resultItemSaved:', item)
+          this.reloadTask()
+          this.lineService.replaceDrawingWithLineOnMap(item)
+        })
       } else {
         console.error('Not supported resultItem type')
       }
@@ -171,6 +184,8 @@ export class OskariRpcComponent implements AfterViewInit, OnInit {
         this.pointService.removePointFromMap(x)
       } else if (this.geoService.isPolygon(x)) {
         this.polygonService.removePolygonFromMap(x)
+      } else if (this.geoService.isLineString(x)) {
+        this.lineService.removeLineFromMap(x)
       }
     }.bind(this)
 
@@ -253,6 +268,7 @@ export class OskariRpcComponent implements AfterViewInit, OnInit {
   private setAllOpenPopupListenersActive() {
     this.setOpenPointListenerActive()
     this.setOpenPolygonListenerActive()
+    this.setOpenLineListenerActive()
   }
 
   private setOpenPointListenerActive() {
@@ -280,11 +296,43 @@ export class OskariRpcComponent implements AfterViewInit, OnInit {
       })
   }
 
+  private setOpenLineListenerActive() {
+    const eventName = 'FeatureEvent'
+    const featureClickedHandler = function (event) {
+      console.log(event)
+      this.zone.runGuarded(() => {
+        if (event['operation'] === 'click' && event.features[0].layerId.startsWith('linestring')) {
+          this.openLinePopup(event.features)
+        }
+      })
+    }.bind(this)
+    this.actionHandlers.set(eventName, featureClickedHandler)
+    this.channel.handleEvent(eventName, featureClickedHandler)
+    this.channel.setCursorStyle(['default'], (data) => this.zone.runGuarded(() => { }))
+  }
+
+  openLinePopup(features: any[]) {
+    if (features.length > 1) {
+      console.info('There are multiple features clicked at the same time, opening the first one.')
+    }
+    const feature = features[0]
+    const layerId: string = feature.layerId
+    const id: number = this.lineService.lineIdForLayerId(layerId)
+    const resultId: number = this.resultId()
+
+    this.taskService.getResultItem(id).subscribe(
+      (data) => {
+        const resultItem: ResultItem = data
+        console.log('openLinePopup: layerId', layerId, 'id', id, 'resultId', resultId, 'resultItem', resultItem)
+        this.showResultItemPopup(resultItem)
+      })
+  }
+
   private setOpenPolygonListenerActive() {
     const eventName = 'FeatureEvent'
     const featureClickedHandler = function (event) {
       this.zone.runGuarded(() => {
-        if (event['operation'] === 'click') {
+        if (event['operation'] === 'click' && event.features[0].layerId.startsWith('polygon')) {
           this.openPolygonPopup(event.features)
         }
       })
@@ -454,6 +502,44 @@ export class OskariRpcComponent implements AfterViewInit, OnInit {
     }
   }
 
+  toggleDrawLineStringAction() {
+    this.clearActionHandlers()
+    this.drawLineStringAction = !this.drawLineStringAction
+    const action = MapAction.DrawLine
+    console.log('toggleDrawLineStringAction', this.drawLineStringAction)
+    if (this.drawLineStringAction) {
+      this.toggleActions(action)
+      this.showActionMessage('Merkitse viiva', action)
+      this.setDrawLineListenerActive()
+      } else {
+      this.lineService.stopDrawLineString()
+      this.setInitialMapToolMode()
+      this.closeActionMessage(action)
+    }
+  }
+
+  setDrawLineListenerActive() {
+    const eventName = 'DrawingEvent'
+    const drawLineHandler = function (event) {
+      this.zone.runGuarded(() => {
+        console.log(eventName, event)
+        if (event.isFinished) {
+          const geojson: LineString = event.geojson
+          const resultItem = this.geoService.lineStringResultItem(this.resultId(), geojson) as any
+          resultItem['isNew'] = true
+          resultItem.visibility = this.task.visibility;
+          this.showResultItemPopup(resultItem)
+          console.log('DrawingEvent.isFinished:', eventName, event, resultItem)
+          this.channel.unregisterEventHandler(eventName, drawLineHandler)
+          this.toggleDrawLineStringAction()
+        }
+      })
+    }.bind(this)
+    this.actionHandlers.set(eventName, drawLineHandler)
+    this.channel.handleEvent(eventName, drawLineHandler)
+    this.lineService.startDrawLineString()
+  }
+
   setDrawAreaListenerActive() {
     const eventName = 'DrawingEvent'
     const drawAreaHandler = function (event) {
@@ -463,6 +549,7 @@ export class OskariRpcComponent implements AfterViewInit, OnInit {
           const geojson: PolygonFeatureCollection = event.geojson
           const resultItem = this.geoService.polygonResultItem(this.resultId(), geojson) as any
           resultItem['isNew'] = true
+          resultItem.visibility = this.task.visibility;
           this.showResultItemPopup(resultItem)
           console.log('DrawingEvent.isFinished:', eventName, event, resultItem)
           this.channel.unregisterEventHandler(eventName, drawAreaHandler)
@@ -520,24 +607,35 @@ export class OskariRpcComponent implements AfterViewInit, OnInit {
         if (this.drawAreaAction) this.toggleDrawAreaAction()
         if (this.measureLineAction) this.toggleMeasureLine()
         if (this.measureAreaAction) this.toggleMeasureArea()
+        if (this.drawLineStringAction) this.toggleDrawLineStringAction()
         break
       }
       case MapAction.DrawArea: {
         if (this.markerAction) this.toggleMarkerAction()
         if (this.measureLineAction) this.toggleMeasureLine()
         if (this.measureAreaAction) this.toggleMeasureArea()
+        if (this.drawLineStringAction) this.toggleDrawLineStringAction()
         break
       }
       case MapAction.MeasureLine: {
         if (this.markerAction) this.toggleMarkerAction()
         if (this.drawAreaAction) this.toggleDrawAreaAction()
         if (this.measureAreaAction) this.toggleMeasureArea()
+        if (this.drawLineStringAction) this.toggleDrawLineStringAction()
         break
       }
       case MapAction.MeasureArea: {
         if (this.markerAction) this.toggleMarkerAction()
         if (this.drawAreaAction) this.toggleDrawAreaAction()
         if (this.measureLineAction) this.toggleMeasureLine()
+        if (this.drawLineStringAction) this.toggleDrawLineStringAction()
+        break
+      }
+      case MapAction.DrawLine: {
+        if (this.markerAction) this.toggleMarkerAction()
+        if (this.drawAreaAction) this.toggleDrawAreaAction()
+        if (this.measureLineAction) this.toggleMeasureLine()
+        if (this.measureAreaAction) this.toggleMeasureArea()
         break
       }
     }
@@ -605,6 +703,10 @@ export class OskariRpcComponent implements AfterViewInit, OnInit {
         if (this.measureAreaAction) this.toggleMeasureArea()
         break
       }
+      case MapAction.DrawLine: {
+        if (this.drawLineStringAction) this.toggleDrawLineStringAction()
+        break
+      }
     }
   }
 }
@@ -619,5 +721,5 @@ export interface MapLayer {
 }
 
 export enum MapAction {
-  Marker, DrawArea, MeasureLine, MeasureArea
+  Marker, DrawArea, MeasureLine, MeasureArea, DrawLine
 }

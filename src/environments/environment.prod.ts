@@ -11,7 +11,7 @@ export const environment = {
   mapEnv : 'prod',
   mapDomain : 'https://kartta.paikkatietoikkuna.fi',
   mapId : '',
-  mapTools: {markerTool: true, areaTool: true, trackLocation: true},
+  mapTools: {markerTool: true, areaTool: true, routeTool: true, trackLocation: true},
   mapHelpVisibleInitially: false,
   apiUri: 'http://localhost:8000/api/v1',
   loginPageUri: 'https://paikkaoppi.csc.fi',

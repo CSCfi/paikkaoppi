@@ -119,10 +119,12 @@ export interface ContentArea {
     name: string
 }
 
-export type Geometry = Point | PolygonFeatureCollection
+export type Geometry = Point | PolygonFeatureCollection | LineString | LineStringFeatureCollection
 export type Point = GeoJSON.Point
 export type FeatureCollection = GeoJSON.FeatureCollection<GeoJSON.GeometryObject>
 export type PolygonFeatureCollection = GeoJSON.FeatureCollection<GeoJSON.Polygon>
+export type LineStringFeatureCollection = GeoJSON.FeatureCollection<GeoJSON.LineString>
+export type LineString = GeoJSON.LineString
 // only point and polygon current supported by domain.
 
 // Remove this when real api is in use and you dont have to create taskCodes in UI

@@ -24,6 +24,8 @@
       title="Merkitse piste"></a>
     <a *ngIf="mapTools['areaTool']" (click)="toggleDrawAreaAction()" class="map__tools-area" [ngClass]="drawAreaAction == true ? 'is-selected' : ''"
       title="Merkitse alue"></a>
+    <a *ngIf="mapTools['routeTool']" (click)="toggleDrawLineStringAction()" class="map__tools-route" [ngClass]="drawLineStringAction == true ? 'is-selected' : ''"
+      title="Merkitse reitti"></a>
     <a *ngIf="mapTools['trackLocation']" (click)="toggleTrackLocation()" class="map__tools-track-location" [ngClass]="trackLocation == true ? 'is-selected' : ''"
       title="Seuraa sijaintiasi"></a>
     <a *ngIf="mapTools['measureLineTool']" (click)="toggleMeasureLine()" class="map__tools-measure-line" [ngClass]="measureLineAction == true ? 'is-selected' : ''"

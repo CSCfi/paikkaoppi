@@ -5,6 +5,7 @@ const EPSG4326 = '+proj=longlat +ellps=WGS84 +datum=WGS84 +no_defs'
 
 const geometryTypePoint = 'Point'
 const geometryTypePolygon = 'Polygon'
+const geometryTypeLineString = 'LineString'
 const geometryTypeFeatureCollection = 'FeatureCollection'
 
 const MARKER_OPTIONS: any = {
@@ -21,4 +22,4 @@ const LOCATION_OPTIONS: any = {
     size: 5
 }
 
-export { MARKER_OPTIONS, LOCATION_OPTIONS, EPSG3067, EPSG4326, geometryTypePoint, geometryTypePolygon, geometryTypeFeatureCollection }
+export { MARKER_OPTIONS, LOCATION_OPTIONS, EPSG3067, EPSG4326, geometryTypePoint, geometryTypePolygon, geometryTypeFeatureCollection, geometryTypeLineString }

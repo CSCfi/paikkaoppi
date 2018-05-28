@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core'
 import * as GeoJSON from 'geojson'
 import proj4 from 'proj4'
-import { ResultItem, Geometry, Point, FeatureCollection, PolygonFeatureCollection, Visibility } from '../service/model'
+import { ResultItem, Geometry, Point, FeatureCollection, PolygonFeatureCollection, LineStringFeatureCollection, Visibility, LineString } from '../service/model'
 import { EPSG3067, EPSG4326, MARKER_OPTIONS, LOCATION_OPTIONS, geometryTypePoint, geometryTypePolygon,
-  geometryTypeFeatureCollection } from './config'
+  geometryTypeFeatureCollection, geometryTypeLineString } from './config'
 
 @Injectable()
 export class GeoService {
@@ -49,6 +49,13 @@ export class GeoService {
     }
   }
 
+  lineStringResultItem(resultId: number, geojson: LineString): ResultItem {
+    return {
+      resultId: resultId,
+      geometry: geojson as LineString
+    }
+  }
+
   isPoint(resultItem: ResultItem) {
     return resultItem && resultItem['geometry'] && resultItem.geometry.type === geometryTypePoint
   }
@@ -60,6 +67,18 @@ export class GeoService {
     if (geometry.type === geometryTypeFeatureCollection) {
       const featureCollection = geometry as FeatureCollection
       return featureCollection.features.every(feature => feature.geometry.type === geometryTypePolygon)
+    }
+    return false
+  }
+
+  isLineString(resultItem: ResultItem) {
+    if (!(resultItem && resultItem['geometry'])) {
+      return false
+    }
+    const geometry: Geometry = resultItem.geometry
+    if (geometry.type === geometryTypeFeatureCollection) {
+      const featureCollection = geometry as FeatureCollection
+      return featureCollection.features.every(feature => feature.geometry.type === geometryTypeLineString)
     }
     return false
   }
@@ -89,8 +108,20 @@ export class GeoService {
     return coordinates[0][0]
   }
 
+  lineStringCoordinates(resultItem: ResultItem): number[][] {
+    const lineString = resultItem.geometry as LineStringFeatureCollection
+    const coordinates = lineString.features.map(f => f.geometry.coordinates)
+    return coordinates[0]
+  }
+
   polygonWGS84Coordinates(resultItem: ResultItem): Coordinates[] {
     const coordinates = this.polygonCoordinates(resultItem)
+    coordinates.forEach(console.log)
+    return coordinates.map(c => this.toWGS84(c[0], c[1]))
+  }
+
+  lineStringWGS84Coordinates(resultItem: ResultItem): Coordinates[] {
+    const coordinates = this.lineStringCoordinates(resultItem)
     coordinates.forEach(console.log)
     return coordinates.map(c => this.toWGS84(c[0], c[1]))
   }
