@@ -444,9 +444,15 @@ export class OskariRpcComponent implements AfterViewInit, OnInit {
     console.log('SelectLayer:', id, 'OldLayer:', this.selectedLayer, 'NewLayer:', newLayer)
     if (newLayer == null)
       return
-    if (this.selectedLayer) this.channel.postRequest('MapModulePlugin.MapLayerVisibilityRequest', [this.selectedLayer.id, false])
+    if (this.selectedLayer && (!this.isBaseMap(this.selectedLayer) || this.isBaseMap(newLayer)))
+      this.channel.postRequest('MapModulePlugin.MapLayerVisibilityRequest', [this.selectedLayer.id, false])
     this.channel.postRequest('MapModulePlugin.MapLayerVisibilityRequest', [newLayer.id, true])
     this.selectedLayer = newLayer
+  }
+
+  isBaseMap(layer) {
+    // If there is more base maps set in Paikkatietoikkuna add them here as well
+    return layer.name === 'Taustakartta' || layer.name === 'Selkokartta' || layer.name === 'OpenStreetMap'; 
   }
 
   toggleTrackLocation(): void {
