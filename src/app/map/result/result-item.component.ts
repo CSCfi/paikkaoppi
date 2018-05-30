@@ -25,6 +25,9 @@ export class ResultItemComponent implements OnChanges {
   isPolygon = false
   polygonCoordinates: number[][]
   polygonWGS84Coordinates: Coordinates[]
+  isLine = false
+  lineCoordinates: number[][]
+  lineWGS84Coordinates: Coordinates[]
   isEditMode = false
   isResized = false
   isUploading = false
@@ -48,11 +51,18 @@ export class ResultItemComponent implements OnChanges {
     this.pointWGS84Coordinates = this.geoService.pointWGS84Coordinates(resultItem)
     this.isPoint = this.geoService.isPoint(resultItem)
     this.isPolygon = this.geoService.isPolygon(resultItem)
+    this.isLine = this.geoService.isLineString(resultItem)
     if (this.isPolygon) {
       this.polygonCoordinates = this.geoService.polygonCoordinates(resultItem)
       console.log(this.polygonCoordinates)
       this.polygonWGS84Coordinates = this.geoService.polygonWGS84Coordinates(resultItem)
       console.log(this.polygonWGS84Coordinates)
+    }
+    if (this.isLine) {
+      this.lineCoordinates = this.geoService.lineStringCoordinates(resultItem)
+      console.log(this.lineCoordinates)
+      this.lineWGS84Coordinates = this.geoService.lineStringWGS84Coordinates(resultItem)
+      console.log(this.lineWGS84Coordinates)
     }
     if (this.model != null && this.model['id'] == null) {
       this.initUpload(null)

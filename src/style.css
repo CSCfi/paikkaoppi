@@ -815,6 +815,7 @@ ul {
 }
 .map__tools-dot,
 .map__tools-area,
+.map__tools-route,
 .map__tools-track-location,
 .map__tools-measure-line,
 .map__tools-measure-area {
@@ -833,6 +834,7 @@ ul {
 }
 .map__tools-dot.is-selected,
 .map__tools-area.is-selected,
+.map__tools-route.is-selected,
 .map__tools-track-location.is-selected,
 .map__tools-measure-line.is-selected,
 .map__tools-measure-area.is-selected {
@@ -844,6 +846,9 @@ ul {
 }
 .map__tools-area:before {
   content: url("assets/icon_area.svg");
+}
+.map__tools-route:before {
+  content: url("assets/icon_route.png");
 }
 .map__tools-track-location:before {
   content: url("assets/icon_location.png");

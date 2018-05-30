@@ -12,6 +12,21 @@
             <div class="form__text-value">N:{{model.geometry.coordinates[0] | decimal: 2}} E:{{model.geometry.coordinates[1] | decimal: 2}} <em>ETRS-TM35FIN</em></div>
             <div class="form__text-value">N:{{pointWGS84Coordinates.lat.asString(3)}} E:{{pointWGS84Coordinates.lon.asString(3)}} <em>WGS84</em></div>
           </ng-container>
+          <ng-container *ngIf="isLine">
+            <div class="form__text-title">Koordinaatit</div>
+            <div class="form__text-value">
+              <div class="form__text-values">
+                <span *ngFor="let c of lineCoordinates">N:{{c[0] | decimal: 2}} E:{{c[1] | decimal: 2}}<br/></span>
+              </div>
+              <em>ETRS-TM35FIN</em>
+            </div>
+            <div class="form__text-value">
+              <div class="form__text-values">
+                <span *ngFor="let c of lineWGS84Coordinates">N:{{c.lat.asString(3)}} E:{{c.lon.asString(3)}}<br/></span>
+              </div>
+              <em>WGS84</em>
+            </div>
+          </ng-container>
           <ng-container *ngIf="isPolygon">
             <div class="form__text-title">Koordinaatit</div>
             <div class="form__text-value">
