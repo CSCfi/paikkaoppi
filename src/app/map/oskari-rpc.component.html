@@ -34,9 +34,9 @@
       title="Mittaa pinta-ala"></a>
     <div class="map__tools-coords" *ngIf="coordinates">N:{{coordinates.lat.asString(3)}} E:{{coordinates.lon.asString(3)}}</div>
   </div>
-  <iframe *ngIf="env == 'dev'" id="oskari-map" src="https://kartta.paikkatietoikkuna.fi/published/fi/529e552b-b0c5-4f0a-954b-5f9a9339a0a2"></iframe>
-  <iframe *ngIf="env == 'test'" id="oskari-map" src="https://kartta.paikkatietoikkuna.fi/published/fi/d6524c8e-9e75-45e9-a82c-b9a181bc0206"></iframe>
-  <iframe *ngIf="env == 'prod'" id="oskari-map" src="https://kartta.paikkatietoikkuna.fi/published/fi/3756c8ff-3145-455d-a19d-5004ce0e9f90"></iframe>
+  <iframe *ngIf="env == 'dev'" id="oskari-map" allow="geolocation *;" src="https://kartta.paikkatietoikkuna.fi/published/fi/529e552b-b0c5-4f0a-954b-5f9a9339a0a2"></iframe>
+  <iframe *ngIf="env == 'test'" id="oskari-map" allow="geolocation *;" src="https://kartta.paikkatietoikkuna.fi/published/fi/d6524c8e-9e75-45e9-a82c-b9a181bc0206"></iframe>
+  <iframe *ngIf="env == 'prod'" id="oskari-map" allow="geolocation *;" src="https://kartta.paikkatietoikkuna.fi/published/fi/3756c8ff-3145-455d-a19d-5004ce0e9f90"></iframe>
 </div>
 <app-result-item (saveResultItem)="saveResultItem($event)" (deleteResultItem)="deleteResultItem($event)" (resultItemPopupHidden)="resultItemPopupHidden($event)"
   [visible]="resultItemPopupVisible" [result]="resultItemPopupResult" [model]="resultItemPopupResultItem">
