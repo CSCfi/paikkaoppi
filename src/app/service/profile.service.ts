@@ -13,7 +13,7 @@ export class ProfileService {
   }
 
   getProfile(user: User | null): number {
-    return this.profileId ? this.profileId : (user != null ? user.profile : 1)
+    return this.profileId ? this.profileId : (user != null && user.profile ? user.profile : 1)
   }
 
   setProfile(profileId: number): void {
