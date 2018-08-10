@@ -49,7 +49,8 @@ export class LibraryComponent implements OnInit {
   private initFilter() {
     return {
       creator: 'Kaikki',
-      type: 'Kaikki'
+      type: 'Kaikki',
+      visibility: 'Kaikki'
     }
   }
 
@@ -78,6 +79,8 @@ export class LibraryComponent implements OnInit {
       this.cFilter.creator = value
     else if (type === 'type')
       this.cFilter.type = value
+    else if (type === 'visibility')
+      this.cFilter.visibility = value
 
     this.setVisibleTaskTemplates()
   }
@@ -92,12 +95,21 @@ export class LibraryComponent implements OnInit {
     } else {
       this.taskTemplates = this.allTaskTemplates.filter(t => t.type === this.getType(this.cFilter.type)).filter(t => t.user.username === this.username)
     }
+
+    if (this.cFilter.visibility !== 'Kaikki') {
+      this.taskTemplates = this.taskTemplates.filter(t => t.visibility === this.getVisibility(this.cFilter.visibility));
+    }
   }
 
   private getType(type: string): string {
     if (type === 'Tutki') return 'INVESTIGATE'
     else if (type === 'Toimi') return 'ACT'
     else return 'PUZZLE'
+  }
+
+  private getVisibility(visibility: string): string {
+    if (visibility === 'Suljettu') return 'RESTRICTED'
+    else return 'OPEN'
   }
 
   isCreator(template: TaskTemplate) {

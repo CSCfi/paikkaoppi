@@ -31,9 +31,10 @@
           </div>
           <div class="view__filter">
             <div (click)="toggleFilter('visibility')" class="view__filter-dropdown" [ngClass]="isFilterOpen('visibility') ? 'is-open' : ''">
-              <div class="view__filter-dropdown-title">Tyyppi: {{ cFilter.visibility }}</div>
+              <div class="view__filter-dropdown-title">Näkyvyys: {{ cFilter.visibility }}</div>
               <div class="view__filter-dropdown-handle"></div>
               <div class="view__filter-dropdown-content">
+                <div (click)="filter('visibility', 'Kaikki')" class="view__filter-dropdown-row" [ngClass]="cFilter.visibility === 'Kaikki' ? 'is-selected' : ''">Kaikki</div>
                 <div (click)="filter('visibility', 'Avoin')" class="view__filter-dropdown-row" [ngClass]="cFilter.visibility === 'Avoin' ? 'is-selected' : ''">Avoin</div>
                 <div (click)="filter('visibility', 'Suljettu')" class="view__filter-dropdown-row" [ngClass]="cFilter.visibility === 'Suljettu' ? 'is-selected' : ''">Suljettu</div>
               </div>
