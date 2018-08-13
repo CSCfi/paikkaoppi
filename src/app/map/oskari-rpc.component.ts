@@ -1,5 +1,5 @@
 import { AfterViewInit, Component, Input, Output, NgZone, EventEmitter, OnInit } from '@angular/core'
-import OskariRPC from 'oskari-rpc'
+import * as OskariRPC from 'oskari-rpc';
 import { Observable } from 'rxjs/Rx'
 import 'rxjs/add/observable/interval';
 
