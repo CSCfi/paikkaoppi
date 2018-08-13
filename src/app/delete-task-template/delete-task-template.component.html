@@ -4,15 +4,15 @@
       <div class="popup__scroll">
         <div class="form type--basic">
           <div class="popup__header">
-            <h1 class="popup__header-title">Tehtäväpohjan poisto</h1>
+            <h1 class="popup__header-title">{{'task-template.delete-task-template' | translate}}</h1>
           </div>
           <h1 class="accordion__header">{{model.name}}</h1>
         </div>
       </div>
       <div class="popup__footer">
         <div class="popup__footer-links">
-          <a (click)="closeDialog()" class="link type--secondary">Peruuta</a>
-          <button type="submit" class="link">Poista</button>
+          <a (click)="closeDialog()" class="link type--secondary">{{'common.action.cancel' | translate}}</a>
+          <button type="submit" class="link">{{'common.action.delete' | translate}}</button>
         </div>
       </div>
     </form>

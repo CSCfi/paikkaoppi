@@ -1,3 +1,4 @@
+import { TranslateService } from '@ngx-translate/core';
 import { AfterViewInit, Component, Input, Output, NgZone, EventEmitter, OnInit } from '@angular/core'
 import * as OskariRPC from 'oskari-rpc';
 import { Observable } from 'rxjs/Rx'
@@ -63,7 +64,8 @@ export class OskariRpcComponent implements AfterViewInit, OnInit {
     private geoService: GeoService,
     private taskService: TaskService,
     private authService: AuthService,
-    private messageService: MessageService) {
+    private messageService: MessageService,
+    private translateService: TranslateService) {
   }
   ngOnInit() {
     if (this.authService.isTeacher()) {
@@ -466,7 +468,7 @@ export class OskariRpcComponent implements AfterViewInit, OnInit {
     const action = MapAction.Marker
     if (this.markerAction) {
       this.toggleActions(action)
-      this.showActionMessage('Merkitse piste', action)
+      this.showActionMessage(this.translateService.instant('map.tool.marker'), action);
       this.setAddMarkerListenerActive()
     } else {
       this.setInitialMapToolMode()
@@ -498,7 +500,7 @@ export class OskariRpcComponent implements AfterViewInit, OnInit {
     console.log('toggleDrawAreaAction:', this.drawAreaAction)
     if (this.drawAreaAction) {
       this.toggleActions(action)
-      this.showActionMessage('Merkitse alue', action)
+      this.showActionMessage(this.translateService.instant('map.tool.area'), action)
       this.setDrawAreaListenerActive()
     } else {
       this.polygonService.stopDrawPolygon()
@@ -514,7 +516,7 @@ export class OskariRpcComponent implements AfterViewInit, OnInit {
     console.log('toggleDrawLineStringAction', this.drawLineStringAction)
     if (this.drawLineStringAction) {
       this.toggleActions(action)
-      this.showActionMessage('Merkitse viiva', action)
+      this.showActionMessage(this.translateService.instant('map.tool.route'), action)
       this.setDrawLineListenerActive()
       } else {
       this.lineService.stopDrawLineString()
@@ -575,7 +577,7 @@ export class OskariRpcComponent implements AfterViewInit, OnInit {
     if (this.measureLineAction) {
       this.toggleActions(action)
       this.setMeasureListenerActive(action)
-      this.showActionMessage('Mittaa etäisyys', action)
+      this.showActionMessage(this.translateService.instant('map.tool.measure-line'), action)
     } else {
       this.polygonService.stopMeasureLine()
       this.setInitialMapToolMode()
@@ -591,7 +593,7 @@ export class OskariRpcComponent implements AfterViewInit, OnInit {
     if (this.measureAreaAction) {
       this.toggleActions(action)
       this.setMeasureListenerActive(action)
-      this.showActionMessage('Mittaa pinta-ala', action)
+      this.showActionMessage(this.translateService.instant('map.tool.measure-area'), action)
     } else {
       this.polygonService.stopMeasureArea()
       this.setInitialMapToolMode()

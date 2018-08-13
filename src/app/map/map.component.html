@@ -3,7 +3,7 @@
         <div class="view__header-content">
             <a routerLink="/dashboard" class="view__header-link type--back"></a>
             <h1 class="view__header-title">{{task?.name}}</h1>
-            <a (click)="showHelp()" class="view__header-link type--info">Ohjeet</a>
+            <a (click)="showHelp()" class="view__header-link type--info">{{'map.instructions' | translate}}</a>
         </div>
     </div>
     <app-oskari-rpc (markerOpened)="isMarkerVisible = true" (markerClosed)="isMarkerVisible = false" [task]="task"></app-oskari-rpc>

@@ -1,8 +1,13 @@
 import { BrowserModule } from '@angular/platform-browser'
-import { NgModule } from '@angular/core'
+import { NgModule, LOCALE_ID } from '@angular/core'
 import { RouterModule } from '@angular/router'
 import { FormsModule } from '@angular/forms'
-import { HttpClientModule } from '@angular/common/http'
+import { HttpClientModule, HttpClient } from '@angular/common/http'
+import { registerLocaleData } from '@angular/common';
+import localeFi from '@angular/common/locales/fi';
+import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { MissingTranslationHandler, MissingTranslationHandlerParams } from '@ngx-translate/core';
 
 import { AppComponent } from './app.component'
 import { DashboardComponent } from './dashboard/dashboard.component'
@@ -28,6 +33,18 @@ import { TaskTemplateComponent } from './task-template/task-template.component'
 import { DeleteTaskTemplateComponent } from './delete-task-template/delete-task-template.component';
 import { CodeComponent } from './code/code.component'
 
+export function createTranslateLoader(http: HttpClient) {
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}
+
+export class MyMissingTranslationHandler implements MissingTranslationHandler {
+  handle(params: MissingTranslationHandlerParams) {
+      return 'Translation missing!';
+  }
+}
+
+registerLocaleData(localeFi, 'fi');
+
 @NgModule({
   declarations: [
     TruncatePipe,
@@ -37,12 +54,36 @@ import { CodeComponent } from './code/code.component'
     LibraryComponent,
     TaskTemplateComponent,
     DeleteTaskTemplateComponent,
-    CodeComponent,
+    CodeComponent
   ],
   imports: [
-    AppRoutingModule, BrowserModule, FormsModule, HttpClientModule, MapModule, MessageModule
+    AppRoutingModule,
+    BrowserModule,
+    FormsModule,
+    HttpClientModule,
+    MapModule,
+    MessageModule,
+    TranslateModule.forRoot({
+      loader: {
+          provide: TranslateLoader,
+          useFactory: (createTranslateLoader),
+          deps: [HttpClient]
+      },
+      missingTranslationHandler: {provide: MissingTranslationHandler, useClass: MyMissingTranslationHandler}
+    })
   ],
-  providers: [AuthService, TaskService, TaskTemplateService, OpsService, ProfileService, ConversionService, AuthGuard, NotLoggedInGuard],
+  providers: [
+    AuthService,
+    TaskService,
+    TaskTemplateService,
+    OpsService,
+    ProfileService,
+    ConversionService,
+    AuthGuard,
+    NotLoggedInGuard,
+    { provide: LOCALE_ID, useValue: 'fi-FI' },
+    TranslateService
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

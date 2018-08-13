@@ -1,7 +1,7 @@
 <div class="view">
   <div class="view__header">
-    <h1 class="view__header-title">Omat tehtävät</h1>
-    <a routerLink="/library" class="view__add">Uusi tehtävä</a>
+    <h1 class="view__header-title">{{'dashboard.own-tasks' | translate}}</h1>
+    <a routerLink="/library" class="view__add">{{'dashboard.new-task' | translate}}</a>
     <a (click)="isProfileOpen = true" class="view__profile-show {{getProfileClass()}}"></a>
   </div>
   <div class="view__content">
@@ -36,17 +36,17 @@
           <app-code class="list__item type--code"></app-code>
           <div *ngIf="tasks?.length == 0" class="list__item type--empty">
             <div class="text">
-              <p>Aloita lataamalla tehtävä koodilla tai lisäämällä uusi tehtävä tehtäväkirjastosta.</p>
+              <p>{{'dashboard.help-text' | translate}}</p>
             </div>
           </div>
           <a [routerLink]="['/map', t.id]" class="list__item" *ngFor="let t of tasks" [ngClass]="{'is-new': t.id == taskId}">
             <div class="list__item-status" *ngIf="t.id == taskId">
-              <div class="status">Uusi</div>
+              <div class="status">{{'common.filter.new' | translate}}</div>
             </div>
             <div class="list__item-image {{getTaskTypeClass(t.type)}}"></div>
             <div class="list__item-content">
               <div class="list__item-title">{{t.name}}</div>
-              <div class="list__item-detail">{{t.resultItemCount}} kohdetta</div>
+              <div class="list__item-detail">{{t.resultItemCount}} {{'dashboard.targets' | translate}}</div>
               <div class="list__item-code" *ngIf="t.creator === user.username || role === 'teacher'">
                 <div class="code">{{t.code}}</div>
               </div>
@@ -71,8 +71,8 @@
       </div>
       <div id="profile" class="view__column" [ngClass]="isProfileOpen ? 'is-open' : ''">
         <div *ngIf="profileEdit == false" id="profile-view" class="profile">
-          <div *ngIf="isProfileOpen == true" (click)="isProfileOpen = false" class="profile__header-back">Takaisin</div>
-          <div (click)="profileEdit = true" class="profile__header">Muokkaa</div>
+          <div *ngIf="isProfileOpen == true" (click)="isProfileOpen = false" class="profile__header-back">{{'common.action.back' | translate}}</div>
+          <div (click)="profileEdit = true" class="profile__header">{{'common.action.edit' | translate}}</div>
           <div class="profile__item">
             <div class="profile__image">
               <div class="image {{getProfileClass()}}"></div>
@@ -105,13 +105,13 @@
           </div>
           <div class="profile__footer">
             <div class="profile__footer-item">
-              <a (click)="logout()">Kirjaudu ulos</a>
+              <a (click)="logout()">{{'common.action.logout' | translate}}</a>
             </div>
           </div>
         </div>
         <div *ngIf="profileEdit == true" id="profile-edit" class="profile is-open">
           <div class="profile__header">
-            <div (click)="saveProfile()" class="profile__header-edit">Tallenna</div>
+            <div (click)="saveProfile()" class="profile__header-edit">{{'common.action.save' | translate}}</div>
           </div>
           <div class="profile__item">
             <div class="profile__image">

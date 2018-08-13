@@ -1,7 +1,7 @@
 <app-delete-task-template *ngIf="showDeleteTaskTemplateComponent" (close)="closeTaskTemplateDialog()" (delete)="deleteTaskTemplate()" [model]="selectedTemplate"></app-delete-task-template>
 <div id="library" class="view">
   <div class="view__header"><a routerLink="/dashboard" class="view__header-link type--back"></a>
-    <h1 class="view__header-title">Tehtäväkirjasto</h1>
+    <h1 class="view__header-title">{{'library.task-library' | translate}}</h1>
   </div>
   <div class="view__content">
     <div class="view__columns">
@@ -9,34 +9,34 @@
         <div class="view__filters">
           <div class="view__filter">
             <div (click)="toggleFilter('creator')" class="view__filter-dropdown" [ngClass]="isFilterOpen('creator') ? 'is-open' : ''">
-              <div class="view__filter-dropdown-title">Tekijä: {{ cFilter.creator }}</div>
+              <div class="view__filter-dropdown-title">{{'common.filter.creator' | translate}}: {{ cFilter.creator }}</div>
               <div class="view__filter-dropdown-handle"></div>
               <div class="view__filter-dropdown-content">
-                <div (click)="filter('creator', 'Kaikki')" class="view__filter-dropdown-row" [ngClass]="cFilter.creator === 'Kaikki' ? 'is-selected' : ''">Kaikki</div>
-                <div (click)="filter('creator', 'Minä')" class="view__filter-dropdown-row" [ngClass]="cFilter.creator === 'Minä' ? 'is-selected' : ''">Minä</div>
+                <div (click)="filter('creator', 'Kaikki')" class="view__filter-dropdown-row" [ngClass]="cFilter.creator === 'Kaikki' ? 'is-selected' : ''">{{'common.filter.all' | translate}}</div>
+                <div (click)="filter('creator', 'Minä')" class="view__filter-dropdown-row" [ngClass]="cFilter.creator === 'Minä' ? 'is-selected' : ''">{{'common.filter.me' | translate}}</div>
               </div>
             </div>
           </div>
           <div class="view__filter">
             <div (click)="toggleFilter('type')" class="view__filter-dropdown" [ngClass]="isFilterOpen('type') ? 'is-open' : ''">
-              <div class="view__filter-dropdown-title">Tyyppi: {{ cFilter.type }}</div>
+              <div class="view__filter-dropdown-title">{{'common.filter.type' | translate}}: {{ cFilter.type }}</div>
               <div class="view__filter-dropdown-handle"></div>
               <div class="view__filter-dropdown-content">
-                <div (click)="filter('type', 'Kaikki')" class="view__filter-dropdown-row" [ngClass]="cFilter.type === 'Kaikki' ? 'is-selected' : ''">Kaikki</div>
-                <div (click)="filter('type', 'Tutki')" class="view__filter-dropdown-row" [ngClass]="cFilter.type === 'Tutki' ? 'is-selected' : ''">Tutki</div>
-                <div (click)="filter('type', 'Toimi')" class="view__filter-dropdown-row" [ngClass]="cFilter.type === 'Toimi' ? 'is-selected' : ''">Toimi</div>
-                <div (click)="filter('type', 'Pähkinä')" class="view__filter-dropdown-row" [ngClass]="cFilter.type === 'Pähkinä' ? 'is-selected' : ''">Pähkinä</div>
+                <div (click)="filter('type', 'Kaikki')" class="view__filter-dropdown-row" [ngClass]="cFilter.type === 'Kaikki' ? 'is-selected' : ''">{{'common.filter.all' | translate}}</div>
+                <div (click)="filter('type', 'Tutki')" class="view__filter-dropdown-row" [ngClass]="cFilter.type === 'Tutki' ? 'is-selected' : ''">{{'common.filter.study' | translate}}</div>
+                <div (click)="filter('type', 'Toimi')" class="view__filter-dropdown-row" [ngClass]="cFilter.type === 'Toimi' ? 'is-selected' : ''">{{'common.filter.act' | translate}}</div>
+                <div (click)="filter('type', 'Pähkinä')" class="view__filter-dropdown-row" [ngClass]="cFilter.type === 'Pähkinä' ? 'is-selected' : ''">{{'common.filter.puzzle' | translate}}</div>
               </div>
             </div>
           </div>
           <div class="view__filter">
             <div (click)="toggleFilter('visibility')" class="view__filter-dropdown" [ngClass]="isFilterOpen('visibility') ? 'is-open' : ''">
-              <div class="view__filter-dropdown-title">Näkyvyys: {{ cFilter.visibility }}</div>
+              <div class="view__filter-dropdown-title">{{'common.filter.visibility' | translate}}: {{ cFilter.visibility }}</div>
               <div class="view__filter-dropdown-handle"></div>
               <div class="view__filter-dropdown-content">
-                <div (click)="filter('visibility', 'Kaikki')" class="view__filter-dropdown-row" [ngClass]="cFilter.visibility === 'Kaikki' ? 'is-selected' : ''">Kaikki</div>
-                <div (click)="filter('visibility', 'Avoin')" class="view__filter-dropdown-row" [ngClass]="cFilter.visibility === 'Avoin' ? 'is-selected' : ''">Avoin</div>
-                <div (click)="filter('visibility', 'Suljettu')" class="view__filter-dropdown-row" [ngClass]="cFilter.visibility === 'Suljettu' ? 'is-selected' : ''">Suljettu</div>
+                <div (click)="filter('visibility', 'Kaikki')" class="view__filter-dropdown-row" [ngClass]="cFilter.visibility === 'Kaikki' ? 'is-selected' : ''">{{'common.filter.all' | translate}}</div>
+                <div (click)="filter('visibility', 'Avoin')" class="view__filter-dropdown-row" [ngClass]="cFilter.visibility === 'Avoin' ? 'is-selected' : ''">{{'common.filter.open' | translate}}</div>
+                <div (click)="filter('visibility', 'Suljettu')" class="view__filter-dropdown-row" [ngClass]="cFilter.visibility === 'Suljettu' ? 'is-selected' : ''">{{'common.filter.restricted' | translate}}</div>
               </div>
             </div>
           </div>
@@ -53,19 +53,19 @@
         </div>-->
         <div class="list__item">
           <div class="list__item-content">
-            <div class="list__item-title">Uusi tehtäväpohja</div>
-            <div class="list__item-description">Rakenna oma tehtäväpohja.</div>
+            <div class="list__item-title">{{'library.new-task-template' | translate}}</div>
+            <div class="list__item-description">{{'library.build-own-task-template' | translate}}</div>
           </div>
           <div class="list__item-footer">
-            <a routerLink="/task-template" class="list__item-link">Uusi tehtäväpohja</a>
+            <a routerLink="/task-template" class="list__item-link">{{'library.new-task-template' | translate}}</a>
           </div>
         </div>
         <div class="list__item" *ngFor="let t of taskTemplates; let i = index">
           <div *ngIf="isCreator(t)" (click)="toggleDropdown(i)" class="list__item-dropdown" [ngClass]="isDropdownOpen(i) ? 'is-open' : ''">
             <div class="list__item-dropdown-handle"></div>
             <div class="list__item-dropdown-content">
-              <div class="list__item-dropdown-row" [routerLink]="['/task-template', t.id]">Muokkaa</div>
-              <div class="list__item-dropdown-row" (click)="showDeleteTaskTemplateDialog(t.id)">Poista</div>
+              <div class="list__item-dropdown-row" [routerLink]="['/task-template', t.id]">{{'common.action.edit' | translate}}</div>
+              <div class="list__item-dropdown-row" (click)="showDeleteTaskTemplateDialog(t.id)">{{'common.action.delete' | translate}}</div>
             </div>
           </div>
           <div class="list__item-type {{getTaskTypeClass(t.type)}}"></div>
@@ -83,7 +83,7 @@
             </div>
           </div>
           <div class="list__item-footer">
-            <a (click)="createTask(t.id)" class="list__item-link">Luo tehtävä</a>
+            <a (click)="createTask(t.id)" class="list__item-link">{{'library.create-task' | translate}}</a>
           </div>
         </div>
       </div>
@@ -100,14 +100,16 @@
           <div class="form__item" [class.has-error]="name.invalid && name.dirty">
             <label>Nimi</label>
             <input type="text" maxlength="128" required [(ngModel)]="model.name" name="name" #name="ngModel">
-            <div [hidden]="name.valid || name.pristine" class="form__item-error alert alert-danger"><div class="text">Pakollinen tieto</div></div>
+            <div [hidden]="name.valid || name.pristine" class="form__item-error alert alert-danger">
+              <div class="text">{{'common.info.mandatory-field' | translate}}</div>
+            </div>
           </div>
         </div>
       </div>
       <div class="popup__footer">
         <div class="popup__footer-links">
-          <a (click)="closePopup()" class="link type--secondary">Peruuta</a>
-          <button type="submit" class="link" [disabled]="!taskForm.form.valid">Tallenna</button>
+          <a (click)="closePopup()" class="link type--secondary">{{'common.action.cancel' | translate}}</a>
+          <button type="submit" class="link" [disabled]="!taskForm.form.valid">{{'common.action.save' | translate}}</button>
         </div>
       </div>
     </form>
