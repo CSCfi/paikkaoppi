@@ -127,7 +127,7 @@ export class OskariRpcComponent implements AfterViewInit, OnInit {
     if (this.showAllResultItems) {
       return true
     } else {
-      return currentUsername == result.user.username
+      return currentUsername === result.user.username
     }
   }
   
@@ -178,7 +178,6 @@ export class OskariRpcComponent implements AfterViewInit, OnInit {
   }
 
   deleteResultItem(resultItem: ResultItem) {
-    console.log('deleteResultItem')
     const removeFromMap = function (x: ResultItem) {
       if (this.geoService.isPoint(x)) {
         this.pointService.removePointFromMap(x)

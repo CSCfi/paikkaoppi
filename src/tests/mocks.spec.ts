@@ -55,7 +55,8 @@ export class TaskServiceMock {
       tags: ['tag1', 'tag2'],
       code: 'code',
       user: TestMethods.getTeacher(),
-      results: null
+      results: null,
+      visibility: "OPEN"
     }])
   }
 
@@ -126,7 +127,8 @@ export class TestMethods {
       info: "Info",
       tags: ["tags"],
       ops: null,
-      user: TestMethods.getTeacher()
+      user: TestMethods.getTeacher(),
+      visibility: "OPEN"
     }
   }
 
