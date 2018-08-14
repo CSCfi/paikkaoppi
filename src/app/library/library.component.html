@@ -23,7 +23,7 @@
               <div class="view__filter-dropdown-handle"></div>
               <div class="view__filter-dropdown-content">
                 <div (click)="filter('type', 'Kaikki')" class="view__filter-dropdown-row" [ngClass]="cFilter.type === 'Kaikki' ? 'is-selected' : ''">{{'common.filter.all' | translate}}</div>
-                <div (click)="filter('type', 'Tutki')" class="view__filter-dropdown-row" [ngClass]="cFilter.type === 'Tutki' ? 'is-selected' : ''">{{'common.filter.study' | translate}}</div>
+                <div (click)="filter('type', 'Tutki')" class="view__filter-dropdown-row" [ngClass]="cFilter.type === 'Tutki' ? 'is-selected' : ''">{{'common.filter.investigate' | translate}}</div>
                 <div (click)="filter('type', 'Toimi')" class="view__filter-dropdown-row" [ngClass]="cFilter.type === 'Toimi' ? 'is-selected' : ''">{{'common.filter.act' | translate}}</div>
                 <div (click)="filter('type', 'Pähkinä')" class="view__filter-dropdown-row" [ngClass]="cFilter.type === 'Pähkinä' ? 'is-selected' : ''">{{'common.filter.puzzle' | translate}}</div>
               </div>

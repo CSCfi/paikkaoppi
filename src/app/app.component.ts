@@ -3,7 +3,6 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { ProfileService } from './service/profile.service'
 import { AuthService } from './service/auth.service'
-import { DashboardComponent } from './dashboard/dashboard.component';
 
 @Component({
   selector: 'app-root',
@@ -18,7 +17,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.translateService.use('fi');
+    this.translateService.use('sv');
   }
 
   getProfileClass(): string {

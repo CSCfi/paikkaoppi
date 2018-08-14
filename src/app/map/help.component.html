@@ -1,7 +1,7 @@
 <div class="popup" *ngIf="visible">
   <div class="popup__content">
     <div class="popup__scroll">
-      <div class="accordion">
+      <div class="accordion popup__bottom-padding">
         <h1 class="accordion__header">{{task?.name}}</h1>
         <div class="accordion__item">
           <ng-container *ngFor="let i of task?.instructions">
@@ -17,7 +17,7 @@
     </div>
     <div class="popup__footer">
       <div class="popup__footer-links">
-        <a class="link" (click)="close()">Jatka tehtävää</a>
+        <a class="link" (click)="close()">{{'map.continue-task' | translate}}</a>
       </div>
     </div>
   </div>

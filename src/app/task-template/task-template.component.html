@@ -1,22 +1,22 @@
 <div class="view">
   <div class="view__header">
     <a class="view__header-link type--back" (click)="closeDialog()"></a>
-    <h1 class="view__header-title">Uusi tehtäväpohja</h1>
+    <h1 class="view__header-title">{{'library.new-task-template' | translate}}</h1>
   </div>
   <div class="view__content">
     <div class="view__wizard-wrapper">
       <div class="view__wizard">
         <div class="view__wizard-back" [ngClass]="{'is-disabled': phase === firstPhase}"></div>
         <div class="view__wizard-step" [ngClass]="{'is-selected': phase === 1}">
-          <a class="link" *ngIf="phase <= 1">1. Tehtävän kuvaus</a>
-          <a class="link" (click)="moveToPhase(1)" *ngIf="phase > 1">1. Tehtävän kuvaus</a>
+          <a class="link" *ngIf="phase <= 1">1. {{'task-template.task-description' | translate}}</a>
+          <a class="link" (click)="moveToPhase(1)" *ngIf="phase > 1">1. {{'task-template.task-description' | translate}}</a>
         </div>
         <div class="view__wizard-step" [ngClass]="{'is-selected': phase === 2}">
-          <a class="link" *ngIf="phase <= 2">2. Tehtävän askeleet</a>
-          <a class="link" (click)="moveToPhase(2)" *ngIf="phase > 2">2. Tehtävän askeleet</a>
+          <a class="link" *ngIf="phase <= 2">2. {{'task-template.task-steps' | translate}}</a>
+          <a class="link" (click)="moveToPhase(2)" *ngIf="phase > 2">2. {{'task-template.task-steps' | translate}}</a>
         </div>
         <div class="view__wizard-step" [ngClass]="{'is-selected': phase === 3}">
-          <a class="link">3. Esikatselu</a>
+          <a class="link">3. {{'task-template.preview' | translate}}</a>
         </div>
         <div class="view__wizard-forward" [ngClass]="{'is-disabled': phase === lastPhase}"></div>
       </div>
@@ -26,37 +26,37 @@
           <div class="view__grid" *ngIf="phase === 1">
             <div class="view__grid-item">
               <div class="form__item" [class.has-error]="name.invalid && name.dirty">
-                <label for="name">Nimi</label>
+                <label for="name">{{'common.field.name' | translate}}</label>
                 <input type="text" maxlength="128" required [(ngModel)]="model.name" name="name" #name="ngModel" />
-                <div [hidden]="name.valid || name.pristine" class="form__item-error alert alert-danger"><div class="text">Pakollinen tieto</div></div>
+                <div [hidden]="name.valid || name.pristine" class="form__item-error alert alert-danger"><div class="text">{{'common.info.mandatory-field' | translate}}</div></div>
               </div>
               <div class="form__item" [class.has-error]="description.invalid && description.dirty">
-                <label for="description">Tehtävän kuvaus</label>
+                <label for="description">{{'task-template.task-description' | translate}}</label>
                 <textarea required maxlength="4096" [(ngModel)]="model.description" name="description" #description="ngModel"></textarea>
-                <div [hidden]="description.valid || description.pristine" class="form__item-error alert alert-danger"><div class="text">Pakollinen tieto</div></div>
+                <div [hidden]="description.valid || description.pristine" class="form__item-error alert alert-danger"><div class="text">{{'common.info.mandatory-field' | translate}}</div></div>
               </div>
               <div class="form__columns">
                 <div class="form__column">
                   <div class="form__item">
-                    <label for="type">Tehtävän tyyppi</label>
+                    <label for="type">{{'task-template.task-type' | translate}}</label>
                     <br/>
                     <div class="select__wrapper">
                       <select [(ngModel)]="model.type" name="type">
-                        <option value="INVESTIGATE">Tutki</option>
-                        <option value="ACT">Toimi</option>
-                        <option value="PUZZLE">Pähkinä</option>
+                        <option value="INVESTIGATE">{{'common.filter.investigate' | translate}}</option>
+                        <option value="ACT">{{'common.filter.act' | translate}}</option>
+                        <option value="PUZZLE">{{'common.filter.puzzle' | translate}}</option>
                       </select>
                     </div>
                   </div>
                 </div>
                 <div class="form__column">
                   <div class="form__item">
-                    <label for="visibility">Tehtävän näkyvyys</label>
+                    <label for="visibility">{{'task-template.task-visibility' | translate}}</label>
                     <br/>
                     <div class="select__wrapper">
                       <select [(ngModel)]="model.visibility" name="visibility">
-                        <option value="OPEN">Avoin</option>
-                        <option value="RESTRICTED">Suljettu</option>
+                        <option value="OPEN">{{'common.filter.open' | translate}}</option>
+                        <option value="RESTRICTED">{{'common.filter.restricted' | translate}}</option>
                       </select>
                     </div>
                   </div>
@@ -79,14 +79,14 @@
                   {{ wideKnowledge.name | limitTo: 40 }} <a (click)="removeWideKnowledge(wideKnowledge.id)">x</a>
                 </div>
               </div>
-              <div class="form__title">Oppiaine</div>
+              <div class="form__title">{{'task-template.subject' | translate}}</div>
               <div class="form__columns">
                 <div class="form__column">
                   <div class="form__item">
-                    <label>Vuosiluokka</label>
+                    <label>{{'task-template.grade' | translate}}</label>
                     <div class="select__wrapper">
                       <select (ngModelChange)="selectGrade($event)" [(ngModel)]="selectedOps.grade" name="grade">
-                        <option [ngValue]="null">Valitse vuosiluokka</option>    
+                        <option [ngValue]="null">{{'task-template.select-grade' | translate}}</option>    
                         <option *ngFor="let grade of ops.grades" [ngValue]="grade">
                             {{grade.name}}
                         </option>
@@ -96,10 +96,10 @@
                 </div>
                 <div *ngIf="ops.wideKnowledges != null && ops.wideKnowledges.length > 0" class="form__column">
                   <div class="form__item">
-                    <label>Laaja-alainen osaaminen</label>
+                    <label>{{'task-template.wide-knowledge' | translate}}</label>
                     <div class="select__wrapper">
                       <select (ngModelChange)="selectWideKnowledge($event)" [(ngModel)]="selectedOps.wideKnowledge" name="wideKnowledge">
-                        <option [ngValue]="null">Valitse laaja-alainen osaaminen</option>    
+                        <option [ngValue]="null">{{'task-template.select-wide-knowledge' | translate}}</option>    
                         <option *ngFor="let wideKnowledge of ops.wideKnowledges" [ngValue]="wideKnowledge">
                             {{wideKnowledge.name}}
                         </option>
@@ -111,10 +111,10 @@
               <div *ngIf="ops.firstSubjects != null && ops.firstSubjects.length > 0" class="form__columns">
                 <div class="form__column">
                   <div class="form__item">
-                    <label>Oppiaine</label>
+                    <label>{{'task-template.subject' | translate}}</label>
                     <div class="select__wrapper">
                       <select (ngModelChange)="selectFirstSubject($event)" [(ngModel)]="selectedOps.firstSubject" name="firstSubject">
-                        <option [ngValue]="null">Valitse oppiaine</option>
+                        <option [ngValue]="null">{{'task-template.select-subject' | translate}}</option>
                         <option *ngFor="let subject of ops.firstSubjects" [ngValue]="subject">
                             {{subject.name}}
                         </option>
@@ -139,10 +139,10 @@
               <div *ngIf="ops.thirdSubjects != null && ops.thirdSubjects.length > 0" class="form__columns">
                 <div class="form__column">
                   <div class="form__item">
-                    <label>Kurssi</label>
+                    <label>{{'task-template.course' | translate}}</label>
                     <div class="select__wrapper">
                       <select (ngModelChange)="selectThirdSubject($event)" [(ngModel)]="selectedOps.thirdSubject" name="thirdSubject">
-                        <option [ngValue]="null">Valitse kurssi</option>  
+                        <option [ngValue]="null">{{'task-template.select-course' | translate}}</option>  
                         <option *ngFor="let subject of ops.thirdSubjects" [ngValue]="subject">
                             {{subject.name}}
                         </option>
@@ -151,14 +151,14 @@
                   </div>
                 </div>
               </div>
-              <div *ngIf="(ops.targets != null && ops.targets.length > 0) || (ops.contentAreas != null && ops.contentAreas.length > 0)" class="form__title">Opetussuunnitelman mukaiset tavoitteet</div>
+              <div *ngIf="(ops.targets != null && ops.targets.length > 0) || (ops.contentAreas != null && ops.contentAreas.length > 0)" class="form__title">{{'task-template.targets' | translate}}</div>
               <div class="form__columns">
                 <div *ngIf="ops.targets != null && ops.targets.length > 0" class="form__column">
                   <div class="form__item">
-                    <label>Tavoite</label>
+                    <label>{{'task-template.target' | translate}}</label>
                     <div class="select__wrapper">
                       <select (ngModelChange)="selectTarget($event)" [(ngModel)]="selectedOps.target" name="target">
-                        <option [ngValue]="null">Valitse tavoite</option>  
+                        <option [ngValue]="null">{{'task-template.select-target' | translate}}</option>  
                         <option *ngFor="let target of ops.targets" [ngValue]="target" title="{{ target.name }}">
                             {{ target.name | limitTo : 60 }}
                         </option>
@@ -168,10 +168,10 @@
                 </div>
                 <div *ngIf="ops.contentAreas != null && ops.contentAreas.length > 0" class="form__column">
                   <div class="form__item">
-                    <label>Sisältöalue</label>
+                    <label>{{'task-template.content-area' | translate}}</label>
                     <div class="select__wrapper">
                       <select (ngModelChange)="selectContentArea($event)" [(ngModel)]="selectedOps.contentArea" name="contentArea">
-                        <option [ngValue]="null">Valitse sisältöalue</option>  
+                        <option [ngValue]="null">{{'task-template.select-content-area' | translate}}</option>  
                         <option *ngFor="let contentArea of ops.contentAreas" [ngValue]="contentArea" title="{{ contentArea.name }}">
                             {{ contentArea.name | limitTo : 60 }}
                         </option>
@@ -182,70 +182,69 @@
               </div>
               <div class="form__footer">
                 <div>
-                  <a (click)="addNewOps()">Lisää uusi luokittelu</a>
+                  <a (click)="addNewOps()">{{'task-template.add-new-ops' | translate}}</a>
                   <br/>
                   <br/>
-                  Lisätietoa luokituksista <a href="https://eperusteet.opintopolku.fi" target="_blank">ePerusteet -palvelusta</a>.
+                  {{'task-template.add-new-ops' | translate}} <a href="https://eperusteet.opintopolku.fi" target="_blank">{{'task-template.from-eperusteet' | translate}}</a>.
                 </div>
-                <button class="button" [disabled]="!form.form.valid" (click)="next(true)">Jatka</button>
-                <a class="button type--secondary" (click)="closeDialog()">Peruuta</a>
+                <button class="button" [disabled]="!form.form.valid" (click)="next(true)">{{'common.action.continue' | translate}}</button>
+                <a class="button type--secondary" (click)="closeDialog()">{{'common.action.cancel' | translate}}</a>
               </div>
             </div>
           </div>
           <div class="view__grid" *ngIf="phase === 2">
             <div class="view__grid-item">
-              <div class="form__title">Tehtävän askeleet</div>
-              <div class="form__ingress">Ohje aiheesta tulee tähän.</div>
+              <div class="form__title">{{'task-template.task-steps' | translate}}</div>
               <ng-template ngFor let-instruction let-index="index" [ngForOf]="model.instructions">
                 <div class="form__item">
                   <label class="type--step">{{index+1}}.</label>
-                  <a class="button type--secondary" (click)="removeInstruction(instruction)">Poista askel</a>
+                  <a class="button type--secondary" (click)="removeInstruction(instruction)">{{'task-template.remove-step' | translate}}</a>
                   <div class="form__row">
-                    <input type="text" maxlength="128" required placeholder="Askeleen otsikko" class="type--wysiwyg-title" [(ngModel)]="model.instructions[index].name"
+                    <input type="text" maxlength="128" required placeholder="{{'task-template.step-title' | translate}}" class="type--wysiwyg-title" [(ngModel)]="model.instructions[index].name"
                       name="name-{{index}}">
                   </div>
                   <div class="form__row">
-                    <textarea placeholder="Askeleen ohje" maxlength="4096" required class="type--wysiwyg-text" [(ngModel)]="model.instructions[index].description"
+                    <textarea placeholder="{{'task-template.step-description' | translate}}" maxlength="4096" required class="type--wysiwyg-text" [(ngModel)]="model.instructions[index].description"
                       name="description-{{index}}"></textarea>
                   </div>
                 </div>
               </ng-template>
               <div class="form__item type--centered">
-                <a class="button type--form" (click)="addInstruction()">Lisää uusi askel</a>
+                <a class="button type--form" (click)="addInstruction()">{{'task-template.add-step' | translate}}</a>
               </div>
               <div class="form__footer">
-                <button class="button" (click)="next(false)" [disabled]="!form.form.valid">Jatka</button>
-                <a class="button type--secondary" (click)="closeDialog()">Sulje</a>
+                <button class="button" (click)="next(false)" [disabled]="!form.form.valid">{{'common.action.continue' | translate}}</button>
+                <a class="button type--secondary" (click)="closeDialog()">{{'common.action.close' | translate}}</a>
               </div>
             </div>
           </div>
           <div class="view__grid" *ngIf="phase === 3">
             <div class="view__grid-item">
-              <div class="form__title">Tehtävän tiedot</div>
+              <div class="form__title">{{'task-template.task-info' | translate}}</div>
               <div class="form__item">
-                <label for="name">Nimi</label>
+                <label for="name">{{'common.field.name' | translate}}</label>
                 <div>{{model.name}}</div>
               </div>
               <div class="form__item">
-                <label for="description">Tehtävän kuvaus</label>
+                <label for="description">{{'task-template.task-description' | translate}}</label>
                 <div id="description">{{model.description}}</div>
               </div>
               <div class="form__item">
-                <label for="info">Tehtävän tyyppi</label>
+                <label for="info">{{'task-template.task-type' | translate}}</label>
                 <div id="type">
-                  <span *ngIf="model.type == 'INVESTIGATE'">Tutki</span>
-                  <span *ngIf="model.type == 'ACT'">Toimi</span>
-                  <span *ngIf="model.type == 'PUZZLE'">Pähkinä</span>
+                  <span *ngIf="model.type == 'INVESTIGATE'">{{'common.filter.investigate' | translate}}</span>
+                  <span *ngIf="model.type == 'ACT'">{{'common.filter.act' | translate}}</span>
+                  <span *ngIf="model.type == 'PUZZLE'">{{'common.filter.puzzle' | translate}}</span>
                 </div>
               </div>
               <div class="form__item">
-                <label for="info">Tehtävän näkyvyys</label>
+                <label for="info">{{'task-template.task-visibility' | translate}}</label>
                 <div id="type">
-                  <span *ngIf="model.visibility == 'OPEN'">Avoin</span>
-                  <span *ngIf="model.visibility == 'RESTRICTED'">Suljettu</span>
+                  <span *ngIf="model.visibility == 'OPEN'">{{'common.filter.open' | translate}}</span>
+                  <span *ngIf="model.visibility == 'RESTRICTED'">{{'common.filter.restricted' | translate}}</span>
                 </div>
               </div>
-              <div class="form__title">Tehtävän ohje</div>
+              <div class="form__title">{{'task-template.task-instruction' | translate}}</div>
               <ng-template ngFor let-instruction let-index="index" [ngForOf]="model.instructions">
                 <div class="form__item">
                   <label>{{index+1}}. {{instruction.name}}</label>
@@ -254,7 +253,7 @@
                   </ul>
                 </div>
               </ng-template>
-              <div class="form__title">Luokittelut</div>
+              <div class="form__title">{{'task-template.ops-classifications' | translate}}</div>
               <div *ngIf="model.ops != null" class="form__item">
                 <div *ngFor="let grade of model.ops.grades" class="tag" title="{{ grade.name }}">
                   {{ grade.name }} <a (click)="removeGrade(grade.id)">x</a>
@@ -273,8 +272,8 @@
                 </div>
               </div>
               <div class="form__footer">
-                <button type="submit" class="button" [disabled]="!form.form.valid">Tallenna tehtäväpohja</button>
-                <button class="button type--secondary" (click)="closeDialog()">Peruuta</button>
+                <button type="submit" class="button" [disabled]="!form.form.valid">{{'task-template.save-task-template' | translate}}</button>
+                <button class="button type--secondary" (click)="closeDialog()">{{'common.action.cancel' | translate}}</button>
               </div>
             </div>
           </div>

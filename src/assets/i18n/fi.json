@@ -10,10 +10,16 @@
         "action": {
             "back": "Takaisin",
             "cancel": "Peruuta",
+            "close": "Sulje",
+            "continue": "Jatka",
             "delete": "Poista",
             "edit": "Muokkaa",
             "logout": "Kirjaudu ulos",
             "save": "Tallenna"
+        },
+        "field": {
+            "name": "Nimi",
+            "description": "Kuvaus"
         },
         "filter": {
             "all": "Kaikki",
@@ -23,7 +29,7 @@
             "visibility": "Näkyvyys",
             "open": "Avoin",
             "restricted": "Suljettu",
-            "study": "Tutki",
+            "investigate": "Tutki",
             "act": "Toimi",
             "puzzle": "Pähkinä",
             "new": "Uusi"
@@ -48,12 +54,14 @@
     },
     "map": {
         "instructions": "Ohjeet",
+        "continue-task": "Jatka tehtävää",
         "action": {
             "zoom-in": "Lähennä",
             "zoom-out": "Loitonna",
             "show-all-results": "Näytä kaikki pisteet",
             "reset": "Palauta",
-            "zoom-to-location": "Keskitä omaan sijaintiin"
+            "zoom-to-location": "Keskitä omaan sijaintiin",
+            "select-map-layer": "Valitse karttataso"
         },
         "tool": {
             "marker": "Merkitse piste",
@@ -64,7 +72,43 @@
             "measure-area": "Mittaa pinta-ala"
         }
     },
+    "result-item": {
+        "user": "Käyttäjä",
+        "coordinates": "Koordinaatit",
+        "add-image": "Lisää kuva",
+        "change-image": "Vaihda kuva",
+        "remove-image": "Poista kuva"
+    },
     "task-template": {
-        "delete-task-template": "Tehtäväpohjan poisto"
+        "delete-task-template": "Tehtäväpohjan poisto",
+        "task-description": "Tehtävän kuvaus",
+        "task-steps": "Tehtävän askeleet",
+        "preview": "Esikatselu",
+        "task-type": "Tehtävän tyyppi",
+        "task-visibility": "Tehtävän näkyvyys",
+        "subject": "Oppiaine",
+        "grade": "Vuosiluokka",
+        "select-grade": "Valitse vuosiluokka",
+        "wide-knowledge": "Laaja-alainen osaaminen",
+        "select-wide-knowledge": "Valitse laaja-alainen osaaminen",
+        "select-subject": "Valitse oppiaine",
+        "course": "Kurssi",
+        "select-course": "Valitse kurssi",
+        "targets": "Opetussuunnitelman mukaiset tavoitteet",
+        "target": "Tavoite",
+        "select-target": "Valitse tavoite",
+        "content-area": "Sisältöalue",
+        "select-content-area": "Valitse sisältöalue",
+        "add-new-ops": "Lisää uusi luokittelu",
+        "more-info-ops": "Lisätietoa luokituksista",
+        "from-eperusteet": "ePerusteet -palvelusta",
+        "remove-step": "Poista askel",
+        "step-title": "Askeleen otsikko",
+        "step-description": "Askeleen ohje",
+        "add-step": "Lisää uusi askel",
+        "task-info": "Tehtävän tiedot",
+        "task-instruction": "Tehtävän ohje",
+        "ops-classifications": "Luokittelut",
+        "save-task-template": "Tallenna tehtäväpohja"
     }
 }

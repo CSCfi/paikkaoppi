@@ -7,7 +7,7 @@
     <div (click)="resetMapLocation()" class="map__center" title="{{'map.action.reset' | translate}}"></div>
     <div (click)="zoomToLocation()" class="map__location" title="{{'map.action.zoom-to-location' | translate}}" *ngIf="mapTools['centerToLocation']"></div>
     <div onclick="this.classList.toggle('is-selected')" class="map__layers" (click)="layerDropdown.hidden=!layerDropdown.hidden"
-      *ngIf="mapTools['changeLayer'] && mapLayers && mapLayers.length > 0">
+      *ngIf="mapTools['changeLayer'] && mapLayers && mapLayers.length > 0" title="{{'map.action.select-map-layer' | translate}}">
       <div class="map__layers-dropdown" hidden #layerDropdown>
         <div class="map__layers-dropdown-content">
           <ng-template ngFor let-layer [ngForOf]="mapLayers">

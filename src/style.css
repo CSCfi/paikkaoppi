@@ -1508,11 +1508,13 @@ ul {
 .form__footer-links {
   text-align: right;
 }
+.popup__bottom-padding {
+  padding-bottom: 55px;
+}
 .accordion {
   counter-reset: accordion__item;
   max-width: 600px;
   margin: 0 auto;
-  padding-bottom: 44px;
 }
 .accordion__header {
   margin: 0 0 15px 0;

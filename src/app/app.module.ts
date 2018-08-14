@@ -5,6 +5,7 @@ import { FormsModule } from '@angular/forms'
 import { HttpClientModule, HttpClient } from '@angular/common/http'
 import { registerLocaleData } from '@angular/common';
 import localeFi from '@angular/common/locales/fi';
+import localeSv from '@angular/common/locales/sv';
 import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { MissingTranslationHandler, MissingTranslationHandlerParams } from '@ngx-translate/core';
@@ -43,7 +44,7 @@ export class MyMissingTranslationHandler implements MissingTranslationHandler {
   }
 }
 
-registerLocaleData(localeFi, 'fi');
+registerLocaleData(localeSv, 'sv');
 
 @NgModule({
   declarations: [
@@ -81,7 +82,7 @@ registerLocaleData(localeFi, 'fi');
     ConversionService,
     AuthGuard,
     NotLoggedInGuard,
-    { provide: LOCALE_ID, useValue: 'fi-FI' },
+    { provide: LOCALE_ID, useValue: 'sv-FI' },
     TranslateService
   ],
   bootstrap: [AppComponent]

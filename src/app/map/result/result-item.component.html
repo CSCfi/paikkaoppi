@@ -3,17 +3,17 @@
     <div class="popup__scroll">
       <div class="form type--basic">
         <div class="form__text" *ngIf="showUser">
-          <div class="form__text-title">Käyttäjä</div>
+          <div class="form__text-title">{{'result-item.user' | translate}}</div>
           <div class="form__text-value">{{result.user.firstName}} {{result.user.lastName}} {{result.user.email}}</div>
         </div>
         <div class="form__text">
           <ng-container *ngIf="isPoint">
-            <div class="form__text-title">Koordinaatit</div>
+            <div class="form__text-title">{{'result-item.coordinates' | translate}}</div>
             <div class="form__text-value">N:{{model.geometry.coordinates[0] | decimal: 2}} E:{{model.geometry.coordinates[1] | decimal: 2}} <em>ETRS-TM35FIN</em></div>
             <div class="form__text-value">N:{{pointWGS84Coordinates.lat.asString(3)}} E:{{pointWGS84Coordinates.lon.asString(3)}} <em>WGS84</em></div>
           </ng-container>
           <ng-container *ngIf="isLine">
-            <div class="form__text-title">Koordinaatit</div>
+            <div class="form__text-title">{{'result-item.coordinates' | translate}}</div>
             <div class="form__text-value">
               <div class="form__text-values">
                 <span *ngFor="let c of lineCoordinates">N:{{c[0] | decimal: 2}} E:{{c[1] | decimal: 2}}<br/></span>
@@ -28,7 +28,7 @@
             </div>
           </ng-container>
           <ng-container *ngIf="isPolygon">
-            <div class="form__text-title">Koordinaatit</div>
+            <div class="form__text-title">{{'result-item.coordinates' | translate}}</div>
             <div class="form__text-value">
               <div class="form__text-values">
                 <span *ngFor="let c of polygonCoordinates">N:{{c[0] | decimal: 2}} E:{{c[1] | decimal: 2}}<br/></span>
@@ -48,15 +48,15 @@
             <div class="form__image-placement">
               <div *ngIf="hasImage() == true" [ngStyle]="{ 'background-image': 'url(' + imageUrl() + ')' }" class="form__image-placement-cover"></div>
               <label *ngIf="hasImage() == false" class="text" for="upload-add">
-                <span>Lisää kuva</span>
+                <span>{{'result-item.add-image' | translate}}</span>
                 <input type="file" id="upload-add" ng2FileSelect [uploader]="uploader" accept=".png, .jpg, .gif" style="display:none"/>
               </label>
               <div *ngIf="hasImage() == true" class="form__image-placement-buttons">
                 <label for="upload-change" class="text">
-                  <span>Vaihda kuva</span>
+                  <span>{{'result-item.change-image' | translate}}</span>
                   <input type="file" id="upload-change" ng2FileSelect [uploader]="uploader" accept=".png, .jpg, .gif" style="display:none"/>
                 </label>
-                <div class="text type--remove" (click)="removeImage()">Poista kuva</div>
+                <div class="text type--remove" (click)="removeImage()">{{'result-item.remove-image' | translate}}</div>
               </div>
             </div>
             <div *ngIf="uploader.isUploading" class="progress-bar" role="progressbar" [ngStyle]="{ 'width': uploader.progress + '%' }"></div>
@@ -64,21 +64,21 @@
                 <div class="form__item-error alert alert-danger"><div class="text">{{errorMessage}}</div></div>
             </div>
           </div>
-          <form (ngSubmit)="save()" #resultItemForm="ngForm">
+          <form (ngSubmit)="save()" #resultItemForm="ngForm" class="popup__bottom-padding">
             <div class="form__item" [class.has-error]="name.invalid && name.dirty">
-              <label>Nimi</label>
+              <label>{{'common.field.name' | translate}}</label>
               <input type="text" required [(ngModel)]="model.name" name="name" #name="ngModel">
-              <div [hidden]="name.valid || name.pristine" class="form__item-error alert alert-danger"><div class="text">Pakollinen tieto</div></div>
+              <div [hidden]="name.valid || name.pristine" class="form__item-error alert alert-danger"><div class="text">{{'common.info.mandatory-field' | translate}}</div></div>
             </div>
             <div class="form__item">
-              <label>Kuvaus</label>
+              <label>{{'common.field.description' | translate}}</label>
               <textarea [(ngModel)]="model.description" name="description"></textarea>
             </div>
             <div class="popup__footer">
               <div class="popup__footer-links">
-                <button [disabled]="isUploading" (click)="close()" class="link type--secondary">Peruuta</button>
-                <button [disabled]="isUploading" (click)="delete()" class="link" *ngIf="model['id'] != null">Poista</button>
-                <button type="submit" [disabled]="!resultItemForm.form.valid || isUploading" class="link">Tallenna</button>
+                <button [disabled]="isUploading" (click)="close()" class="link type--secondary">{{'common.action.cancel' | translate}}</button>
+                <button [disabled]="isUploading" (click)="delete()" class="link" *ngIf="model['id'] != null">{{'common.action.delete' | translate}}</button>
+                <button type="submit" [disabled]="!resultItemForm.form.valid || isUploading" class="link">{{'common.action.save' | translate}}</button>
               </div>
             </div>
           </form>
@@ -89,22 +89,22 @@
             <a *ngIf="hasImage() == true" href="{{imageUrl()}}" target="_blank"><div [ngStyle]="{ 'background-image': 'url(' + imageUrl() + ')' }" class="form__image-placement-preview"></div></a>
           </div>
           <div class="form__item">
-            <label>Nimi</label>
+            <label>{{'common.field.name' | translate}}</label>
             <div class="form__value">{{model.name}}</div>
           </div>
           <div class="form__item">
-            <label>Kuvaus</label>
+            <label>{{'common.field.description' | translate}}</label>
             <div class="form__value">{{model.description}}</div>
           </div>
           <div class="popup__footer" *ngIf="!showUser">
             <div class="popup__footer-links">
-              <button (click)="close()" class="link type--secondary">Peruuta</button>
-              <button (click)="edit()" class="link">Muokkaa</button>
+              <button (click)="close()" class="link type--secondary">{{'common.action.cancel' | translate}}</button>
+              <button (click)="edit()" class="link">{{'common.action.edit' | translate}}</button>
             </div>
           </div>
           <div class="popup__footer" *ngIf="showUser">
             <div class="popup__footer-links">
-              <button (click)="close()" class="link type--secondary">Peruuta</button>
+              <button (click)="close()" class="link type--secondary">{{'common.action.cancel' | translate}}</button>
             </div>
           </div>
         </ng-container>
