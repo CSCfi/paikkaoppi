@@ -1,6 +1,6 @@
+import { Observable } from 'rxjs/Rx';
 import { MessageActionType } from './message.service';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Rx'
 import { Subject } from 'rxjs/Subject'
 import { Router, NavigationStart } from '@angular/router';
 

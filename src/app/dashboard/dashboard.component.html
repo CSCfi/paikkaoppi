@@ -120,6 +120,15 @@
               <div *ngIf="getProfile() == 1" (click)="changeProfile(2)" class="profile__image-next"></div>
             </div>
           </div>
+          <div class="profile__item">
+            <div class="profile__language">
+              <div id="profileLanguage">
+                <span *ngIf="getLanguage() == 'fi'" (click)="changeLanguage('sv')">&lt;</span>  
+                {{getLanguage() | language}}
+                <span *ngIf="getLanguage() == 'sv'" (click)="changeLanguage('fi')">&gt;</span>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>

@@ -6,7 +6,7 @@ import { Subject } from 'rxjs/Subject'
 import 'rxjs/add/observable/empty'
 import { environment } from '../../environments/environment'
 
-import { User, Role, Roles } from '../service/model'
+import { User, Role, Roles } from './model'
 
 @Injectable()
 export class AuthService {

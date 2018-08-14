@@ -17,7 +17,7 @@ export class AppComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.translateService.use('sv');
+    this.translateService.use('fi');
   }
 
   getProfileClass(): string {

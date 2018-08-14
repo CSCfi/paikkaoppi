@@ -28,6 +28,7 @@ import { OpsService } from './service/ops.service'
 import { ProfileService } from './service/profile.service'
 import { ConversionService } from './service/conversion.service'
 
+import { LanguagePipe } from './pipe/language.pipe';
 import { TruncatePipe } from './pipe/truncate.pipe'
 import { MessageModule } from './message/message.module'
 import { TaskTemplateComponent } from './task-template/task-template.component'
@@ -38,17 +39,19 @@ export function createTranslateLoader(http: HttpClient) {
   return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
-export class MyMissingTranslationHandler implements MissingTranslationHandler {
+export class CustomMissingTranslationHandler implements MissingTranslationHandler {
   handle(params: MissingTranslationHandlerParams) {
       return 'Translation missing!';
   }
 }
 
+registerLocaleData(localeFi, 'fi');
 registerLocaleData(localeSv, 'sv');
 
 @NgModule({
   declarations: [
     TruncatePipe,
+    LanguagePipe,
     AppComponent,
     HomeComponent,
     DashboardComponent,
@@ -70,7 +73,7 @@ registerLocaleData(localeSv, 'sv');
           useFactory: (createTranslateLoader),
           deps: [HttpClient]
       },
-      missingTranslationHandler: {provide: MissingTranslationHandler, useClass: MyMissingTranslationHandler}
+      missingTranslationHandler: {provide: MissingTranslationHandler, useClass: CustomMissingTranslationHandler}
     })
   ],
   providers: [
@@ -82,7 +85,7 @@ registerLocaleData(localeSv, 'sv');
     ConversionService,
     AuthGuard,
     NotLoggedInGuard,
-    { provide: LOCALE_ID, useValue: 'sv-FI' },
+    { provide: LOCALE_ID, useValue: 'fi-FI' },
     TranslateService
   ],
   bootstrap: [AppComponent]

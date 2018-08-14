@@ -1,7 +1,6 @@
 import { TranslateService } from '@ngx-translate/core';
 import { AfterViewInit, Component, Input, Output, NgZone, EventEmitter, OnInit } from '@angular/core'
 import * as OskariRPC from 'oskari-rpc';
-import { Observable } from 'rxjs/Rx'
 import 'rxjs/add/observable/interval';
 
 import { environment } from '../../environments/environment'

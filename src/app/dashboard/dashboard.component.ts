@@ -1,9 +1,10 @@
+import { TranslateService } from '@ngx-translate/core';
 import { forEach } from '@angular/router/src/utils/collection';
 import 'rxjs/add/operator/switchMap';
 import { Observable } from 'rxjs/Observable'
 import 'rxjs/add/observable/of';
 import { Component, OnInit } from '@angular/core'
-import { Router, ParamMap, ActivatedRoute } from '@angular/router'
+import { ParamMap, ActivatedRoute } from '@angular/router'
 import { AuthService } from '../service/auth.service'
 import { TaskService } from '../service/task.service'
 import { ProfileService } from '../service/profile.service'
@@ -27,7 +28,7 @@ export class DashboardComponent implements OnInit {
   
   constructor(
     private authService: AuthService,
-    private router: Router,
+    private translateService: TranslateService,
     private route: ActivatedRoute,
     private taskService: TaskService,
     private profileService: ProfileService,
@@ -51,6 +52,14 @@ export class DashboardComponent implements OnInit {
 
   changeProfile(profile: number) {
     this.profileService.setProfile(profile)
+  }
+
+  getLanguage(): string {
+    return this.translateService.currentLang
+  }
+
+  changeLanguage(language: string) {
+    this.translateService.use(language)
   }
 
   saveProfile() {

@@ -8,7 +8,7 @@ import { Ng2PicaModule } from 'ng2-pica'
 
 import { DecimalPipe } from '../../pipe/decimal.pipe'
 import { AuthService } from '../../service/auth.service'
-import { GeoService } from '../../map/geo.service'
+import { GeoService } from '../geo.service'
 import { MockComponent, AuthServiceMock } from '../../../tests/mocks.spec'
 import { ResultItemComponent } from './result-item.component'
 import { AttachmentService } from '../../service/attachment.service'

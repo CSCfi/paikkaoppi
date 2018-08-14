@@ -18,7 +18,7 @@ export class AuthGuard implements CanActivate {
     return this.authService.isLoggedIn().mergeMap(value => {
       if (value === false) {
         console.info(`Not logged in. 'Trying to get to '${next.url}', but redirecting to '${this.loginPageUri}'`)
-        window.location.href = this.loginPageUri;
+        window.location.href = this.loginPageUri
       }
       return Observable.of(value)
     })

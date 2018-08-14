@@ -1,5 +1,4 @@
 import { Component, OnInit } from '@angular/core'
-import { Observable } from 'rxjs/Rx'
 import { MessageService, Message, MessageAction, MessageSeverity, MessageActionType } from './message.service'
 
 @Component({
