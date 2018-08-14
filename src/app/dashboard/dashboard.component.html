@@ -123,9 +123,9 @@
           <div class="profile__item">
             <div class="profile__language">
               <div id="profileLanguage">
-                <span *ngIf="getLanguage() == 'fi'" (click)="changeLanguage('sv')">&lt;</span>  
+                <span *ngIf="getLanguage() == 'sv'" (click)="changeLanguage('fi')">&lt;</span>  
                 {{getLanguage() | language}}
-                <span *ngIf="getLanguage() == 'sv'" (click)="changeLanguage('fi')">&gt;</span>
+                <span *ngIf="getLanguage() == 'fi'" (click)="changeLanguage('sv')">&gt;</span>
               </div>
             </div>
           </div>

@@ -9,34 +9,34 @@
         <div class="view__filters">
           <div class="view__filter">
             <div (click)="toggleFilter('creator')" class="view__filter-dropdown" [ngClass]="isFilterOpen('creator') ? 'is-open' : ''">
-              <div class="view__filter-dropdown-title">{{'common.filter.creator' | translate}}: {{ cFilter.creator }}</div>
+              <div class="view__filter-dropdown-title">{{'common.filter.creator' | translate}}: {{ 'common.filter.' + cFilter.creator.toLowerCase() | translate }}</div>
               <div class="view__filter-dropdown-handle"></div>
               <div class="view__filter-dropdown-content">
-                <div (click)="filter('creator', 'Kaikki')" class="view__filter-dropdown-row" [ngClass]="cFilter.creator === 'Kaikki' ? 'is-selected' : ''">{{'common.filter.all' | translate}}</div>
-                <div (click)="filter('creator', 'Minä')" class="view__filter-dropdown-row" [ngClass]="cFilter.creator === 'Minä' ? 'is-selected' : ''">{{'common.filter.me' | translate}}</div>
+                <div (click)="filter('creator', 'ALL')" class="view__filter-dropdown-row" [ngClass]="cFilter.creator === 'ALL' ? 'is-selected' : ''">{{'common.filter.all' | translate}}</div>
+                <div (click)="filter('creator', 'ME')" class="view__filter-dropdown-row" [ngClass]="cFilter.creator === 'ME' ? 'is-selected' : ''">{{'common.filter.me' | translate}}</div>
               </div>
             </div>
           </div>
           <div class="view__filter">
             <div (click)="toggleFilter('type')" class="view__filter-dropdown" [ngClass]="isFilterOpen('type') ? 'is-open' : ''">
-              <div class="view__filter-dropdown-title">{{'common.filter.type' | translate}}: {{ cFilter.type }}</div>
+              <div class="view__filter-dropdown-title">{{'common.filter.type' | translate}}: {{ 'common.filter.' + cFilter.type.toLowerCase() | translate }}</div>
               <div class="view__filter-dropdown-handle"></div>
               <div class="view__filter-dropdown-content">
-                <div (click)="filter('type', 'Kaikki')" class="view__filter-dropdown-row" [ngClass]="cFilter.type === 'Kaikki' ? 'is-selected' : ''">{{'common.filter.all' | translate}}</div>
-                <div (click)="filter('type', 'Tutki')" class="view__filter-dropdown-row" [ngClass]="cFilter.type === 'Tutki' ? 'is-selected' : ''">{{'common.filter.investigate' | translate}}</div>
-                <div (click)="filter('type', 'Toimi')" class="view__filter-dropdown-row" [ngClass]="cFilter.type === 'Toimi' ? 'is-selected' : ''">{{'common.filter.act' | translate}}</div>
-                <div (click)="filter('type', 'Pähkinä')" class="view__filter-dropdown-row" [ngClass]="cFilter.type === 'Pähkinä' ? 'is-selected' : ''">{{'common.filter.puzzle' | translate}}</div>
+                <div (click)="filter('type', 'ALL')" class="view__filter-dropdown-row" [ngClass]="cFilter.type === 'ALL' ? 'is-selected' : ''">{{'common.filter.all' | translate}}</div>
+                <div (click)="filter('type', 'INVESTIGATE')" class="view__filter-dropdown-row" [ngClass]="cFilter.type === 'INVESTIGATE' ? 'is-selected' : ''">{{'common.filter.investigate' | translate}}</div>
+                <div (click)="filter('type', 'ACT')" class="view__filter-dropdown-row" [ngClass]="cFilter.type === 'ACT' ? 'is-selected' : ''">{{'common.filter.act' | translate}}</div>
+                <div (click)="filter('type', 'PUZZLE')" class="view__filter-dropdown-row" [ngClass]="cFilter.type === 'PUZZLE' ? 'is-selected' : ''">{{'common.filter.puzzle' | translate}}</div>
               </div>
             </div>
           </div>
           <div class="view__filter">
             <div (click)="toggleFilter('visibility')" class="view__filter-dropdown" [ngClass]="isFilterOpen('visibility') ? 'is-open' : ''">
-              <div class="view__filter-dropdown-title">{{'common.filter.visibility' | translate}}: {{ cFilter.visibility }}</div>
+              <div class="view__filter-dropdown-title">{{'common.filter.visibility' | translate}}: {{ 'common.filter.' + cFilter.visibility.toLowerCase() | translate }}</div>
               <div class="view__filter-dropdown-handle"></div>
               <div class="view__filter-dropdown-content">
-                <div (click)="filter('visibility', 'Kaikki')" class="view__filter-dropdown-row" [ngClass]="cFilter.visibility === 'Kaikki' ? 'is-selected' : ''">{{'common.filter.all' | translate}}</div>
-                <div (click)="filter('visibility', 'Avoin')" class="view__filter-dropdown-row" [ngClass]="cFilter.visibility === 'Avoin' ? 'is-selected' : ''">{{'common.filter.open' | translate}}</div>
-                <div (click)="filter('visibility', 'Suljettu')" class="view__filter-dropdown-row" [ngClass]="cFilter.visibility === 'Suljettu' ? 'is-selected' : ''">{{'common.filter.restricted' | translate}}</div>
+                <div (click)="filter('visibility', 'ALL')" class="view__filter-dropdown-row" [ngClass]="cFilter.visibility === 'ALL' ? 'is-selected' : ''">{{'common.filter.all' | translate}}</div>
+                <div (click)="filter('visibility', 'OPEN')" class="view__filter-dropdown-row" [ngClass]="cFilter.visibility === 'OPEN' ? 'is-selected' : ''">{{'common.filter.open' | translate}}</div>
+                <div (click)="filter('visibility', 'RESTRICTED')" class="view__filter-dropdown-row" [ngClass]="cFilter.visibility === 'RESTRICTED' ? 'is-selected' : ''">{{'common.filter.restricted' | translate}}</div>
               </div>
             </div>
           </div>

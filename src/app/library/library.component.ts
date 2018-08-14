@@ -48,9 +48,9 @@ export class LibraryComponent implements OnInit {
 
   private initFilter() {
     return {
-      creator: 'Kaikki',
-      type: 'Kaikki',
-      visibility: 'Kaikki'
+      creator: 'ALL',
+      type: 'ALL',
+      visibility: 'ALL'
     }
   }
 
@@ -86,30 +86,19 @@ export class LibraryComponent implements OnInit {
   }
 
   private setVisibleTaskTemplates() {
-    if (this.cFilter.creator === 'Kaikki' && this.cFilter.type === 'Kaikki') {
+    if (this.cFilter.creator === 'ALL' && this.cFilter.type === 'ALL') {
       this.taskTemplates = this.allTaskTemplates
-    } else if (this.cFilter.type === 'Kaikki') {
+    } else if (this.cFilter.type === 'ALL') {
       this.taskTemplates = this.allTaskTemplates.filter(t => t.user.username === this.username)
-    } else if (this.cFilter.creator === 'Kaikki') {
-      this.taskTemplates = this.allTaskTemplates.filter(t => t.type === this.getType(this.cFilter.type))
+    } else if (this.cFilter.creator === 'ALL') {
+      this.taskTemplates = this.allTaskTemplates.filter(t => t.type === this.cFilter.type)
     } else {
-      this.taskTemplates = this.allTaskTemplates.filter(t => t.type === this.getType(this.cFilter.type)).filter(t => t.user.username === this.username)
+      this.taskTemplates = this.allTaskTemplates.filter(t => t.type === this.cFilter.type).filter(t => t.user.username === this.username)
     }
 
-    if (this.cFilter.visibility !== 'Kaikki') {
-      this.taskTemplates = this.taskTemplates.filter(t => t.visibility === this.getVisibility(this.cFilter.visibility));
+    if (this.cFilter.visibility !== 'ALL') {
+      this.taskTemplates = this.taskTemplates.filter(t => t.visibility === this.cFilter.visibility);
     }
-  }
-
-  private getType(type: string): string {
-    if (type === 'Tutki') return 'INVESTIGATE'
-    else if (type === 'Toimi') return 'ACT'
-    else return 'PUZZLE'
-  }
-
-  private getVisibility(visibility: string): string {
-    if (visibility === 'Suljettu') return 'RESTRICTED'
-    else return 'OPEN'
   }
 
   isCreator(template: TaskTemplate) {
