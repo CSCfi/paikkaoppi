@@ -153,7 +153,7 @@ export class OskariRpcComponent implements AfterViewInit, OnInit {
         })
       } else if (this.geoService.isLineString(resultItem)) {
         console.log('saveResultItem -- Saving new resultItem to db to resultId', resultId, event)
-        this.taskService.saveResultItem(resultId,resultItem).subscribe(item => {
+        this.taskService.saveResultItem(resultId, resultItem).subscribe(item => {
           console.log('resultItemSaved:', item)
           this.reloadTask()
           this.lineService.replaceDrawingWithLineOnMap(item)
