@@ -1,8 +1,9 @@
+import { LanguageInterceptor } from './interceptor/language.interceptor';
 import { BrowserModule } from '@angular/platform-browser'
 import { NgModule, LOCALE_ID } from '@angular/core'
 import { RouterModule } from '@angular/router'
 import { FormsModule } from '@angular/forms'
-import { HttpClientModule, HttpClient } from '@angular/common/http'
+import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http'
 import { registerLocaleData } from '@angular/common';
 import localeFi from '@angular/common/locales/fi';
 import localeSv from '@angular/common/locales/sv';
@@ -86,6 +87,11 @@ registerLocaleData(localeSv, 'sv');
     AuthGuard,
     NotLoggedInGuard,
     { provide: LOCALE_ID, useValue: 'fi-FI' },
+    {  
+      provide: HTTP_INTERCEPTORS,
+      useClass: LanguageInterceptor,
+      multi: true
+    },
     TranslateService
   ],
   bootstrap: [AppComponent]
