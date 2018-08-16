@@ -17,4 +17,4 @@ export class LanguageInterceptor implements HttpInterceptor {
 
     return next.handle(langReq);
   }
-}  
+}
