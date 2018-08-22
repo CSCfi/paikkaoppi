@@ -285,7 +285,6 @@ export class OskariRpcComponent implements AfterViewInit, OnInit {
       })
     }.bind(this)
 
-    this.actionHandlers.set(eventName, mapMoveEventHandler)
     this.channel.handleEvent(eventName, mapMoveEventHandler)
   }
 
