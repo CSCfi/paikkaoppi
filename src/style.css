@@ -782,6 +782,27 @@ ul {
 .map__center {
   animation-delay: 1500ms;
 }
+.map__scale {
+  position: fixed;
+  right: 10px;
+  bottom: 70px;
+  display: inline-block;
+  display: flex;
+}
+.map__scale-line {
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-right: 4px;
+  background-color: rgba(255,255,255,0.2);
+  display: inline-block;
+  margin: 0 2px 0 0;
+  text-align: right;
+  font-size: 10px;
+  font-weight: 700;
+  border-bottom: 2px solid black;
+  border-left: 2px solid black;
+  border-right: 2px solid black;
+}
 .map__tools {
   background: #fff;
   box-shadow: 2px 2px 12px rgba(0,0,0,0.5);

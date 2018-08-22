@@ -36,6 +36,8 @@ export class OskariRpcComponent implements AfterViewInit, OnInit {
   zoomLevel = 0
   minZoomLevel = 0
   maxZoomLevel = 13
+  scaleLineMeters = 0
+  scaleLinePixels = 0
 
   env = environment.mapEnv
   domain = environment.mapDomain
@@ -86,6 +88,7 @@ export class OskariRpcComponent implements AfterViewInit, OnInit {
           this.checkRpcVersion()
           this.resetMapLocation()
           this.loadLayers()
+          this.listenMapMoves();
           this.drawTaskResultsToMap(this.task)
           this.setInitialMapToolMode()
           this.debugAllChannelFunctions()
@@ -252,6 +255,73 @@ export class OskariRpcComponent implements AfterViewInit, OnInit {
     this.setAllOpenPopupListenersActive()
   }
 
+  getScaleLineLabel() {
+    if (this.scaleLineMeters < 1000) {
+      return this.scaleLineMeters + ' m';
+    
+    } else {
+      return this.scaleLineMeters / 1000 + ' km';
+    }
+  }
+
+  private listenMapMoves() {
+    const eventName = 'AfterMapMoveEvent'
+    const mapMoveEventHandler = function (event) {
+      this.zone.runGuarded(() => {
+        this.channel.getMapBbox(function(data) {
+          const widthMeters = data.right - data.left;
+          const widthPixels = document.documentElement.clientWidth;
+          const pixelWidth = widthMeters / widthPixels;
+
+          this.zone.runGuarded(() => {
+            const defaultToolWidth = 100;
+            const ratio = this.getRatio(pixelWidth * defaultToolWidth);
+            const toolPixels = 100 * ratio;
+
+            this.scaleLinePixels = toolPixels;
+          });
+
+        }.bind(this));
+      })
+    }.bind(this)
+
+    this.actionHandlers.set(eventName, mapMoveEventHandler)
+    this.channel.handleEvent(eventName, mapMoveEventHandler)
+  }
+
+  private getRatio(toolWidth: number) {
+    let toolLabel = 20;
+    if (toolWidth > 31 && toolWidth < 75) {
+      toolLabel = 50;
+    } else if (toolWidth >= 75 && toolWidth < 150) {
+      toolLabel = 100;
+    } else if (toolWidth >= 150 && toolWidth < 320) {
+      toolLabel = 200;
+    } else if (toolWidth >= 320 && toolWidth < 780) {
+      toolLabel = 500;
+    } else if (toolWidth >= 780 && toolWidth < 1578) {
+      toolLabel = 1000;
+    } else if (toolWidth >= 1578 && toolWidth < 3150) {
+      toolLabel = 2000;
+    } else if (toolWidth >= 3150 && toolWidth < 7880) {
+      toolLabel = 5000;
+    } else if (toolWidth >= 7880 && toolWidth < 15600) {
+      toolLabel = 10000;
+    } else if (toolWidth >= 15600 && toolWidth < 31500) {
+      toolLabel = 20000;
+    } else if (toolWidth >= 31500 && toolWidth < 78500) {
+      toolLabel = 50000;
+    } else if (toolWidth >= 78500 && toolWidth < 158000) {
+      toolLabel = 100000;
+    } else if (toolWidth >= 150000) {
+      toolLabel = 200000;
+    }
+
+    this.scaleLineMeters = toolLabel;
+
+    return toolLabel / toolWidth;
+  }
+
   private setShowCoordinateActive() {
     const eventName = 'MapClickedEvent'
     const mapClickedEventFn = function (data) {
@@ -401,7 +471,7 @@ export class OskariRpcComponent implements AfterViewInit, OnInit {
 
   checkRpcVersion() {
     console.info('checkRpcVersion: isReady:', this.channel.isReady())
-    const expectedOskariVersion = '1.44.3'
+    const expectedOskariVersion = '1.47.1'
     this.channel.isSupported(expectedOskariVersion, (blnSupported) => this.zone.runGuarded(() => {
       if (blnSupported) {
         console.info('Client is supported and Oskari version is ' + expectedOskariVersion)

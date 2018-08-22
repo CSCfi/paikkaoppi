@@ -19,6 +19,9 @@
       </div>
     </div>
   </div>
+  <div *ngIf="scaleLineMeters > 0" class="map__scale">
+    <div class="map__scale-line" [ngStyle]="{'width.px': scaleLinePixels}">{{getScaleLineLabel()}}</div>
+  </div>
   <div class="map__tools">
     <a *ngIf="mapTools['markerTool']" (click)="toggleMarkerAction()" class="map__tools-dot" [ngClass]="markerAction == true ? 'is-selected' : ''"
       title="{{'map.tool.marker' | translate}}"></a>
