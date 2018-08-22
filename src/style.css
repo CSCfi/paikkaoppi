@@ -271,11 +271,16 @@ ul {
   overflow: hidden;
 }
 .app__logo {
-  background: url("assets/poppi_logo.svg");
+  background: url("/assets/poppi_logo.svg");
   background-size: cover;
   width: 76px;
   height: 100px;
-  margin: 0 auto 50px;
+  margin: 0 auto 10px;
+}
+.app__beta {
+  text-align: center;
+  font-size: 130%;
+  margin-bottom: 50px;
 }
 .title__list {
   margin: 35px 0 25px 0;

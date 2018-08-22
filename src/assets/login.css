@@ -248,7 +248,12 @@ ul {
   background-size: cover;
   width: 76px;
   height: 100px;
-  margin: 0 auto 50px;
+  margin: 0 auto 10px;
+}
+.app__beta {
+  text-align: center;
+  font-size: 130%;
+  margin-bottom: 50px;
 }
 .form.type--login {
   max-width: 600px;
