@@ -1,115 +1,115 @@
 {
     "alert": {
         "http": {
-            "general": "sv-Virhe palvelussa. Ole hyvä ja odota hetki, jonka jälkeen voit yrittää uudelleen. Jos ongelma toistuu, ota yhteyttä asiakastukeen",
-            "offline": "sv-Olet offline-tilassa, jonka vuoksi sovellusta ei voi käyttää tällä hetkellä.",
-            "404": "sv-Palvelin ei voinut toteuttaa haluttua pyyntöä."
+            "general": "Fel i servicen. Vänligen vänta en stund och försök sedan på nytt. Om felet upprepas, kontakta kundstödet.",
+            "offline": "Du är i offline –läge, varmed applikationen inte kan användas just nu.",
+            "404": "Servern kunde inte fullgöra den önskade handlingen."
         }
     },
     "common": {
         "action": {
-            "back": "sv-Takaisin",
-            "cancel": "sv-Peruuta",
-            "close": "sv-Sulje",
-            "continue": "sv-Jatka",
-            "delete": "sv-Poista",
-            "edit": "sv-Muokkaa",
-            "logout": "sv-Kirjaudu ulos",
-            "save": "sv-Tallenna"
+            "back": "Tillbaka",
+            "cancel": "Annullera",
+            "close": "Stäng",
+            "continue": "Fortsätt",
+            "delete": "Avlägsna",
+            "edit": "Redigera",
+            "logout": "Logga ut",
+            "save": "Spara"
         },
         "field": {
-            "name": "sv-Nimi",
-            "description": "sv-Kuvaus"
+            "name": "Namn",
+            "description": "Beskrivning"
         },
         "filter": {
-            "all": "sv-Kaikki",
-            "creator": "sv-Tekijä",
-            "me": "sv-Minä",
-            "type": "sv-Tyyppi",
-            "visibility": "sv-Vastausten näkyvyys",
-            "open": "sv-Kaikki",
-            "restricted": "sv-Rajoitettu",
-            "investigate": "sv-Tutki",
-            "act": "sv-Toimi",
-            "puzzle": "sv-Pähkinä",
-            "new": "sv-Uusi"
+            "all": "Alla",
+            "creator": "Skapare",
+            "me": "Jag",
+            "type": "Typ",
+            "visibility": "Svarens synlighet",
+            "open": "Öppna",
+            "restricted": "Begränsat",
+            "investigate": "Undersök",
+            "act": "Agera",
+            "puzzle": "Nöt",
+            "new": "Ny"
         },
         "info": {
-            "mandatory-field": "sv-Pakollinen tieto"
+            "mandatory-field": "Obligatoriskt fält"
         }
     },
     "dashboard": {
-        "own-tasks": "sv-Omat tehtävät",
-        "new-task": "sv-Uusi tehtävä",
-        "help-text": "sv-Aloita lataamalla tehtävä koodilla tai lisäämällä uusi tehtävä tehtäväkirjastosta.",
-        "targets": "sv-kohdetta",
-        "load-with-code": "sv-Lataa tehtävä koodilla.",
-        "task-not-found": "sv-Tehtävää ei löytynyt. Tarkista että koodi on oikein ja yritä uudestaan."
+        "own-tasks": "Egna uppgifter",
+        "new-task": "Ny uppgift",
+        "help-text": "Börja genom att ladda in en uppgift med kod eller lägg till en ny uppgift från uppgiftsbibblioteket.",
+        "targets": "Mål",
+        "load-with-code": "Ladda in en uppgift med en kod.",
+        "task-not-found": "Uppgiften kunde inte hittas. Kontrollera att koden var rätt och försök på nytt."
     },
     "library": {
-        "task-library": "sv-Tehtäväkirjasto",
-        "new-task-template": "sv-Uusi tehtäväpohja",
-        "build-own-task-template": "sv-Rakenna oma tehtäväpohja.",
-        "create-task": "sv-Luo tehtävä"
+        "task-library": "Uppgiftsbibliotek",
+        "new-task-template": "En ny uppgiftsbotten",
+        "build-own-task-template": "Bygg en ny uppgiftsbotten.",
+        "create-task": "Skapa uppgift"
     },
     "map": {
-        "instructions": "sv-Ohjeet",
-        "continue-task": "sv-Jatka tehtävää",
+        "instructions": "Instruktioner",
+        "continue-task": "Fortsätt uppgiften",
         "action": {
-            "zoom-in": "sv-Lähennä",
-            "zoom-out": "sv-Loitonna",
-            "show-all-results": "sv-Näytä kaikki pisteet",
+            "zoom-in": "Zoma in",
+            "zoom-out": "Zoma ut",
+            "show-all-results": "Återställ",
             "reset": "sv-Palauta",
-            "zoom-to-location": "sv-Keskitä omaan sijaintiin",
-            "select-map-layer": "sv-Valitse karttataso"
+            "zoom-to-location": "Centrera på din position",
+            "select-map-layer": "Välj kartnivå"
         },
         "tool": {
-            "marker": "sv-Merkitse piste",
-            "area": "sv-Merkitse alue",
-            "route": "sv-Merkitse reitti",
-            "track-location": "sv-Seuraa sijaintiasi",
-            "measure-line": "sv-Mittaa etäisyys",
-            "measure-area": "sv-Mittaa pinta-ala"
+            "marker": "Märk ut en punkt",
+            "area": "Avgränsa ett område",
+            "route": "Pricka ut en rutt",
+            "track-location": "Följ din position",
+            "measure-line": "Mät avståndet",
+            "measure-area": "Mät arean"
         }
     },
     "result-item": {
-        "user": "sv-Käyttäjä",
-        "coordinates": "sv-Koordinaatit",
-        "add-image": "sv-Lisää kuva",
-        "change-image": "sv-Vaihda kuva",
-        "remove-image": "sv-Poista kuva"
+        "user": "Användare",
+        "coordinates": "Koordinater",
+        "add-image": "Lägg till en bild",
+        "change-image": "Byt bild",
+        "remove-image": "Ta bort bilden"
     },
     "task-template": {
-        "delete-task-template": "sv-Tehtäväpohjan poisto",
-        "task-description": "sv-Tehtävän kuvaus",
-        "task-steps": "sv-Tehtävän askeleet",
-        "preview": "sv-Esikatselu",
-        "task-type": "sv-Tehtävän tyyppi",
-        "task-visibility": "sv-Vastausten näkyvyys",
-        "subject": "sv-Oppiaine",
-        "subject-instruction": "sv-Voit antaa hakuehtoja tehtävällesi. \"Lisää uusi luokittelu\" tallentaa valinnat.",
-        "grade": "sv-Vuosiluokka",
-        "select-grade": "sv-Valitse vuosiluokka",
-        "wide-knowledge": "sv-Laaja-alainen osaaminen",
-        "select-wide-knowledge": "sv-Valitse laaja-alainen osaaminen",
-        "select-subject": "sv-Valitse oppiaine",
-        "course": "sv-Kurssi",
-        "select-course": "sv-Valitse kurssi",
-        "targets": "sv-Opetussuunnitelman mukaiset tavoitteet",
-        "target": "sv-Tavoite",
-        "select-target": "sv-Valitse tavoite",
-        "content-area": "sv-Sisältöalue",
-        "select-content-area": "sv-Valitse sisältöalue",
-        "add-new-ops": "sv-Lisää uusi luokittelu",
-        "more-info-ops": "sv-Lisätietoa luokituksista",
-        "from-eperusteet": "sv-ePerusteet -palvelusta",
-        "remove-step": "sv-Poista askel",
-        "step-title": "sv-Askeleen otsikko",
-        "step-description": "sv-Askeleen ohje",
-        "add-step": "sv-Lisää uusi askel",
-        "task-info": "sv-Tehtävän tiedot",
-        "task-instruction": "sv-Tehtävän ohje",
-        "ops-classifications": "sv-Luokittelut",
-        "save-task-template": "sv-Tallenna tehtäväpohja"
+        "delete-task-template": "Ta bort uppgiftsbottnen",
+        "task-description": "Uppgiftsbeskrivning",
+        "task-steps": "Uppgiftens steg",
+        "preview": "Förhandsgranskning",
+        "task-type": "Uppgiftstyp",
+        "task-visibility": "Uppgiftens synlighet",
+        "subject": "Läroämne",
+        "subject-instruction": "Du kan ge sökvillkor för din uppgift \"Lägg till en klassificering\" spara valen.",
+        "grade": "Årsklass",
+        "select-grade": "Välj årsklass",
+        "wide-knowledge": "Mångsidig kompetens",
+        "select-wide-knowledge": "Välj den mångsidiga kompetensen",
+        "select-subject": "Välj läroämne",
+        "course": "Kurs",
+        "select-course": "Välj kurs",
+        "targets": "Läroplansenliga mål",
+        "target": "Målsättning",
+        "select-target": "Välj målsättning",
+        "content-area": "Innehållsområde",
+        "select-content-area": "Välj innehållsområde",
+        "add-new-ops": "Lägg till en ny klassificering",
+        "more-info-ops": "Mer info om klassificeringar",
+        "from-eperusteet": "om eGrunderna -servicen",
+        "remove-step": "Avlägsna ett steg",
+        "step-title": "Stegets rubrik",
+        "step-description": "Stegets instruktioner",
+        "add-step": "Tillsätt ett nytt steg",
+        "task-info": "Info om uppgiften",
+        "task-instruction": "Uppgiftens instruktioner",
+        "ops-classifications": "Klassificeringar",
+        "save-task-template": "Spara uppgiftsbottnen"
     }
 }
