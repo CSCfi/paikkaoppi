@@ -22,11 +22,11 @@
             "description": "Kuvaus"
         },
         "filter": {
-            "all": "Kaikki",
+            "all": "Valitse",
             "creator": "Tekijä",
             "me": "Minä",
             "type": "Tyyppi",
-            "visibility": "Vastausten näkyvyys",
+            "visibility": "Näkyvyys",
             "open": "Kaikki",
             "restricted": "Rajoitettu",
             "investigate": "Tutki",
@@ -85,7 +85,8 @@
         "task-steps": "Tehtävän askeleet",
         "preview": "Esikatselu",
         "task-type": "Tehtävän tyyppi",
-        "task-visibility": "Vastausten näkyvyys",
+        "task-visibility": "Tehtävän näkyvyys",
+        "result-visibility": "Vastausten näkyvyys",
         "subject": "Oppiaine",
         "subject-instruction": "Voit antaa hakuehtoja tehtävällesi. \"Lisää uusi luokittelu\" tallentaa valinnat.",
         "grade": "Vuosiluokka",

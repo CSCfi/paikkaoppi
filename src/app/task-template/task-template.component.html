@@ -51,14 +51,26 @@
                 </div>
                 <div class="form__column">
                   <div class="form__item">
-                    <label for="visibility">{{'task-template.task-visibility' | translate}}</label>
+                    <label for="resultVisibility">{{'task-template.result-visibility' | translate}}</label>
                     <br/>
                     <div class="select__wrapper">
-                      <select [(ngModel)]="model.visibility" name="visibility">
+                      <select [(ngModel)]="model.resultVisibility" name="resultVisibility">
                         <option value="OPEN">{{'common.filter.open' | translate}}</option>
                         <option value="RESTRICTED">{{'common.filter.restricted' | translate}}</option>
                       </select>
                     </div>
+                  </div>
+                </div>
+              </div>
+              <div *ngIf="isTeacher() == true" class="form__column">
+                <div class="form__item">
+                  <label for="visibility">{{'task-template.task-visibility' | translate}}</label>
+                  <br/>
+                  <div class="select__wrapper">
+                    <select [(ngModel)]="model.visibility" name="visibility">
+                      <option value="OPEN">{{'common.filter.open' | translate}}</option>
+                      <option value="RESTRICTED">{{'common.filter.restricted' | translate}}</option>
+                    </select>
                   </div>
                 </div>
               </div>
@@ -243,6 +255,13 @@
                 <div id="type">
                   <span *ngIf="model.visibility == 'OPEN'">{{'common.filter.open' | translate}}</span>
                   <span *ngIf="model.visibility == 'RESTRICTED'">{{'common.filter.restricted' | translate}}</span>
+                </div>
+              </div>
+              <div class="form__item">
+                <label for="info">{{'task-template.result-visibility' | translate}}</label>
+                <div id="type">
+                  <span *ngIf="model.resultVisibility == 'OPEN'">{{'common.filter.open' | translate}}</span>
+                  <span *ngIf="model.resultVisibility == 'RESTRICTED'">{{'common.filter.restricted' | translate}}</span>
                 </div>
               </div>
               <div class="form__title">{{'task-template.task-instruction' | translate}}</div>

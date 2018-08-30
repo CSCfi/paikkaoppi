@@ -34,6 +34,7 @@ export interface TaskTemplate {
     name: string
     type: string
     visibility: Visibility
+    resultVisibility: Visibility
     title: string
     description: string
     instructions: Instruction[]

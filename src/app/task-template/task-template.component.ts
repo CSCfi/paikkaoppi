@@ -1,3 +1,4 @@
+import { AuthService } from './../service/auth.service';
 import { Observable } from 'rxjs/Rx';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 import { TaskTemplateService } from '../service/task-template.service';
@@ -23,6 +24,7 @@ export class TaskTemplateComponent implements OnInit {
   constructor(
     private taskTemplateService: TaskTemplateService,
     private opsService: OpsService,
+    private authService: AuthService,
     private route: ActivatedRoute,
     private router: Router) { }
 
@@ -54,7 +56,6 @@ export class TaskTemplateComponent implements OnInit {
   }
 
   submit() {
-
     this.setOpsToModel()
     
     if (this.model.id !== undefined) {
@@ -87,6 +88,10 @@ export class TaskTemplateComponent implements OnInit {
   removeInstruction(instruction: Instruction): void {
     this.model.instructions = this.model.instructions.filter( i => i !== instruction)
     console.log('removeInstruction', this.model)
+  }
+
+  isTeacher() {
+    return this.authService.isTeacher();
   }
 
   selectGrade(grade: Grade): void {
@@ -305,6 +310,7 @@ export class TaskTemplateComponent implements OnInit {
       name: null,
       type: 'INVESTIGATE',
       visibility: 'RESTRICTED',
+      resultVisibility: 'RESTRICTED',
       title: null,
       description: null,
       instructions: [this.createNewInstruction()],

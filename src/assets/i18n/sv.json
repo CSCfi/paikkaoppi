@@ -22,11 +22,11 @@
             "description": "Beskrivning"
         },
         "filter": {
-            "all": "Alla",
+            "all": "Välja",
             "creator": "Skapare",
             "me": "Jag",
             "type": "Typ",
-            "visibility": "Svarens synlighet",
+            "visibility": "Synlighet",
             "open": "Öppna",
             "restricted": "Begränsat",
             "investigate": "Undersök",
@@ -86,6 +86,7 @@
         "preview": "Förhandsgranskning",
         "task-type": "Uppgiftstyp",
         "task-visibility": "Uppgiftens synlighet",
+        "result-visibility": "Svarens synlighet",
         "subject": "Läroämne",
         "subject-instruction": "Du kan ge sökvillkor för din uppgift \"Lägg till en klassificering\" spara valen.",
         "grade": "Årsklass",
