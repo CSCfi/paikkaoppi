@@ -1,5 +1,6 @@
+import { Observable } from 'rxjs/Rx';
 import { Component, OnInit } from '@angular/core'
-import { Router } from '@angular/router'
+import { Router, ActivatedRoute, ParamMap } from '@angular/router'
 import { AuthService } from '../service/auth.service'
 import { TaskTemplateComponent } from '../task-template/task-template.component'
 import { TaskTemplateService } from '../service/task-template.service'
@@ -24,17 +25,25 @@ export class LibraryComponent implements OnInit {
   showDeleteTaskTemplateComponent = false
   username: string
   role: Role
+  taskTemplateId?: number
   
   constructor(private taskTemplateService: TaskTemplateService,
     private authService: AuthService,
     private taskService: TaskService,
     private conversionService: ConversionService,
+    private route: ActivatedRoute,
     private router: Router) { }
 
   ngOnInit() {
-    this.loadTaskTemplates()
     this.role = this.authService.getRole()
     this.username = this.authService.getUsername()
+
+    this.route.paramMap
+      .switchMap((params: ParamMap) => Observable.of(params.has('id') ? +params.get('id') : null))
+      .subscribe(id => {
+        this.taskTemplateId = id
+        this.loadTaskTemplates()
+      })
   }
 
   private loadTaskTemplates() {

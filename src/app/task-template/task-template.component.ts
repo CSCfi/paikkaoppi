@@ -60,11 +60,11 @@ export class TaskTemplateComponent implements OnInit {
     
     if (this.model.id !== undefined) {
       this.taskTemplateService.updateTaskTemplate(this.model).subscribe(
-        value => this.router.navigate(['/library'])
+        data => this.router.navigate(['/library'])
       )
     } else {
       this.taskTemplateService.createTaskTemplate(this.model).subscribe(
-        value => this.router.navigate(['/library'])
+        data => this.router.navigate(['/library', data.id])
       )
     }
   }

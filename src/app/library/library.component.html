@@ -60,7 +60,7 @@
             <a routerLink="/task-template" class="list__item-link">{{'library.new-task-template' | translate}}</a>
           </div>
         </div>
-        <div class="list__item" *ngFor="let t of taskTemplates; let i = index">
+        <div class="list__item" *ngFor="let t of taskTemplates; let i = index" [ngClass]="{'is-new': t.id == taskTemplateId}">
           <div *ngIf="isCreator(t)" (click)="toggleDropdown(i)" class="list__item-dropdown" [ngClass]="isDropdownOpen(i) ? 'is-open' : ''">
             <div class="list__item-dropdown-handle"></div>
             <div class="list__item-dropdown-content">
@@ -69,6 +69,9 @@
             </div>
           </div>
           <div class="list__item-type {{getTaskTypeClass(t.type)}}"></div>
+          <div class="list__item-status" *ngIf="t.id == taskTemplateId">
+            <div class="status">{{'common.filter.new' | translate}}</div>
+          </div>
           <div class="list__item-content">
             <div class="list__item-title">{{t.name}}</div>
             <div class="list__item-description">{{t.description}}</div>

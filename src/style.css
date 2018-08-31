@@ -1248,11 +1248,15 @@ ul {
   font-size: 0.82rem;
   font-weight: 700;
 }
-.list.type--tasks .list__item-status,
-.list.type--library .list__item-status {
+.list.type--tasks .list__item-status {
   position: absolute;
   top: 0;
   left: 2px;
+}
+.list.type--library .list__item-status {
+  position: absolute;
+  top: 5px;
+  left: 40px;
 }
 .list.type--tasks .list__item-status .status,
 .list.type--library .list__item-status .status {
