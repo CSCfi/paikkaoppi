@@ -111,6 +111,7 @@
         "task-info": "Tehtävän tiedot",
         "task-instruction": "Tehtävän ohje",
         "ops-classifications": "Luokittelut",
-        "save-task-template": "Tallenna tehtäväpohja"
+        "save-task-template": "Tallenna tehtäväpohja",
+        "insert-description": "Kirjoita kuvaus..."
     }
 }

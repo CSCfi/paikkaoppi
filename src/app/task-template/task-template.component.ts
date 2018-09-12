@@ -1,9 +1,12 @@
-import { AuthService } from './../service/auth.service';
-import { Observable } from 'rxjs/Rx';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { TranslateService } from '@ngx-translate/core';
+import { Observable } from 'rxjs/Rx';
+
+import { AuthService } from './../service/auth.service';
 import { TaskTemplateService } from '../service/task-template.service';
 import { OpsService } from '../service/ops.service';
-import { Component, OnInit } from '@angular/core';
+
 import { Grade, Instruction, Subject, Target, ContentArea, TaskTemplate, WideKnowledge } from '../service/model';
 
 @Component({
@@ -26,6 +29,7 @@ export class TaskTemplateComponent implements OnInit {
     private taskTemplateService: TaskTemplateService,
     private opsService: OpsService,
     private authService: AuthService,
+    private translateService: TranslateService,
     private route: ActivatedRoute,
     private router: Router) { }
 
@@ -310,25 +314,27 @@ export class TaskTemplateComponent implements OnInit {
   private initEditor() {
     this.editorConfig.modules = {
       toolbar: [
-        ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+        ['bold', 'italic', 'underline', 'strike'],
         ['blockquote', 'code-block'],
     
-        [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+        [{ 'header': 1 }, { 'header': 2 }],
         [{ 'list': 'ordered'}, { 'list': 'bullet' }],
-        [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
-        [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+        [{ 'script': 'sub'}, { 'script': 'super' }],
+        [{ 'indent': '-1'}, { 'indent': '+1' }],
     
-        [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+        [{ 'size': ['small', false, 'large', 'huge'] }],
         [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
     
-        [{ 'color': [] }],                                // dropdown with defaults from theme
+        [{ 'color': [] }],
         [{ 'align': [] }],
     
-        ['clean'],                                         // remove formatting button
+        ['clean'],
     
-        ['link']                                  // link and video
+        ['link']
       ]
     }
+
+    this.editorConfig.placeholder = this.translateService.instant('task-template.insert-description')
   }
 
   private createNewModel(): any {

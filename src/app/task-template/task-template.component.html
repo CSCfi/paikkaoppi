@@ -32,7 +32,7 @@
               </div>
               <div class="form__item" [class.has-error]="description.invalid && description.dirty">
                 <label for="description">{{'task-template.task-description' | translate}}</label>
-                <quill-editor maxlength="4096" [(ngModel)]="model.description" [modules]="editorConfig.modules" name="description" #description="ngModel"></quill-editor>
+                <quill-editor [maxLength]="4096" [(ngModel)]="model.description" [modules]="editorConfig.modules" [placeholder]="editorConfig.placeholder" name="description" #description="ngModel"></quill-editor>
                 <div [hidden]="description.valid || description.pristine" class="form__item-error alert alert-danger"><div class="text">{{'common.info.mandatory-field' | translate}}</div></div>
               </div>
               <div class="form__columns">
@@ -217,7 +217,7 @@
                       name="name-{{index}}">
                   </div>
                   <div class="form__row">
-                    <quill-editor placeholder="{{'task-template.step-description' | translate}}" maxlength="4096" required [(ngModel)]="model.instructions[index].description" [modules]="editorConfig.modules" name="description-{{index}}" #description="ngModel"></quill-editor>
+                    <quill-editor placeholder="{{'task-template.step-description' | translate}}" [maxLength]="4096" required [(ngModel)]="model.instructions[index].description" [modules]="editorConfig.modules" name="description-{{index}}" #description="ngModel"></quill-editor>
                   </div>
                 </div>
               </ng-template>
