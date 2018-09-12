@@ -32,7 +32,7 @@
               </div>
               <div class="form__item" [class.has-error]="description.invalid && description.dirty">
                 <label for="description">{{'task-template.task-description' | translate}}</label>
-                <textarea required maxlength="4096" [(ngModel)]="model.description" name="description" #description="ngModel"></textarea>
+                <textarea required maxlength="4096" [(ngModel)]="model.description" placeholder="{{'task-template.task-description-info' | translate}}" name="description" #description="ngModel"></textarea>
                 <div [hidden]="description.valid || description.pristine" class="form__item-error alert alert-danger"><div class="text">{{'common.info.mandatory-field' | translate}}</div></div>
               </div>
               <div class="form__columns">

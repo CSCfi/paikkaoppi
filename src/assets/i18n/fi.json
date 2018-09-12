@@ -81,7 +81,8 @@
     },
     "task-template": {
         "delete-task-template": "Tehtäväpohjan poisto",
-        "task-description": "Tehtävän kuvaus",
+        "task-description": "Tehtävän idea",
+        "task-description-info": "Kirjoita tähän mikä tehtävän idea on...",
         "task-steps": "Tehtävän askeleet",
         "preview": "Esikatselu",
         "task-type": "Tehtävän tyyppi",

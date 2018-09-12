@@ -74,7 +74,10 @@
           </div>
           <div class="list__item-content">
             <div class="list__item-title">{{t.name}}</div>
-            <div class="list__item-description" class="html_content" [innerHTML]="t.description | lineBreak | limitTo: 150" [title]="t.description"></div>
+            <div class="list__item-description html_content" [innerHTML]="t.description | lineBreak | limitTo: 150" [title]="t.description"></div>
+          </div>
+          <div class="list__item-creator">
+              <div class="list__item-name" title="{{t.user.school}}, {{t.user.municipality}}">{{t.user.firstName}} {{t.user.lastName}}</div>
           </div>
           <div class="list__item-info">
             <div class="list__item-tag" *ngIf="t.ops != null">

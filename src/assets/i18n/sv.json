@@ -81,7 +81,8 @@
     },
     "task-template": {
         "delete-task-template": "Ta bort uppgiftsbottnen",
-        "task-description": "Uppgiftsbeskrivning",
+        "task-description": "Uppgiftsidé",
+        "task-description-info": "sv-Kirjoita tähän mikä tehtävän idea on...",
         "task-steps": "Uppgiftens steg",
         "preview": "Förhandsgranskning",
         "task-type": "Uppgiftstyp",
