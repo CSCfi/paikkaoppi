@@ -8,7 +8,7 @@
             <h2 class="accordion__title">{{i.name}}</h2>
             <div class="accordion__text">
               <ul class="list type--text">
-                <li class="list__item">{{i.description}}</li>
+                <li class="list__item" class="html_content" [innerHTML]="i.description"></li>
               </ul>
             </div>
           </ng-container>

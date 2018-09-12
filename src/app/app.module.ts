@@ -1,15 +1,15 @@
 import { LanguageInterceptor } from './interceptor/language.interceptor';
 import { BrowserModule } from '@angular/platform-browser'
 import { NgModule, LOCALE_ID } from '@angular/core'
-import { RouterModule } from '@angular/router'
 import { FormsModule } from '@angular/forms'
 import { HttpClientModule, HttpClient, HTTP_INTERCEPTORS } from '@angular/common/http'
-import { registerLocaleData } from '@angular/common';
-import localeFi from '@angular/common/locales/fi';
-import localeSv from '@angular/common/locales/sv';
-import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { MissingTranslationHandler, MissingTranslationHandlerParams } from '@ngx-translate/core';
+import { registerLocaleData } from '@angular/common'
+import localeFi from '@angular/common/locales/fi'
+import localeSv from '@angular/common/locales/sv'
+import { TranslateModule, TranslateLoader, TranslateService } from '@ngx-translate/core'
+import { TranslateHttpLoader } from '@ngx-translate/http-loader'
+import { MissingTranslationHandler, MissingTranslationHandlerParams } from '@ngx-translate/core'
+import { QuillModule } from 'ngx-quill'
 
 import { AppComponent } from './app.component'
 import { DashboardComponent } from './dashboard/dashboard.component'
@@ -29,11 +29,11 @@ import { OpsService } from './service/ops.service'
 import { ProfileService } from './service/profile.service'
 import { ConversionService } from './service/conversion.service'
 
-import { LanguagePipe } from './pipe/language.pipe';
+import { LanguagePipe } from './pipe/language.pipe'
 import { TruncatePipe } from './pipe/truncate.pipe'
 import { MessageModule } from './message/message.module'
 import { TaskTemplateComponent } from './task-template/task-template.component'
-import { DeleteTaskTemplateComponent } from './delete-task-template/delete-task-template.component';
+import { DeleteTaskTemplateComponent } from './delete-task-template/delete-task-template.component'
 import { CodeComponent } from './code/code.component'
 
 export function createTranslateLoader(http: HttpClient) {
@@ -68,6 +68,7 @@ registerLocaleData(localeSv, 'sv');
     HttpClientModule,
     MapModule,
     MessageModule,
+    QuillModule,
     TranslateModule.forRoot({
       loader: {
           provide: TranslateLoader,

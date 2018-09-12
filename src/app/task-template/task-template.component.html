@@ -32,7 +32,7 @@
               </div>
               <div class="form__item" [class.has-error]="description.invalid && description.dirty">
                 <label for="description">{{'task-template.task-description' | translate}}</label>
-                <textarea required maxlength="4096" [(ngModel)]="model.description" name="description" #description="ngModel"></textarea>
+                <quill-editor maxlength="4096" [(ngModel)]="model.description" [modules]="editorConfig.modules" name="description" #description="ngModel"></quill-editor>
                 <div [hidden]="description.valid || description.pristine" class="form__item-error alert alert-danger"><div class="text">{{'common.info.mandatory-field' | translate}}</div></div>
               </div>
               <div class="form__columns">
@@ -217,8 +217,7 @@
                       name="name-{{index}}">
                   </div>
                   <div class="form__row">
-                    <textarea placeholder="{{'task-template.step-description' | translate}}" maxlength="4096" required class="type--wysiwyg-text" [(ngModel)]="model.instructions[index].description"
-                      name="description-{{index}}"></textarea>
+                    <quill-editor placeholder="{{'task-template.step-description' | translate}}" maxlength="4096" required [(ngModel)]="model.instructions[index].description" [modules]="editorConfig.modules" name="description-{{index}}" #description="ngModel"></quill-editor>
                   </div>
                 </div>
               </ng-template>
@@ -240,7 +239,7 @@
               </div>
               <div class="form__item">
                 <label for="description">{{'task-template.task-description' | translate}}</label>
-                <div id="description">{{model.description}}</div>
+                <div id="description" class="html_content" [innerHTML]="model.description"></div>
               </div>
               <div class="form__item">
                 <label for="info">{{'task-template.task-type' | translate}}</label>
@@ -269,7 +268,7 @@
                 <div class="form__item">
                   <label>{{index+1}}. {{instruction.name}}</label>
                   <ul class="list type--text">
-                    <li class="list__item">{{instruction.description}}</li>
+                    <li class="list__item" class="html_content" [innerHTML]="instruction.description"></li>
                   </ul>
                 </div>
               </ng-template>

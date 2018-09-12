@@ -185,6 +185,32 @@ input {
 .clear-left {
   clear: left;
 }
+.html_content p {
+  margin: 0;
+}
+.html_content ul {
+  list-style: inside;
+}
+.html_content a {
+  text-decoration: underline;
+}
+.html_content .ql-indent-1 {
+  padding-left: 2.5em;
+}
+.html_content .ql-indent-2 {
+  padding-left: 5.5em;
+}
+body .ql-container {
+  font-family: 'Nunito', sans-serif;
+  font-size: 100%;
+}
+body .ql-toolbar.ql-snow,
+body .ql-container.ql-snow {
+  border: 1px solid #333;
+}
+body quill-editor.ng-invalid .ql-container.ql-snow {
+  border: 1px solid red;
+}
 .select__wrapper {
   position: relative;
   border: 1px solid #333;
@@ -367,7 +393,7 @@ ul {
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
   padding: 0 25px 50px;
-  max-height: calc(100vh - 189px);
+  max-height: calc(100vh - 209px);
 }
 @media (max-height: 739px) {
   .popup__scroll {
@@ -1057,6 +1083,7 @@ ul {
 .list.type--tasks .list__item-content,
 .list.type--library .list__item-content {
   flex: 1 0 auto;
+  width: 100%;
 }
 .list.type--tasks .list__item-error,
 .list.type--library .list__item-error {
@@ -1123,6 +1150,7 @@ ul {
   font-size: 1rem;
   font-weight: 600;
   margin: 0 0 5px 0;
+  word-wrap: break-word;
 }
 .list.type--tasks .list__item-marks,
 .list.type--library .list__item-marks {

@@ -74,7 +74,7 @@
           </div>
           <div class="list__item-content">
             <div class="list__item-title">{{t.name}}</div>
-            <div class="list__item-description">{{t.description}}</div>
+            <div class="list__item-description" class="html_content" [innerHTML]="t.description"></div>
           </div>
           <div class="list__item-info">
             <div class="list__item-tag" *ngIf="t.ops != null">

@@ -20,7 +20,8 @@
       "prefix": "app",
       "styles": [
         "style.css",
-        "../node_modules/font-awesome/css/font-awesome.min.css"
+        "../node_modules/font-awesome/css/font-awesome.min.css",
+        "../node_modules/quill/dist/quill.snow.css"
       ],
       "scripts": [
         "../node_modules/oskari-rpc/dist/rpc-client.js"

@@ -18,6 +18,7 @@ export class TaskTemplateComponent implements OnInit {
   phase = 1
   firstPhase = 1
   lastPhase = 3
+  editorConfig: any = {}
   secondSubjectTitle = 'Oppiaineen tarkenne'
   secondSubjectSelectTitle = 'Valitse oppiaine'
 
@@ -33,6 +34,7 @@ export class TaskTemplateComponent implements OnInit {
     this.phase = 1
     this.initOps()
     this.initGrades()
+    this.initEditor()
 
     this.route.paramMap.switchMap((params: ParamMap) => {
       if (params.has('id')) {
@@ -303,6 +305,30 @@ export class TaskTemplateComponent implements OnInit {
     this.opsService.getGrades().subscribe(
       value => this.ops.grades = value
     )
+  }
+
+  private initEditor() {
+    this.editorConfig.modules = {
+      toolbar: [
+        ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
+        ['blockquote', 'code-block'],
+    
+        [{ 'header': 1 }, { 'header': 2 }],               // custom button values
+        [{ 'list': 'ordered'}, { 'list': 'bullet' }],
+        [{ 'script': 'sub'}, { 'script': 'super' }],      // superscript/subscript
+        [{ 'indent': '-1'}, { 'indent': '+1' }],          // outdent/indent
+    
+        [{ 'size': ['small', false, 'large', 'huge'] }],  // custom dropdown
+        [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
+    
+        [{ 'color': [] }],                                // dropdown with defaults from theme
+        [{ 'align': [] }],
+    
+        ['clean'],                                         // remove formatting button
+    
+        ['link']                                  // link and video
+      ]
+    }
   }
 
   private createNewModel(): any {
