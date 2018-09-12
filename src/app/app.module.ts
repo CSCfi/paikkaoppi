@@ -30,6 +30,7 @@ import { ProfileService } from './service/profile.service'
 import { ConversionService } from './service/conversion.service'
 
 import { LanguagePipe } from './pipe/language.pipe'
+import { LineBreakPipe } from './pipe/line-break.pipe';
 import { TruncatePipe } from './pipe/truncate.pipe'
 import { MessageModule } from './message/message.module'
 import { TaskTemplateComponent } from './task-template/task-template.component'
@@ -52,6 +53,7 @@ registerLocaleData(localeSv, 'sv');
 @NgModule({
   declarations: [
     TruncatePipe,
+    LineBreakPipe,
     LanguagePipe,
     AppComponent,
     HomeComponent,
