@@ -1,0 +1,20 @@
+<div class="popup">
+  <div class="popup__content">
+    <form (ngSubmit)="submit()">
+      <div class="popup__scroll">
+        <div class="form type--basic">
+          <div class="popup__header">
+            <h1 class="popup__header-title">{{'dashboard.delete-task' | translate}}</h1>
+          </div>
+          <h1 class="accordion__header">{{model.name}}</h1>
+        </div>
+      </div>
+      <div class="popup__footer">
+        <div class="popup__footer-links">
+          <a (click)="closeDialog()" class="link type--secondary">{{'common.action.cancel' | translate}}</a>
+          <button type="submit" class="link">{{'common.action.delete' | translate}}</button>
+        </div>
+      </div>
+    </form>
+  </div>
+</div>

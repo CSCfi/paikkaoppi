@@ -39,6 +39,7 @@
         }
     },
     "dashboard": {
+        "delete-task": "Ta bort uppgift",
         "own-tasks": "Egna uppgifter",
         "new-task": "Ny uppgift",
         "help-text": "Börja genom att ladda in en uppgift med kod eller lägg till en ny uppgift från uppgiftsbibblioteket.",

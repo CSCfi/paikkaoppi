@@ -1370,6 +1370,9 @@ ul {
 .list.type--library .list__item {
   padding-top: 35px;
 }
+.list.type--tasks .list__item {
+  padding-top: 40px;
+}
 .list.type--library .list__item-content {
   padding: 0 15px;
   max-width: 100%;

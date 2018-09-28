@@ -21,8 +21,11 @@ export class DashboardComponent implements OnInit {
   role: Role
   tasks: TaskDashboard[]
   taskId?: number
+  selectedDropdown?: number
+  selectedTask?: Task
   profileEdit = false
   isProfileOpen = false
+  showDeleteTaskComponent = false
   // For Proto
   unusedCodes: string[]
   
@@ -46,8 +49,39 @@ export class DashboardComponent implements OnInit {
       })
   }
 
+  showDeleteTaskDialog(id: number) {
+    console.log('showDeleteTaskDialog for task id: ' + id)
+    this.taskService.getTask(id)
+      .subscribe(
+      (data) => {
+        this.selectedTask = data
+        this.showDeleteTaskComponent = true
+      })
+  }
+
+  deleteTask() {
+    this.showDeleteTaskComponent = false
+    this.loadTasks()
+  }
+
+  closeTaskDialog() {
+    this.showDeleteTaskComponent = false
+  }
+
   getTaskTypeClass(type: TaskType) {
     return 'type--' + this.conversionService.taskTypeToOrderNumber(type)
+  }
+
+  isCreator(task: TaskDashboard) {
+    return this.authService.getUsername() === task.creator
+  }
+
+  isDropdownOpen(index: number) {
+    return this.selectedDropdown === index
+  }
+
+  toggleDropdown(index: number) {
+    this.selectedDropdown = this.selectedDropdown === index ? null : index
   }
 
   changeProfile(profile: number) {

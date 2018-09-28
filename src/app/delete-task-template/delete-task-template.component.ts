@@ -4,8 +4,7 @@ import { TaskTemplate } from '../service/model';
 
 @Component({
   selector: 'app-delete-task-template',
-  templateUrl: './delete-task-template.component.html',
-  styleUrls: ['./delete-task-template.component.css']
+  templateUrl: './delete-task-template.component.html'
 })
 export class DeleteTaskTemplateComponent {
   @Input() model: any
@@ -17,6 +16,7 @@ export class DeleteTaskTemplateComponent {
   closeDialog() {
     this.close.next()
   }
+
 
   submit() {
     console.log('submit', this.model)

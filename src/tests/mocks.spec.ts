@@ -128,7 +128,8 @@ export class TestMethods {
       tags: ["tags"],
       ops: null,
       user: TestMethods.getTeacher(),
-      visibility: "OPEN"
+      visibility: "OPEN",
+      resultVisibility: "OPEN"
     }
   }
 

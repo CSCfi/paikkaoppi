@@ -68,4 +68,8 @@ export class TaskService {
   updateResultItem(resultItemId: number, resultItem: ResultItem): Observable<ResultItem> {
     return this.http.put<ResultItem>(`${environment.apiUri}/resultitem/${resultItemId}`, resultItem)
   }
+
+  deleteTask(taskId: number): Observable<Task> {
+    return this.http.delete<Task>(`${environment.apiUri}/task/${taskId}`)
+  }
 }

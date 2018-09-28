@@ -39,6 +39,7 @@
         }
     },
     "dashboard": {
+        "delete-task": "Tehtävän poisto",
         "own-tasks": "Omat tehtävät",
         "new-task": "Uusi tehtävä",
         "help-text": "Aloita lataamalla tehtävä koodilla tai lisäämällä uusi tehtävä tehtäväkirjastosta.",

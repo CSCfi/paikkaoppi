@@ -135,13 +135,11 @@ export class LibraryComponent implements OnInit {
   }
 
   deleteTaskTemplate() {
-    console.log('deleteTaskTemplate') 
     this.showDeleteTaskTemplateComponent = false
     this.loadTaskTemplates()
   }
 
   closeTaskTemplateDialog() {
-    console.log("closeTaskTemplateDialog")
     this.showDeleteTaskTemplateComponent = false
   }
 

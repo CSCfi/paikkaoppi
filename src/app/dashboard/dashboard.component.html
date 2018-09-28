@@ -1,3 +1,4 @@
+<app-delete-task *ngIf="showDeleteTaskComponent" (close)="closeTaskDialog()" (delete)="deleteTask()" [model]="selectedTask"></app-delete-task>
 <div class="view">
   <div class="view__header">
     <h1 class="view__header-title">{{'dashboard.own-tasks' | translate}}</h1>
@@ -39,26 +40,34 @@
               <p>{{'dashboard.help-text' | translate}}</p>
             </div>
           </div>
-          <a [routerLink]="['/map', t.id]" class="list__item" *ngFor="let t of tasks" [ngClass]="{'is-new': t.id == taskId}">
+          <div class="list__item" *ngFor="let t of tasks; let i = index" [ngClass]="{'is-new': t.id == taskId}">
             <div class="list__item-status" *ngIf="t.id == taskId">
               <div class="status">{{'common.filter.new' | translate}}</div>
             </div>
-            <div class="list__item-image {{getTaskTypeClass(t.type)}}"></div>
-            <div class="list__item-content">
-              <div class="list__item-title">{{t.name}}</div>
-              <div class="list__item-detail">{{t.resultItemCount}} {{'dashboard.targets' | translate}}</div>
-              <div class="list__item-code" *ngIf="t.creator === user.username || role === 'teacher'">
-                <div class="code">{{t.code}}</div>
+            <div *ngIf="isCreator(t)" (click)="toggleDropdown(i)" class="list__item-dropdown" [ngClass]="isDropdownOpen(i) ? 'is-open' : ''">
+              <div class="list__item-dropdown-handle"></div>
+              <div class="list__item-dropdown-content">
+                <div class="list__item-dropdown-row" (click)="showDeleteTaskDialog(t.id)">{{'common.action.delete' | translate}}</div>
               </div>
-              <!--
-              <div class="list__item-marks"> 
-                <div class="list__item-mark"></div>
-                <div class="list__item-mark"></div>
-                <div class="list__item-mark"></div>
-              </div>
-              -->
             </div>
-          </a>
+            <a [routerLink]="['/map', t.id]">
+              <div class="list__item-image {{getTaskTypeClass(t.type)}}"></div>
+              <div class="list__item-content">
+                <div class="list__item-title">{{t.name}}</div>
+                <div class="list__item-detail">{{t.resultItemCount}} {{'dashboard.targets' | translate}}</div>
+                <div class="list__item-code" *ngIf="t.creator === user.username || role === 'teacher'">
+                  <div class="code">{{t.code}}</div>
+                </div>
+                <!--
+                <div class="list__item-marks"> 
+                  <div class="list__item-mark"></div>
+                  <div class="list__item-mark"></div>
+                  <div class="list__item-mark"></div>
+                </div>
+                -->
+              </div>
+            </a>
+          </div>
         </div>
         <div class="list type--tasks" style="display: block;" *ngIf="unusedCodes?.length > 0">
           <div class="list__item-title" style="color: gray;">Käyttämättömät koodit

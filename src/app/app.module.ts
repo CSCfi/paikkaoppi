@@ -1,4 +1,3 @@
-import { LanguageInterceptor } from './interceptor/language.interceptor';
 import { BrowserModule } from '@angular/platform-browser'
 import { NgModule, LOCALE_ID } from '@angular/core'
 import { FormsModule } from '@angular/forms'
@@ -35,6 +34,8 @@ import { TruncatePipe } from './pipe/truncate.pipe'
 import { MessageModule } from './message/message.module'
 import { TaskTemplateComponent } from './task-template/task-template.component'
 import { DeleteTaskTemplateComponent } from './delete-task-template/delete-task-template.component'
+import { DeleteTaskComponent } from './delete-task/delete-task.component';
+import { LanguageInterceptor } from './interceptor/language.interceptor';
 import { CodeComponent } from './code/code.component'
 
 export function createTranslateLoader(http: HttpClient) {
@@ -60,6 +61,7 @@ registerLocaleData(localeSv, 'sv');
     DashboardComponent,
     LibraryComponent,
     TaskTemplateComponent,
+    DeleteTaskComponent,
     DeleteTaskTemplateComponent,
     CodeComponent
   ],
