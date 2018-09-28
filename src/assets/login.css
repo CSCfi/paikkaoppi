@@ -244,7 +244,7 @@ ul {
   margin: 0;
 }
 .app__logo {
-  background: url("/assets/poppi_logo.svg");
+  background: url("/assets/poppi_logo.png");
   background-size: cover;
   width: 76px;
   height: 100px;
