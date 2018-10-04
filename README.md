@@ -54,6 +54,10 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 `./deploy_test.sh`
 
+### Production (CSC)
+
+`./deploy_prod.sh`
+
 ## kartta.paikkatietoikkuna.fi
 
 - paikkaoppi-projekti@affecto.flowdock.com
