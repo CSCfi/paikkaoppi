@@ -50,6 +50,58 @@ To get more help on the Angular CLI use `ng help` or go check out the [Angular C
 
 ## Deployment
 
+First add following to your .ssh/config -file:
+
+`
+Host paikkaoppi-prod-front
+  HostName paikkaoppi.csc.fi
+  IdentityFile ~/.ssh/id_rsa_paikkaoppi
+  User mkettunen
+
+Host paikkaoppi-prod-be-1
+  HostName paikkaoppibe1.csc.fi
+  ProxyCommand ssh -q paikkaoppi-prod-front -W %h:%p
+  IdentityFile ~/.ssh/id_rsa_paikkaoppi
+  User mkettunen
+
+Host paikkaoppi-prod-be-2
+  HostName paikkaoppibe2.csc.fi
+  ProxyCommand ssh -q paikkaoppi-prod-front -W %h:%p
+  IdentityFile ~/.ssh/id_rsa_paikkaoppi
+  User mkettunen
+
+Host paikkaoppi-prod-db
+  HostName paikkaoppidb.csc.fi
+  ProxyCommand ssh -q paikkaoppi-prod-front -W %h:%p
+  IdentityFile ~/.ssh/id_rsa_paikkaoppi
+  User mkettunen
+
+Host paikkaoppi-dev-front
+  HostName paikkaoppidev.csc.fi
+  IdentityFile ~/.ssh/id_rsa_paikkaoppi
+  User mkettunen
+
+Host paikkaoppi-dev-be-1
+  HostName paikkaoppidevbe1.csc.fi
+  ProxyCommand ssh -q paikkaoppi-dev-front -W %h:%p
+  IdentityFile ~/.ssh/id_rsa_paikkaoppi
+  User mkettunen
+
+Host paikkaoppi-dev-be-2
+  HostName paikkaoppidevbe2.csc.fi
+  ProxyCommand ssh -q paikkaoppi-dev-front -W %h:%p
+  IdentityFile ~/.ssh/id_rsa_paikkaoppi
+  User mkettunen
+
+Host paikkaoppi-dev-db
+  HostName paikkaoppidevdb.csc.fi
+  ProxyCommand ssh -q paikkaoppi-dev-front -W %h:%p
+  IdentityFile ~/.ssh/id_rsa_paikkaoppi
+  User mkettunen
+`
+
+by changing user to your own and possible rename identity file.
+
 ### Test (CSC)
 
 `./deploy_test.sh`
