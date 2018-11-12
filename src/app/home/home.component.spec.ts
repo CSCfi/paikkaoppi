@@ -1,12 +1,12 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 import { RouterTestingModule } from '@angular/router/testing'
 import { HttpClientModule } from '@angular/common/http'
-import { Router } from '@angular/router'
 
 import { AuthService } from '../service/auth.service'
-import { MockComponent, AuthServiceMock } from '../../tests/mocks.spec'
+import { AuthServiceMock } from '../../tests/mocks.spec'
 
 import { HomeComponent } from './home.component'
+import { MockComponent } from "../../tests/mock.component";
 
 describe('HomeComponent', () => {
   let component: HomeComponent
@@ -14,7 +14,7 @@ describe('HomeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ HomeComponent, MockComponent ],
+      declarations: [HomeComponent, MockComponent],
       imports: [
         HttpClientModule,
         RouterTestingModule.withRoutes([
@@ -25,7 +25,7 @@ describe('HomeComponent', () => {
         { provide: AuthService, useClass: AuthServiceMock }
       ]
     })
-    .compileComponents()
+      .compileComponents()
   }))
 
   beforeEach(() => {

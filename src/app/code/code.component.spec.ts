@@ -4,9 +4,10 @@ import { FormsModule } from '@angular/forms'
 import { HttpClientModule } from '@angular/common/http'
 
 import { TaskService } from '../service/task.service'
-import { MockComponent, TaskServiceMock } from '../../tests/mocks.spec'
+import { TaskServiceMock } from '../../tests/mocks.spec'
 
 import { CodeComponent } from './code.component';
+import { TranslateFakeLoader, TranslateLoader, TranslateModule } from "@ngx-translate/core";
 
 describe('CodeComponent', () => {
   let component: CodeComponent;
@@ -14,17 +15,23 @@ describe('CodeComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ CodeComponent ],
+      declarations: [CodeComponent],
       imports: [
         FormsModule,
         HttpClientModule,
-        RouterTestingModule
+        RouterTestingModule,
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useFactory: () => new TranslateFakeLoader()
+          }
+        })
       ],
       providers: [
-        { provide: TaskService, useClass: TaskServiceMock }
+        { provide: TaskService, useClass: TaskServiceMock },
       ]
     })
-    .compileComponents()
+      .compileComponents()
   }))
 
   beforeEach(() => {

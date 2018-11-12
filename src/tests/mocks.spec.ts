@@ -1,16 +1,10 @@
-import { Component } from '@angular/core'
 import { Observable } from 'rxjs/Observable'
 
-import { Grade, Role, Task, TaskDashboard, TaskTemplate, User } from '../app/service/model';
+import { Grade, Role, Task, TaskDashboard, TaskTemplate, TaskType, User, Visibility } from '../app/service/model';
+import { AuthService } from "../app/service/auth.service";
 
-@Component({
-  template: ''
-})
-export class MockComponent {
-}
+export class AuthServiceMock extends AuthService {
 
-export class AuthServiceMock {
-  
   getUser(): User | null {
     return TestMethods.getTeacher()
   }
@@ -42,7 +36,7 @@ export class AuthServiceMock {
 }
 
 export class TaskServiceMock {
-  
+
   getTasks(): Observable<Task[]> {
     return Observable.of([{
       id: 1,
@@ -56,7 +50,7 @@ export class TaskServiceMock {
       code: 'code',
       user: TestMethods.getTeacher(),
       results: null,
-      visibility: "OPEN"
+      visibility: <Visibility>'OPEN'
     }])
   }
 
@@ -66,7 +60,8 @@ export class TaskServiceMock {
       name: 'Tehtävä 1',
       code: 'code',
       creator: 'oppi.opettaja@koulu.fi',
-      resultItemCount: 1
+      resultItemCount: 1,
+      type: <TaskType>'INVESTIGATE'
     }])
   }
 
@@ -76,7 +71,7 @@ export class TaskServiceMock {
 }
 
 export class TaskTemplateServiceMock {
-  
+
   getTaskTemplate(): Observable<TaskTemplate> {
     return Observable.of(this.getTemplate(1))
   }
@@ -91,14 +86,14 @@ export class TaskTemplateServiceMock {
 }
 
 export class OpsServiceMock {
-  
+
   getGrades(): Observable<Grade[]> {
     return Observable.of([TestMethods.getGradeWithId(1), TestMethods.getGradeWithId(1)])
   }
 }
 
 export class TestMethods {
-  
+
   static getTeacher(): User {
     return {
       username: 'oppi.opettaja@koulu.fi',

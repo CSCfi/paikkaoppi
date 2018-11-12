@@ -6,6 +6,6 @@
             <a (click)="showHelp()" class="view__header-link type--info">{{'map.instructions' | translate}}</a>
         </div>
     </div>
-    <app-oskari-rpc (markerOpened)="isMarkerVisible = true" (markerClosed)="isMarkerVisible = false" [task]="task"></app-oskari-rpc>
+    <app-oskari-rpc *ngIf="task" (markerOpened)="isMarkerVisible = true" (markerClosed)="isMarkerVisible = false" [task]="task"></app-oskari-rpc>
 </div>
 <app-help (helpClosed)="hideHelp()" [task]="task" [visible]="isHelpVisible"></app-help>

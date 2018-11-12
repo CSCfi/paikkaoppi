@@ -9,7 +9,12 @@ import { OpsService } from '../service/ops.service';
 import { TaskTemplateComponent } from './task-template.component';
 import { TruncatePipe } from '../pipe/truncate.pipe'
 
-import { TestMethods, OpsServiceMock } from '../../tests/mocks.spec'
+import { AuthServiceMock, OpsServiceMock, TaskTemplateServiceMock, TestMethods } from '../../tests/mocks.spec'
+import { TranslateFakeLoader, TranslateLoader, TranslateModule } from "@ngx-translate/core";
+import { QuillModule } from "ngx-quill";
+import { LineBreakPipe } from "../pipe/line-break.pipe";
+import { AuthService } from "../service/auth.service";
+import { MockComponent } from "../../tests/mock.component";
 
 describe('TaskTemplateComponent', () => {
   let component: TaskTemplateComponent;
@@ -17,18 +22,27 @@ describe('TaskTemplateComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ TruncatePipe, TaskTemplateComponent ],
+      declarations: [TruncatePipe, TaskTemplateComponent, LineBreakPipe, MockComponent],
       imports: [
         RouterTestingModule,
         FormsModule,
-        HttpClientModule
+        HttpClientModule,
+        QuillModule,
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useFactory: () => new TranslateFakeLoader()
+          }
+        })
       ],
       providers: [
         TaskTemplateService,
         { provide: OpsService, useClass: OpsServiceMock },
+        { provide: AuthService, useClass: AuthServiceMock },
+        { provide: TaskTemplateService, useClass: TaskTemplateServiceMock }
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {

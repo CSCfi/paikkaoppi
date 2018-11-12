@@ -5,26 +5,32 @@ import { DeleteTaskTemplateComponent } from './delete-task-template.component';
 
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
-import { RouterTestingModule } from '@angular/router/testing';
 
 import { TestMethods } from '../../tests/mocks.spec'
+import { TranslateFakeLoader, TranslateLoader, TranslateModule } from "@ngx-translate/core";
 
-describe('TaskTemplateComponent', () => {
+describe('DeleteTaskTemplateComponent', () => {
   let component: DeleteTaskTemplateComponent;
   let fixture: ComponentFixture<DeleteTaskTemplateComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ DeleteTaskTemplateComponent ],
+      declarations: [DeleteTaskTemplateComponent],
       imports: [
         FormsModule,
-        HttpClientModule
+        HttpClientModule,
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useFactory: () => new TranslateFakeLoader()
+          }
+        })
       ],
       providers: [
         TaskTemplateService
       ]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
