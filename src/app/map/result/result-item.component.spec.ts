@@ -1,4 +1,3 @@
-import { Component } from '@angular/core'
 import { async, ComponentFixture, TestBed } from '@angular/core/testing'
 import { RouterTestingModule } from '@angular/router/testing'
 import { FormsModule } from '@angular/forms'
@@ -9,10 +8,12 @@ import { Ng2PicaModule } from 'ng2-pica'
 import { DecimalPipe } from '../../pipe/decimal.pipe'
 import { AuthService } from '../../service/auth.service'
 import { GeoService } from '../geo.service'
-import { MockComponent, AuthServiceMock } from '../../../tests/mocks.spec'
 import { ResultItemComponent } from './result-item.component'
 import { AttachmentService } from '../../service/attachment.service'
 import { ResizeService } from '../../service/resize.service'
+import { MockComponent } from "../../../tests/mock.component";
+import { AuthServiceMock } from "../../../tests/mocks.spec";
+import { TranslateFakeLoader, TranslateLoader, TranslateModule } from "@ngx-translate/core";
 
 describe('ResultItemComponent', () => {
   let component: ResultItemComponent
@@ -20,12 +21,18 @@ describe('ResultItemComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ ResultItemComponent, MockComponent, DecimalPipe ],
+      declarations: [ResultItemComponent, MockComponent, DecimalPipe],
       imports: [
         FormsModule,
         HttpClientModule,
         FileUploadModule,
         Ng2PicaModule,
+        TranslateModule.forRoot({
+          loader: {
+            provide: TranslateLoader,
+            useFactory: () => new TranslateFakeLoader()
+          }
+        }),
         RouterTestingModule.withRoutes([
           { path: 'map', component: MockComponent }
         ])
@@ -37,7 +44,7 @@ describe('ResultItemComponent', () => {
         ResizeService
       ]
     })
-    .compileComponents()
+      .compileComponents()
   }))
 
   beforeEach(() => {

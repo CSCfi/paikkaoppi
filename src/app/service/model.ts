@@ -25,7 +25,7 @@ export interface User {
 /**
  * `TaskTemplate` is a template for a task, which contain all information about the `Task`.
  * `TaskTemplate` can be instantiated as a `Task`, and then code is generated for the `Task`.
- * All students in the class will perform the same `Task` instance. 
+ * All students in the class will perform the same `Task` instance.
  * When students save their results they will add a `Result` to the `Task` with their userId.
  * Each student has their own `Result` which groups all the answers together.
   */
@@ -74,6 +74,7 @@ export interface TaskDashboard {
     code: string
     creator: string
     resultItemCount: number
+    type: TaskType
 }
 
 export interface ResultItem {
