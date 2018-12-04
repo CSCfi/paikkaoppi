@@ -1,45 +1,97 @@
 <!DOCTYPE html>
 <html>
-  <head>
+<head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <meta name="viewport"
+          content="width=device-width, height=device-height, initial-scale=1, maximum-scale=1, user-scalable=no">
     <meta name="apple-mobile-web-app-capable" content="yes">
-    <base href="/">
-    <link rel="apple-touch-icon" sizes="152x152" href="assets/apple_icon-152.png">
-    <link rel="shortcut icon" href="assets/apple_icon-152.png">
-    <link rel="stylesheet" type="text/css" href="assets/login.css">
+    <link rel="apple-touch-icon" sizes="152x152" href="apple_icon-152.png">
+    <link rel="shortcut icon" href="apple_icon-152.png">
+    <link rel="stylesheet" type="text/css" href="login.css">
     <title>Paikkaoppi | Kirjautuminen</title>
-  </head>
-  <body>
-    <div class="app variant--1">
-      <div class="app__wrapper">
+</head>
+<body>
+<div class="app variant--1">
+    <div class="app__wrapper">
         <div class="app__content">
-          <div id="login" class="view">
-            <div class="view__index">
-              <div class="view__index-columns">
-                <div class="view__index-column">
-                  <div class="form type--login">
-                    <div class="app__logo"></div>
-                    <div class="app__beta">
-                      PaikkaOppi<br/>
-                      BETA
+            <div id="login" class="view">
+                <div class="view__index">
+                    <div class="view__index-columns">
+                        <div class="view__index-column">
+                            <div class="form type--login">
+                                <div class="app__logo"></div>
+                                <div class="app__beta">
+                                    PaikkaOppi<br/>
+                                    BETA
+                                </div>
+                                <div class="form__ingress">
+                                    <p><strong>PaikkaOppi.fi on kouluille maksuton verkkopohjainen
+                                        oppimisympäristö. </strong></p>
+                                    <p>PaikkaOppi sisältää työkaluja paikkatietotaitojen perusteiden hallintaan sekä
+                                        ohjeita paikkatiedon soveltavaan käyttöön eri oppiaineissa ja monialaisissa
+                                        oppimiskokonaisuuksissa. </p>
+                                    <p>Oppimisympäristön interaktiivinen kartta toimii projektialustana oppilaiden
+                                        omille ympäristöhavainnoille ja kokemuksille. </p>
+                                </div>
+                                <div class="form__footer">
+                                    <a href="#" class="button" onclick="openMenu(event)">Valitse Kirjautuminen</a>
+                                    <div id="loginMenu" class="hidden">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="view__index-column">
+                            <div class="image__index">
+                                <img src="pirate_scene.png" width="600px">
+                            </div>
+                        </div>
                     </div>
-                    <div class="form__ingress">
-                      <p> <strong>PaikkaOppi.fi on kouluille maksuton verkkopohjainen oppimisympäristö. </strong></p>
-                      <p>PaikkaOppi sisältää työkaluja paikkatietotaitojen perusteiden hallintaan sekä ohjeita paikkatiedon soveltavaan käyttöön eri oppiaineissa ja monialaisissa oppimiskokonaisuuksissa. </p>
-                      <p>Oppimisympäristön interaktiivinen kartta toimii projektialustana oppilaiden omille ympäristöhavainnoille ja kokemuksille. </p>
-                    </div>
-                    <div class="form__footer"><a href="/app/dashboard" class="button">Kirjaudu sisään</a></div>
-                  </div>
                 </div>
-                <div class="view__index-column">
-                  <div class="image__index"><img src="assets/pirate_scene.png" width="600px"></div>
-                </div>
-              </div>
             </div>
-          </div>
         </div>
-      </div>
     </div>
-  </body>
+</div>
+
+<script type="application/javascript">
+  window.onload = function () {
+    var xhttp = new XMLHttpRequest();
+    xhttp.onreadystatechange = function () {
+      if (this.readyState === 4 && this.status === 200) {
+        createMenuItems(JSON.parse(this.responseText));
+      }
+    };
+    xhttp.open('GET', 'https://mpass-proxy-test.csc.fi/idp/profile/api/authnsources', true);
+    xhttp.send();
+  }
+
+  function openMenu(event) {
+    event.preventDefault();
+    var menu = document.getElementById('loginMenu');
+    menu.classList.toggle('hidden');
+    if (!menu.classList.contains('hidden')) {
+      var first = menu.getElementsByTagName('li')[0];
+      first.focus();
+    }
+  }
+
+  function createMenuItems(json) {
+    var menu = document.getElementById('loginMenu');
+    var list = document.createElement('ul');
+    menu.appendChild(list);
+
+    json.response.forEach(function (item) {
+      var listItem = document.createElement('li');
+      var img = document.createElement('img');
+      var link = document.createElement('a');
+      img.src = item.iconUrl;
+      listItem.appendChild(img);
+      link.href = 'Shibboleth.sso/Login?authnContextClassRef=urn:mpass.id:authnsource:'
+        + item.id + '&target=/app/dashboard';
+      link.innerText = item.title;
+      listItem.appendChild(link);
+      list.appendChild(listItem);
+    });
+  }
+</script>
+</body>
 </html>

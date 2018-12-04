@@ -1,4 +1,4 @@
-@import url("//fonts.googleapis.com/css?family=Nunito:300,400,600,700,900");
+@import url('https://fonts.googleapis.com/css?family=Nunito:300,400,600,700,900');
 * {
   box-sizing: border-box;
 }
@@ -244,7 +244,7 @@ ul {
   margin: 0;
 }
 .app__logo {
-  background: url("/assets/poppi_logo.png");
+  background: url("poppi_logo.png");
   background-size: cover;
   width: 73px;
   height: 70px;
@@ -671,4 +671,53 @@ ul {
   margin-top: 20vh;
   margin-left: -100px;
   animation: float 6s ease-in-out infinite;
+}
+
+#loginMenu {
+  position: relative;
+  text-align: left;
+  border-radius: 10px;
+  box-shadow: 4px 4px 8px 0 rgba(0,0,0,0.2);
+  border: 1px solid #e0e0e0;
+  padding: 30px 30px 30px 30px;
+  margin-bottom: 10px;
+}
+
+#loginMenu:after, #loginMenu:before {
+  bottom: 100%;
+  left: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+#loginMenu:after {
+  border-color: rgba(255, 255, 255, 0);
+  border-bottom-color: #ffffff;
+  border-width: 10px;
+  margin-left: -10px;
+}
+#loginMenu:before {
+  border-color: rgba(224, 224, 224, 0);
+  border-bottom-color: #e0e0e0;
+  border-width: 11px;
+  margin-left: -11px;
+}
+
+#loginMenu li {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+#loginMenu li img {
+  width: 35px;
+  margin-right: 10px;
+  vertical-align: middle;
+}
+
+.hidden {
+  display: none;
 }
