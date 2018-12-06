@@ -19,4 +19,5 @@ export const environment = {
   apiUri: '/api/v1',
   loginPageUri: 'https://paikkaoppi.csc.fi',
   logoutUri: '/Shibboleth.sso/Logout?return=https://mpass-proxy.csc.fi/idp/profile/Logout?return=https://paikkaoppi.csc.fi',
+  mPassApiUri: 'https://mpass-proxy.csc.fi'
 }

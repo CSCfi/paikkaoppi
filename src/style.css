@@ -294,7 +294,7 @@ ul {
   left: 0;
   right: 0;
   bottom: 0;
-  overflow: hidden;
+  overflow-y: auto;
 }
 .app__logo {
   background: url("/assets/poppi_logo.png");
@@ -662,6 +662,7 @@ ul {
   left: 0;
   right: 0;
   bottom: 0;
+  overflow: hidden;
 }
 .map__info {
   position: absolute;
@@ -2147,3 +2148,75 @@ ul {
     transform: translate3d(-50%, -300%, 0);
   }
 }
+
+.loginMenu {
+  position: relative;
+  text-align: left;
+  border-radius: 10px;
+  padding: 5px;
+  box-shadow: 4px 4px 8px 0 rgba(0,0,0,0.2);
+  border: 1px solid #e0e0e0;
+}
+
+.loginMenu:after, .loginMenu:before {
+  bottom: 100%;
+  left: 50%;
+  border: solid transparent;
+  content: " ";
+  height: 0;
+  width: 0;
+  position: absolute;
+  pointer-events: none;
+}
+
+.loginMenu:after {
+  border-color: rgba(255, 255, 255, 0);
+  border-bottom-color: #ffffff;
+  border-width: 10px;
+  margin-left: -10px;
+}
+
+.loginMenu:before {
+  border-color: rgba(224, 224, 224, 0);
+  border-bottom-color: #e0e0e0;
+  border-width: 11px;
+  margin-left: -11px;
+}
+
+.loginMenuContainer {
+  padding: 30px 30px 30px 30px;
+  margin-bottom: 10px;
+  max-height: 200px;
+  overflow-y: scroll;
+}
+
+.loginMenuItem {
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.loginMenuImage {
+  display: inline-block;
+  width: 10%;
+}
+
+.loginMenuImage img {
+  width: 35px;
+  vertical-align: middle;
+}
+
+.loginMenuText {
+  display: inline-block;
+  width: 88%;
+  padding: 5px;
+}
+
+.loginMenuText span {
+  margin-left: 10px;
+}
+
+.loginMenuText:hover {
+  border-radius: 10px;
+  background-color: #e0e0e0;
+}
+
