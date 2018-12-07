@@ -1009,8 +1009,6 @@ ul {
 @media (max-width: 940px) {
   .list.type--tasks .list__item,
   .list.type--library .list__item {
-    flex-direction: row;
-    padding: 5px;
   }
 }
 .list.type--tasks .list__item.is-new,
@@ -1144,8 +1142,7 @@ ul {
 @media (max-width: 940px) {
   .list.type--tasks .list__item-image,
   .list.type--library .list__item-image {
-    max-width: 80px;
-    max-height: 60px;
+    width: 100%;
     margin: 0 15px 0 0;
   }
 }
