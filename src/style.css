@@ -1916,7 +1916,6 @@ ul {
 }
 .view__filter-dropdown {
   position: relative;
-  z-index: 20;
 }
 .view__filter-dropdown.is-open .view__filter-dropdown-content {
   display: block;
@@ -1937,6 +1936,7 @@ ul {
   min-width: 180px;
   padding: 0;
   margin: 5px 0 0 0;
+  z-index: 1;
 }
 .view__filter-dropdown-row {
   padding: 5px 10px;
