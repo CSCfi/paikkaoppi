@@ -1,12 +1,12 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpErrorResponse } from '@angular/common/http'
+import { HttpClient, HttpHeaders } from '@angular/common/http'
 import { Router } from '@angular/router'
 import { Observable } from 'rxjs/Observable'
 import { Subject } from 'rxjs/Subject'
 import 'rxjs/add/observable/empty'
 import { environment } from '../../environments/environment'
 
-import { User, Role, Roles } from './model'
+import { MPassAuthSources, Role, Roles, User } from './model'
 
 @Injectable()
 export class AuthService {
@@ -63,7 +63,7 @@ export class AuthService {
         done.next()
         done.complete()
       })
-      return done.asObservable()
+    return done.asObservable()
   }
 
   private requestCurrentUser(): Observable<User> {
@@ -95,7 +95,7 @@ export class AuthService {
     if (this.initialized)
       return Observable.of(this.getRole() != null)
     else {
-      return this.updateCurrentUser().mergeMap( () => {
+      return this.updateCurrentUser().mergeMap(() => {
         return Observable.of(this.getRole() != null)
       })
     }
@@ -125,5 +125,14 @@ export class AuthService {
       'oppi.opettaja@koulu.fi',
       'professori.poikonen@koulu.fi'
     ]
+  }
+
+  getMPassAuthSources(): Observable<MPassAuthSources> {
+    const httpOptions = {
+      headers: new HttpHeaders({
+        'Access-Control-Allow-Origin': '*',
+      })
+    };
+    return this.http.get<MPassAuthSources>(`${environment.mPassApiUri}/idp/profile/api/authnsources`, httpOptions)
   }
 }

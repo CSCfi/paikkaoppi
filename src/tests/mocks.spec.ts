@@ -103,7 +103,8 @@ export class TestMethods {
       municipality: 'KuntaYksi',
       school: 'DemolaTestSchool',
       schoolClass: '9A',
-      profile: 1
+      profile: 1,
+      email: 'oppi.opettaja@koulu.fi'
     }
   }
 

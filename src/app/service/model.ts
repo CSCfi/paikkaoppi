@@ -20,6 +20,7 @@ export interface User {
   school: string,
   schoolClass: string,
   profile: number
+  email: string
 }
 
 /**
@@ -119,6 +120,18 @@ export interface Target {
 export interface ContentArea {
     id: number
     name: string
+}
+
+export interface MPassAuthSources {
+    lang: string
+    response: MPassAuthSource[]
+}
+
+export interface MPassAuthSource {
+    id: string
+    title: string
+    iconUrl: string
+    tags: string[]
 }
 
 export type Geometry = Point | PolygonFeatureCollection | LineString | LineStringFeatureCollection

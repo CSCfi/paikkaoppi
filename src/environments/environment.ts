@@ -17,6 +17,7 @@ export const environment = {
     centerToLocation: true, changeLayer: true},
   mapHelpVisibleInitially: true,
   apiUri: 'http://localhost:8000/api/v1',
-  loginPageUri: '/assets/login.html',
+  loginPageUri: '/home',
   logoutUri: 'http://localhost:8000/api/v1/auth/logout',
+  mPassApiUri: ''
 }

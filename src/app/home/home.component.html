@@ -9,13 +9,43 @@
             BETA
           </div>
           <div class="form__ingress">
-            <p> <strong>PaikkaOppi.fi on kouluille maksuton verkkopohjainen oppimisympäristö. </strong></p>
-            <p>PaikkaOppi sisältää työkaluja paikkatietotaitojen perusteiden hallintaan sekä ohjeita paikkatiedon soveltavaan käyttöön eri oppiaineissa ja monialaisissa oppimiskokonaisuuksissa. </p>
-            <p>Oppimisympäristön interaktiivinen kartta toimii projektialustana oppilaiden omille ympäristöhavainnoille ja kokemuksille. </p>
+            <p><strong>PaikkaOppi.fi on kouluille maksuton verkkopohjainen oppimisympäristö. </strong></p>
+            <p>PaikkaOppi sisältää työkaluja paikkatietotaitojen perusteiden hallintaan sekä ohjeita paikkatiedon
+              soveltavaan käyttöön eri oppiaineissa ja monialaisissa oppimiskokonaisuuksissa. </p>
+            <p>Oppimisympäristön interaktiivinen kartta toimii projektialustana oppilaiden omille ympäristöhavainnoille
+              ja kokemuksille. </p>
           </div>
-          <ng-container *ngFor="let u of users">
-              <div><a (click)='loginUser(u)' class="button">Kirjaudu sisään: {{u}}</a></div>
+          <div class="form__footer">
+            <div *ngIf="!prod">
+              <ng-container *ngFor="let u of users">
+                <div><a (click)='loginUser(u)' class="button">Kirjaudu sisään: {{u}}</a></div>
+              </ng-container>
+            </div>
+            <ng-container *ngIf="prod">
+              <div>
+                <a (click)="toggleMenu()" class="button">Kirjaudu sisään</a>
+              </div>
+              <div *ngIf="showMenu" class="loginMenu">
+                <div class="loginMenuContainer">
+                  <ul class="loginMenuList">
+                    <li *ngFor="let item of menuItems">
+                      <a href="{{item.loginUrl}}" target="_self">
+                        <div class="loginMenuItem">
+                          <div class="loginMenuImage">
+                            <img src="{{item.mPassSource.iconUrl || 'assets/poppi_logo.png'}}"
+                                 alt="{{item.mPassSource.title}}">
+                          </div>
+                          <div class="loginMenuText">
+                            <span>{{item.mPassSource.title}}</span>
+                          </div>
+                        </div>
+                      </a>
+                    </li>
+                  </ul>
+                </div>
+              </div>
             </ng-container>
+          </div>
         </div>
       </div>
       <div class="view__index-column">
