@@ -380,7 +380,6 @@ ul {
   width: 400px;
   overflow: hidden;
   max-width: 100%;
-  height: 100%;
   max-height: calc(100vh - 209px);
 }
 @media (max-height: 739px) {
@@ -463,6 +462,7 @@ ul {
   bottom: 0;
   width: 100%;
   -webkit-overflow-scrolling: touch;
+  overflow-y: auto;
 }
 @media (min-width: 620px) {
   .view__content {
@@ -478,10 +478,9 @@ ul {
 .view__header {
   height: 6.6rem;
   text-align: left;
-  padding: 0 25px;
   display: flex;
   align-items: flex-start;
-  padding-top: 20px;
+  padding: 20px 25px 0;
   position: relative;
   z-index: 3;
   margin: 0 auto;
@@ -705,6 +704,13 @@ ul {
   right: 10px;
   top: 20px;
 }
+
+@media (max-width: 380px) {
+  .map__zoom {
+    top: 65px;
+  }
+}
+
 .map__zoom-in,
 .map__zoom-out,
 .map__center,
@@ -1481,10 +1487,8 @@ ul {
   overflow: hidden;
 }
 .form__image-placement .text {
-  color: #f05348;
-  font-weight: 600;
   position: relative;
-  z-index: 2;
+  z-index: 0;
   -webkit-appearance: none;
   appearance: none;
   display: inline-block;
@@ -1493,13 +1497,11 @@ ul {
   font-weight: 700;
   font-size: 1rem;
   line-height: 1;
-  border: none;
   padding: 15px 35px;
   white-space: nowrap;
   border-radius: 30px;
   transition: all 160ms linear;
   background: linear-gradient(65deg, #f05348, #e1854b);
-  color: #fff;
   text-align: center;
   margin: 10px auto;
   -webkit-user-select: none;
