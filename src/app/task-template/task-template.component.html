@@ -6,19 +6,17 @@
   <div class="view__content">
     <div class="view__wizard-wrapper">
       <div class="view__wizard">
-        <div class="view__wizard-back" [ngClass]="{'is-disabled': phase === firstPhase}"></div>
+        <div class="view__wizard-back" (click)="moveToPhase(phase - 1)" [ngClass]="{'is-disabled': phase === firstPhase}"></div>
         <div class="view__wizard-step" [ngClass]="{'is-selected': phase === 1}">
-          <a class="link" *ngIf="phase <= 1">1. {{'task-template.task-description' | translate}}</a>
-          <a class="link" (click)="moveToPhase(1)" *ngIf="phase > 1">1. {{'task-template.task-description' | translate}}</a>
+          <a class="link" (click)="moveToPhase(1)">1. {{'task-template.task-description' | translate}}</a>
         </div>
         <div class="view__wizard-step" [ngClass]="{'is-selected': phase === 2}">
-          <a class="link" *ngIf="phase <= 2">2. {{'task-template.task-steps' | translate}}</a>
-          <a class="link" (click)="moveToPhase(2)" *ngIf="phase > 2">2. {{'task-template.task-steps' | translate}}</a>
+          <a class="link" (click)="moveToPhase(2)">2. {{'task-template.task-steps' | translate}}</a>
         </div>
         <div class="view__wizard-step" [ngClass]="{'is-selected': phase === 3}">
-          <a class="link">3. {{'task-template.preview' | translate}}</a>
+          <a class="link" (click)="moveToPhase(3)">3. {{'task-template.preview' | translate}}</a>
         </div>
-        <div class="view__wizard-forward" [ngClass]="{'is-disabled': phase === lastPhase}"></div>
+        <div class="view__wizard-forward" (click)="moveToPhase(phase + 1)" [ngClass]="{'is-disabled': phase === lastPhase}"></div>
       </div>
       <div class="view__wizard-content">
       <form (ngSubmit)="submit()" #form="ngForm" *ngIf="model != null">
