@@ -34,6 +34,9 @@
 // import 'core-js/es6/weak-map';
 // import 'core-js/es6/set';
 
+/** IOS Safari needs HTMLElementCanvas.toBlob polyfills for image resizing **/
+import 'blueimp-canvas-to-blob/js/canvas-to-blob';
+
 /** IE10 and IE11 requires the following for NgClass support on SVG elements */
 // import 'classlist.js';  // Run `npm install --save classlist.js`.
 
