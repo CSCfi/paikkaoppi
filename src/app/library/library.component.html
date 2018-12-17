@@ -40,6 +40,32 @@
               </div>
             </div>
           </div>
+          <div class="view__filter">
+            <div (click)="toggleFilter('grades')" class="view__filter-dropdown" [ngClass]="isFilterOpen('grades') ? 'is-open' : ''">
+              <div class="view__filter-dropdown-title">{{'common.filter.grade' | translate}}:
+                <span *ngIf="!cFilter.grade">{{ 'common.filter.all' | translate }}</span>
+                <span *ngIf="cFilter.grade">{{getGradeName(cFilter.grade)}}</span>
+              </div>
+              <div class="view__filter-dropdown-handle"></div>
+              <div class="view__filter-dropdown-content">
+                <div (click)="filter('grade')" class="view__filter-dropdown-row" [ngClass]="!cFilter.grade ? 'is-selected' : ''">{{'common.filter.all' | translate}}</div>
+                <div *ngFor="let grade of grades" (click)="filter('grade', grade.id.toString())" class="view__filter-dropdown-row" [ngClass]="cFilter.grade === grade.id ? 'is-selected' : ''">{{grade.name}}</div>
+              </div>
+            </div>
+          </div>
+          <div class="view__filter">
+            <div (click)="toggleFilter('subjects')" class="view__filter-dropdown" [ngClass]="isFilterOpen('subjects') ? 'is-open' : ''">
+              <div class="view__filter-dropdown-title">{{'common.filter.subject' | translate}}:
+                <span *ngIf="!cFilter.subject">{{ 'common.filter.all' | translate }}</span>
+                <span *ngIf="cFilter.subject">{{getSubjectName(cFilter.subject)}}</span>
+              </div>
+              <div class="view__filter-dropdown-handle"></div>
+              <div class="view__filter-dropdown-content">
+                <div (click)="filter('subject')" class="view__filter-dropdown-row" [ngClass]="!cFilter.subject ? 'is-selected' : ''">{{'common.filter.all' | translate}}</div>
+                <div *ngFor="let subject of subjects" (click)="filter('subject', subject.id.toString())" class="view__filter-dropdown-row" [ngClass]="cFilter.subject === subject.id ? 'is-selected' : ''">{{subject.name}}</div>
+              </div>
+            </div>
+          </div>
         </div>
       <div class="list type--library">
         <!--<div class="list__item" *ngIf="role === 'student'">

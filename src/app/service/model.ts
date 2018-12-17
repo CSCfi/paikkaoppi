@@ -100,6 +100,11 @@ export interface Grade {
     name: string
 }
 
+export interface Subject {
+    id: number
+    name: string
+}
+
 export interface WideKnowledge {
     id: number
     name: string

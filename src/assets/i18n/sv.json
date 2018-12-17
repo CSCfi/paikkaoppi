@@ -32,7 +32,9 @@
             "investigate": "Undersök",
             "act": "Agera",
             "puzzle": "Nöt",
-            "new": "Ny"
+            "new": "Ny",
+            "grade": "Årsklass",
+            "subject": "Läroämne"
         },
         "info": {
             "mandatory-field": "Obligatoriskt fält"
