@@ -32,7 +32,9 @@
             "investigate": "Tutki",
             "act": "Toimi",
             "puzzle": "Pähkinä",
-            "new": "Uusi"
+            "new": "Uusi",
+            "grade": "Vuosiluokka",
+            "subject": "Oppiaine"
         },
         "info": {
             "mandatory-field": "Pakollinen tieto"
