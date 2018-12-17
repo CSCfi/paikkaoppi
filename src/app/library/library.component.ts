@@ -118,7 +118,7 @@ export class LibraryComponent implements OnInit {
     return this.selectedDropdown === index
   }
 
-  filter(type: string, value: string) {
+  filter(type: string, value?: string) {
     if (type === 'creator')
       this.cFilter.creator = value
     else if (type === 'type')
@@ -126,9 +126,9 @@ export class LibraryComponent implements OnInit {
     else if (type === 'visibility')
       this.cFilter.visibility = value
     else if (type === 'grade')
-      this.cFilter.grade = value ? parseInt(value) : null
+      this.cFilter.grade = value ? parseInt(value, 10) : null
     else if (type === 'subject')
-      this.cFilter.subject = value ? parseInt(value) : null
+      this.cFilter.subject = value ? parseInt(value, 10) : null
 
     this.setVisibleTaskTemplates()
   }
