@@ -1743,7 +1743,6 @@ ul {
 }
 .profile__medals {
   margin: 35px -10px 25px 0;
-  flex: 1 0 auto;
   text-align: center;
 }
 .profile__medal {
