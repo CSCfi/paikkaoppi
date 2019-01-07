@@ -19,10 +19,6 @@ export class CodeComponent {
     private taskService: TaskService) { }
 
   setKeyIfOk(index: number, key: string) {
-    if (this.handleSpecialKey(index, key)) {
-      return
-    }
-
     this.formError = null
     
     if (this.isSupportedKey(key)) {
@@ -35,7 +31,8 @@ export class CodeComponent {
       this.codeChanged()
     
     } else {
-      this.model.code[index] = ""
+      this.model.code.splice(index, 1, "")
+      this.model.code = Array.from(this.model.code)
     }
   }
 
@@ -79,7 +76,7 @@ export class CodeComponent {
     return key.length === 1 && !key.match(/[^0-9a-z]/i)
   }
 
-  private handleSpecialKey(index: number, key: string) {
+  handleSpecialKey(index: number, key: string) {
     if (key === 'ArrowLeft' || key === 'Backspace') {
       if (index > 0) {
         document.getElementById('code' + (index - 1)).focus()
