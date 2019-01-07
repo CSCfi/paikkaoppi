@@ -4,10 +4,16 @@
 </div>
 <div class="list__item-footer">
   <div class="list__item-input">
-    <input type="text" class="input--code" maxlength="1" required [(ngModel)]="model.code[0]" id="code0" name="code0" #code0="ngModel" (keyup)="setKeyIfOk(0, $event.key)" (paste)="handlePaste($event)">
-    <input type="text" class="input--code" maxlength="1" required [(ngModel)]="model.code[1]" id="code1" name="code1" #code1="ngModel" (keyup)="setKeyIfOk(1, $event.key)">
-    <input type="text" class="input--code" maxlength="1" required [(ngModel)]="model.code[2]" id="code2" name="code2" #code2="ngModel" (keyup)="setKeyIfOk(2, $event.key)">
-    <input type="text" class="input--code" maxlength="1" required [(ngModel)]="model.code[3]" id="code3" name="code3" #code3="ngModel" (keyup)="setKeyIfOk(3, $event.key)">
-    <input type="text" class="input--code" maxlength="1" required [(ngModel)]="model.code[4]" id="code4" name="code4" #code4="ngModel" (keyup)="setKeyIfOk(4, $event.key)">
+    <input type="text" class="input--code" maxlength="1" required [(ngModel)]="model.code[0]"
+           (ngModelChange)="setKeyIfOk(0, $event)" id="code0" name="code0" #code0="ngModel"
+           (keyup)="handleSpecialKey(0, $event.key)" (paste)="handlePaste($event)">
+    <input type="text" class="input--code" maxlength="1" required (ngModelChange)="setKeyIfOk(1, $event)"
+           (keyup)="handleSpecialKey(1, $event.key)" [(ngModel)]="model.code[1]" id="code1" name="code1" #code1="ngModel">
+    <input type="text" class="input--code" maxlength="1" required (ngModelChange)="setKeyIfOk(2, $event)"
+           (keyup)="handleSpecialKey(2, $event.key)" [(ngModel)]="model.code[2]" id="code2" name="code2" #code2="ngModel">
+    <input type="text" class="input--code" maxlength="1" required (ngModelChange)="setKeyIfOk(3, $event)"
+           (keyup)="handleSpecialKey(3, $event.key)" [(ngModel)]="model.code[3]" id="code3" name="code3" #code3="ngModel">
+    <input type="text" class="input--code" maxlength="1" required (ngModelChange)="setKeyIfOk(4, $event)"
+           (keyup)="handleSpecialKey(4, $event.key)" [(ngModel)]="model.code[4]" id="code4" name="code4" #code4="ngModel">
   </div>
 </div>
