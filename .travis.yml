@@ -17,7 +17,7 @@ before_install:
 
 script:
  - ng build --target=production --environment=dev
- - ng serve & ng e2e
+ - ng serve & ng e2e --webdriver-update=false
  - ng test --sourcemaps false --watch false # http://mseemann.de/frontend/2016/05/31/setup-angular-2-app-part-1.html
 
 notifications:
