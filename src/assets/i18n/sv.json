@@ -22,7 +22,7 @@
             "description": "Beskrivning"
         },
         "filter": {
-            "all": "Välja",
+            "all": "Välj",
             "creator": "Skapare",
             "me": "Jag",
             "type": "Typ",
@@ -85,7 +85,7 @@
     "task-template": {
         "delete-task-template": "Ta bort uppgiftsbottnen",
         "task-description": "Uppgiftsidé",
-        "task-description-info": "sv-Kirjoita tiiviisti mitä tehtävässä tehdään. Kuvaus näkyy Tehtäväkirjaston tehtäväpohjissa.",
+        "task-description-info": "Skriv kortfattat vad som skall göras i uppgiften. Beskrivningen syns i uppgiftsbottnarna i uppgiftbiblioteket.",
         "task-steps": "Uppgiftens steg",
         "preview": "Förhandsgranskning",
         "task-type": "Uppgiftstyp",
