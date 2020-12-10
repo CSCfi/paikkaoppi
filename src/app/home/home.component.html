@@ -22,26 +22,8 @@
             </div>
             <ng-container *ngIf="prod">
               <div>
-                <a (click)="toggleMenu()" class="button">Kirjaudu sisään</a>
-              </div>
-              <div *ngIf="showMenu" class="loginMenu">
-                <div class="loginMenuContainer">
-                  <ul class="loginMenuList">
-                    <li *ngFor="let item of menuItems">
-                      <a href="{{item.loginUrl}}" target="_self">
-                        <div class="loginMenuItem">
-                          <div class="loginMenuImage">
-                            <img src="{{item.mPassSource.iconUrl || 'assets/poppi_logo.png'}}"
-                                 alt="{{item.mPassSource.title}}">
-                          </div>
-                          <div class="loginMenuText">
-                            <span>{{item.mPassSource.title}}</span>
-                          </div>
-                        </div>
-                      </a>
-                    </li>
-                  </ul>
-                </div>
+                <a href="https://kartta.paikkaoppi.fi/Shibboleth.sso/Login?target=https://kartta.paikkaoppi.fi/app/dashboard"
+                   target="_self" class="button">Kirjaudu sisään</a>
               </div>
             </ng-container>
           </div>
