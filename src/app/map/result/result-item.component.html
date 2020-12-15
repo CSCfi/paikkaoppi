@@ -96,15 +96,10 @@
             <label>{{'common.field.description' | translate}}</label>
             <div class="form__value">{{model.description}}</div>
           </div>
-          <div class="popup__footer" *ngIf="!showUser">
+          <div class="popup__footer">
             <div class="popup__footer-links">
               <button (click)="close()" class="link type--secondary">{{'common.action.cancel' | translate}}</button>
-              <button (click)="edit()" class="link">{{'common.action.edit' | translate}}</button>
-            </div>
-          </div>
-          <div class="popup__footer" *ngIf="showUser">
-            <div class="popup__footer-links">
-              <button (click)="close()" class="link type--secondary">{{'common.action.cancel' | translate}}</button>
+              <button *ngIf="canEdit()" (click)="edit()" class="link">{{'common.action.edit' | translate}}</button>
             </div>
           </div>
         </ng-container>

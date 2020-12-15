@@ -3,7 +3,18 @@
   <div class="map__zoom">
     <div (click)="zoomIn()" class="map__zoom-in" [ngClass]="(this.zoomLevel >= this.maxZoomLevel) ? 'map__zoom-disabled' : ''" title="{{'map.action.zoom-in' | translate}}"></div>
     <div (click)="zoomOut()" class="map__zoom-out" [ngClass]="(this.zoomLevel <= this.minZoomLevel) ? 'map__zoom-disabled' : ''" title="{{'map.action.zoom-out' | translate}}"></div>
-    <div (click)="toggleAllTaskResults()" class="map__showall" [ngClass]="showAllResultItems == false ? 'map__showall-disabled' : ''" title="{{'map.action.show-all-results' | translate}}"></div>
+    <div onclick="this.classList.toggle('is-selected')" class="map__showall" (click)="usersDropdown.hidden=!usersDropdown.hidden"
+         *ngIf="users && users.length > 0" title="{{'map.action.select-map-layer' | translate}}">
+      <div class="map__layers-dropdown" hidden #usersDropdown>
+        <div class="map__layers-dropdown-content">
+          <ng-template ngFor let-user [ngForOf]="users">
+            <div class="map__layers-dropdown-row" [ngClass]="{'is-selected': selectedUser === user.username}">
+              <div class="link" (click)="selectUser(user.username)">{{user.firstName + ' ' + user.lastName}}</div>
+            </div>
+          </ng-template>
+        </div>
+      </div>
+    </div>
     <div (click)="resetMapLocation()" class="map__center" title="{{'map.action.reset' | translate}}"></div>
     <div (click)="zoomToLocation()" class="map__location" title="{{'map.action.zoom-to-location' | translate}}" *ngIf="mapTools['centerToLocation']"></div>
     <div onclick="this.classList.toggle('is-selected')" class="map__layers" (click)="layerDropdown.hidden=!layerDropdown.hidden"

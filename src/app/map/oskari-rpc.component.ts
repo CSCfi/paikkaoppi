@@ -7,7 +7,7 @@ import { environment } from '../../environments/environment'
 import { AuthService } from '../service/auth.service'
 import { MessageService, Message, MessageSeverity, MessageAction, MessageActionType } from '../message/message.service';
 
-import { PolygonFeatureCollection, ResultItem, Task, LineString, FeatureCollection} from '../service/model'
+import { PolygonFeatureCollection, ResultItem, Task, LineString, FeatureCollection, User } from '../service/model'
 import { Result } from '../service/model-result'
 import { TaskService } from '../service/task.service'
 import { Coordinates, GeoService } from './geo.service'
@@ -33,6 +33,8 @@ export class OskariRpcComponent implements AfterViewInit, OnInit {
   mapLayers: MapLayer[] = []
   selectedLayer?: MapLayer = null
   actionMessages: Map<MapAction, Message> = new Map
+  users: User[] = []
+  selectedUser: String = null
   zoomLevel = 0
   minZoomLevel = 0
   maxZoomLevel = 13
@@ -69,8 +71,10 @@ export class OskariRpcComponent implements AfterViewInit, OnInit {
     private translateService: TranslateService) {
   }
   ngOnInit() {
-    if (this.authService.isTeacher()) {
-      this.showAllResultItems = !this.showAllResultItems
+    if (!this.authService.isTeacher()) {
+      this.selectedUser = this.authService.getUsername()
+    } else {
+      this.showAllResultItems = true
     }
   }
 
@@ -88,7 +92,8 @@ export class OskariRpcComponent implements AfterViewInit, OnInit {
           this.checkRpcVersion()
           this.resetMapLocation()
           this.loadLayers()
-          this.listenMapMoves();
+          this.loadUsers()
+          this.listenMapMoves()
           this.drawTaskResultsToMap(this.task)
           this.setInitialMapToolMode()
           this.debugAllChannelFunctions()
@@ -122,16 +127,11 @@ export class OskariRpcComponent implements AfterViewInit, OnInit {
     }
   }
 
-  toggleAllTaskResults() {
-    this.showAllResultItems = !this.showAllResultItems
-    this.drawTaskResultsToMap(this.task)
-  }
-
   private showResultItem (result: Result, currentUsername: String) {
     if (this.showAllResultItems) {
       return true
     } else {
-      return currentUsername === result.user.username
+      return result.user.username === this.selectedUser
     }
   }
   
@@ -519,6 +519,13 @@ export class OskariRpcComponent implements AfterViewInit, OnInit {
     this.selectedLayer = newLayer
   }
 
+  selectUser(username: String): void {
+    const user = this.users.find(u => u.username === username)
+    this.selectedUser = user ? user.username : ""
+    this.showAllResultItems = !user.username
+    this.drawTaskResultsToMap(this.task)
+  }
+
   isBaseMap(layer) {
     // If there is more base maps set in Paikkatietoikkuna add them here as well
     return layer.name === 'Taustakartta' || layer.name === 'Selkokartta' || layer.name === 'OpenStreetMap'; 
@@ -783,6 +790,19 @@ export class OskariRpcComponent implements AfterViewInit, OnInit {
         break
       }
     }
+  }
+
+  private loadUsers() {
+    const users = [];
+    users.push({ email: '', firstName: '-- Kaikki --', lastName: '', municipality: '',
+      profile: 0, role: undefined, school: '', schoolClass: '', username: null })
+    users.push({ email: '', firstName: '-- Omat --', lastName: '', municipality: '',
+      profile: 0, role: undefined, school: '', schoolClass: '', username: this.authService.getUsername() })
+    this.task.results.filter(result => result.resultItems && result.resultItems.length > 0 &&
+      this.authService.getUsername() !== result.user.username)
+      .map(result => result.user)
+      .forEach(u => users.push(u))
+    this.users = users
   }
 }
 

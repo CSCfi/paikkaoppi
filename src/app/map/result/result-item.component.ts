@@ -68,13 +68,12 @@ export class ResultItemComponent implements OnChanges {
       this.initUpload(null)
       this.isEditMode = true
     }
-    if (this.result != null && this.authService.isTeacher()) {
-      this.showUser = false
-    } else if (this.result != null && this.authService.getUsername() !== this.result.user.username) {
-      this.showUser = true
-    } else {
-      this.showUser = false
-    }
+    this.showUser = this.result != null && this.authService.getUsername() !== this.result.user.username
+  }
+
+  canEdit(): boolean {
+    return this.authService.getUsername() === this.result.user.username ||
+      (this.authService.isTeacher() && this.result.resultItems.some(item => item.visibility === 'OPEN'))
   }
 
   hasImage(): boolean {
