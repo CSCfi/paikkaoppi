@@ -5,7 +5,7 @@
     <div (click)="zoomOut()" class="map__zoom-out" [ngClass]="(this.zoomLevel <= this.minZoomLevel) ? 'map__zoom-disabled' : ''" title="{{'map.action.zoom-out' | translate}}"></div>
     <div onclick="this.classList.toggle('is-selected')" class="map__showall" (click)="usersDropdown.hidden=!usersDropdown.hidden"
          *ngIf="users && users.length > 0" title="{{'map.action.select-map-layer' | translate}}">
-      <div class="map__layers-dropdown" hidden #usersDropdown>
+      <div class="users map__layers-dropdown" hidden #usersDropdown>
         <div class="map__layers-dropdown-content">
           <ng-template ngFor let-user [ngForOf]="users">
             <div class="map__layers-dropdown-row" [ngClass]="{'is-selected': selectedUser === user.username}">

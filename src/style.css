@@ -772,6 +772,9 @@ ul {
 .map__layers.is-selected:before {
   content: url("assets/icon_layers-w.svg");
 }
+.users.map__layers-dropdown {
+  transform: translateY(-20%);
+}
 .map__layers-dropdown {
   position: absolute;
   top: 50%;
